@@ -4,7 +4,7 @@
     <div class="content">
       <el-input v-model="searchVal" class="searchInput" placeholder="请输入公司/试卷名称" prefix-icon="el-icon-search" size="small"></el-input>
       <el-tabs v-model="activeName" @tab-click="handleClick">
-        <el-tab-pane label="技术（软件）/信息技术类" name="first">
+        <el-tab-pane label="技术（软件）/信息技术类" name="software">
           <template>
             <div>
               <el-collapse v-model="activeNames" @change="handleChange">
@@ -64,54 +64,66 @@
             </div>
           </template>
         </el-tab-pane>
-        <el-tab-pane label="技术（硬件）/电子信息类" name="second">技术（硬件）/电子信息类的内容</el-tab-pane>
+        <el-tab-pane label="技术（硬件）/电子信息类" name="hardware">
+          <collapse-card :collapseCardData="collapseData" @selectedValList="selectedValList"> </collapse-card>
+        </el-tab-pane>
       </el-tabs>
     </div>
     <div class="contant-card">
       <el-tabs v-model="activeCardName" @tab-click="handleCardClick" type="border-card">
-        <el-tab-pane label="默认" name="first">
-          <div class="contant-card-box">
-            <div v-for="(item, index) in cardContent" :key="index">
-              <el-card class="box-card">
-                <div class="box-card-main">
-                  <span>{{ item.title }}</span>
-                  <img :src="item.url">
-                  <div class="hot">热度指数: {{ item.hot }}</div>
-                  <div>匹配职位: {{ item.job }}</div>
-                </div>
-              </el-card>
-              <div class="rate-content">
-                <span>难度系数</span>
-                <el-rate
-                  v-model="item.rate"
-                  disabled
-                  show-score
-                  text-color="#ff9900"
-                  score-template="{value}">
-                </el-rate>
-              </div>
-            </div>
-          </div>
+        <el-tab-pane label="默认" name="default">
+          <span>根据默认排序</span>
+          <question-card :questionCardData="cardContent"></question-card>
         </el-tab-pane>
-        <el-tab-pane label="最新" name="second">根据最新排序</el-tab-pane>
-        <el-tab-pane label="最热" name="third">根据最热排序</el-tab-pane>
+        <el-tab-pane label="最新" name="newest">
+          <span>根据最新排序</span>
+          <question-card :questionCardData="cardContent"></question-card>
+        </el-tab-pane>
+        <el-tab-pane label="最热" name="hottest">
+          <span>根据最热排序</span>
+          <question-card :questionCardData="cardContent"></question-card>
+        </el-tab-pane>
       </el-tabs>
     </div>
   </div>
 </template>
 
 <script>
+import CollapseCard from '@/components/CollapseCard'
+import QuestionCard from '@/components/QuestionCard'
+import _ from 'lodash'
+
 export default {
   name: 'QuestionPage',
+  components: {
+    CollapseCard,
+    QuestionCard
+  },
   data () {
     return {
-      activeName: 'first',
-      activeCardName: 'first',
+      activeName: 'software',
+      activeCardName: 'default',
       searchVal: '',
       activeNames: ['1'],
       selectedCompany: '',
       selectedTime: '',
       selectedJob: '',
+      searchSelectedVal: {
+        companyName: '',
+        post: '',
+        time: ''
+      },
+      collapseData: [
+        {
+          category: 'software', companyName: '腾讯', companyUrl: 'https://uploadfiles.nowcoder.com/images/20190409/6658561_1554809293714_A976736125A07297BEF0C62503894AAF', post: 'Java工程师', time: '2020', tagType: 'danger'
+        },
+        {
+          category: 'software', companyName: '腾讯1', companyUrl: 'https://uploadfiles.nowcoder.com/images/20190409/6658561_1554809293714_A976736125A07297BEF0C62503894AAF', post: 'Java工程师', time: '2019', tagType: ''
+        },
+        {
+          category: 'software', companyName: '腾讯2', companyUrl: 'https://uploadfiles.nowcoder.com/images/20190409/6658561_1554809293714_A976736125A07297BEF0C62503894AAF', post: 'Java工程师', time: '2018', tagType: 'info'
+        }
+      ],
       timeTags: [
         { name: '2020', type: '' },
         { name: '2019', type: 'success' },
@@ -181,15 +193,32 @@ export default {
       ]
     }
   },
+  computed: {
+    fetchFilters () {
+      return `${this.searchSelectedVal.companyName}_${this.searchSelectedVal.post}_${this.searchSelectedVal.time}` +
+        `${this.activeName}_${this.activeCardName}`
+    }
+  },
+  watch: {
+    fetchFilters () {
+      this.fetchQuestionsList()
+    }
+  },
   methods: {
     handleClick (tab, event) {
-      console.log(tab, event)
+      // software handware 用这两个字段去请求数据
+      console.log(333, this.activeName)
+      // console.log(222, tab, event)
     },
     handleCardClick (tab, event) {
-      console.log(tab, event)
+      console.log(222333, tab.name)
+      // tab.name = 'default' || 'newest' || 'hosttest'
+      // 将tab.name的类型传递给后端，后端用次type去进行查询，排序
+      // console.log(tab, event)
     },
     handleChange (val) {
-      console.log(val)
+      console.log(1111, this.activeNames)
+      console.log(1234, val)
     },
     selectCompany (companyName) {
       this.selectedCompany = companyName
@@ -202,6 +231,17 @@ export default {
       this.selectedTime = time
       // 点击年份进行查询过滤
       console.log(111, time)
+    },
+    selectedValList (selectedValList) {
+      // 子组件传来选择的值 公司 职位 年份 {}
+      this.searchSelectedVal = _.cloneDeep(selectedValList)
+    },
+    fetchQuestionsList () {
+      console.log('要请求数据啦！！！')
+      let params = this.searchSelectedVal
+      let category = this.activeName
+      let status = this.activeCardName
+      console.log(678, params, category, status)
     }
   }
 }
@@ -267,41 +307,5 @@ export default {
   font-size: 10px;
   margin-left: 10px;
 }
-.box-card-main {
-  font-size: 14px;
-  padding: 18px 0;
-  /* text-align: center; */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-.box-card-main img {
-  padding: 10px 0;
-  width: 80px;
-  height: 80px;
-}
-.box-card {
-  width: 220px;
-  /* margin-right: 15px; */
-  margin-bottom: 10px;
-}
-.contant-card-box {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-}
-.hot {
-  font-size: 16px;
-  padding: 5px 0 10px 0;
-}
-.rate-content {
-  font-size: 15px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 5px 0 10px 0;
-}
+
 </style> /* eslint-disable */
