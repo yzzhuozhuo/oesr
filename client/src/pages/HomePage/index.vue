@@ -25,6 +25,492 @@
           </div>
           <div>
             <div class="title-name">名企真题</div>
+            <div class="logo">
+              <div class="logo1 logo0">腾讯</div>
+              <div class="logo2 logo0">字节跳动</div>
+              <div class="logo3 logo0">百度</div>
+              <div class="logo4 logo0">京东</div>
+              <div class="logo5 logo0">网易</div>
+              <div class="logo6 logo0">美团</div>
+              <div class="logo7 logo0">99+</div>
+            </div>
+            <div class="question-wrap">
+              <div class="list">
+                <div class="left">专项练习</div>
+                <div class="right">
+                  <div class="que-card">
+                    <div class="que-name">计算机</div>
+                    <div class="que-type">语言/算法/数据结构等基础训练</div>
+                  </div>
+                  <div class="que-card">
+                    <div class="que-name">计算机</div>
+                    <div class="que-type">语言/算法/数据结构等基础训练</div>
+                  </div>
+                  <div class="que-card">
+                    <div class="que-name">计算机</div>
+                    <div class="que-type">语言/算法/数据结构等基础训练</div>
+                  </div>
+                  <div class="que-card">
+                    <div class="que-name">计算机</div>
+                    <div class="que-type">语言/算法/数据结构等基础训练</div>
+                  </div>
+                </div>
+              </div>
+              <div class="list">
+                <div class="left">专项练习</div>
+                <div class="right">
+                  <div class="que-card">
+                    <div class="que-name">计算机</div>
+                    <div class="que-type">语言/算法/数据结构等基础训练</div>
+                  </div>
+                  <div class="que-card">
+                    <div class="que-name">计算机</div>
+                    <div class="que-type">语言/算法/数据结构等基础训练</div>
+                  </div>
+                  <div class="que-card">
+                    <div class="que-name">计算机</div>
+                    <div class="que-type">语言/算法/数据结构等基础训练</div>
+                  </div>
+                  <div class="que-card">
+                    <div class="que-name">计算机</div>
+                    <div class="que-type">语言/算法/数据结构等基础训练</div>
+                  </div>
+                  <div class="que-card">
+                    <div class="que-name">计算机</div>
+                    <div class="que-type">语言/算法/数据结构等基础训练</div>
+                  </div>
+                  <div class="que-card">
+                    <div class="que-name">计算机</div>
+                    <div class="que-type">语言/算法/数据结构等基础训练</div>
+                  </div>
+                </div>
+              </div>
+              <div class="list">
+                <div class="left">专项练习</div>
+                <div class="right">
+                  <div class="que-card">
+                    <div class="que-name">计算机</div>
+                    <div class="que-type">语言/算法/数据结构等基础训练</div>
+                  </div>
+                  <div class="que-card">
+                    <div class="que-name">计算机</div>
+                    <div class="que-type">语言/算法/数据结构等基础训练</div>
+                  </div>
+                  <div class="que-card">
+                    <div class="que-name">计算机</div>
+                    <div class="que-type">语言/算法/数据结构等基础训练</div>
+                  </div>
+                  <div class="que-card">
+                    <div class="que-name">计算机</div>
+                    <div class="que-type">语言/算法/数据结构等基础训练</div>
+                  </div>
+                  <div class="que-card">
+                    <div class="que-name">计算机</div>
+                    <div class="que-type">语言/算法/数据结构等基础训练</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="write-test">
+          <div class="title title2">面试备战</div>
+          <div class="question-wrap">
+            <div class="list">
+              <div class="left">专项练习</div>
+              <div class="right">
+                <div class="que-card">
+                  <div class="que-name">计算机</div>
+                  <div class="que-type">语言/算法/数据结构等基础训练</div>
+                </div>
+                <div class="que-card">
+                  <div class="que-name">计算机</div>
+                  <div class="que-type">语言/算法/数据结构等基础训练</div>
+                </div>
+                <div class="que-card">
+                  <div class="que-name">计算机</div>
+                  <div class="que-type">语言/算法/数据结构等基础训练</div>
+                </div>
+                <div class="que-card">
+                  <div class="que-name">计算机</div>
+                  <div class="que-type">语言/算法/数据结构等基础训练</div>
+                </div>
+              </div>
+            </div>
+            <div class="list">
+              <div class="left">专项练习</div>
+              <div class="right">
+                <div class="que-card">
+                  <div class="que-name">计算机</div>
+                  <div class="que-type">语言/算法/数据结构等基础训练</div>
+                </div>
+                <div class="que-card">
+                  <div class="que-name">计算机</div>
+                  <div class="que-type">语言/算法/数据结构等基础训练</div>
+                </div>
+                <div class="que-card">
+                  <div class="que-name">计算机</div>
+                  <div class="que-type">语言/算法/数据结构等基础训练</div>
+                </div>
+                <div class="que-card">
+                  <div class="que-name">计算机</div>
+                  <div class="que-type">语言/算法/数据结构等基础训练</div>
+                </div>
+                <div class="que-card">
+                  <div class="que-name">计算机</div>
+                  <div class="que-type">语言/算法/数据结构等基础训练</div>
+                </div>
+                <div class="que-card">
+                  <div class="que-name">计算机</div>
+                  <div class="que-type">语言/算法/数据结构等基础训练</div>
+                </div>
+                <div class="que-card">
+                  <div class="que-name">计算机</div>
+                  <div class="que-type">语言/算法/数据结构等基础训练</div>
+                </div>
+                <div class="que-card">
+                  <div class="que-name">计算机</div>
+                  <div class="que-type">语言/算法/数据结构等基础训练</div>
+                </div>
+                <div class="que-card">
+                  <div class="que-name">计算机</div>
+                  <div class="que-type">语言/算法/数据结构等基础训练</div>
+                </div>
+                <div class="que-card">
+                  <div class="que-name">计算机</div>
+                  <div class="que-type">语言/算法/数据结构等基础训练</div>
+                </div>
+                <div class="que-card">
+                  <div class="que-name">计算机</div>
+                  <div class="que-type">语言/算法/数据结构等基础训练</div>
+                </div>
+              </div>
+            </div>
+            <div class="list">
+              <div class="left">专项练习</div>
+              <div class="right">
+                <div class="que-card">
+                  <div class="que-name">计算机</div>
+                  <div class="que-type">语言/算法/数据结构等基础训练</div>
+                </div>
+                <div class="que-card">
+                  <div class="que-name">计算机</div>
+                  <div class="que-type">语言/算法/数据结构等基础训练</div>
+                </div>
+                <div class="que-card">
+                  <div class="que-name">计算机</div>
+                  <div class="que-type">语言/算法/数据结构等基础训练</div>
+                </div>
+                <div class="que-card">
+                  <div class="que-name">计算机</div>
+                  <div class="que-type">语言/算法/数据结构等基础训练</div>
+                </div>
+                <div class="que-card">
+                  <div class="que-name">计算机</div>
+                  <div class="que-type">语言/算法/数据结构等基础训练</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="write-test">
+          <div class="title title2">课程推荐</div>
+          <div class="question-wrap">
+            <div class="list">
+              <div class="left">专项练习</div>
+              <div class="right">
+                <div class="que-card">
+                  <div class="que-name">计算机</div>
+                  <div class="que-type">语言/算法/数据结构等基础训练</div>
+                </div>
+                <div class="que-card">
+                  <div class="que-name">计算机</div>
+                  <div class="que-type">语言/算法/数据结构等基础训练</div>
+                </div>
+                <div class="que-card">
+                  <div class="que-name">计算机</div>
+                  <div class="que-type">语言/算法/数据结构等基础训练</div>
+                </div>
+                <div class="que-card">
+                  <div class="que-name">计算机</div>
+                  <div class="que-type">语言/算法/数据结构等基础训练</div>
+                </div>
+              </div>
+            </div>
+            <div class="list">
+              <div class="left">专项练习</div>
+              <div class="right">
+                <div class="que-card">
+                  <div class="que-name">计算机</div>
+                  <div class="que-type">语言/算法/数据结构等基础训练</div>
+                </div>
+                <div class="que-card">
+                  <div class="que-name">计算机</div>
+                  <div class="que-type">语言/算法/数据结构等基础训练</div>
+                </div>
+                <div class="que-card">
+                  <div class="que-name">计算机</div>
+                  <div class="que-type">语言/算法/数据结构等基础训练</div>
+                </div>
+                <div class="que-card">
+                  <div class="que-name">计算机</div>
+                  <div class="que-type">语言/算法/数据结构等基础训练</div>
+                </div>
+                <div class="que-card">
+                  <div class="que-name">计算机</div>
+                  <div class="que-type">语言/算法/数据结构等基础训练</div>
+                </div>
+                <div class="que-card">
+                  <div class="que-name">计算机</div>
+                  <div class="que-type">语言/算法/数据结构等基础训练</div>
+                </div>
+                <div class="que-card">
+                  <div class="que-name">计算机</div>
+                  <div class="que-type">语言/算法/数据结构等基础训练</div>
+                </div>
+                <div class="que-card">
+                  <div class="que-name">计算机</div>
+                  <div class="que-type">语言/算法/数据结构等基础训练</div>
+                </div>
+                <div class="que-card">
+                  <div class="que-name">计算机</div>
+                  <div class="que-type">语言/算法/数据结构等基础训练</div>
+                </div>
+                <div class="que-card">
+                  <div class="que-name">计算机</div>
+                  <div class="que-type">语言/算法/数据结构等基础训练</div>
+                </div>
+                <div class="que-card">
+                  <div class="que-name">计算机</div>
+                  <div class="que-type">语言/算法/数据结构等基础训练</div>
+                </div>
+              </div>
+            </div>
+            <div class="list">
+              <div class="left">专项练习</div>
+              <div class="right">
+                <div class="que-card">
+                  <div class="que-name">计算机</div>
+                  <div class="que-type">语言/算法/数据结构等基础训练</div>
+                </div>
+                <div class="que-card">
+                  <div class="que-name">计算机</div>
+                  <div class="que-type">语言/算法/数据结构等基础训练</div>
+                </div>
+                <div class="que-card">
+                  <div class="que-name">计算机</div>
+                  <div class="que-type">语言/算法/数据结构等基础训练</div>
+                </div>
+                <div class="que-card">
+                  <div class="que-name">计算机</div>
+                  <div class="que-type">语言/算法/数据结构等基础训练</div>
+                </div>
+                <div class="que-card">
+                  <div class="que-name">计算机</div>
+                  <div class="que-type">语言/算法/数据结构等基础训练</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="write-test">
+          <div class="title title2">项目推荐</div>
+          <div class="question-wrap">
+            <div class="list">
+              <div class="left">专项练习</div>
+              <div class="right">
+                <div class="que-card">
+                  <div class="que-name">计算机</div>
+                  <div class="que-type">语言/算法/数据结构等基础训练</div>
+                </div>
+                <div class="que-card">
+                  <div class="que-name">计算机</div>
+                  <div class="que-type">语言/算法/数据结构等基础训练</div>
+                </div>
+                <div class="que-card">
+                  <div class="que-name">计算机</div>
+                  <div class="que-type">语言/算法/数据结构等基础训练</div>
+                </div>
+                <div class="que-card">
+                  <div class="que-name">计算机</div>
+                  <div class="que-type">语言/算法/数据结构等基础训练</div>
+                </div>
+              </div>
+            </div>
+            <div class="list">
+              <div class="left">专项练习</div>
+              <div class="right">
+                <div class="que-card">
+                  <div class="que-name">计算机</div>
+                  <div class="que-type">语言/算法/数据结构等基础训练</div>
+                </div>
+                <div class="que-card">
+                  <div class="que-name">计算机</div>
+                  <div class="que-type">语言/算法/数据结构等基础训练</div>
+                </div>
+                <div class="que-card">
+                  <div class="que-name">计算机</div>
+                  <div class="que-type">语言/算法/数据结构等基础训练</div>
+                </div>
+                <div class="que-card">
+                  <div class="que-name">计算机</div>
+                  <div class="que-type">语言/算法/数据结构等基础训练</div>
+                </div>
+                <div class="que-card">
+                  <div class="que-name">计算机</div>
+                  <div class="que-type">语言/算法/数据结构等基础训练</div>
+                </div>
+                <div class="que-card">
+                  <div class="que-name">计算机</div>
+                  <div class="que-type">语言/算法/数据结构等基础训练</div>
+                </div>
+                <div class="que-card">
+                  <div class="que-name">计算机</div>
+                  <div class="que-type">语言/算法/数据结构等基础训练</div>
+                </div>
+                <div class="que-card">
+                  <div class="que-name">计算机</div>
+                  <div class="que-type">语言/算法/数据结构等基础训练</div>
+                </div>
+                <div class="que-card">
+                  <div class="que-name">计算机</div>
+                  <div class="que-type">语言/算法/数据结构等基础训练</div>
+                </div>
+                <div class="que-card">
+                  <div class="que-name">计算机</div>
+                  <div class="que-type">语言/算法/数据结构等基础训练</div>
+                </div>
+                <div class="que-card">
+                  <div class="que-name">计算机</div>
+                  <div class="que-type">语言/算法/数据结构等基础训练</div>
+                </div>
+              </div>
+            </div>
+            <div class="list">
+              <div class="left">专项练习</div>
+              <div class="right">
+                <div class="que-card">
+                  <div class="que-name">计算机</div>
+                  <div class="que-type">语言/算法/数据结构等基础训练</div>
+                </div>
+                <div class="que-card">
+                  <div class="que-name">计算机</div>
+                  <div class="que-type">语言/算法/数据结构等基础训练</div>
+                </div>
+                <div class="que-card">
+                  <div class="que-name">计算机</div>
+                  <div class="que-type">语言/算法/数据结构等基础训练</div>
+                </div>
+                <div class="que-card">
+                  <div class="que-name">计算机</div>
+                  <div class="que-type">语言/算法/数据结构等基础训练</div>
+                </div>
+                <div class="que-card">
+                  <div class="que-name">计算机</div>
+                  <div class="que-type">语言/算法/数据结构等基础训练</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="write-test">
+          <div class="title title2">网申内推</div>
+          <div class="question-wrap">
+            <div class="list">
+              <div class="left">专项练习</div>
+              <div class="right">
+                <div class="que-card">
+                  <div class="que-name">计算机</div>
+                  <div class="que-type">语言/算法/数据结构等基础训练</div>
+                </div>
+                <div class="que-card">
+                  <div class="que-name">计算机</div>
+                  <div class="que-type">语言/算法/数据结构等基础训练</div>
+                </div>
+                <div class="que-card">
+                  <div class="que-name">计算机</div>
+                  <div class="que-type">语言/算法/数据结构等基础训练</div>
+                </div>
+                <div class="que-card">
+                  <div class="que-name">计算机</div>
+                  <div class="que-type">语言/算法/数据结构等基础训练</div>
+                </div>
+              </div>
+            </div>
+            <div class="list">
+              <div class="left">专项练习</div>
+              <div class="right">
+                <div class="que-card">
+                  <div class="que-name">计算机</div>
+                  <div class="que-type">语言/算法/数据结构等基础训练</div>
+                </div>
+                <div class="que-card">
+                  <div class="que-name">计算机</div>
+                  <div class="que-type">语言/算法/数据结构等基础训练</div>
+                </div>
+                <div class="que-card">
+                  <div class="que-name">计算机</div>
+                  <div class="que-type">语言/算法/数据结构等基础训练</div>
+                </div>
+                <div class="que-card">
+                  <div class="que-name">计算机</div>
+                  <div class="que-type">语言/算法/数据结构等基础训练</div>
+                </div>
+                <div class="que-card">
+                  <div class="que-name">计算机</div>
+                  <div class="que-type">语言/算法/数据结构等基础训练</div>
+                </div>
+                <div class="que-card">
+                  <div class="que-name">计算机</div>
+                  <div class="que-type">语言/算法/数据结构等基础训练</div>
+                </div>
+                <div class="que-card">
+                  <div class="que-name">计算机</div>
+                  <div class="que-type">语言/算法/数据结构等基础训练</div>
+                </div>
+                <div class="que-card">
+                  <div class="que-name">计算机</div>
+                  <div class="que-type">语言/算法/数据结构等基础训练</div>
+                </div>
+                <div class="que-card">
+                  <div class="que-name">计算机</div>
+                  <div class="que-type">语言/算法/数据结构等基础训练</div>
+                </div>
+                <div class="que-card">
+                  <div class="que-name">计算机</div>
+                  <div class="que-type">语言/算法/数据结构等基础训练</div>
+                </div>
+                <div class="que-card">
+                  <div class="que-name">计算机</div>
+                  <div class="que-type">语言/算法/数据结构等基础训练</div>
+                </div>
+              </div>
+            </div>
+            <div class="list">
+              <div class="left">专项练习</div>
+              <div class="right">
+                <div class="que-card">
+                  <div class="que-name">计算机</div>
+                  <div class="que-type">语言/算法/数据结构等基础训练</div>
+                </div>
+                <div class="que-card">
+                  <div class="que-name">计算机</div>
+                  <div class="que-type">语言/算法/数据结构等基础训练</div>
+                </div>
+                <div class="que-card">
+                  <div class="que-name">计算机</div>
+                  <div class="que-type">语言/算法/数据结构等基础训练</div>
+                </div>
+                <div class="que-card">
+                  <div class="que-name">计算机</div>
+                  <div class="que-type">语言/算法/数据结构等基础训练</div>
+                </div>
+                <div class="que-card">
+                  <div class="que-name">计算机</div>
+                  <div class="que-type">语言/算法/数据结构等基础训练</div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -116,7 +602,8 @@ export default {
 
 .tac {
   width: 1200px;
-  margin: 20px auto;
+  margin: 20px auto 0;
+  padding-bottom: 20px;
 }
 
 .el-right {
@@ -135,13 +622,152 @@ export default {
   font-size: 18px;
 }
 
+.title2 {
+  margin-top: 20px;
+}
+
 .title-name {
   margin-top: 20px;
+  color: #333333;
 }
 
 .test-card {
   margin-top: 15px;
   display: flex;
   justify-content: space-between;
+}
+
+.logo {
+  display: flex;
+  flex-direction: row;
+  margin-top: 5px;
+}
+
+.logo0 {
+  width: 120px;
+  height: 120px;
+  /* background-color: #bfa; */
+  border-radius: 50%;
+  box-sizing: border-box;
+  margin-right: 5px;
+  text-align: center;
+  line-height: 120px;
+  cursor: pointer;
+  text-indent: -999em;
+  transform: scale(0.7);
+  background-image: url('../../assets/biglogo.png');
+}
+
+.logo1 {
+  background-position: -1430px -520px;
+}
+
+.logo1:hover {
+  background-position: -1430px -650px;
+}
+
+.logo2 {
+  background-position: -1691px -519px;
+}
+
+.logo2:hover {
+  background-position: -1690px -650px;
+}
+
+.logo3 {
+  /* background-position: 0 0; */
+}
+
+.logo3:hover {
+  background-position: 0 -130px;
+}
+
+.logo4 {
+  background-position: 0 -520px;
+}
+
+.logo4:hover {
+  background-position: 0 -650px;
+}
+
+.logo5 {
+  background-position: -1820px 0;
+}
+
+.logo5:hover {
+  background-position: -1820px -130px;
+}
+
+.logo6 {
+  background-position: -650px 0;
+}
+
+.logo6:hover {
+  background-position: -650px -130px;
+}
+
+.logo7 {
+  background-image: url('');
+  border: 3px solid #9b9b9b;
+  border-radius: 50%;
+  color: #9b9b9b;
+  text-indent: -0;
+  font-size: 26px;
+}
+
+.logo7:hover {
+  background-position: -650px -130px;
+  background-color: #9b9b9b;
+  color: #fff;
+}
+
+.question-wrap {
+  /* background-color: #bfa; */
+  color: #333333;
+  margin-top: 10px;
+}
+
+.list {
+  display: flex;
+}
+
+.left {
+  margin-top: 20px;
+  width: 130px;
+  /* background-color: #bfa; */
+}
+
+.right {
+  width: 780px;
+}
+
+.que-card {
+  width: 160px;
+  height: 120px;
+  cursor: pointer;
+  padding: 20px;
+  box-sizing: border-box;
+  display: inline-block;
+}
+
+.que-card:hover {
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  color: #25bb9b;
+}
+
+.que-name {
+  text-align: center;
+  margin-bottom: 14px;
+}
+
+.que-type {
+  color: #acacac;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  max-height: 40px;
+  font-size: 14px;
 }
 </style>
