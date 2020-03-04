@@ -1,0 +1,2 @@
+export const UPDATE_USERINFO = 'UPDATE_USERINFO'
+export const NOTIFY_ERROR = 'NOTIFY_ERROR'
