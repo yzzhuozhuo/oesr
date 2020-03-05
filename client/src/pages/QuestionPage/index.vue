@@ -1,5 +1,6 @@
 <template>
   <div class="main">
+    <router-view></router-view>
     <img src="https://uploadfiles.nowcoder.com/images/20200227/339694163_1582803781536_E8CABFD4B8C6F9129BA59A7DDB02371B">
     <div class="content">
       <el-input v-model="searchVal" class="searchInput" placeholder="请输入公司/试卷名称" prefix-icon="el-icon-search" size="small"></el-input>
