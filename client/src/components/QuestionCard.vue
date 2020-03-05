@@ -7,7 +7,7 @@
           <img :src="item.url">
           <div class="hot">热度指数: {{ item.hot }}</div>
           <div class="job">匹配职位: {{ item.job }}</div>
-          <el-button type="primary" size="mini">查看详情</el-button>
+          <el-button type="primary" size="mini" @click="toQuestionList">查看详情</el-button>
         </div>
       </el-card>
       <div class="rate-content">
@@ -37,7 +37,11 @@ export default {
     }
   },
   methods: {
-
+    toQuestionList () {
+      this.$router.push({
+        path: 'questionList'
+      })
+    }
   }
 }
 </script>
@@ -45,7 +49,7 @@ export default {
 <style scoped>
 .box-card-main {
   font-size: 14px;
-  padding: 10px 0;
+  padding: 5px 0;
   /* text-align: center; */
   display: flex;
   flex-direction: column;
@@ -59,21 +63,31 @@ export default {
   height: 80px;
 }
 .box-card {
-  width: 220px;
+  width: 210px;
   /* margin-right: 15px; */
   margin-bottom: 10px;
+  margin-right: 19px;
+  /* text-align: center; */
+  cursor: pointer;
+}
+.box-card:hover {
+  background: #eeeeee;
+  /* transform: scale(1.1); */
+  /* border: 2px solid #eee; */
+  /* background-position: -1430px -650px; */
 }
 .contant-card-box {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  padding-left: 10px;
   /* justify-content: space-between; */
 }
 .contant-card-box div {
-  margin-right: 5px;
+  /* margin-right: 10.5px; */
 }
 .no-margin:nth-child(5n) {
-  margin-right: 0;
+  margin-right: -10px;
   /* background: red; */
 }
 .hot {
@@ -103,4 +117,4 @@ export default {
   height: 50px;
   padding-bottom: 20px
 }
-</style> /* eslint-disable */
+</style>

@@ -2,6 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import HomePage from '../pages/homepage'
 import QuestionPage from '../pages/QuestionPage'
+import QuestionList from '../pages/QuestionPage/questionList'
+import AnswerList from '../pages/QuestionPage/answerList'
 import LearnPage from '../pages/LearnPage'
 import JobPage from '../pages/JobPage'
 import DiscussPage from '../pages/DiscussPage'
@@ -20,6 +22,13 @@ export default new Router({
       path: '/questionPage',
       name: '题库',
       component: QuestionPage
+      // children: [
+      //   {
+      //     path: 'questionList',
+      //     name: '试题详情页',
+      //     component: QuestionList
+      //   }
+      // ]
     },
     {
       path: '/learnPage',
@@ -35,6 +44,16 @@ export default new Router({
       path: '/discussPage',
       name: '讨论区',
       component: DiscussPage
+    },
+    {
+      path: '/questionList',
+      name: '问题详情页',
+      component: QuestionList
+    },
+    {
+      path: '/answerList',
+      name: '答题页',
+      component: AnswerList
     }
   ]
 })
