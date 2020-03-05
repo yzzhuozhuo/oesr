@@ -1,5 +1,11 @@
 <template>
-  <div class="banner-wrap">
+<!--  -->
+  <div
+    class="banner-wrap"
+    :style="{
+      height: `${height || 300}px` // 轮播图高度
+    }"
+  >
     <div class="swiper-container">
       <div class="swiper-wrapper">
         <div
@@ -27,7 +33,7 @@ import 'swiper/css/swiper.min.css'
 import 'swiper/js/swiper.min.js'
 
 export default {
-  props: ['swiperImgs'],
+  props: ['swiperImgs', 'height'],
   mounted () {
     // 轮播图 · 初始化设定
     // eslint-disable-next-line
@@ -56,7 +62,6 @@ export default {
 .banner-wrap {
   margin-top: 61px;
   width: 100%;
-  height: 300px;
 }
 .swiper-container {
   min-width: 1200px;

@@ -39,6 +39,7 @@ html, body {
   padding: 0px;
   background-color: #eeeeee;
   height: 100%;
+  color: #333;
 }
 
 * {
