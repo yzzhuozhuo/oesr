@@ -1,6 +1,9 @@
 <template>
   <div class="home">
-    <swiper :swiperImgs="swiperImgs" />
+    <swiper
+      :swiperImgs="swiperImgs"
+      :height="300"
+    />
     <el-row class="tac">
       <left-menu />
       <div class="el-right">

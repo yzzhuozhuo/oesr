@@ -1,5 +1,8 @@
 <template>
-  <div class="profession" @click.stop="jumpTpTestPage(professionData.jumpUrl)">
+  <div
+    class="profession"
+    @click.stop="jumpTpTestPage(professionData.jumpUrl)"
+  >
     <div class="profession-name">{{professionData.name}}</div>
     <img
       class="profession-img"
