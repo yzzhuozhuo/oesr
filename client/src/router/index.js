@@ -7,6 +7,7 @@ import AnswerList from '../pages/QuestionPage/answerList'
 import LearnPage from '../pages/LearnPage'
 import JobPage from '../pages/JobPage'
 import DiscussPage from '../pages/DiscussPage'
+import UserPage from '../pages/UserPage'
 // import NewPage from '../components/NewPage'
 
 Vue.use(Router)
@@ -54,6 +55,11 @@ export default new Router({
       path: '/answerList',
       name: '答题页',
       component: AnswerList
+    },
+    {
+      path: '/userPage',
+      name: '用户主页',
+      component: UserPage
     }
   ]
 })
