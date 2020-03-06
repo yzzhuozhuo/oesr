@@ -20,6 +20,7 @@
     <el-menu-item index="/jobPage">求职</el-menu-item>
     <el-menu-item index="/discussPage">讨论区</el-menu-item>
     <el-menu-item class="logoutBtn" @click="logout()">退出登陆</el-menu-item>
+    <el-menu-item index="/userPage">个人主页</el-menu-item>
     <el-menu-item v-if="hasLogin" style="float: right">{{userInfo && userInfo.username}}</el-menu-item>
     <el-menu-item style="float: right">
       <el-input v-model="searchVal" class="searchInput" size="mini" placeholder="请输入试题、公司" prefix-icon="el-icon-search"></el-input>
