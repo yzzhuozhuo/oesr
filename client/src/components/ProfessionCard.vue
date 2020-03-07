@@ -32,6 +32,8 @@ export default {
   text-align: center;
   border-radius: 4px;
   cursor: pointer;
+  display: inline-block;
+  margin: 5px 18px 13px 0;
 }
 
 .profession:hover {
