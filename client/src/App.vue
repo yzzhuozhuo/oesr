@@ -52,6 +52,15 @@ html, body {
     user-select:none;
 }
 
+.el-input__inner {
+  background: 0;
+  /*更改了全局样式，全局的input都会是这样，有问题*/
+}
+
+.el-menu.el-menu--horizontal {
+  border-bottom: 1px solid #000;
+}
+
 </style>
 <style scoped>
 .router-view {

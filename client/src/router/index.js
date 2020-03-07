@@ -6,6 +6,7 @@ import QuestionList from '../pages/QuestionPage/questionList'
 import AnswerList from '../pages/QuestionPage/answerList'
 import LearnPage from '../pages/LearnPage'
 import JobPage from '../pages/JobPage'
+import PreachList from '../pages/JobPage/preachList'
 import DiscussPage from '../pages/DiscussPage'
 import UserPage from '../pages/UserPage'
 // import NewPage from '../components/NewPage'
@@ -40,6 +41,11 @@ export default new Router({
       path: '/jobPage',
       name: '求职',
       component: JobPage
+    },
+    {
+      path: '/preachList',
+      name: '宣讲会',
+      component: PreachList
     },
     {
       path: '/discussPage',
