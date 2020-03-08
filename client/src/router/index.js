@@ -8,6 +8,7 @@ import LearnPage from '@/pages/LearnPage'
 import JobPage from '@/pages/JobPage'
 import PreachList from '@/pages/JobPage/preachList'
 import PracticeSquare from '@/pages/JobPage/PracticeSquare'
+import Schedule from '@/pages/JobPage/Schedule'
 import DiscussPage from '@/pages/DiscussPage'
 import UserPage from '@/pages/UserPage'
 // import NewPage from '../components/NewPage'
@@ -72,6 +73,11 @@ export default new Router({
       path: '/center',
       name: '实习广场页',
       component: PracticeSquare
+    },
+    {
+      path: '/schedule',
+      name: '校招日程页',
+      component: Schedule
     }
   ]
 })
