@@ -1,30 +1,13 @@
 <template>
-  <div class="schedule">
-    <div class="banner">
-      <div class="word">2020 IT名企校招日程</div>
-    </div>
+  <div class="banner">
+    <div class="word">2020 IT名企校招日程</div>
   </div>
 </template>
 
 <script>
-import Banner from '@/components/Banner'
-import CardTitle from '@/components/CardTitle'
-import LogoList from '@/components/LogoList'
-import Selector from '@/components/Selector'
-
 export default {
-  name: 'Schedule',
-  components: {
-    Banner,
-    CardTitle,
-    LogoList,
-    Selector
-  },
   data () {
-    return {
-      bannerImg:
-        'https://static.nowcoder.com/images-nk/img/campusRecruitment/banner3.jpg'
-    }
+    return {}
   },
   mounted () {}
 }
