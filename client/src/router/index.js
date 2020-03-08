@@ -6,12 +6,13 @@ import QuestionList from '@/pages/QuestionPage/questionList'
 import AnswerList from '@/pages/QuestionPage/answerList'
 import LearnPage from '@/pages/LearnPage'
 import JobPage from '@/pages/JobPage'
-import PreachList from '@/pages/JobPage/preachList'
-import PracticeSquare from '@/pages/JobPage/PracticeSquare'
-import Schedule from '@/pages/JobPage/Schedule'
 import DiscussPage from '@/pages/DiscussPage'
 import UserPage from '@/pages/UserPage'
-// import NewPage from '../components/NewPage'
+import PracticeSquare from '@/pages/PracticeSquare'
+import RecruitSchedule from '@/pages/RecruitSchedule'
+import WriteCalendar from '@/pages/WriteCalendar'
+import PreachList from '@/pages/preachList'
+// import NewPage from '@/components/NewPage'
 
 Vue.use(Router)
 
@@ -45,11 +46,6 @@ export default new Router({
       component: JobPage
     },
     {
-      path: '/preachList',
-      name: '宣讲会',
-      component: PreachList
-    },
-    {
       path: '/discussPage',
       name: '讨论区',
       component: DiscussPage
@@ -70,14 +66,24 @@ export default new Router({
       component: UserPage
     },
     {
-      path: '/center',
+      path: '/practiceSquare',
       name: '实习广场页',
       component: PracticeSquare
     },
     {
-      path: '/schedule',
-      name: '校招日程页',
-      component: Schedule
+      path: '/recruitSchedule',
+      name: '校招日程',
+      component: RecruitSchedule
+    },
+    {
+      path: '/writeCalendar',
+      name: '笔试日历',
+      component: WriteCalendar
+    },
+    {
+      path: '/preachList',
+      name: '宣讲会',
+      component: PreachList
     }
   ]
 })
