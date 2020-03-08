@@ -9,6 +9,7 @@ import JobPage from '@/pages/JobPage'
 import DiscussPage from '@/pages/DiscussPage'
 import UserPage from '@/pages/UserPage'
 import PracticeSquare from '@/pages/PracticeSquare'
+import PositionDetail from '@/pages/practiceSquare/PositionDetail'
 import RecruitSchedule from '@/pages/RecruitSchedule'
 import WriteCalendar from '@/pages/WriteCalendar'
 import PreachList from '@/pages/preachList'
@@ -84,6 +85,11 @@ export default new Router({
       path: '/preachList',
       name: '宣讲会',
       component: PreachList
+    },
+    {
+      path: '/positionDetail',
+      name: '职位详情',
+      component: PositionDetail
     }
   ]
 })

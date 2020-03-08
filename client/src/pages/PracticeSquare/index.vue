@@ -23,7 +23,7 @@
           v-for="(item, index) in 10"
           :key="index"
         >
-          <div class="company">
+          <div class="company" @click="positionDetail">
             <img src="https://uploadfiles.nowcoder.com/files/20190715/9398821_1563179722928_120.png">
             <div class="intr">
               <div class="intr-name">IMWeb前端开发实习生可转正</div>
@@ -138,7 +138,14 @@ export default {
       ]
     }
   },
-  mounted () {}
+  mounted () {},
+  methods: {
+    positionDetail () {
+      this.$router.push({
+        path: 'PositionDetail'
+      })
+    }
+  }
 }
 </script>
 
@@ -198,6 +205,7 @@ export default {
       .company {
         display: flex;
         justify-content: space-between;
+        cursor: pointer;
 
         img {
           width: 50px;

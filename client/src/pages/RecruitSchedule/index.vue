@@ -96,6 +96,7 @@ export default {
     border: 1px solid #d6d6d6;
     border-radius: 4px;
     background: #fff;
+    margin-bottom: 20px;
   }
 }
 </style>
