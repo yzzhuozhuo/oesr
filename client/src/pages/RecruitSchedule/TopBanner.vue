@@ -1,6 +1,7 @@
 <template>
-  <div class="banner">
+  <div class="top-banner">
     <div class="word">2020 IT名企校招日程</div>
+    <div class="word-bottom">一站关注所有公司招聘动态 | 一站获得所有名企内推机会 | 最全笔试面试题库及面经攻略</div>
   </div>
 </template>
 
@@ -18,7 +19,7 @@ export default {
   min-width: 1200px;
   margin: 60px auto;
 
-  .banner {
+  .top-banner {
     height: 400px;
     background-image: url(https://static.nowcoder.com/images-nk/img/campusRecruitment/banner3.jpg);
     background-repeat: no-repeat;
@@ -38,6 +39,13 @@ export default {
       font-size: 74px;
       color: #fff;
       text-align: center;
+
+      &-bottom {
+        width: 100%;
+        color: #fff;
+        margin: 0 auto;
+        text-align: center;
+      }
     }
   }
 }

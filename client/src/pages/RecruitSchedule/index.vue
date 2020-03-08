@@ -1,6 +1,7 @@
 <template>
   <div class="schedule">
-    <banner />
+    <top-banner />
+    <middle-banner :bannerImg="bannerImg" />
     <div class="content">
       <el-tabs
         v-model="activeName"
@@ -10,42 +11,69 @@
           label="全部"
           name="first"
         >
-          <schedule-card />
+          <schedule-card
+            v-for="(item, index) in 20"
+            :key="index"
+          />
         </el-tab-pane>
         <el-tab-pane
           label="国企/研究所"
           name="second"
-        >国企/研究所</el-tab-pane>
+        >
+          <schedule-card
+            v-for="(item, index) in 4"
+            :key="index"
+          />
+        </el-tab-pane>
         <el-tab-pane
           label="外企"
           name="third"
-        >外企</el-tab-pane>
+        >
+          <schedule-card
+            v-for="(item, index) in 8"
+            :key="index"
+          />
+        </el-tab-pane>
         <el-tab-pane
           label="银行/证券"
           name="fourth"
-        >银行/证券</el-tab-pane>
+        >
+          <schedule-card
+            v-for="(item, index) in 7"
+            :key="index"
+          />
+        </el-tab-pane>
         <el-tab-pane
           label="游戏"
-          name="fourth"
-        >游戏</el-tab-pane>
+          name="fivth"
+        >
+          <schedule-card
+            v-for="(item, index) in 9"
+            :key="index"
+          />
+        </el-tab-pane>
       </el-tabs>
     </div>
   </div>
 </template>
 
 <script>
-import Banner from './Banner'
+import TopBanner from './TopBanner'
+import MiddleBanner from './MiddleBanner'
 import ScheduleCard from './ScheduleCard'
 
 export default {
   name: 'RecruitSchedule',
   components: {
-    Banner,
+    TopBanner,
+    MiddleBanner,
     ScheduleCard
   },
   data () {
     return {
-      activeName: 'first'
+      activeName: 'first',
+      bannerImg:
+        'https://static.nowcoder.com/images-nk/img/campusRecruitment/tip-bg.png'
     }
   },
   methods: {
@@ -62,9 +90,9 @@ export default {
   margin: 60px auto 0;
 
   .content {
-    width: 1200px;
+    width: 1170px;
     padding: 25px 20px;
-    margin: 20px auto;
+    margin: 0px auto;
     border: 1px solid #d6d6d6;
     border-radius: 4px;
     background: #fff;

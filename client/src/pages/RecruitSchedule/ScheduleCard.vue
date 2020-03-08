@@ -9,22 +9,58 @@
         <div class="name">搜狗</div>
         <div class="follow">+ 关注</div>
       </div>
-      <div class="list" v-for="(item, index) in 5" :key="index">
-        <img
-          src=""
-          class="img"
-        >
-        <div class="type">内推</div>
-        <div class="date">2月-3月</div>
-      </div>
+      <card-bottom
+        v-for="(item, index) in listInfo"
+        :key="index"
+        :listInfo="item"
+      />
     </div>
   </div>
 </template>
 
 <script>
+import CardBottom from './CardBottom'
+import neitui from '@/assets/neitui.png'
+import wangshen from '@/assets/wangshen.png'
+import bishi from '@/assets/bishi.png'
+import mianshi from '@/assets/mianshi.png'
+import offer from '@/assets/offer.png'
+
 export default {
+  components: {
+    CardBottom
+  },
   data () {
-    return {}
+    return {
+      neitui,
+      listInfo: [
+        {
+          img: neitui,
+          type: '内推',
+          date: '2月-3月'
+        },
+        {
+          img: wangshen,
+          type: '网申',
+          date: '2月-3月'
+        },
+        {
+          img: bishi,
+          type: '笔试',
+          date: ''
+        },
+        {
+          img: mianshi,
+          type: '面试',
+          date: '3月-4月'
+        },
+        {
+          img: offer,
+          type: 'offer',
+          date: '3月-5月'
+        }
+      ]
+    }
   },
   mounted () {}
 }
@@ -43,6 +79,11 @@ export default {
   margin-right: 15px;
   margin-bottom: 20px;
   cursor: pointer;
+  display: inline-block;
+
+  &:hover {
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  }
 
   img {
     width: 217px;
@@ -73,28 +114,6 @@ export default {
         font-size: 12px;
         background-color: #25bb9b;
         color: #fff;
-      }
-    }
-
-    .list {
-      @include flex-row;
-      font-size: 12px;
-      margin: 5px 0;
-
-      .img {
-        width: 10px;
-        height: 10px;
-        margin-right: 5px;
-        background-color: #bfa;
-      }
-
-      .type {
-        flex: 1;
-        color: #1abc9c;
-      }
-
-      .date {
-        color: #5e5d5d;
       }
     }
   }
