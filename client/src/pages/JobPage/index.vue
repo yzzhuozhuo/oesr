@@ -4,6 +4,12 @@
       :swiperImgs="swiperImgs"
       :height="200"
     />
+    <div class="header-menu">
+      <div class="menu-card" v-for="(item, index) in menuCardData" :key="index" @click="toNewPage(item.routerPath)">
+        <img :src="item.src" class="img">
+        <div class="title">{{item.title}}</div>
+      </div>
+    </div>
     <div class="rec-wrap">
       <card-title titleName="推荐" />
       <job-card
@@ -53,6 +59,10 @@ import JobCard from '@/components/JobCard'
 import Selector from '@/components/Selector'
 import PostCard from '@/components/PostCard'
 import CardTitle from '@/components/CardTitle'
+import practice from '@/assets/practice.png'
+import schedule from '@/assets/schedule.png'
+import calendar from '@/assets/calendar.png'
+import preach from '@/assets/preach.png'
 
 export default {
   name: 'JobPage',
@@ -96,14 +106,43 @@ export default {
         '产品',
         '运营',
         '其他'
+      ],
+      menuCardData: [
+        {
+          src: practice,
+          title: '实习广场',
+          routerPath: 'practiceSquare'
+        },
+        {
+          src: schedule,
+          title: '校招日程',
+          routerPath: 'recruitSchedule'
+        },
+        {
+          src: calendar,
+          title: '笔试日历',
+          routerPath: 'writeCalendar'
+        },
+        {
+          src: preach,
+          title: '宣讲信息',
+          routerPath: 'preachList'
+        }
       ]
     }
   },
-  mounted () {}
+  mounted () {},
+  methods: {
+    toNewPage (routerPath) {
+      this.$router.push({
+        path: routerPath
+      })
+    }
+  }
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .rec-wrap {
   width: 1200px;
   margin: 20px auto;
@@ -136,5 +175,27 @@ export default {
   width: 1172px;
   margin: 20px auto 0;
   text-align: left;
+}
+
+.header-menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+  padding: 15px;
+  .menu-card {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    margin-right: 50px;
+    .img {
+      width: 40px;
+      height: 40px;
+      padding-right: 10px;
+    }
+  }
+  .menu-card:hover {
+    transform: scale(1.1);
+  }
 }
 </style>
