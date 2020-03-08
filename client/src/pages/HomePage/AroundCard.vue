@@ -38,7 +38,7 @@ export default {
   }
 
   .right {
-    width: 780px;
+    width: 800px;
   }
 }
 </style>

@@ -25,6 +25,7 @@ export default {
   display: flex;
   flex-direction: row;
   margin-top: 5px;
+  padding-left: 8px;
 }
 
 .logo0 {

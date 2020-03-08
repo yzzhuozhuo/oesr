@@ -27,7 +27,7 @@ export default {
 <style scoped>
 .post-card {
   padding: 10px;
-  margin: 0 10px 10px 0;
+  margin: 0 5px 10px 5px;
   width: 261px;
   height: 60px;
   display: inline-block;

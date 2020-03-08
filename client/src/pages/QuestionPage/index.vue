@@ -73,15 +73,15 @@
     <div class="contant-card">
       <el-tabs v-model="activeCardName" @tab-click="handleCardClick" type="border-card">
         <el-tab-pane label="默认" name="default">
-          <span>根据默认排序</span>
+          <!-- <span>根据默认排序</span> -->
           <question-card :questionCardData="cardContent"></question-card>
         </el-tab-pane>
         <el-tab-pane label="最新" name="newest">
-          <span>根据最新排序</span>
+          <!-- <span>根据最新排序</span> -->
           <question-card :questionCardData="cardContent"></question-card>
         </el-tab-pane>
         <el-tab-pane label="最热" name="hottest">
-          <span>根据最热排序</span>
+          <!-- <span>根据最热排序</span> -->
           <question-card :questionCardData="cardContent"></question-card>
         </el-tab-pane>
       </el-tabs>
@@ -250,8 +250,11 @@ export default {
 
 <style scoped>
 .main {
-  margin-top: 61px;
-  padding: 10px 80px;
+  margin: 76px auto 0;
+  /* padding: 10px 80px; */
+  width: 1200px;
+  box-sizing: border-box;
+  position: relative;
 }
 .content {
   background: #fff;
@@ -266,7 +269,7 @@ export default {
   width: 200px;
   /* float: right; */
   position: absolute;
-  right: 130px;
+  right: 50px;
   z-index: 1000;
 }
 .el-collapse {

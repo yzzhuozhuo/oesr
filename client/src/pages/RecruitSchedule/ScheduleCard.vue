@@ -76,10 +76,10 @@ export default {
 .wrap {
   width: 217px;
   border: 1px solid #eaeaea;
-  margin-right: 15px;
+  margin: 0 7px;
   margin-bottom: 20px;
   cursor: pointer;
-  display: inline-block;
+  // display: inline-block;
 
   &:hover {
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
