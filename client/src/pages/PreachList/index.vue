@@ -49,20 +49,22 @@
             :default-time="defaultTime">
           </el-date-picker>
         </div>
-        <div class="preach-content" v-for="(item, index) in preachData" :key="index">
-          <div class="title">{{item.preachTitle}}</div>
-          <div class="preach-info">
-            <div class="city">
-              <i class="el-icon-map-location"></i>
-              <span>宣讲城市：{{item.preachCity}}</span>
-            </div>
-            <div class="school">
-              <i class="el-icon-school"></i>
-              <span>宣讲高校：{{item.preachSchool}}</span>
-            </div>
-            <div class="time">
-              <i class="el-icon-time"></i>
-              <span>宣讲时间：{{item.preachTime}}</span>
+        <div class="preach-flex">
+          <div class="preach-content" v-for="(item, index) in preachData" :key="index">
+            <div class="title">{{item.preachTitle}}</div>
+            <div class="preach-info">
+              <div class="city">
+                <i class="el-icon-map-location"></i>
+                <span>宣讲城市：{{item.preachCity}}</span>
+              </div>
+              <div class="school">
+                <i class="el-icon-school"></i>
+                <span>宣讲高校：{{item.preachSchool}}</span>
+              </div>
+              <div class="time">
+                <i class="el-icon-time"></i>
+                <span>宣讲时间：{{item.preachTime}}</span>
+              </div>
             </div>
           </div>
         </div>
@@ -268,6 +270,7 @@ export default {
         font-size: 16px;
         line-height: 16px;
         float: left;
+        margin-left: 5px;
         .preach {
           font-weight: 700;
         }
@@ -292,41 +295,47 @@ export default {
         }
       }
       .select {
-        margin: 15px 0;
+        margin: 10px 0 15px 5px;
         .select-school {
           padding: 0 5px;
         }
       }
-      .preach-content {
-        width: 960px;
-        border: 1px solid #d4d4d4;
-        margin-bottom: 15px;
+      .preach-flex {
         display: flex;
         flex-direction: column;
-        padding: 15px;
-        cursor: pointer;
-        .title {
-          margin-bottom: 10px;
-          font-size: 16px;
-        }
-        .preach-info {
+        justify-content: center;
+        align-items: center;
+        .preach-content {
+          width: 960px;
+          border: 1px solid #d4d4d4;
+          margin-bottom: 15px;
           display: flex;
-          align-items: center;
-          font-size: 14px;
-          .school {
-            margin: 0 30px;
+          flex-direction: column;
+          padding: 15px;
+          cursor: pointer;
+          .title {
+            margin-bottom: 10px;
+            font-size: 16px;
           }
-          .city i {
-            color: #909090;
-            font-weight: bold;
-          }
-          .school i {
-            color: #909090;
-            font-weight: bold;
-          }
-          .time i {
-            color: #909090;
-            font-weight: bold;
+          .preach-info {
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            .school {
+              margin: 0 30px;
+            }
+            .city i {
+              color: #909090;
+              font-weight: bold;
+            }
+            .school i {
+              color: #909090;
+              font-weight: bold;
+            }
+            .time i {
+              color: #909090;
+              font-weight: bold;
+            }
           }
         }
       }
