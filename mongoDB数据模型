@@ -1,0 +1,16 @@
+首页 home
+{
+  id: 0,             // 导航标识
+  navigate: 'xxx',   // 一级导航
+  subject: {
+    subjectName: '', // 二级导航
+    card: [
+      {
+        name: 'xxx', // 卡片名字
+        intr: 'xxx', // 卡片介绍
+        img: 'xxx',  // 卡片图片
+        url: 'xxx'   // 卡片跳转
+      }
+    ]
+  }
+}

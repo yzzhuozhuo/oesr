@@ -14,7 +14,11 @@
           <selector :selectList="disscussList" />
         </div>
         <div class="comment-wrap">
-          <div class="comment" v-for="(item, index) in 10" :key="index">
+          <div
+            class="comment"
+            v-for="(item, index) in 10"
+            :key="index"
+          >
             <img
               src="https://images.nowcoder.com/images/20200221/999991342_1582251610228_6D9DCA1EE42757CAD66E3EA71709F9B8?x-oss-process=image/resize,m_mfit,h_100,w_100"
               alt=""
@@ -23,11 +27,26 @@
               <div class="comment-word">
                 2020届补招专场｜春招补招，抓住上岸翻盘的最后机会！
               </div>
+              <mark-type
+                v-for="(item, index) in markData"
+                :key="index"
+                :markData="item"
+              />
+              <div class="info">
+                <div class="info-left">大大大菠萝 2020-02-13</div>
+                <div class="info-right">回复14 | 赞18 | 浏览38953</div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="right"></div>
+      <div class="right">
+        <card-title titleName="近期热帖" />
+        <hot-discuss
+          v-for="(item, index) in 18"
+          :key="index"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -36,13 +55,17 @@
 import Banner from '@/components/Banner'
 import CardTitle from '@/components/CardTitle'
 import Selector from '@/components/Selector'
+import HotDiscuss from './HotDiscuss'
+import MarkType from './MarkType'
 
 export default {
   name: 'DiscussPage',
   components: {
     Banner,
     CardTitle,
-    Selector
+    Selector,
+    HotDiscuss,
+    MarkType
   },
   data () {
     return {
@@ -61,14 +84,15 @@ export default {
         '资源分享',
         '猿生活',
         '工作以后'
-      ]
+      ],
+      markData: ['春招', '内推', '补招']
     }
   },
   mounted () {}
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .discuss {
   width: 1000px;
   margin: 80px auto;
@@ -77,10 +101,12 @@ export default {
 .content {
   width: 100%;
   margin: 8px auto 20px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .left {
-  width: 668px;
+  width: 685px;
   background-color: #fff;
   padding: 15px 0;
   box-sizing: border-box;
@@ -106,6 +132,11 @@ export default {
   border-radius: 3px;
   margin-right: 20px;
   margin-top: -5px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #22ae90;
+  }
 }
 
 .selector {
@@ -129,23 +160,44 @@ export default {
   border-bottom: 1px solid #ddd;
   display: flex;
   flex-direction: row;
+
+  img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
 }
 
 .comment:hover {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  color: #4dbfae;
-}
-
-.comment > img {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  margin-right: 10px;
 }
 
 .main {
   width: 570px;
-  padding-top: 6px;
   box-sizing: border-box;
+
+  .comment-word {
+    margin-bottom: 7px;
+
+    &:hover {
+      color: #4dbfae;
+    }
+  }
+
+  .info {
+    display: flex;
+    font-size: 12px;
+    color: #999999;
+    justify-content: space-between;
+    margin-top: 8px;
+  }
+}
+
+.right {
+  width: 300px;
+  padding: 15px 0;
+  box-sizing: border-box;
+  background-color: #fff;
 }
 </style>

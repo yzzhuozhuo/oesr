@@ -9,6 +9,7 @@ import JobPage from '../pages/JobPage'
 import PreachList from '../pages/JobPage/preachList'
 import DiscussPage from '../pages/DiscussPage'
 import UserPage from '../pages/UserPage'
+import PracticeSquare from '@/pages/PracticeSquare'
 // import NewPage from '../components/NewPage'
 
 Vue.use(Router)
@@ -66,6 +67,11 @@ export default new Router({
       path: '/userPage',
       name: '用户主页',
       component: UserPage
+    },
+    {
+      path: '/center',
+      name: '实习广场页',
+      component: PracticeSquare
     }
   ]
 })
