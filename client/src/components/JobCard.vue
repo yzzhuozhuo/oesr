@@ -1,11 +1,10 @@
 <template>
-  <div class="job-card">
+  <div class="job-card" @click="toCompanyPage(jobCardData.href)">
     <img
       class="job-img"
-      src="https://uploadfiles.nowcoder.com/images/20200302/339694163_1583161657092_19A58D529E0790FFEF450BDB70348390"
-      alt=""
-    >
-    <div class="job-name">携程旅行2020校园招聘</div>
+      :src="jobCardData.src"
+      alt="">
+    <div class="job-name">{{jobCardData.title}}</div>
   </div>
 </template>
 
@@ -15,7 +14,13 @@ export default {
   data () {
     return {}
   },
-  mounted () {}
+  mounted () {},
+  methods: {
+    toCompanyPage (href) {
+      // window.location.href = href
+      window.open(href)
+    }
+  }
 }
 </script>
 
