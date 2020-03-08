@@ -39,7 +39,7 @@ export default {
 
 .job-card:hover {
   box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.1);
-  color: #25bb9b;
+  color: #162522;
 }
 
 .job-img {

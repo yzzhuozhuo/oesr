@@ -10,6 +10,7 @@
         <el-tab-pane
           label="全部"
           name="first"
+          class="pane"
         >
           <schedule-card
             v-for="(item, index) in 20"
@@ -19,6 +20,7 @@
         <el-tab-pane
           label="国企/研究所"
           name="second"
+          class="pane"
         >
           <schedule-card
             v-for="(item, index) in 4"
@@ -28,6 +30,7 @@
         <el-tab-pane
           label="外企"
           name="third"
+          class="pane"
         >
           <schedule-card
             v-for="(item, index) in 8"
@@ -37,6 +40,7 @@
         <el-tab-pane
           label="银行/证券"
           name="fourth"
+          class="pane"
         >
           <schedule-card
             v-for="(item, index) in 7"
@@ -46,6 +50,7 @@
         <el-tab-pane
           label="游戏"
           name="fivth"
+          class="pane"
         >
           <schedule-card
             v-for="(item, index) in 9"
@@ -97,6 +102,14 @@ export default {
     border-radius: 4px;
     background: #fff;
     margin-bottom: 20px;
+  }
+
+  .pane {
+    display: flex;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+    width: 1165px;
+    margin: 0 auto;
   }
 }
 </style>

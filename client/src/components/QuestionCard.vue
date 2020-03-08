@@ -63,15 +63,17 @@ export default {
   height: 80px;
 }
 .box-card {
-  width: 210px;
+  width: 216px;
   /* margin-right: 15px; */
   margin-bottom: 10px;
-  margin-right: 19px;
+  /* margin-right: 19px; */
+  margin: 0 7px;
   /* text-align: center; */
   cursor: pointer;
 }
 .box-card:hover {
   background: #eeeeee;
+  /* box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); */
   /* transform: scale(1.1); */
   /* border: 2px solid #eee; */
   /* background-position: -1430px -650px; */
@@ -80,14 +82,18 @@ export default {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  padding-left: 10px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  /* padding-left: 5px; */
+  width: 1160px;
+  /* padding-left: 10px; */
   /* justify-content: space-between; */
 }
 .contant-card-box div {
   /* margin-right: 10.5px; */
 }
 .no-margin:nth-child(5n) {
-  margin-right: -10px;
+  /* margin-right: -10px; */
   /* background: red; */
 }
 .hot {

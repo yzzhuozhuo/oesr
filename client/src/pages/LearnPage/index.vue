@@ -496,10 +496,8 @@ export default {
   justify-content: space-around;
 }
 .share-content {
-  text-align: left;
-  font-size: 0;
-  margin-right: -20px;
-  padding: 0 20px;
+  width: 1176px;
+  margin: 0 auto;
 }
 .img-share-box {
   position: relative;
@@ -508,7 +506,7 @@ export default {
   background: #7f7f7f;
   width: 180px;
   height: 130px;
-  margin: 0 16px 10px 0;
+  margin: 0 8px 10px 8px;
   font-size: 12px;
   cursor: pointer;
 }
@@ -537,10 +535,8 @@ export default {
   width: 30%;
 }
 .special-content {
-  text-align: left;
-  font-size: 0;
-  margin-right: -20px;
-  padding: 0 20px;
+  width: 1172px;
+  margin: 0 auto;
   .special-content-item {
     width: 570px;
     height: 180px;
@@ -551,7 +547,7 @@ export default {
     display: inline-block;
     vertical-align: top;
     font-size: 14px;
-    margin: 0 17px 15px 0;
+    margin: 0 8px 15px 8px;
     cursor: pointer;
     .pic {
       width: 102px;
@@ -606,15 +602,13 @@ export default {
     margin-right: 5px;
   }
   .box {
-    padding: 0 20px;
-    text-align: left;
-    font-size: 0;
-    margin-right: -20px;
+    width: 1172px;
+    margin: 0 auto;
     .base-content-item {
       width: 570px;
       height: 270px;
       overflow: hidden;
-      margin: 0 17px 15px 0;
+      margin: 0 8px 15px 8px;
       border: 1px solid #eee;
       box-sizing: border-box;
       display: inline-block;
@@ -675,10 +669,8 @@ export default {
     margin-right: 5px;
   }
   .courses-content-box {
-    text-align: left;
-    font-size: 0;
-    margin-right: -20px;
-    padding: 0 20px;
+    width: 1150px;
+    margin: 0 auto;
     .courses-content-item {
       position: relative;
       display: inline-block;
@@ -686,7 +678,7 @@ export default {
       // background: #7f7f7f;
       width: 210px;
       // height: 119px;
-      margin: 0 16px 10px 8px;
+      margin: 0 10px 10px 10px;
       font-size: 12px;
       cursor: pointer;
         .pic {
