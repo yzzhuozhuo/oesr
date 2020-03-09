@@ -8,7 +8,7 @@
       <div class="left">
         <div class="head">
           <card-title titleName="分享与求助" />
-          <div class="pub-btn">我要发布</div>
+          <div class="pub-btn" @click="toPublish">我要发布</div>
         </div>
         <div class="selector">
           <selector :selectList="disscussList" />
@@ -88,7 +88,14 @@ export default {
       markData: ['春招', '内推', '补招']
     }
   },
-  mounted () {}
+  mounted () {},
+  methods: {
+    toPublish () {
+      this.$router.push({
+        path: 'publishComment'
+      })
+    }
+  }
 }
 </script>
 

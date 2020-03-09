@@ -61,6 +61,10 @@ html, body {
   border-bottom: 1px solid #000;
 }
 
+.ql-container {
+  min-height: 430px;
+}
+
 </style>
 <style scoped>
 .router-view {

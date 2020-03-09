@@ -2,17 +2,18 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import HomePage from '@/pages/homepage'
 import QuestionPage from '@/pages/QuestionPage'
-import QuestionList from '@/pages/QuestionPage/questionList'
-import AnswerList from '@/pages/QuestionPage/answerList'
+import QuestionList from '@/pages/QuestionList'
+import AnswerList from '@/pages/AnswerList'
 import LearnPage from '@/pages/LearnPage'
 import JobPage from '@/pages/JobPage'
 import DiscussPage from '@/pages/DiscussPage'
 import UserPage from '@/pages/UserPage'
 import PracticeSquare from '@/pages/PracticeSquare'
-import PositionDetail from '@/pages/practiceSquare/PositionDetail'
+import PositionDetail from '@/pages/PositionDetail'
 import RecruitSchedule from '@/pages/RecruitSchedule'
 import WriteCalendar from '@/pages/WriteCalendar'
 import PreachList from '@/pages/preachList'
+import PublishComment from '@/pages/PublishComment'
 // import NewPage from '@/components/NewPage'
 
 Vue.use(Router)
@@ -90,6 +91,11 @@ export default new Router({
       path: '/positionDetail',
       name: '职位详情',
       component: PositionDetail
+    },
+    {
+      path: '/publishComment',
+      name: '发表评论',
+      component: PublishComment
     }
   ]
 })
