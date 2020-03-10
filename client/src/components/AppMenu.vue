@@ -22,6 +22,7 @@
     <el-menu-item class="logoutBtn" @click="logout()">退出登陆</el-menu-item>
     <el-menu-item index="/userPage">个人主页</el-menu-item>
     <el-menu-item v-if="hasLogin" style="float: right">{{userInfo && userInfo.username}}</el-menu-item>
+    <el-menu-item v-else style="float: right" index="/login">登录/注册</el-menu-item>
     <!-- <el-menu-item style="float: right">
       <el-input v-model="searchVal" class="searchInput" size="mini" placeholder="请输入试题、公司" prefix-icon="el-icon-search"></el-input>
     </el-menu-item> -->
@@ -64,9 +65,9 @@ export default {
 .logoItem img {
   width: 60%;
 }
-.logoItem div {
-  /* background-image: url('../assets/jobLogo.png') */
-}
+/* .logoItem div {
+  background-image: url('../assets/jobLogo.png')
+} */
 .searchInput .el-input__inner {
   color: #fff;
   background-color: #51575D;

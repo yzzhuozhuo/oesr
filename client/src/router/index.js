@@ -16,6 +16,9 @@ import PreachList from '@/pages/preachList'
 import PublishComment from '@/pages/PublishComment'
 import CampusDate from '@/pages/CampusDate'
 import Company from '@/pages/Company'
+import LoginPage from '@/pages/LoginPage'
+import PasswordBack from '@/pages/PasswordBack'
+import RegisterAccount from '@/pages/RegisterAccount'
 
 Vue.use(Router)
 
@@ -107,6 +110,21 @@ export default new Router({
       path: '/company',
       name: '公司主页',
       component: Company
+    },
+    {
+      path: '/login',
+      name: '登录页面',
+      component: LoginPage
+    },
+    {
+      path: '/passwordBack',
+      name: '密码找回页',
+      component: PasswordBack
+    },
+    {
+      path: '/registerAccount',
+      name: '账号注册页',
+      component: RegisterAccount
     }
   ]
 })
