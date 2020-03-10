@@ -34,7 +34,7 @@ export default {
   display: inline-block;
   white-space: nowrap;
   font-size: 14px;
-  margin-right: 10px;
+  margin-right: 15px;
   margin-bottom: 6px;
   cursor: pointer;
   text-align: center;

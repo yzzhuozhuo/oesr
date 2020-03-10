@@ -14,7 +14,8 @@ import RecruitSchedule from '@/pages/RecruitSchedule'
 import WriteCalendar from '@/pages/WriteCalendar'
 import PreachList from '@/pages/preachList'
 import PublishComment from '@/pages/PublishComment'
-// import NewPage from '@/components/NewPage'
+import CampusDate from '@/pages/CampusDate'
+import Company from '@/pages/Company'
 
 Vue.use(Router)
 
@@ -96,6 +97,16 @@ export default new Router({
       path: '/publishComment',
       name: '发表评论',
       component: PublishComment
+    },
+    {
+      path: '/campusDate',
+      name: '公司校招日程',
+      component: CampusDate
+    },
+    {
+      path: '/company',
+      name: '公司主页',
+      component: Company
     }
   ]
 })

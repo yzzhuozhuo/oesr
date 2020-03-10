@@ -1,5 +1,8 @@
 <template>
-  <div class="wrap">
+  <div
+    class="wrap"
+    @click.stop="jumpToCampus('campusDate')"
+  >
     <img
       src="https://uploadfiles.nowcoder.com/files/20160729/60_1469787222046_sougou.png"
       alt=""
@@ -62,7 +65,13 @@ export default {
       ]
     }
   },
-  mounted () {}
+  methods: {
+    jumpToCampus (path) {
+      this.$router.push({
+        path
+      })
+    }
+  }
 }
 </script>
 
