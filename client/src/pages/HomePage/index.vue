@@ -32,7 +32,7 @@
 
 <script>
 import Swiper from '@/components/Swiper'
-import LeftMenu from '@/components/LeftMenu'
+import LeftMenu from './LeftMenu'
 import RightCard from './RightCard'
 import FristCard from './FristCard'
 import AroundCard from './AroundCard'

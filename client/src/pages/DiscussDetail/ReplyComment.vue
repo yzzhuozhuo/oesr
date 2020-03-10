@@ -108,7 +108,7 @@ export default {
             font-size: 12px;
 
             .name {
-              // font-size: 13px;
+              cursor: pointer;
               color: #f34c54;
               margin-right: 10px;
             }
