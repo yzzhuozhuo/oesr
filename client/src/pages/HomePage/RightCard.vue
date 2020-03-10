@@ -1,6 +1,6 @@
 <template>
   <div class="right-wrap">
-    <div class="title">面试备战</div>
+    <div class="title">{{title}}</div>
     <div class="question-wrap">
       <div class="list">
         <slot></slot>
@@ -11,7 +11,7 @@
 
 <script>
 export default {
-  props: ['rightCardData'],
+  props: ['rightCardData', 'title'],
   data () {
     return {}
   },
