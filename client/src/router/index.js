@@ -16,6 +16,7 @@ import PreachList from '@/pages/preachList'
 import PublishComment from '@/pages/PublishComment'
 import CampusDate from '@/pages/CampusDate'
 import Company from '@/pages/Company'
+import DiscussDetail from '@/pages/DiscussDetail'
 
 Vue.use(Router)
 
@@ -107,6 +108,11 @@ export default new Router({
       path: '/company',
       name: '公司主页',
       component: Company
+    },
+    {
+      path: '/discussDetail',
+      name: '帖子详情',
+      component: DiscussDetail
     }
   ]
 })
