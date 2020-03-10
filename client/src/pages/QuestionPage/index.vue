@@ -258,12 +258,12 @@ export default {
 }
 .content {
   background: #fff;
-  padding: 10px 50px;
+  padding: 10px 25px;
   margin-top: 10px;
 }
 .contant-card {
   background: #fff;
-  margin-top: 15px;
+  margin: 15px 0 20px;
 }
 .searchInput {
   width: 200px;
