@@ -55,7 +55,7 @@ export default {
   display: flex;
   justify-content: center;
   .main-content {
-    width: 1326px;
+    width: 1000px;
     margin-bottom: 20px;
     .import {
       display: flex;
@@ -63,9 +63,6 @@ export default {
       .inp {
         background: #ffffff;
         margin-right: 35px;
-      }
-      .btn {
-
       }
     }
     .editor-content {

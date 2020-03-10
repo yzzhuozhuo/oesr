@@ -62,8 +62,6 @@ export default {
     .calendar-content {
       width: 900px;
       padding: 20px;
-      .calendar-day {
-      }
     }
   }
 }
