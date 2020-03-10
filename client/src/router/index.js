@@ -16,6 +16,7 @@ import PreachList from '@/pages/preachList'
 import PublishComment from '@/pages/PublishComment'
 import CampusDate from '@/pages/CampusDate'
 import Company from '@/pages/Company'
+import DiscussDetail from '@/pages/DiscussDetail'
 import LoginPage from '@/pages/LoginPage'
 import PasswordBack from '@/pages/PasswordBack'
 import RegisterAccount from '@/pages/RegisterAccount'
@@ -110,6 +111,11 @@ export default new Router({
       path: '/company',
       name: '公司主页',
       component: Company
+    },
+    {
+      path: '/discussDetail',
+      name: '帖子详情',
+      component: DiscussDetail
     },
     {
       path: '/login',

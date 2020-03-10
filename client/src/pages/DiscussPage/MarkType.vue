@@ -24,6 +24,7 @@ export default {
   background: #fff;
   margin-bottom: 5px;
   line-height: 16px;
+  cursor: pointer;
 
   &:hover {
     border-color: #1abc9c;

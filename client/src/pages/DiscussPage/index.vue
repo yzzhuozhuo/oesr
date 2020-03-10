@@ -8,7 +8,10 @@
       <div class="left">
         <div class="head">
           <card-title titleName="分享与求助" />
-          <div class="pub-btn" @click="toPublish">我要发布</div>
+          <div
+            class="pub-btn"
+            @click="toPublish"
+          >我要发布</div>
         </div>
         <div class="selector">
           <selector :selectList="disscussList" />
@@ -24,7 +27,10 @@
               alt=""
             >
             <div class="main">
-              <div class="comment-word">
+              <div
+                class="comment-word"
+                @click="toDetail('discussDetail')"
+              >
                 2020届补招专场｜春招补招，抓住上岸翻盘的最后机会！
               </div>
               <mark-type
@@ -55,7 +61,7 @@
 import Banner from '@/components/Banner'
 import CardTitle from '@/components/CardTitle'
 import Selector from '@/components/Selector'
-import HotDiscuss from './HotDiscuss'
+import HotDiscuss from '@/components/HotDiscuss'
 import MarkType from './MarkType'
 
 export default {
@@ -93,6 +99,11 @@ export default {
     toPublish () {
       this.$router.push({
         path: 'publishComment'
+      })
+    },
+    toDetail (path) {
+      this.$router.push({
+        path
       })
     }
   }
@@ -161,7 +172,6 @@ export default {
 .comment {
   height: 113px;
   border-radius: 3px;
-  cursor: pointer;
   box-sizing: border-box;
   padding: 15px;
   border-bottom: 1px solid #ddd;
@@ -186,6 +196,7 @@ export default {
 
   .comment-word {
     margin-bottom: 7px;
+    cursor: pointer;
 
     &:hover {
       color: #4dbfae;
@@ -206,5 +217,6 @@ export default {
   padding: 15px 0;
   box-sizing: border-box;
   background-color: #fff;
+  border: 1px solid #e0e0e0;
 }
 </style>
