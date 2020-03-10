@@ -17,6 +17,9 @@ import PublishComment from '@/pages/PublishComment'
 import CampusDate from '@/pages/CampusDate'
 import Company from '@/pages/Company'
 import DiscussDetail from '@/pages/DiscussDetail'
+import LoginPage from '@/pages/LoginPage'
+import PasswordBack from '@/pages/PasswordBack'
+import RegisterAccount from '@/pages/RegisterAccount'
 
 Vue.use(Router)
 
@@ -113,6 +116,21 @@ export default new Router({
       path: '/discussDetail',
       name: '帖子详情',
       component: DiscussDetail
+    },
+    {
+      path: '/login',
+      name: '登录页面',
+      component: LoginPage
+    },
+    {
+      path: '/passwordBack',
+      name: '密码找回页',
+      component: PasswordBack
+    },
+    {
+      path: '/registerAccount',
+      name: '账号注册页',
+      component: RegisterAccount
     }
   ]
 })

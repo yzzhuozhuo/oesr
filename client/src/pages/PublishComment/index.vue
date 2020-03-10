@@ -67,8 +67,6 @@ export default {
     }
     .editor-content {
       background: #fff;
-      .editor-b {
-      }
     }
   }
 }
