@@ -5,10 +5,9 @@
         <template slot="title">
           <span class="collapse-title">公司</span>
           <i class="header-icon el-icon-office-building"></i>
-          <div v-if="selectedCompany">
-            <el-tag type="danger" class="user-selected" effect="plain">
-              您选择的公司是 —— {{ selectedCompany }}
-            </el-tag>
+          <div v-if="selected.companyName" class="user-selected">
+            <span>您选择的公司是—— </span>
+            <span class="selected-val">{{ selected.companyName }}</span>
           </div>
         </template>
         <div class="company">
@@ -21,10 +20,9 @@
         <template slot="title">
           <span class="collapse-title">职位</span>
           <i class="header-icon el-icon-s-custom"></i>
-          <div v-if="selectedJob">
-            <el-tag type="danger" class="user-selected" effect="plain">
-              您选择的职位是 —— {{ selectedJob }}
-            </el-tag>
+          <div v-if="selected.post" class="user-selected">
+            <span>您选择的职位是—— </span>
+            <span class="selected-val">{{ selected.post }}</span>
           </div>
         </template>
         <el-tag
@@ -39,18 +37,17 @@
         <template slot="title">
           <span class="collapse-title">年份</span>
           <i class="header-icon el-icon-time"></i>
-          <div v-if="selectedTime">
-            <el-tag type="danger" class="user-selected" effect="plain">
-              您选择的年份是 —— {{ selectedTime }}
-            </el-tag>
+          <div v-if="selected.time" class="user-selected">
+            <span>您选择的年份是—— </span>
+            <span class="selected-val">{{ selected.time }}</span>
           </div>
         </template>
         <el-tag
-          v-for="(item, index) in collapseCardData"
+          v-for="(item, index) in tagVal"
           :key="index"
-          :type="item.tagType"
-          @click="selectedVal(item.time, key='time')">
-          {{item.time}}
+          type="danger"
+          @click="selectedVal(item, key='time')">
+          {{item}}
         </el-tag>
       </el-collapse-item>
     </el-collapse>
@@ -66,9 +63,21 @@ export default {
       selectedCompany: '',
       selectedJob: '',
       selectedTime: '',
+      selected: {
+        companyName: '',
+        post: '',
+        time: ''
+      },
       selectedValList: {}
     }
   },
+  computed: {
+    tagVal () {
+      return this.handleTagVal(this.collapseCardData)
+    }
+  },
+  watch: {},
+  mounted () {},
   methods: {
     handleChange (val) {
       console.log(1111, this.activeNames)
@@ -76,9 +85,16 @@ export default {
     },
     selectedVal (val, key) {
       console.log(6666, val, key)
+      this.selected[key] = val
       this.selectedValList[key] = val
       console.log(this.selectedValList)
       this.$emit('selectedValList', this.selectedValList)
+    },
+    handleTagVal (data) {
+      let repeatTime = data.map(item => {
+        return item.time
+      })
+      return [...new Set(repeatTime)]
     }
   }
 }
@@ -120,8 +136,15 @@ export default {
   margin: 0 20px 10px 0;
   cursor: pointer;
 }
+
 .user-selected {
-  font-size: 10px;
+  font-size: 15px;
   margin-left: 10px;
+  color: #909090;
 }
+
+/* .selected-val {
+  color: #f56c6c;
+} */
+
 </style>

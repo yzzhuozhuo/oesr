@@ -111,7 +111,7 @@
                       <el-input v-else v-model="newUserInfo.loveCompany"></el-input>
                     </el-form-item>
                     <el-form-item label="感兴趣的工作">
-                      <div v-if="!isEdit">{{item.interestedClassify}}—{{item.interestedPost}}</div>
+                      <div v-if="!isEdit">{{item.interestedClassify === 'soft' ? '技术（软件）/信息技术类' : '技术（硬件）/电子技术类'}}—{{item.interestedPost}}</div>
                       <div v-else>
                         <el-select v-model="newUserInfo.interestedClassify" placeholder="请选择方向">
                           <el-option
@@ -207,7 +207,7 @@ export default {
           education: '本科',
           school: '西安科技大学',
           loveCompany: '网易',
-          interestedClassify: '技术（软件）/信息技术类',
+          interestedClassify: 'software',
           interestedPost: '前端工程师'
         }
       ],
@@ -230,11 +230,11 @@ export default {
       classifyOptions: [
         {
           label: '技术（软件）/信息技术类',
-          value: '技术（软件）/信息技术类'
+          value: 'software'
         },
         {
           label: '技术（硬件）/电子技术类',
-          value: '技术（硬件）/电子技术类'
+          value: 'hardware'
         }
       ],
       postOptions: [

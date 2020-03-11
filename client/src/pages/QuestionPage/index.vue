@@ -6,64 +6,7 @@
       <el-input v-model="searchVal" class="searchInput" placeholder="请输入公司/试卷名称" prefix-icon="el-icon-search" size="small"></el-input>
       <el-tabs v-model="activeName" @tab-click="handleClick">
         <el-tab-pane label="技术（软件）/信息技术类" name="software">
-          <template>
-            <div>
-              <el-collapse v-model="activeNames" @change="handleChange">
-                <el-collapse-item name="1">
-                  <template slot="title">
-                    <span class="collapse-title">公司</span>
-                    <i class="header-icon el-icon-office-building"></i>
-                    <div v-if="selectedCompany">
-                      <el-tag type="danger" class="user-selected" effect="plain">
-                        您选择的公司是 —— {{ selectedCompany }}
-                      </el-tag>
-                    </div>
-                  </template>
-                  <div class="company">
-                    <div v-for="(item, index) in companyUrl" :key="index">
-                      <img :src="item.url" class="companyImage" @click="selectCompany(item.companyName)">
-                    </div>
-                  </div>
-                </el-collapse-item>
-                <el-collapse-item name="2">
-                  <template slot="title">
-                    <span class="collapse-title">职位</span>
-                    <i class="header-icon el-icon-s-custom"></i>
-                    <div v-if="selectedJob">
-                      <el-tag type="danger" class="user-selected" effect="plain">
-                        您选择的职位是 —— {{ selectedJob }}
-                      </el-tag>
-                    </div>
-                  </template>
-                  <el-tag
-                    v-for="tag in jobTags"
-                    :key="tag.name"
-                    :type="tag.type"
-                    @click="selectJob(tag.name)">
-                    {{tag.name}}
-                  </el-tag>
-                </el-collapse-item>
-                <el-collapse-item name="3">
-                  <template slot="title">
-                    <span class="collapse-title">年份</span>
-                    <i class="header-icon el-icon-time"></i>
-                    <div v-if="selectedTime">
-                      <el-tag type="danger" class="user-selected" effect="plain">
-                        您选择的年份是 —— {{ selectedTime }}
-                      </el-tag>
-                    </div>
-                  </template>
-                  <el-tag
-                    v-for="tag in timeTags"
-                    :key="tag.name"
-                    :type="tag.type"
-                    @click="selectTime(tag.name)">
-                    {{tag.name}}
-                  </el-tag>
-                </el-collapse-item>
-              </el-collapse>
-            </div>
-          </template>
+          <collapse-card :collapseCardData="collapseData" @selectedValList="selectedValList"> </collapse-card>
         </el-tab-pane>
         <el-tab-pane label="技术（硬件）/电子信息类" name="hardware">
           <collapse-card :collapseCardData="collapseData" @selectedValList="selectedValList"> </collapse-card>
@@ -116,13 +59,70 @@ export default {
       },
       collapseData: [
         {
-          category: 'software', companyName: '腾讯', companyUrl: 'https://uploadfiles.nowcoder.com/images/20190409/6658561_1554809293714_A976736125A07297BEF0C62503894AAF', post: 'Java工程师', time: '2020', tagType: 'danger'
+          category: 'software', companyName: '腾讯', companyUrl: 'https://uploadfiles.nowcoder.com/images/20190409/6658561_1554809293714_A976736125A07297BEF0C62503894AAF', post: 'Java工程师', time: '2020', tagType: ''
         },
         {
-          category: 'software', companyName: '腾讯1', companyUrl: 'https://uploadfiles.nowcoder.com/images/20190409/6658561_1554809293714_A976736125A07297BEF0C62503894AAF', post: 'Java工程师', time: '2019', tagType: ''
+          category: 'software', companyName: '字节跳动', companyUrl: 'https://uploadfiles.nowcoder.com/files/20191129/4107856_1575019688704_90x30.png', post: '前端工程师', time: '2019', tagType: 'success'
         },
         {
-          category: 'software', companyName: '腾讯2', companyUrl: 'https://uploadfiles.nowcoder.com/images/20190409/6658561_1554809293714_A976736125A07297BEF0C62503894AAF', post: 'Java工程师', time: '2018', tagType: 'info'
+          category: 'software', companyName: '百度', companyUrl: 'https://uploadfiles.nowcoder.com/images/20180518/59_1526626225791_52442CEB6EF8192F3D72F2BCA98B6EC4', post: '前端工程师', time: '2018', tagType: 'info'
+        },
+        {
+          category: 'software', companyName: '美团点评', companyUrl: 'https://uploadfiles.nowcoder.com/files/20190629/4107856_1561788934302_90x30.png', post: '前端工程师', time: '2017', tagType: 'warning'
+        },
+        {
+          category: 'software', companyName: '京东', companyUrl: 'https://uploadfiles.nowcoder.com/images/20180704/826546_1530685753274_C00B57557743E709B8B96933432E0DFA', post: '前端工程师', time: '2016', tagType: 'danger'
+        },
+        {
+          category: 'software', companyName: '网易', companyUrl: 'https://uploadfiles.nowcoder.com/images/20180609/59_1528513313775_BDDCDA025D331852F27B3D0D5FF903EC', post: '前端工程师', time: '2015', tagType: ''
+        },
+        {
+          category: 'software', companyName: '小米', companyUrl: 'https://uploadfiles.nowcoder.com/images/20190222/59_1550844836644_A516DAD551EB22B1F5E839523087FA06', post: '前端工程师', time: '2014', tagType: 'success'
+        },
+        {
+          category: 'software', companyName: '滴滴', companyUrl: 'https://static.nowcoder.com//images/res/logo/comLogo/dd.png', post: '前端工程师', time: '2020', tagType: 'info'
+        },
+        {
+          category: 'software', companyName: '拼多多', companyUrl: 'https://uploadfiles.nowcoder.com/images/20180518/59_1526626303215_A4273799F870EBEA77C9E6CFADC9D005', post: '前端工程师', time: '2013', tagType: 'warning'
+        },
+        {
+          category: 'software', companyName: '360', companyUrl: 'https://uploadfiles.nowcoder.com/files/20190929/9398821_1569752897226_90x30.png', post: '前端工程师', time: '2012', tagType: 'danger'
+        },
+        {
+          category: 'software', companyName: 'ViVo', companyUrl: 'https://uploadfiles.nowcoder.com/files/20190411/4107856_1554957266672_1.jpg', post: '前端工程师', time: '2011', tagType: ''
+        },
+        {
+          category: 'software', companyName: '携程', companyUrl: 'https://uploadfiles.nowcoder.com/files/20190508/4107856_1557284535485_%E6%90%BA%E7%A8%8B.png', post: '前端工程师', time: '2010', tagType: 'success'
+        },
+        {
+          category: 'software', companyName: '蘑菇街', companyUrl: 'https://uploadfiles.nowcoder.com/files/20190329/4107856_1553833982879_90x30.png', post: '前端工程师', time: '2020', tagType: 'info'
+        },
+        {
+          category: 'software', companyName: '欢聚集团', companyUrl: 'https://uploadfiles.nowcoder.com/files/20200107/4107856_1578392556326_90x30.png', post: '前端工程师', time: '2020', tagType: 'warning'
+        },
+        {
+          category: 'software', companyName: '搜狗', companyUrl: 'https://uploadfiles.nowcoder.com/images/20190313/59_1552467469722_859C1846A8036823F3E068F41F768F06', post: '前端工程师', time: '2020', tagType: 'danger'
+        },
+        {
+          category: 'software', companyName: 'bilibili', companyUrl: 'https://uploadfiles.nowcoder.com/files/20190508/4107856_1557284894634_%E5%93%94%E5%93%A9%E5%93%94%E5%93%A9.png', post: '前端工程师', time: '2020', tagType: ''
+        },
+        {
+          category: 'software', companyName: '旷视科技', companyUrl: 'https://uploadfiles.nowcoder.com/files/20190723/4107856_1563883639164_90x30.png', post: '前端工程师', time: '2020', tagType: 'success'
+        },
+        {
+          category: 'software', companyName: '商汤科技', companyUrl: 'https://uploadfiles.nowcoder.com/images/20180816/59_1534410276919_F7A02FC71127F78A6754B1C01B33EDB7', post: '前端工程师', time: '2020', tagType: 'info'
+        },
+        {
+          category: 'software', companyName: '吉比特', companyUrl: 'https://static.nowcoder.com//images/res/logo/comLogo/jbt.png', post: '前端工程师', time: '2020', tagType: 'warning'
+        },
+        {
+          category: 'software', companyName: '搜狐', companyUrl: 'https://uploadfiles.nowcoder.com/images/20180518/59_1526626261634_0580BE38735562F177330519443A4F36', post: '前端工程师', time: '2018', tagType: 'danger'
+        },
+        {
+          category: 'software', companyName: 'iHandy', companyUrl: 'https://uploadfiles.nowcoder.com/files/20190625/4107856_1561443875132_90x30.png', post: '前端工程师', time: '2020', tagType: ''
+        },
+        {
+          category: 'software', companyName: '点我达', companyUrl: 'https://uploadfiles.nowcoder.com/images/20181207/59_1544163131168_6C3A469CB69F397E0EF46C021A6FEE24', post: '前端工程师', time: '2020', tagType: 'success'
         }
       ],
       timeTags: [
@@ -155,30 +155,6 @@ export default {
         { name: '游戏研发工程师', type: 'danger' },
         { name: '测试开发工程师', type: '' },
         { name: '测试工程师', type: 'success' }
-      ],
-      companyUrl: [
-        { 'url': 'https://uploadfiles.nowcoder.com/images/20190409/6658561_1554809293714_A976736125A07297BEF0C62503894AAF', 'companyName': '腾讯' },
-        { 'url': 'https://uploadfiles.nowcoder.com/files/20191129/4107856_1575019688704_90x30.png', 'companyName': '字节跳动' },
-        { 'url': 'https://uploadfiles.nowcoder.com/images/20180518/59_1526626225791_52442CEB6EF8192F3D72F2BCA98B6EC4', 'companyName': '百度' },
-        { 'url': 'https://uploadfiles.nowcoder.com/files/20190629/4107856_1561788934302_90x30.png', 'companyName': '美团点评' },
-        { 'url': 'https://uploadfiles.nowcoder.com/images/20180704/826546_1530685753274_C00B57557743E709B8B96933432E0DFA', 'companyName': '京东' },
-        { 'url': 'https://uploadfiles.nowcoder.com/images/20180609/59_1528513313775_BDDCDA025D331852F27B3D0D5FF903EC', 'companyName': '网易' },
-        { 'url': 'https://uploadfiles.nowcoder.com/images/20190222/59_1550844836644_A516DAD551EB22B1F5E839523087FA06', 'companyName': '小米' },
-        { 'url': 'https://static.nowcoder.com//images/res/logo/comLogo/dd.png', 'companyName': '滴滴' },
-        { 'url': 'https://uploadfiles.nowcoder.com/images/20180518/59_1526626303215_A4273799F870EBEA77C9E6CFADC9D005', 'companyName': '拼多多' },
-        { 'url': 'https://uploadfiles.nowcoder.com/files/20190929/9398821_1569752897226_90x30.png', 'companyName': '360' },
-        { 'url': 'https://uploadfiles.nowcoder.com/files/20190411/4107856_1554957266672_1.jpg', 'companyName': 'ViVo' },
-        { 'url': 'https://uploadfiles.nowcoder.com/files/20190508/4107856_1557284535485_%E6%90%BA%E7%A8%8B.png', 'companyName': '携程' },
-        { 'url': 'https://uploadfiles.nowcoder.com/files/20190329/4107856_1553833982879_90x30.png', 'companyName': '蘑菇街' },
-        { 'url': 'https://uploadfiles.nowcoder.com/files/20200107/4107856_1578392556326_90x30.png', 'companyName': '欢聚集团' },
-        { 'url': 'https://uploadfiles.nowcoder.com/images/20190313/59_1552467469722_859C1846A8036823F3E068F41F768F06', 'companyName': '搜狗' },
-        { 'url': 'https://uploadfiles.nowcoder.com/files/20190508/4107856_1557284894634_%E5%93%94%E5%93%A9%E5%93%94%E5%93%A9.png', 'companyName': 'bilibili' },
-        { 'url': 'https://uploadfiles.nowcoder.com/files/20190723/4107856_1563883639164_90x30.png', 'companyName': '旷视科技' },
-        { 'url': 'https://uploadfiles.nowcoder.com/images/20180816/59_1534410276919_F7A02FC71127F78A6754B1C01B33EDB7', 'companyName': '商汤科技' },
-        { 'url': 'https://static.nowcoder.com//images/res/logo/comLogo/jbt.png', 'companyName': '吉比特' },
-        { 'url': 'https://uploadfiles.nowcoder.com/images/20180518/59_1526626261634_0580BE38735562F177330519443A4F36', 'companyName': '搜狐' },
-        { 'url': 'https://uploadfiles.nowcoder.com/files/20190625/4107856_1561443875132_90x30.png', 'companyName': 'iHandy' },
-        { 'url': 'https://uploadfiles.nowcoder.com/images/20181207/59_1544163131168_6C3A469CB69F397E0EF46C021A6FEE24', 'companyName': '点我达' }
       ],
       cardContent: [
         { title: '奇安信2019秋招C++方向笔试题（B）', url: 'https://uploadfiles.nowcoder.com/files/20190524/63_1558668315246_奇安信-80x80.png', job: '前端工程师', hot: 100, rate: 1 },
