@@ -118,11 +118,11 @@ export default {
       classifyOptions: [
         {
           label: '技术（软件）/信息技术类',
-          value: '技术（软件）/信息技术类'
+          value: 'software'
         },
         {
           label: '技术（硬件）/电子技术类',
-          value: '技术（硬件）/电子技术类'
+          value: 'hardware'
         }
       ],
       postOptions: [
@@ -150,7 +150,7 @@ export default {
     },
     updateUserInfo () {
       console.log(123, this.newUserInfo)
-      this.$router.push({
+      this.$router.replace({
         path: 'login'
       })
     }

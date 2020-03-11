@@ -419,6 +419,7 @@ export default {
 .home {
   min-width: 1200px;
   background-color: #fff;
+  padding-bottom: 50px;
 }
 
 .tac {

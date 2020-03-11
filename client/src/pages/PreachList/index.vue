@@ -1,6 +1,7 @@
 <template>
   <div class="main">
     <div class="header">
+      <div class="menu-title">求职首页 / 宣讲会</div>
       <div class="search-title-top">宣讲会查询系统</div>
       <div class="search-title-bottom">第一时间获得宣讲信息</div>
       <div class="input-content">
@@ -10,6 +11,13 @@
           v-model="searchVal">
           <i slot="prefix" class="el-input__icon el-icon-search"></i>
         </el-input>
+      </div>
+      <div class="hot">
+        <img src="@/assets/fire.png" class="hot-img">
+        <div class="hot-title">热门院校：</div>
+        <div class="hot-school" v-for="(item, index) in hotSchool" :key="index" @click="setInpval(item)">
+          {{item}}
+        </div>
       </div>
     </div>
     <div class="main-content">
@@ -80,6 +88,39 @@
           </el-pagination>
         </div>
       </div>
+    </div>
+    <div class="dialog-content">
+      <el-dialog
+        title="添加宣讲会"
+        :visible.sync="addMesDialogVisible"
+        width="40%">
+        <div class="form-content">
+          <el-form ref="form" :model="addPreachForm" label-width="80px">
+            <el-form-item label="宣讲名称">
+              <el-input v-model="addPreachForm.preachTitle"></el-input>
+            </el-form-item>
+            <el-form-item label="宣讲城市">
+              <el-input v-model="addPreachForm.preachCity"></el-input>
+            </el-form-item>
+            <el-form-item label="宣讲学校">
+              <el-input v-model="addPreachForm.preachSchool"></el-input>
+            </el-form-item>
+            <el-form-item label="宣讲时间">
+              <el-col :span="11">
+                <el-date-picker type="date" placeholder="选择日期" v-model="addPreachForm.preachDate" style="width: 100%;"></el-date-picker>
+              </el-col>
+              <el-col class="line" :span="2" style="text-align: center; color: #DCDFE6">—</el-col>
+              <el-col :span="11">
+                <el-time-picker placeholder="选择时间" v-model="addPreachForm.preachTime" style="width: 100%;"></el-time-picker>
+              </el-col>
+            </el-form-item>
+          </el-form>
+        </div>
+        <span slot="footer" class="dialog-footer">
+          <el-button @click="addMesDialogVisible = false">取 消</el-button>
+          <el-button type="primary" @click="onSubmit">确 定</el-button>
+        </span>
+      </el-dialog>
     </div>
   </div>
 </template>
@@ -206,7 +247,16 @@ export default {
           preachAddress: ' 华中师范大学佑铭体育场',
           preachCity: '湖北'
         }
-      ]
+      ],
+      hotSchool: ['北京大学', '西安电子科技大学', '西安科技大学'],
+      addMesDialogVisible: false,
+      addPreachForm: {
+        preachTitle: '',
+        preachCity: '',
+        preachSchool: '',
+        preachDate: '',
+        preachTime: ''
+      }
     }
   },
   mounted () {
@@ -214,12 +264,21 @@ export default {
   methods: {
     addMsg () {
       console.log('增加信息')
+      this.addMesDialogVisible = true
     },
     handleSizeChange (val) {
       console.log(`每页 ${val} 条`)
     },
     handleCurrentChange (val) {
       console.log(`当前页: ${val}`)
+    },
+    setInpval (val) {
+      console.log(11111111111, val)
+      this.searchVal = val
+    },
+    onSubmit () {
+      console.log('submit!')
+      console.log(23424, this.addPreachForm)
     }
   }
 }
@@ -236,6 +295,13 @@ export default {
     background-image: url('http://static.nowcoder.com/images/res/careerTalk/banner.jpg');
     background-size: 100% 100%;
     background-repeat: no-repeat;
+      .menu-title {
+        position: relative;
+        top: 22px;
+        left: -500px;
+        color: #999;
+        font-size: 15px;
+      }
       .search-title-top {
         font-size: 42px;
         color: #fff;
@@ -246,10 +312,26 @@ export default {
         font-size: 20px;
         color: #fff;
       }
+      .hot {
+        display: flex;
+        align-items: center;
+        color: #fff;
+        font-size: 14px;
+        margin-bottom: 60px;
+        .hot-img {
+          width: 13px;
+          height: 16px;
+          margin-right: 5px;
+        }
+        .hot-school {
+          margin-right: 10px;
+          cursor: pointer;
+        }
+      }
     .input-content {
-      width: 420px;
+      width: 430px;
       height: 34px;
-      margin: 40px 0 105px;
+      margin: 30px 0 15px;
     }
   }
   .main-content {
@@ -341,6 +423,7 @@ export default {
       }
       .preach-content:hover {
         background: #eeeeee;
+        color: #25bb9b;
       }
       .pagination {
         text-align: center;
@@ -348,4 +431,11 @@ export default {
     }
   }
 }
+
+.input-p /deep/ input {
+  border-radius: 50px;
+  border: 1px solid #fff;
+  color: #fff;
+}
+
 </style>

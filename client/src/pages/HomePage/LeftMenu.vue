@@ -49,7 +49,7 @@ export default {
 .fixed {
   width: 200px;
   position: fixed;
-  left: 140px;
+  left: 75px;
   top: 60px;
 }
 </style>
