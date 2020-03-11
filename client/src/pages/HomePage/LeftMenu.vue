@@ -52,4 +52,14 @@ export default {
   left: 140px;
   top: 60px;
 }
+
+.el-submenu .el-menu-item {
+  height: 38px;
+  line-height: 38px;
+}
+
+.el-menu-vertical-demo /deep/ .el-submenu__title {
+  height: 45px;
+  line-height: 45px;
+}
 </style>
