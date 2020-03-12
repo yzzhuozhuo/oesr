@@ -1,6 +1,9 @@
 <template>
   <el-col
     :class="fixed ? 'fixed' : 'absolute'"
+    :style="{
+      left: fixed ? `${left}px` : '0'
+    }"
     :span="4"
   >
     <el-menu
@@ -33,9 +36,17 @@
 <script>
 export default {
   props: ['menus', 'fixed', 'active', 'handleOpen'],
-  methods: {},
-  mounted () {
-    // handleOpen(this.active)
+  data () {
+    return {
+      width: document.body.clientWidth
+    }
+  },
+  computed: {
+    left () {
+      let left = (this.width - 1216) / 2
+      if (left <= 0) left = 0
+      return left
+    }
   }
 }
 </script>
@@ -49,7 +60,17 @@ export default {
 .fixed {
   width: 200px;
   position: fixed;
-  left: 75px;
+  // left: 75px;
   top: 60px;
+}
+
+.el-submenu .el-menu-item {
+  height: 38px;
+  line-height: 38px;
+}
+
+.el-menu-vertical-demo /deep/ .el-submenu__title {
+  height: 45px;
+  line-height: 45px;
 }
 </style>
