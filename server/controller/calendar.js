@@ -14,7 +14,7 @@ exports.getCalendar = function (req, res) {
   })
 }
 
-exports.addCalendar = function(req, res) {
+exports.addCalendar = function (req, res) {
   let data = req.body
   calendarService.addCalendarList(data).then(data => {
     res.send({

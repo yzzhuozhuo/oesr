@@ -27,3 +27,16 @@ export const updateCalendarList = function ({ commit }, data) {
     return data
   }).catch(generateErrorHandler(commit))
 }
+
+export const fetchPreachList = function ({ commit }, data) {
+  return api.fetchPreachList(data).then(data => {
+    // console.log(454, data)
+    commit(types.FETCH_PREACH_LIST, data)
+  }).catch(generateErrorHandler(commit))
+}
+
+export const updatePreachList = function ({ commit }, data) {
+  return api.updatePreachList(data).then(data => {
+    return data
+  }).catch(generateErrorHandler(commit))
+}
