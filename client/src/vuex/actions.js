@@ -14,3 +14,16 @@ export const fetchUserInfo = function ({ state, commit, rootState }) {
     commit(types.UPDATE_USERINFO, userInfo)
   }).catch(generateErrorHandler(commit))
 }
+
+export const fetchCalendarList = function ({ commit }) {
+  return api.fetchCalendarList().then(data => {
+    // console.log(123321, data)
+    commit(types.FETCH_CALENDAR_LIST, data)
+  }).catch(generateErrorHandler(commit))
+}
+
+export const updateCalendarList = function ({ commit }, data) {
+  return api.updateCalendarList(data).then(data => {
+    return data
+  }).catch(generateErrorHandler(commit))
+}

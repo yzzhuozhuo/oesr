@@ -13,8 +13,7 @@ const userService = require('../service/user')
 exports.user = function (req, res) {
   // 手动给数据库user表中添加数据，后期登录信息需要从req.session中获取
   // let userInfo = {
-  //   username: 'yz',
-  //   password: '123456'
+  //   username: 'yz'
   // }
   userService.getUserInfo().then(data => {
     res.send({

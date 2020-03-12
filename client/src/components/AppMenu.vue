@@ -21,7 +21,7 @@
     <el-menu-item index="/discussPage">讨论区</el-menu-item>
     <el-menu-item class="logoutBtn" @click="logout()">退出登陆</el-menu-item>
     <el-menu-item index="/userPage">个人主页</el-menu-item>
-    <el-menu-item v-if="hasLogin" style="float: right">{{userInfo && userInfo.username}}</el-menu-item>
+    <el-menu-item v-if="hasLogin && !isLogout" style="float: right">{{userInfo && userInfo.username}}</el-menu-item>
     <el-menu-item v-else style="float: right" index="/login">登录/注册</el-menu-item>
     <!-- <el-menu-item style="float: right">
       <el-input v-model="searchVal" class="searchInput" size="mini" placeholder="请输入试题、公司" prefix-icon="el-icon-search"></el-input>
@@ -36,7 +36,8 @@ export default {
   data () {
     return {
       activeIndex: this.$route.path,
-      searchVal: ''
+      searchVal: '',
+      isLogout: false
     }
   },
   computed: {
@@ -52,6 +53,7 @@ export default {
     ...mapActions(['fetchUserInfo']),
     logout () {
       console.log('退出登录')
+      this.isLogout = true
     }
   }
 }
