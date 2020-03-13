@@ -478,7 +478,7 @@ export default {
           finalScore += this.topic[3][index].score // 计算总分数
         }
       })
-      console.log(`目前总分${finalScore}`)
+      console.log(`6666------目前总分${finalScore}`)
       if (this.time !== 0) {
         this.$confirm('考试结束时间未到,是否提前交卷', '友情提示', {
           confirmButtonText: '立即交卷',
@@ -486,6 +486,10 @@ export default {
           type: 'warning'
         }).then(() => {
           console.log('交卷')
+          let date = new Date()
+          this.endTime = this.getTime(date)
+          let answerDate = this.endTime.substr(0, 10)
+          console.log(111, date, this.showTime, this.endTime, answerDate)
           // 请求接口，将最终的分数保存数据库中
         }).catch(() => {
           console.log('继续答题')

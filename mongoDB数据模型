@@ -14,3 +14,39 @@
     ]
   }
 }
+题库 questionPage
+{
+  tagType: '', // 题库tab的类型 software / hardware
+  themeTitle: '', // 试卷名称
+  companyName: '',
+  companyUrl: '', // 公司的图标
+  years: '', // 年份 2020/2019/2018...
+  post: '', // 职位 前端/C++/Java
+  hot: '', // 热度指数
+  rate: 1-5, // 难度系数，星星个数
+  createAt: Date, //创建时间，点击最新时进行排序,
+  questionLists: [
+    chooseLists: [{
+      "question": "主机A向主机B发送一个（SYN=1，seq=2000）的TCP报文，期望与主机B建立连接，若主机B接受连接请求，则主机B发送的正确有TCP报文可能是（ ）",
+      "answerA": "（SYN=0,ACK=0,seq=2001,ack=2001）",
+      "answerB": "（SYN=1,ACK=1,seq=2000,ack=2000）",
+      "answerC": "（SYN=1,ACK=1,seq=2001,ack=2001）",
+      "answerD": "（SYN=0,ACK=1,seq=2000,ack=2000）",
+      "rightAnswer": "C",
+      "analysis": null,
+      "score": 2
+    }],
+    fillLists: [{
+      "question": "按交换方式来分类，计算机网络可以分为电路交换网，报文交换网 和()三种",
+      "answer": "分组交换网",
+      "score": 2,
+      "analysis": null
+    }],
+    judgeLists: [{
+      "question": "没有网线的电脑不能连入互联网",
+      "answer": "F",
+      "score": 2,
+      "analysis": null
+    }]
+  ] 
+}

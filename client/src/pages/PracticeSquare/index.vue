@@ -58,7 +58,7 @@
         </div>
       </div>
       <div class="right">
-        <div class="publish">
+        <div class="publish" @click="publishPost">
           <div class="img"></div>
           <span>发布职位</span>
         </div>
@@ -144,6 +144,9 @@ export default {
       this.$router.push({
         path: 'PositionDetail'
       })
+    },
+    publishPost () {
+      // TODO发布职位
     }
   }
 }
