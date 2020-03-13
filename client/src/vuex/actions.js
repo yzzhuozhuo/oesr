@@ -14,3 +14,9 @@ export const fetchUserInfo = function ({ state, commit, rootState }) {
     commit(types.UPDATE_USERINFO, userInfo)
   }).catch(generateErrorHandler(commit))
 }
+
+export const fetchHomeInfo = function ({ state, commit, rootState }) {
+  return api.fetchHomeInfo().then(homeInfo => {
+    commit(types.UPDATE_HOMEINFO, homeInfo)
+  }).catch(generateErrorHandler(commit))
+}

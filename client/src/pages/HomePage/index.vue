@@ -59,6 +59,7 @@
 </template>
 
 <script>
+import { mapActions, mapState } from 'vuex'
 import Swiper from '@/components/Swiper'
 import LeftMenu from './LeftMenu'
 import RightCard from './RightCard'
@@ -289,15 +290,23 @@ export default {
       active: '1-1'
     }
   },
+  computed: {
+    ...mapState({
+      homeInfo: state => state.home
+    })
+  },
   mounted () {
+    console.info(this.homeInfo)
+    this.fetchHomeInfo()
     this.$nextTick(() => {
       window.addEventListener('scroll', this.throttle(this.handleScroll, 100))
     })
   },
   methods: {
+    ...mapActions(['fetchHomeInfo']),
     handleScroll () {
       let scrollY = document.documentElement.scrollTop
-      if (scrollY > 361) {
+      if (scrollY > 311) {
         if (!this.fixed) this.fixed = true
       } else {
         if (this.fixed) this.fixed = false
