@@ -25,11 +25,11 @@
         <div class="title">
           <div class="point"></div>
           <span class="preach">近期宣讲会</span>
-          <span class="totle">共100条信息</span>
+          <span class="totle">共{{this.total}}条信息</span>
           <el-button type="text" class="btn" @click="addMsg">+我要添加</el-button>
         </div>
         <div class="select">
-          <el-select v-model="selectCity" placeholder="请选择宣讲城市">
+          <el-select clearable v-model="selectCity" placeholder="请选择宣讲城市">
             <el-option
               v-for="item in cityOptions"
               :key="item.value"
@@ -37,7 +37,7 @@
               :value="item.value">
             </el-option>
           </el-select>
-          <el-select v-model="selectSchool" placeholder="请选择宣讲学校" class="select-school">
+          <el-select clearable v-model="selectSchool" placeholder="请选择宣讲学校" class="select-school">
             <el-option
               v-for="item in schoolOptions"
               :key="item.value"
@@ -46,7 +46,7 @@
             </el-option>
           </el-select>
           <el-date-picker
-            v-model="pickDateValue"
+            v-model="pickDateVal"
             type="datetimerange"
             value-format="timestamp"
             :picker-options="pickerOptions"
@@ -59,7 +59,11 @@
         </div>
         <div class="preach-flex">
           <div class="preach-content" v-for="(item, index) in preachData" :key="index">
-            <div class="title">{{item.preachTitle}}</div>
+            <div class="title">
+              <span class="preach-company">{{item.preachCompany}}</span>
+              <el-tag effect="dark" size="small" v-if="new Date(item.preachTime).getDate() === new Date().getDate()" type="success">今日</el-tag>
+              <el-tag effect="dark" size="small" v-if="tomorrowStart <= new Date(item.preachTime) && new Date(item.preachTime) <= tomorrowEnd">明日</el-tag>
+            </div>
             <div class="preach-info">
               <div class="city">
                 <i class="el-icon-map-location"></i>
@@ -75,16 +79,20 @@
               </div>
             </div>
           </div>
+          <div class="no-data" v-if="this.preachData.length === 0 || !this.preachData">
+            <img src="//static.nowcoder.com//images/res/empty/2.png">
+            <div>暂无宣讲会信息</div>
+          </div>
         </div>
-        <div class="pagination">
+        <div class="pagination" v-if="this.preachData.length !== 0">
           <el-pagination
             @size-change="handleSizeChange"
             @current-change="handleCurrentChange"
-            :current-page="currentPage"
-            :page-sizes="[100, 200, 300, 400]"
-            :page-size="100"
+            :current-page.sync="currentPage"
+            :page-sizes="[10, 20, 50, 100]"
+            :page-size.sync="pageNum"
             layout="total, sizes, prev, pager, next, jumper"
-            :total="400">
+            :total="total">
           </el-pagination>
         </div>
       </div>
@@ -96,8 +104,8 @@
         width="40%">
         <div class="form-content">
           <el-form ref="form" :model="addPreachForm" label-width="80px">
-            <el-form-item label="宣讲名称">
-              <el-input v-model="addPreachForm.preachTitle"></el-input>
+            <el-form-item label="宣讲公司">
+              <el-input v-model="addPreachForm.preachCompany"></el-input>
             </el-form-item>
             <el-form-item label="宣讲城市">
               <el-input v-model="addPreachForm.preachCity"></el-input>
@@ -126,16 +134,23 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex'
+import moment from 'moment'
+import _ from 'lodash'
+const tomorrowStart = new Date(new Date(new Date().toLocaleDateString()).getTime() + 3600 * 1000 * 24 * 1)
+const tomorrowEnd = new Date(new Date(new Date().toLocaleDateString()).getTime() + 3600 * 1000 * 24 * 1 + 24 * 60 * 60 * 1000 - 1)
 
 export default {
   name: 'NewPage',
   data () {
     return {
       searchVal: '',
-      selectCity: '宣讲城市',
-      selectSchool: '宣讲学校',
-      pickDateValue: '',
-      currentPage: 1,
+      selectCity: '',
+      selectSchool: '',
+      pickDateVal: '',
+      currentPage: 1, // 分页
+      pageNum: 10,
+      total: 0,
       defaultTime: ['00:00:00', '23:59:59'],
       pickerOptions: {
         shortcuts: [{
@@ -146,10 +161,10 @@ export default {
             picker.$emit('pick', [start, end])
           }
         }, {
-          text: '昨日',
+          text: '明日',
           onClick (picker) {
-            const start = new Date(new Date(new Date().toLocaleDateString()).getTime() - 3600 * 1000 * 24 * 1)
-            const end = new Date(new Date(new Date().toLocaleDateString()).getTime() - 3600 * 1000 * 24 * 1 + 24 * 60 * 60 * 1000 - 1)
+            const start = new Date(new Date(new Date().toLocaleDateString()).getTime() + 3600 * 1000 * 24 * 1)
+            const end = new Date(new Date(new Date().toLocaleDateString()).getTime() + 3600 * 1000 * 24 * 1 + 24 * 60 * 60 * 1000 - 1)
             picker.$emit('pick', [start, end])
           }
         }, {
@@ -157,7 +172,7 @@ export default {
           onClick (picker) {
             const end = new Date()
             const start = new Date()
-            start.setTime(start.getTime() - 3600 * 1000 * 24 * 7)
+            end.setTime(start.getTime() + 3600 * 1000 * 24 * 7)
             picker.$emit('pick', [start, end])
           }
         }, {
@@ -165,7 +180,7 @@ export default {
           onClick (picker) {
             const end = new Date()
             const start = new Date()
-            start.setTime(start.getTime() - 3600 * 1000 * 24 * 30)
+            end.setTime(start.getTime() + 3600 * 1000 * 24 * 30)
             picker.$emit('pick', [start, end])
           }
         }]
@@ -204,73 +219,90 @@ export default {
           label: '北京大学'
         }
       ],
-      preachData: [
-        {
-          preachTitle: '2020年春季在汉直属高校研究生双选会',
-          preachSchool: '华中科技大学',
-          preachTime: '2020-03-07 08:30:00',
-          preachAddress: ' 华中师范大学佑铭体育场',
-          preachCity: '湖北'
-        },
-        {
-          preachTitle: '2020年春季在汉直属高校研究生双选会',
-          preachSchool: '华中科技大学',
-          preachTime: '2020-03-07 08:30:00',
-          preachAddress: ' 华中师范大学佑铭体育场',
-          preachCity: '湖北'
-        },
-        {
-          preachTitle: '2020年春季在汉直属高校研究生双选会',
-          preachSchool: '华中科技大学',
-          preachTime: '2020-03-07 08:30:00',
-          preachAddress: ' 华中师范大学佑铭体育场',
-          preachCity: '湖北'
-        },
-        {
-          preachTitle: '2020年春季在汉直属高校研究生双选会',
-          preachSchool: '华中科技大学',
-          preachTime: '2020-03-07 08:30:00',
-          preachAddress: ' 华中师范大学佑铭体育场',
-          preachCity: '湖北'
-        },
-        {
-          preachTitle: '2020年春季在汉直属高校研究生双选会',
-          preachSchool: '华中科技大学',
-          preachTime: '2020-03-07 08:30:00',
-          preachAddress: ' 华中师范大学佑铭体育场',
-          preachCity: '湖北'
-        },
-        {
-          preachTitle: '2020年春季在汉直属高校研究生双选会',
-          preachSchool: '华中科技大学',
-          preachTime: '2020-03-07 08:30:00',
-          preachAddress: ' 华中师范大学佑铭体育场',
-          preachCity: '湖北'
-        }
-      ],
+      preachData: [],
       hotSchool: ['北京大学', '西安电子科技大学', '西安科技大学'],
       addMesDialogVisible: false,
       addPreachForm: {
-        preachTitle: '',
+        preachCompany: '',
         preachCity: '',
         preachSchool: '',
         preachDate: '',
         preachTime: ''
-      }
+      },
+      tomorrowStart: tomorrowStart,
+      tomorrowEnd: tomorrowEnd
+    }
+  },
+  computed: {
+    ...mapState({
+      preachList: state => state.preach.preachList || [],
+      totalPage: state => state.preach.totalPage || 0,
+      pageNumber: state => state.preach.pageNumber || 10,
+      page: state => state.preach.page || 1
+    }),
+    fetchList () {
+      return `${this.searchVal}_${this.selectCity}_${this.selectSchool}_${this.pickDateVal}`
+    }
+  },
+  watch: {
+    preachList () {
+      this.preachData = this.formatPreachTime(this.preachList)
+    },
+    totalPage () {
+      this.total = this.totalPage
+    },
+    pageNumber () {
+      this.pageNum = this.pageNumber
+    },
+    page () {
+      this.currentPage = this.page
+    },
+    fetchList () {
+      this.fetchPreachDataList()
     }
   },
   mounted () {
+    this.fetchPreachList()
   },
   methods: {
+    ...mapActions([
+      'fetchPreachList',
+      'updatePreachList'
+    ]),
+    formatPreachTime (preachList) {
+      const TIME_FORMAT = 'YYYY-MM-DD HH:mm:ss'
+      const data = _.cloneDeep(preachList)
+      return data.map(item => {
+        item.preachTime = moment(item.preachTime).format(TIME_FORMAT)
+        return item
+      })
+    },
+    fetchPreachDataList () {
+      let params = {
+        preachStartTime: this.pickDateVal ? this.pickDateVal[0] : [],
+        preachEndTime: this.pickDateVal ? this.pickDateVal[1] : [],
+        searchValue: this.searchVal,
+        selectCity: this.selectCity,
+        selectSchool: this.selectSchool,
+        currentPage: this.currentPage,
+        pageNum: this.pageNum
+      }
+      this.fetchPreachList(params)
+    },
     addMsg () {
       console.log('增加信息')
       this.addMesDialogVisible = true
+      console.log(111, this.preachData)
     },
     handleSizeChange (val) {
       console.log(`每页 ${val} 条`)
+      this.pageNum = val
+      this.fetchPreachDataList()
     },
     handleCurrentChange (val) {
       console.log(`当前页: ${val}`)
+      this.currentPage = val
+      this.fetchPreachDataList()
     },
     setInpval (val) {
       console.log(11111111111, val)
@@ -278,7 +310,25 @@ export default {
     },
     onSubmit () {
       console.log('submit!')
-      console.log(23424, this.addPreachForm)
+      const TIME_FORMAT = 'YYYY-MM-DD' // YYYY-MM-DD
+      const HOUR_FORMAT = 'HH:mm:ss' // HH:mm:ss
+      let formatMonths = moment(this.addPreachForm.preachDate).format(TIME_FORMAT)
+      let formatHour = moment(this.addPreachForm.preachTime).format(HOUR_FORMAT)
+      let formatTime = moment(new Date(`${formatMonths} ${formatHour}`), 'YYYY-MM-DD HH:mm:ss').valueOf()
+      let data = {
+        preachCompany: this.addPreachForm.preachCompany,
+        preachCity: this.addPreachForm.preachCity,
+        preachSchool: this.addPreachForm.preachSchool,
+        preachTime: formatTime
+      }
+      this.updatePreachList(data).then(() => {
+        this.addMesDialogVisible = false
+        this.fetchPreachDataList()
+        this.$message({
+          type: 'success',
+          message: '添加宣讲信息成功~'
+        })
+      })
     }
   }
 }
@@ -393,11 +443,16 @@ export default {
           margin-bottom: 15px;
           display: flex;
           flex-direction: column;
-          padding: 15px;
+          padding: 18px;
           cursor: pointer;
           .title {
-            margin-bottom: 10px;
-            font-size: 16px;
+            margin-bottom: 14px;
+            font-size: 17px;
+            display: flex;
+            align-items: center;
+            .preach-company {
+              padding-right: 10px;
+            }
           }
           .preach-info {
             display: flex;
@@ -420,13 +475,22 @@ export default {
             }
           }
         }
+        .no-data {
+          margin: 90px 0;
+          text-align: center;
+        }
+        .no-data img {
+          width: 80px;
+          height: 80px;
+          margin-bottom: 10px;
+        }
       }
       .preach-content:hover {
         background: #eeeeee;
         color: #25bb9b;
       }
       .pagination {
-        text-align: center;
+        text-align: right;
       }
     }
   }

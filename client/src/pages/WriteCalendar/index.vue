@@ -1,6 +1,9 @@
 <template>
   <div class="main">
-    <div class="header-title">求职 > 校招日历</div>
+    <div class="header-title">
+      <span>求职 > 校招日历</span>
+      <el-button type="primary" size="small" @click="addCalendarData">添加日历</el-button>
+    </div>
     <div class="calendar">
       <el-calendar v-model="value" class="calendar-content">
         <!-- 这里使用的是 2.5 slot 语法，对于新项目请使用 2.6 slot 语法-->
@@ -25,25 +28,94 @@
         </template>
       </el-calendar>
     </div>
+    <div class="dialog-content">
+      <el-dialog
+        title="添加笔试日历"
+        :visible.sync="addDialogVisible"
+        width="40%">
+        <div class="form-content">
+          <el-form ref="form" :model="addCalendarForm" label-width="80px">
+            <el-form-item label="笔试名称">
+              <el-input v-model="addCalendarForm.title"></el-input>
+            </el-form-item>
+            <el-form-item label="笔试时间">
+              <el-col :span="11">
+                <el-date-picker type="date" placeholder="选择日期" v-model="addCalendarForm.calendarDate" style="width: 100%;"></el-date-picker>
+              </el-col>
+              <el-col class="line" :span="2" style="text-align: center; color: #DCDFE6">—</el-col>
+              <el-col :span="11">
+                <el-time-picker placeholder="选择时间" v-model="addCalendarForm.calendarTime" style="width: 100%;"></el-time-picker>
+              </el-col>
+            </el-form-item>
+          </el-form>
+        </div>
+        <span slot="footer" class="dialog-footer">
+          <el-button @click="addDialogVisible = false">取 消</el-button>
+          <el-button type="primary" @click="onSubmit">确 定</el-button>
+        </span>
+      </el-dialog>
+    </div>
   </div>
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex'
+import moment from 'moment'
 
 export default {
   name: 'WriteCalendar',
   data () {
     return {
-      calendarData: [
-        { months: ['03'], days: ['10', '11', '12'], things: '14:00 美团笔试' },
-        { months: ['03'], days: ['10', '11', '12'], things: '14:00 字节跳动笔试' }
-      ],
-      value: new Date()
+      calendarData: [],
+      value: new Date(),
+      addCalendarForm: {
+        title: '',
+        calendarDate: '',
+        calendarTime: ''
+      },
+      addDialogVisible: false
+    }
+  },
+  computed: {
+    ...mapState({
+      calendarList: state => state.calendar.calendarList || []
+    })
+  },
+  watch: {
+    calendarList () {
+      this.calendarData = this.calendarList
     }
   },
   mounted () {
+    this.fetchCalendarList()
   },
   methods: {
+    ...mapActions([
+      'fetchCalendarList',
+      'updateCalendarList'
+    ]),
+    onSubmit () {
+      const TIME_FORMAT = 'MM-DD' // YY-MM-DD
+      const HOUR_FORMAT = 'HH:mm' // HH:mm:ss
+      let formatMonths = moment(this.addCalendarForm.calendarDate).format(TIME_FORMAT)
+      let formatHour = moment(this.addCalendarForm.calendarTime).format(HOUR_FORMAT)
+      let data = {
+        months: formatMonths.split('-')[0],
+        days: formatMonths.split('-')[1],
+        things: `${formatHour} ${this.addCalendarForm.title}`
+      }
+      this.updateCalendarList(data).then(() => {
+        this.fetchCalendarList()
+        this.$message({
+          message: '添加笔试日历成功~',
+          type: 'success'
+        })
+      })
+      this.addDialogVisible = false
+    },
+    addCalendarData () {
+      this.addDialogVisible = true
+    }
   }
 }
 </script>
@@ -53,7 +125,10 @@ export default {
   margin-top: 61px;
   .header-title {
     margin-left: 204px;
-    padding: 15px 0;
+    padding: 20px 0;
+    display: flex;
+    justify-content: space-between;
+    width: 940px;
   }
   .calendar {
     display: flex;
@@ -68,11 +143,11 @@ export default {
 
 .is-selected {
   font-size: 13px;
-  color: #909090;
+  color: #2f84cc;
 }
 
 .is-selected:hover {
-  background: #eee;
+  background: #eeeeee;
 }
 
 </style>
