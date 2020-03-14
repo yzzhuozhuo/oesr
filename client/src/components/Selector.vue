@@ -6,7 +6,7 @@
       :key="index"
       :class="activeIndex === index ? 'active' : 'nomal'"
       @click.stop="checkout(index)"
-    >{{item}}</span>
+    >{{item.name}}</span>
   </div>
 </template>
 

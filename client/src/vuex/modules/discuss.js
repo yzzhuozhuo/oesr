@@ -1,12 +1,12 @@
 import * as types from '../mutation-types'
 
 const state = {
-  menus: []
+  discussList: []
 }
 
 const mutations = {
-  [types.FETCH_HOME_INFO] (state, homeInfo) {
-    state.menus = homeInfo
+  [types.FETCH_DISCUSS_INFO] (state, discussList) {
+    state.discussList = discussList
   }
 }
 

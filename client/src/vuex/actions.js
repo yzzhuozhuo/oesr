@@ -17,7 +17,7 @@ export const fetchUserInfo = function ({ state, commit, rootState }) {
 
 export const fetchHomeInfo = function ({ state, commit, rootState }) {
   return api.fetchHomeInfo().then(homeInfo => {
-    commit(types.UPDATE_HOMEINFO, homeInfo)
+    commit(types.FETCH_HOME_INFO, homeInfo)
   })
 }
 
@@ -45,4 +45,10 @@ export const updatePreachList = function ({ commit }, data) {
   return api.updatePreachList(data).then(data => {
     return data
   }).catch(generateErrorHandler(commit))
+}
+
+export const fetchDiscussInfo = function ({ state, commit, rootState }, data) {
+  return api.fetchDiscussInfo(data).then(discussInfo => {
+    commit(types.FETCH_DISCUSS_INFO, discussInfo)
+  })
 }
