@@ -50,3 +50,33 @@
     }]
   ] 
 }
+
+职位表 position
+{
+  companyName: '', // 公司名称
+  companyImgUrl: '', // 公司图标
+  companyProfile: '', // 公司简介
+  positionTitle: '', // 职位标题
+  positionType: '', // 职位类型 研发/测试/前端...
+  PositionCity: '', // 职位位置
+  createAt: '', // 发布时间，也就是给数据库中插入的时间
+  processingRatio: '', // 简历处理率 [1, 0.9, 0.8 ...] --> [100%, 90%, 80%,...]
+  processingTime: '1', // 简历处理时间 1天
+  processingSpeed: '', // 处理速度 ['fast', 'medium ', 'slow']
+  compensation: '', // 薪酬 面议/200-300元/天
+  practiceRequire: '5天/周，3个月以上',
+  becomeOfficial: '', // 是否可以转正 是/否
+  jobResponsibilities: [
+    '负责国际事业群业务线开发，包括全球各地钱包',
+    '业务实体包括：Alipay HK、Paytm、TNG、MYNT等',
+    '将我们的技术输出到全球，创造无限的可能',
+    '专注国际业务，致力于通过世界一流的全球化技术惠普全球消费者'
+  ],
+  jobRequirements: [
+    '本科及以上学历，优秀的代码能力。',
+    '热爱计算机科学和互联网技术，精通至少一门编程语言，包括但不仅限于：Java、C、C++、PHP、 Python、Go。',
+    '掌握扎实的计算机基础知识，深入理解数据结构、算法和操作系统知识。',
+    '有优秀的逻辑分析能力，能够对业务逻辑进行合理的抽象和拆分。',
+    '有强烈的求知欲，优秀的学习和沟通能力。'
+  ]
+}

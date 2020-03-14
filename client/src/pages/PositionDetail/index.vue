@@ -1,7 +1,8 @@
 <template>
   <div class="main">
     <div class="title">
-      <span>实习首页 > {{positionDetailData.companyName}}</span>
+      <!-- <span>职位首页 > {{positionDetailData.companyName}}</span> -->
+      <span>职位首页 > 蚂蚁金服</span>
     </div>
     <div class="card-content">
       <div class="card-left">
@@ -13,19 +14,19 @@
           <div class="introduce">
             <div class="header">
               <div class="introduce-title">
-                <span>{{positionDetailData.companyName}}-{{positionDetailData.time}}-{{positionDetailData.post}}岗</span>
+                <span>{{positionDetailData.positionTitle}}</span>
               </div>
               <div class="icon">
                 <div class="post">
                   <i class="el-icon-suitcase-1"></i>
-                  <span>{{positionDetailData.post}}</span>
+                  <span>{{positionDetailData.positionType}}</span>
                 </div>
                 <div class="location">
                   <i class="el-icon-map-location"></i>
-                  <span>{{positionDetailData.location.toString()}}</span>
+                  <span>{{positionDetailData.PositionCity}}</span>
                 </div>
               </div>
-              <div class="info">薪酬：面议  |  实习要求：{{positionDetailData.practiceRequire}}  |  转正机会：有</div>
+              <div class="info">薪酬：{{positionDetailData.compensation}}  |  实习要求：{{positionDetailData.practiceRequire}}  |  转正机会：{{positionDetailData.becomeOfficial === '1' ? '有' : '无'}}</div>
             </div>
             <div class="section">
               <div class="duty">
@@ -56,9 +57,11 @@
       <div class="card-right">
         <div class="card-header">
           <div class="card-img">
-            <img :src="positionDetailData.companyImgUrl">
+            <!-- <img :src="positionDetailData.companyImgUrl"> -->
+            <img src="https://uploadfiles.nowcoder.com/files/20170318/1697873_1489806769570_2.jpg">
           </div>
-          <div class="card-company-name">{{positionDetailData.companyName}}</div>
+          <!-- <div class="card-company-name">{{positionDetailData.companyName}}</div> -->
+          <div class="card-company-name">蚂蚁金服</div>
         </div>
         <div class="info">
           <div class="info-content">
@@ -84,6 +87,7 @@
             </div>
             <div class="content">
               <span>
+                <!-- {{positionDetailData.companyProfile}} -->
                 浙江蚂蚁小微金融服务集团股份有限公司，简称蚂蚁金服，正式成立于2014年，是专注于服务小微企业与普通消费者的互联网金融服务公司。
                 其前身是成立于2000年10月，独立于阿里巴巴集团之外的中国内资公司——浙江阿里巴巴电子商务有限公司。 截至2018年，蚂蚁金服的估值达到1600亿美元，是全球最大的独角兽公司。
               </span>
@@ -96,19 +100,23 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex'
 
 export default {
   name: 'PositionDetail',
   data () {
     return {
-      positionDetailData: {
+      positionDetailData: {},
+      positionDetailDataOld: {
         companyName: '蚂蚁金服',
         companyImgUrl: 'https://uploadfiles.nowcoder.com/files/20170318/1697873_1489806769570_2.jpg',
-        companyIntor: '浙江蚂蚁小微金融服务集团股份有限公司，简称蚂蚁金服，正式成立于2014年，是专注于服务小微企业与普通消费者的互联网金融服务公司。 其前身是成立于2000年10月，独立于阿里巴巴集团之外的中国内资公司——浙江阿里巴巴电子商务有限公司。 截至2018年，蚂蚁金服的估值达到1600亿美元，是全球最大的独角兽公司。',
-        time: '2020春招',
-        post: '研发',
-        location: ['北京', '上海', '深圳', '杭州'],
+        companyProfile: '浙江蚂蚁小微金融服务集团股份有限公司，简称蚂蚁金服，正式成立于2014年，是专注于服务小微企业与普通消费者的互联网金融服务公司。 其前身是成立于2000年10月，独立于阿里巴巴集团之外的中国内资公司——浙江阿里巴巴电子商务有限公司。 截至2018年，蚂蚁金服的估值达到1600亿美元，是全球最大的独角兽公司。',
+        positionTitle: '蚂蚁金服-2020-研发岗', // 职位标题
+        positionType: '研发', // 职位类型 研发/测试/前端...
+        PositionCity: '杭州', // 职位位置
         practiceRequire: '5天/周，3个月以上',
+        compensation: '面议',
+        becomeOfficial: '是',
         jobResponsibilities: [
           '负责国际事业群业务线开发，包括全球各地钱包',
           '业务实体包括：Alipay HK、Paytm、TNG、MYNT等',
@@ -125,9 +133,26 @@ export default {
       }
     }
   },
+  created () {
+    let positionDetailId = this.$route.query.positionDetailId
+    this.fetchPositionDetailList({ positionDetailId: positionDetailId })
+  },
   mounted () {
   },
+  computed: {
+    ...mapState({
+      positionDetailList: state => state.position.positionDetailList || {}
+    })
+  },
+  watch: {
+    positionDetailList () {
+      this.positionDetailData = this.positionDetailList
+    }
+  },
   methods: {
+    ...mapActions([
+      'fetchPositionDetailList'
+    ])
   }
 }
 </script>

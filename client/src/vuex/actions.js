@@ -40,3 +40,22 @@ export const updatePreachList = function ({ commit }, data) {
     return data
   }).catch(generateErrorHandler(commit))
 }
+
+export const fetchPositionList = function ({ commit }, data) {
+  return api.fetchPositionList(data).then(data => {
+    console.log(555, data)
+    commit(types.FETCH_POSITION_LIST, data)
+  }).catch(generateErrorHandler(commit))
+}
+
+export const updatePositionList = function ({ commit }, data) {
+  return api.updatePositionList(data).then(data => {
+    return data
+  }).catch(generateErrorHandler(commit))
+}
+
+export const fetchPositionDetailList = function ({ commit }, data) {
+  return api.fetchPositionDetailList(data).then(data => {
+    commit(types.FETCH_POSITION_DETAIL_LIST, data)
+  }).catch(generateErrorHandler(commit))
+}

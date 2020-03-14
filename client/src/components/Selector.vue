@@ -5,8 +5,8 @@
       v-for="(item, index) in selectList"
       :key="index"
       :class="activeIndex === index ? 'active' : 'nomal'"
-      @click.stop="checkout(index)"
-    >{{item}}</span>
+      @click.stop="checkout(item, index)"
+    >{{item.label}}</span>
   </div>
 </template>
 
@@ -15,12 +15,15 @@ export default {
   props: ['selectList'],
   data () {
     return {
-      activeIndex: 0
+      activeIndex: 0,
+      selectedCity: '',
+      selectedPost: ''
     }
   },
   methods: {
-    checkout (index) {
+    checkout (item, index) {
       this.activeIndex = index
+      this.$emit('selectedValList', item)
     }
   }
 }
