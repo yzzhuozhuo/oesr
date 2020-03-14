@@ -23,6 +23,7 @@ export default {
   },
   methods: {
     checkout (active) {
+      this.$emit('selectPublish', active)
       this.active = active
     }
   }

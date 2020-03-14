@@ -14,9 +14,12 @@
           >我要发布</div>
         </div>
         <div class="selector">
-          <selector :selectList="selectList" />
+          <selector
+            :selectList="selectList"
+            @selectedLabel="selectedLabel"
+          />
         </div>
-        <publish />
+        <publish @selectPublish="selectPublish" />
         <discuss :discussList="discussList" />
       </div>
       <div class="right">
@@ -34,8 +37,8 @@
 import { mapActions, mapState } from 'vuex'
 import Banner from '@/components/Banner'
 import CardTitle from '@/components/CardTitle'
-import Selector from '@/components/Selector'
 import HotDiscuss from '@/components/HotDiscuss'
+import Selector from './Selector'
 import Discuss from './Discuss'
 import Publish from './Publish'
 
@@ -66,14 +69,16 @@ export default {
         { label: 9, name: '资源分享' },
         { label: 10, name: '猿生活' },
         { label: 11, name: '工作以后' }
-      ]
+      ],
+      publish: 0,
+      label: 0
     }
   },
   computed: {
     ...mapState({ discussList: state => state.discuss.discussList })
   },
   created () {
-    this.fetchDiscussInfo({ label: 1, publish: 2 })
+    this.fetchDiscussInfo(this.publish, this.label)
   },
   mounted () {},
   methods: {
@@ -82,6 +87,16 @@ export default {
       this.$router.push({
         path
       })
+    },
+    selectedLabel (label) {
+      if (this.label === label) return
+      this.fetchDiscussInfo({ label, publish: this.publish })
+      this.label = label
+    },
+    selectPublish (publish) {
+      if (this.publish === publish) return
+      this.fetchDiscussInfo({ label: this.label, publish })
+      this.publish = publish
     }
   }
 }
