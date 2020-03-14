@@ -4,6 +4,7 @@ import common from './common'
 import calendar from './calendar'
 import preach from './preach'
 import discuss from './discuss'
+import position from './position'
 
 export default {
   user,
@@ -11,5 +12,6 @@ export default {
   common,
   calendar,
   preach,
-  discuss
+  discuss,
+  position
 }

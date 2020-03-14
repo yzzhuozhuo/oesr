@@ -43,6 +43,37 @@ export function updatePreachList (body) {
   }).then(utils.checkHttpStatus).then(utils.checkResponse).catch({})
 }
 
+export function fetchPositionList (data) {
+  return axios.get(`/oesr/PositionList?${params(data)}`, {
+    method: 'GET',
+    credentials: 'same-origin',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }).then(utils.checkHttpStatus).then(utils.checkResponse).catch({})
+}
+
+export function updatePositionList (body) {
+  return fetch('/oesr/addPositionList', {
+    method: 'POST',
+    credentials: 'same-origin',
+    body: JSON.stringify(body),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }).then(utils.checkHttpStatus).then(utils.checkResponse).catch({})
+}
+
+export function fetchPositionDetailList (data) {
+  return axios.get(`/oesr/positionDetailList?${params(data)}`, {
+    method: 'GET',
+    credentials: 'same-origin',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }).then(utils.checkHttpStatus).then(utils.checkResponse).catch({})
+}
+
 function params (obj) {
   var param = []
   for (var key in obj) {

@@ -21,6 +21,10 @@
     <el-menu-item index="/discussPage">讨论区</el-menu-item>
     <el-menu-item class="logoutBtn" @click="logout()">退出登陆</el-menu-item>
     <el-menu-item index="/userPage">个人主页</el-menu-item>
+    <el-menu-item index="/company/designTheme">在线出题</el-menu-item>
+    <el-menu-item index="/practiceSquare">职位发布</el-menu-item>
+    <el-menu-item index="/preachList">宣讲会发布</el-menu-item>
+    <el-menu-item index="/company/page">公司主页</el-menu-item>
     <el-menu-item v-if="hasLogin && !isLogout" style="float: right">{{userInfo && userInfo.username}}</el-menu-item>
     <el-menu-item v-else style="float: right" index="/login">登录/注册</el-menu-item>
     <!-- <el-menu-item style="float: right">

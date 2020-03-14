@@ -20,6 +20,8 @@ import DiscussDetail from '@/pages/DiscussDetail'
 import LoginPage from '@/pages/LoginPage'
 import PasswordBack from '@/pages/PasswordBack'
 import RegisterAccount from '@/pages/RegisterAccount'
+import CompanyPage from '@/pages/CompanyPage'
+import DesignTheme from '@/pages/DesignTheme'
 
 Vue.use(Router)
 
@@ -109,7 +111,7 @@ export default new Router({
     },
     {
       path: '/company',
-      name: '公司主页',
+      name: '公司首页',
       component: Company
     },
     {
@@ -131,6 +133,16 @@ export default new Router({
       path: '/registerAccount',
       name: '账号注册页',
       component: RegisterAccount
+    },
+    {
+      path: '/company/designTheme',
+      name: '在线出题页',
+      component: DesignTheme
+    },
+    {
+      path: '/company/page',
+      name: '公司主页',
+      component: CompanyPage
     }
   ]
 })
