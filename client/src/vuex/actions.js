@@ -18,8 +18,9 @@ export const fetchUserInfo = function ({ state, commit, rootState }) {
 export const fetchHomeInfo = function ({ state, commit, rootState }) {
   return api.fetchHomeInfo().then(homeInfo => {
     commit(types.UPDATE_HOMEINFO, homeInfo)
-  }
+  })
 }
+
 export const fetchCalendarList = function ({ commit }) {
   return api.fetchCalendarList().then(data => {
     // console.log(123321, data)

@@ -1,5 +1,8 @@
 <template>
-  <div class="bottom-wrap">
+  <div
+    class="bottom-wrap"
+    @click.stop="jump(firmCardData.url)"
+  >
     <div class="bottom-item">
       <img
         class="bottom-item-left"
@@ -7,7 +10,7 @@
       />
       <div class="bottom-item-right">
         <div class="bottom-item-right-name">{{firmCardData.name}}</div>
-        <div class="bottom-item-right-intr">{{firmCardData.intr}}</div>
+        <div class="bottom-item-right-intr">{{firmCardData.intro}}</div>
       </div>
     </div>
   </div>
@@ -19,7 +22,11 @@ export default {
   data () {
     return {}
   },
-  mounted () {}
+  methods: {
+    jump (url) {
+      window.location.href = url
+    }
+  }
 }
 </script>
 

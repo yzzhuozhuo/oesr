@@ -1,5 +1,8 @@
 <template>
-  <div class="logo">
+  <div
+    class="logo"
+    @click.capture="jump"
+  >
     <div class="logo1 logo0">腾讯</div>
     <div class="logo2 logo0">字节跳动</div>
     <div class="logo3 logo0">百度</div>
@@ -16,7 +19,13 @@ export default {
   data () {
     return {}
   },
-  mounted () {}
+  methods: {
+    jump (e) {
+      this.$router.push({
+        path: 'questionPage'
+      })
+    }
+  }
 }
 </script>
 

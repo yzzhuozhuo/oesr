@@ -1,12 +1,18 @@
 <template>
-  <div class="wrap">
-    <div class="left">求职互助</div>
-    <div class="bottom">
-      <firm-card
-        v-for="(item, index) in firmCardData"
-        :key="index"
-        :firmCardData="item"
-      />
+  <div class="tb">
+    <div
+      class="wrap"
+      v-for="(tbCard, index) in tbCardData"
+      :key="index"
+    >
+      <div class="left">{{tbCard.listName}}</div>
+      <div class="bottom">
+        <firm-card
+          v-for="(item, index) in tbCard.listCard"
+          :key="index"
+          :firmCardData="item"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -18,7 +24,7 @@ export default {
   components: {
     FirmCard
   },
-  props: ['tbCardData', 'firmCardData'],
+  props: ['tbCardData'],
   data () {
     return {}
   },

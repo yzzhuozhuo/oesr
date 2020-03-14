@@ -130,7 +130,7 @@ export default {
       menuCardData: [
         {
           src: practice,
-          title: '实习广场',
+          title: '求职广场',
           routerPath: 'practiceSquare'
         },
         {

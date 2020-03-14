@@ -8,7 +8,6 @@ export default {
   user,
   home,
   common,
-  common,
   calendar,
   preach
 }

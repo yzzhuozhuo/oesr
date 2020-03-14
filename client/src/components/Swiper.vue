@@ -62,6 +62,7 @@ export default {
 .banner-wrap {
   margin-top: 61px;
   width: 100%;
+  cursor: pointer;
 }
 .swiper-container {
   min-width: 1200px;

@@ -6,7 +6,7 @@
     />
     <div class="content">
       <div class="left">
-        <card-title titleName="实习广场" />
+        <card-title titleName="求职广场" />
         <logo-list />
         <div class="post-selector">
           <div class="city">
@@ -122,7 +122,6 @@ export default {
         '西安',
         '长沙',
         '哈尔滨',
-        '合肥',
         '其他'
       ],
       typeList: [
