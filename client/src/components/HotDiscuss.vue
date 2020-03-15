@@ -25,6 +25,10 @@ export default {
   border-bottom: 1px solid #ddd;
   cursor: pointer;
 
+  &:last-child {
+    border-bottom: 0;
+  }
+
   .top {
     color: #333333;
 

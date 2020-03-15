@@ -9,7 +9,7 @@
     </el-breadcrumb>
     <card-header />
     <time-table :plans="plans" />
-    <find-post />
+    <!-- <find-post /> -->
   </div>
 </template>
 
