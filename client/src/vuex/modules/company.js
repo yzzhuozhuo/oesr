@@ -1,24 +1,23 @@
 import * as types from '../mutation-types'
 
 const state = {
-  username: ''
+  companyList: {}
 }
 
 const mutations = {
-  [types.UPDATE_USERINFO] (state, userInfo) {
-    state.username = userInfo.username
+  [types.FETCH_COMPANY_LIST] (state, data) {
+    state.companyList = data[0]
   }
 }
 
 // // 验证是否登录
 // const getters = {
 //   hasLogin: (state, getters, rootState) => {
-//     return !!state.username
+//     return !!state.companyList.companyId
 //   }
 // }
 
 export default {
   state,
-  // getters,
   mutations
 }

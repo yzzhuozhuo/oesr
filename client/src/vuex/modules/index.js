@@ -5,6 +5,8 @@ import calendar from './calendar'
 import preach from './preach'
 import discuss from './discuss'
 import position from './position'
+import student from './student'
+import company from './company'
 
 export default {
   user,
@@ -13,5 +15,7 @@ export default {
   calendar,
   preach,
   discuss,
-  position
+  position,
+  student,
+  company
 }

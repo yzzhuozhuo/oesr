@@ -7,6 +7,8 @@ const calendarController = require('../controller/calendar')
 const preachController = require('../controller/preach')
 const discussController = require('../controller/discuss')
 const positionController = require('../controller/position')
+const studentController = require('../controller/student')
+const companyController = require('../controller/company')
 
 router
   .get('/oesr/user', userController.user)
@@ -19,6 +21,14 @@ router
   .get('/oesr/positionList', positionController.getPosition)
   .post('/oesr/addPositionList', positionController.addPosition)
   .get('/oesr/positionDetailList', positionController.getPositionDetail)
+
+  .get('/oesr/studentList', studentController.getStudent)
+  .post('/oesr/addStudentList', studentController.addStudent)
+  .put('/oesr/updateStudentList', studentController.updateStudent)
+
+  .get('/oesr/companyList', companyController.getCompany)
+  .post('/oesr/addCompanyList', companyController.addCompany)
+  .put('/oesr/updateCompanyList', companyController.updateCompany)
   .use('/', express.static(path.resolve(__dirname, '../../client/dist')))
 
 module.exports = router

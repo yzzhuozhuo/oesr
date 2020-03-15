@@ -55,7 +55,6 @@ export const fetchDiscussInfo = function ({ state, commit, rootState }, data) {
 
 export const fetchPositionList = function ({ commit }, data) {
   return api.fetchPositionList(data).then(data => {
-    console.log(555, data)
     commit(types.FETCH_POSITION_LIST, data)
   }).catch(generateErrorHandler(commit))
 }
@@ -69,5 +68,41 @@ export const updatePositionList = function ({ commit }, data) {
 export const fetchPositionDetailList = function ({ commit }, data) {
   return api.fetchPositionDetailList(data).then(data => {
     commit(types.FETCH_POSITION_DETAIL_LIST, data)
+  }).catch(generateErrorHandler(commit))
+}
+
+export const fetchStudentList = function ({ commit }, data) {
+  return api.fetchStudentList(data).then(data => {
+    commit(types.FETCH_STUDENT_LIST, data)
+  }).catch(generateErrorHandler(commit))
+}
+
+export const updateStudentList = function ({ commit }, data) {
+  return api.updateStudentList(data).then(data => {
+    return data
+  }).catch(generateErrorHandler(commit))
+}
+
+export const addStudentList = function ({ commit }, data) {
+  return api.addStudentList(data).then(data => {
+    return data
+  }).catch(generateErrorHandler(commit))
+}
+
+export const fetchCompanyList = function ({ commit }, data) {
+  return api.fetchCompanyList(data).then(data => {
+    commit(types.FETCH_COMPANY_LIST, data)
+  }).catch(generateErrorHandler(commit))
+}
+
+export const updateCompanyList = function ({ commit }, data) {
+  return api.updateCompanyList(data).then(data => {
+    return data
+  }).catch(generateErrorHandler(commit))
+}
+
+export const addCompanyList = function ({ commit }, data) {
+  return api.addCompanyList(data).then(data => {
+    return data
   }).catch(generateErrorHandler(commit))
 }

@@ -5,6 +5,10 @@
 const mongoose = require('mongoose')
 
 const positionSchema = mongoose.Schema({
+  companyId: {
+    type: String,
+    // require: true
+  },
   companyName: {
     type: String,
     // require: true // 等公司表做好，记得加上TODO

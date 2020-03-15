@@ -2,7 +2,6 @@
   <div class="main">
     <div class="main-content">
       <div class="form-content" v-if="!hasRegister">
-        <!-- <div>欢迎登录</div> -->
         <el-form ref="form" :model="loginForm" label-width="80px" class="form-box">
           <el-form-item label="" class="title">
             <div>注册账号</div>
@@ -29,7 +28,7 @@
           </el-form-item>
         </el-form>
       </div>
-      <div class="user-info" v-if="hasRegister && isStudentType">
+      <div class="user-info"  v-if="!hasRegister && isStudentType">
         <div class="user-info-content">
           <div class="head">
             <span>个人信息填写</span>
@@ -108,7 +107,7 @@
           </div>
         </div>
       </div>
-      <div class="company-info" v-if="hasRegister">
+      <div class="company-info"  v-if="hasRegister">
         <div class="company-info-content">
           <div class="head">
             <span>企业信息填写</span>
@@ -125,23 +124,23 @@
             </div>
           </div>
           <div class="base-info">
-            <el-form label-position="right" label-width="100px" :model="newCompanyInfo">
-              <el-form-item label="公司名称">
+            <el-form  :model="newCompanyInfo" label-position="right" ref="infoForm" :rules="infoRules" label-width="100px">
+              <el-form-item label="公司名称" prop="companyName">
                 <el-input v-model="newCompanyInfo.companyName" placeholder="请输入公司名称"></el-input>
               </el-form-item>
-              <el-form-item label="公司简介" class="intro">
+              <el-form-item label="公司简介" class="intro" prop="companyProfile">
                 <el-input v-model="newCompanyInfo.companyProfile" type="textarea" placeholder="请输入公司简介"></el-input>
               </el-form-item>
-              <el-form-item label="所在城市">
+              <el-form-item label="所在城市" prop="companyAddress">
                 <el-input v-model="newCompanyInfo.companyAddress" placeholder="请输入公司所在城市，多个城市请用空车分隔"></el-input>
               </el-form-item>
-              <el-form-item label="需招职位">
+              <el-form-item label="需招职位" prop="recuritPosts">
                 <el-input v-model="newCompanyInfo.recuritPosts" placeholder="请输入职位名称，多个职位请用空格分隔"></el-input>
               </el-form-item>
-              <el-form-item label="薪酬福利">
+              <el-form-item label="薪酬福利" prop="companyWelfare">
                 <el-input v-model="newCompanyInfo.companyWelfare" placeholder="请输入公司薪酬福利情况"></el-input>
               </el-form-item>
-              <el-form-item label="业务体系" class="business">
+              <el-form-item label="业务体系" class="business" prop="companyBusiness">
                 <el-input v-model="newCompanyInfo.companyBusiness" type="textarea" placeholder="请输入公司业务体系"></el-input>
               </el-form-item>
             </el-form>
@@ -156,6 +155,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 
 export default {
   name: 'RegisterAccount',
@@ -171,7 +171,8 @@ export default {
       isCompanyType: true,
       hasRegister: false,
       newUserInfo: {
-        studentImgUrl: 'https://uploadfiles.nowcoder.com/files/20190710/4107856_1562753015408_%E7%9B%9B%E8%B6%A3%E6%B8%B8%E6%88%8F120.png',
+        studentId: '123',
+        studentImgUrl: 'https://images.nowcoder.com/images/20190928/638373518_1569674550437_27E42C56E73D70CBE3050C38883E4E56?x-oss-process=image/resize,m_mfit,h_200,w_200',
         studentName: '',
         sex: '',
         introduction: '',
@@ -185,13 +186,37 @@ export default {
         attentionSchedule: []
       },
       newCompanyInfo: {
+        companyId: '123',
         companyName: '',
-        companyImgUrl: '',
+        companyImgUrl: 'https://images.nowcoder.com/images/20180718/921290_1531896583092_901BA20B5E086190E85C74B8628FA8D2?x-oss-process=image/resize,m_mfit,h_200,w_200',
         companyProfile: '', // 公司简介
         companyWelfare: '', // 薪酬福利
         companyAddress: '', // 公司所在地
         companyBusiness: '', // 主页业务体系
         recuritPosts: '' // 需招职位
+      },
+      infoRules: {
+        companyName: [
+          { required: true, message: '请输入公司名称', trigger: 'blur' }
+        ],
+        companyImgUrl: [
+          { required: true, message: '请上传公司图片' }
+        ],
+        companyProfile: [
+          { required: true, message: '请输入公司简介', trigger: 'blur' }
+        ],
+        companyWelfare: [
+          { required: true, message: '请输入薪酬福利', trigger: 'blur' }
+        ],
+        companyAddress: [
+          { required: true, message: '请输入公司所在城市', trigger: 'blur' }
+        ],
+        companyBusiness: [
+          { required: true, message: '请输入公司主页业务体系', trigger: 'blur' }
+        ],
+        recuritPosts: [
+          { required: true, message: '请输入需要招聘的职位', trigger: 'blur' }
+        ]
       },
       companyOptions: [
         {
@@ -276,18 +301,31 @@ export default {
   mounted () {
   },
   methods: {
+    ...mapActions([
+      'addStudentList',
+      'addCompanyList',
+      'fetchCompanyList'
+    ]),
     register () {
       // 立即注册之后，要填写个人信息，将数据保存数据库，用户主页的个人信息的数据就来源此
       this.hasRegister = true
     },
     updateStudentInfo () {
       console.log(123, this.newUserInfo)
+      this.addStudentList(this.newUserInfo)
       // this.$router.replace({
       //   path: 'login'
       // })
     },
     updateCompanyInfo () {
-      console.log(46, this.newCompanyInfo)
+      this.$refs['infoForm'].validate((valid) => {
+        if (!valid) {
+          this.handleMessage('error', '表单输入异常！')
+          return false
+        } else {
+          this.addCompanyList(this.newCompanyInfo)
+        }
+      })
     },
     handleAvatarSuccess (res, file) {
       this.newUserInfo.studentImgUrl = URL.createObjectURL(file.raw)
@@ -500,6 +538,7 @@ export default {
   // height: 50px;
   width: 100%;
   display: block;
+  border-radius: 50%;
 }
 
 </style>

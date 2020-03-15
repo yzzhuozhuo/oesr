@@ -99,3 +99,67 @@ export function fetchDiscussInfo (data) {
     }
   }).then(utils.checkHttpStatus).then(utils.checkResponse).catch()
 }
+
+export function fetchStudentList (data) {
+  return axios.get(`/oesr/studentList?${params(data)}`, {
+    method: 'GET',
+    credentials: 'same-origin',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }).then(utils.checkHttpStatus).then(utils.checkResponse).catch({})
+}
+
+export function addStudentList (body) {
+  return fetch('/oesr/addStudentList', {
+    method: 'POST',
+    credentials: 'same-origin',
+    body: JSON.stringify(body),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }).then(utils.checkHttpStatus).then(utils.checkResponse).catch({})
+}
+
+export function updateStudentList (body) {
+  return fetch('/oesr/updateStudentList', {
+    method: 'PUT',
+    credentials: 'same-origin',
+    body: JSON.stringify(body),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }).then(utils.checkHttpStatus).then(utils.checkResponse).catch({})
+}
+
+export function fetchCompanyList (data) {
+  return axios.get(`/oesr/companyList?${params(data)}`, {
+    method: 'GET',
+    credentials: 'same-origin',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }).then(utils.checkHttpStatus).then(utils.checkResponse).catch({})
+}
+
+export function addCompanyList (body) {
+  return fetch('/oesr/addCompanyList', {
+    method: 'POST',
+    credentials: 'same-origin',
+    body: JSON.stringify(body),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }).then(utils.checkHttpStatus).then(utils.checkResponse).catch({})
+}
+
+export function updateCompanyList (body) {
+  return fetch('/oesr/updateCompanyList', {
+    method: 'PUT',
+    credentials: 'same-origin',
+    body: JSON.stringify(body),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }).then(utils.checkHttpStatus).then(utils.checkResponse).catch({})
+}

@@ -190,6 +190,7 @@
 
 <script>
 import _ from 'lodash'
+import { mapState, mapActions } from 'vuex'
 
 export default {
   name: 'UserPage',
@@ -214,34 +215,8 @@ export default {
       }
     }
     return {
-      userInfo: {
-        studentName: '前端小菜猪~',
-        studentImgUrl: 'https://images.nowcoder.com/images/20190928/638373518_1569674550437_27E42C56E73D70CBE3050C38883E4E56?x-oss-process=image/resize,m_mfit,h_200,w_200',
-        sex: 'female',
-        introduction: '我热爱前端，想要找个可以学习的平台',
-        address: '陕西西安',
-        graduateTime: '2020',
-        education: '本科',
-        school: '西安科技大学',
-        interestedCompany: ['网易', '头条'],
-        interestedClassify: 'software',
-        interestedPost: ['前端工程师', 'Java工程师'],
-        attentionSchedule: [] // 关注的校招日程，默认为[]
-      },
-      newUserInfo: {
-        studentName: '',
-        studentImgUrl: '',
-        sex: '',
-        introduction: '',
-        address: '',
-        graduateTime: '',
-        education: '',
-        school: '',
-        interestedCompany: [],
-        interestedClassify: '',
-        interestedPost: [],
-        attentionSchedule: [] // 关注的校招日程，默认为[]
-      },
+      userInfo: {},
+      newUserInfo: {},
       isEdit: false,
       isSetting: false,
       dialogSettingVisible: false,
@@ -341,15 +316,32 @@ export default {
       }
     }
   },
+  computed: {
+    ...mapState({
+      studentList: state => state.student.studentList
+    })
+  },
+  watch: {
+    studentList () {
+      this.userInfo = this.studentList
+    }
+  },
+  created () {
+    this.fetchStudentList({studentId: '123'})
+  },
   mounted () {
-    this.newUserInfo = _.cloneDeep(this.userInfo)
   },
   methods: {
+    ...mapActions([
+      'fetchStudentList',
+      'updateStudentList'
+    ]),
     handleSelect (keyPath) {
       console.log(234, keyPath)
       if (keyPath === 'edit') {
         this.isEdit = true
         console.log(this.isEdit)
+        this.newUserInfo = _.cloneDeep(this.userInfo)
       } else if (keyPath === 'setting') {
         this.isSetting = true
         this.dialogSettingVisible = true
@@ -358,7 +350,11 @@ export default {
     },
     updateUserInfo () {
       console.log(this.newUserInfo)
-      this.isEdit = false
+      this.updateStudentList(this.newUserInfo).then(() => {
+        this.fetchStudentList({studentId: '123'}).then(() => {
+          this.isEdit = false
+        })
+      })
     },
     cancelUpdateUserInfo () {
       this.isEdit = false
