@@ -20,31 +20,43 @@
           <el-form-item label="重输密码">
             <el-input v-model="loginForm.password" placeholder="请再次输入密码"></el-input>
           </el-form-item>
+          <el-form-item label="类型" class="user-type">
+            <el-radio v-model="loginForm.userType" label="student">学生</el-radio>
+            <el-radio v-model="loginForm.userType" label="company">企业</el-radio>
+          </el-form-item>
           <el-form-item label="" class="login-btn">
             <el-button type="primary" class="btn" @click="register">立即注册</el-button>
           </el-form-item>
         </el-form>
       </div>
-      <div class="user-info" v-if="hasRegister">
+      <div class="user-info" v-if="hasRegister && isStudentType">
         <div class="user-info-content">
           <div class="head">
-            <span>基本信息填写</span>
-            <div class="btn">
-              <el-button @click="updateUserInfo" type="primary">保存</el-button>
+            <span>个人信息填写</span>
+            <div class="uploader">
+              <el-upload
+                class="avatar-uploader"
+                action="https://jsonplaceholder.typicode.com/posts/"
+                :show-file-list="false"
+                :on-success="handleAvatarSuccess"
+                :before-upload="beforeAvatarUpload">
+                <img v-if="newUserInfo.studentImgUrl" :src="newUserInfo.studentImgUrl" class="avatar">
+                <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+              </el-upload>
             </div>
           </div>
           <div class="base-info">
             <el-form label-position="right" label-width="100px" :model="newUserInfo">
               <el-form-item label="我的昵称">
-                <el-input v-model="newUserInfo.username" placeholder="请输入昵称"></el-input>
+                <el-input v-model="newUserInfo.studentName" placeholder="请输入昵称"></el-input>
               </el-form-item>
-              <el-form-item label="我的性别">
+              <el-form-item label="我的性别" class="sex">
                 <div>
                   <el-radio v-model="newUserInfo.sex" label="male">男</el-radio>
                   <el-radio v-model="newUserInfo.sex" label="female">女</el-radio>
                 </div>
               </el-form-item>
-              <el-form-item label="我的简介">
+              <el-form-item label="我的简介" class="intro">
                 <el-input v-model="newUserInfo.introduction" type="textarea" placeholder="请输入个人简介"></el-input>
               </el-form-item>
               <el-form-item label="我居住地">
@@ -59,8 +71,15 @@
               <el-form-item label="我的学校">
                 <el-input v-model="newUserInfo.school" placeholder="请输入学校"></el-input>
               </el-form-item>
-              <el-form-item label="我想去的公司">
-                <el-input v-model="newUserInfo.loveCompany" placeholder="请输入想去的公司"></el-input>
+              <el-form-item label="感兴趣的公司">
+                <el-select v-model="newUserInfo.interestedCompany" multiple placeholder="请选择感兴趣的公司" style="width: 436px">
+                  <el-option
+                    v-for="item in companyOptions"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value">
+                  </el-option>
+                </el-select>
               </el-form-item>
               <el-form-item label="感兴趣的工作">
                 <div>
@@ -72,7 +91,7 @@
                       :value="item.value">
                     </el-option>
                   </el-select>
-                  <el-select v-model="newUserInfo.interestedPost" placeholder="请选择职位">
+                  <el-select v-model="newUserInfo.interestedPost" multiple placeholder="请选择职位">
                     <el-option
                       v-for="item in postOptions"
                       :key="item.value"
@@ -83,6 +102,52 @@
                 </div>
               </el-form-item>
             </el-form>
+            <div class="btn">
+              <el-button @click="updateStudentInfo" type="primary">保存信息</el-button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="company-info" v-if="hasRegister">
+        <div class="company-info-content">
+          <div class="head">
+            <span>企业信息填写</span>
+            <div class="uploader">
+              <el-upload
+                class="avatar-uploader"
+                action="https://jsonplaceholder.typicode.com/posts/"
+                :show-file-list="false"
+                :on-success="handleAvatarSuccess"
+                :before-upload="beforeAvatarUpload">
+                <img v-if="newCompanyInfo.companyImgUrl" :src="newCompanyInfo.companyImgUrl" class="avatar">
+                <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+              </el-upload>
+            </div>
+          </div>
+          <div class="base-info">
+            <el-form label-position="right" label-width="100px" :model="newCompanyInfo">
+              <el-form-item label="公司名称">
+                <el-input v-model="newCompanyInfo.companyName" placeholder="请输入公司名称"></el-input>
+              </el-form-item>
+              <el-form-item label="公司简介" class="intro">
+                <el-input v-model="newCompanyInfo.companyProfile" type="textarea" placeholder="请输入公司简介"></el-input>
+              </el-form-item>
+              <el-form-item label="所在城市">
+                <el-input v-model="newCompanyInfo.companyAddress" placeholder="请输入公司所在城市，多个城市请用空车分隔"></el-input>
+              </el-form-item>
+              <el-form-item label="需招职位">
+                <el-input v-model="newCompanyInfo.recuritPosts" placeholder="请输入职位名称，多个职位请用空格分隔"></el-input>
+              </el-form-item>
+              <el-form-item label="薪酬福利">
+                <el-input v-model="newCompanyInfo.companyWelfare" placeholder="请输入公司薪酬福利情况"></el-input>
+              </el-form-item>
+              <el-form-item label="业务体系" class="business">
+                <el-input v-model="newCompanyInfo.companyBusiness" type="textarea" placeholder="请输入公司业务体系"></el-input>
+              </el-form-item>
+            </el-form>
+            <div class="btn">
+              <el-button @click="updateCompanyInfo" type="primary">保存信息</el-button>
+            </div>
           </div>
         </div>
       </div>
@@ -99,22 +164,85 @@ export default {
       loginForm: {
         tel: '',
         password: '',
+        userType: '',
         automaticLogin: true
       },
+      isStudentType: false,
+      isCompanyType: true,
       hasRegister: false,
       newUserInfo: {
-        username: '',
-        avatar: '',
+        studentImgUrl: 'https://uploadfiles.nowcoder.com/files/20190710/4107856_1562753015408_%E7%9B%9B%E8%B6%A3%E6%B8%B8%E6%88%8F120.png',
+        studentName: '',
         sex: '',
         introduction: '',
         address: '',
         graduateTime: '',
         education: '',
         school: '',
-        loveCompany: '',
+        interestedCompany: '', // []
         interestedClassify: '',
-        interestedPost: ''
+        interestedPost: '', // []
+        attentionSchedule: []
       },
+      newCompanyInfo: {
+        companyName: '',
+        companyImgUrl: '',
+        companyProfile: '', // 公司简介
+        companyWelfare: '', // 薪酬福利
+        companyAddress: '', // 公司所在地
+        companyBusiness: '', // 主页业务体系
+        recuritPosts: '' // 需招职位
+      },
+      companyOptions: [
+        {
+          label: '全部',
+          value: ''
+        },
+        {
+          label: '字节跳动',
+          value: '字节跳动'
+        },
+        {
+          label: '腾讯',
+          value: '腾讯'
+        },
+        {
+          label: '百度',
+          value: '百度'
+        },
+        {
+          label: '阿里巴巴',
+          value: '阿里巴巴'
+        },
+        {
+          label: '滴滴',
+          value: '滴滴'
+        },
+        {
+          label: '美团',
+          value: '美团'
+        },
+        {
+          label: '唯品会',
+          value: '唯品会'
+        },
+        {
+          label: '携程旅行',
+          value: '携程旅行'
+        },
+        {
+          label: 'Shopee',
+          value: 'Shopee'
+        },
+        {
+          label: '网易',
+          value: '网易'
+        },
+        {
+          label: '深信服',
+          value: '深信服'
+        }
+      ],
       classifyOptions: [
         {
           label: '技术（软件）/信息技术类',
@@ -126,6 +254,10 @@ export default {
         }
       ],
       postOptions: [
+        {
+          label: '全部',
+          value: ''
+        },
         {
           label: '前端工程师',
           value: '前端工程师'
@@ -148,11 +280,30 @@ export default {
       // 立即注册之后，要填写个人信息，将数据保存数据库，用户主页的个人信息的数据就来源此
       this.hasRegister = true
     },
-    updateUserInfo () {
+    updateStudentInfo () {
       console.log(123, this.newUserInfo)
-      this.$router.replace({
-        path: 'login'
-      })
+      // this.$router.replace({
+      //   path: 'login'
+      // })
+    },
+    updateCompanyInfo () {
+      console.log(46, this.newCompanyInfo)
+    },
+    handleAvatarSuccess (res, file) {
+      this.newUserInfo.studentImgUrl = URL.createObjectURL(file.raw)
+      console.log(111, this.newUserInfo.studentImgUrl)
+    },
+    beforeAvatarUpload (file) {
+      const isPNG = file.type === 'image/png'
+      const isLt2M = file.size / 1024 / 1024 < 2
+
+      if (!isPNG) {
+        this.$message.error('上传头像图片只能是 PNG 格式!')
+      }
+      if (!isLt2M) {
+        this.$message.error('上传头像图片大小不能超过 2MB!')
+      }
+      return isPNG && isLt2M
     }
   }
 }
@@ -165,7 +316,7 @@ export default {
     display: flex;
     justify-content: center;
     // align-items: center;
-    height: 730px;
+    height: 780px;
     background: url('http://static.nowcoder.com/images/res/infoComplete/bg.jpg') no-repeat;
     background-size: 100% 100%;
     .form-content {
@@ -176,7 +327,7 @@ export default {
       background: rgba(255,255,255,.8);
       margin: 60px auto 0;
       border: 1px solid #eee;
-      height: 320px;
+      height: 360px;
       display: flex;
       justify-content: center;
       // flex-direction: column;
@@ -201,6 +352,9 @@ export default {
             margin-left: 6px;
           }
         }
+        .user-type {
+          margin: -10px 0 -8px;
+        }
         .forgot-bth {
           padding-left: 76px;
         }
@@ -221,7 +375,7 @@ export default {
 
 .user-info {
   background: #fff;
-  padding: 20px 30px 60px 30px;
+  padding: 20px 30px 100px 30px;
   margin: 20px 0 20px 0;
   .user-info-content {
     .head {
@@ -231,11 +385,24 @@ export default {
       margin-bottom: 20px;
       display: flex;
       justify-content: space-between;
+      align-items: center;
+      .uploader {
+        width: 50px;
+        height: 50px;
+        background: #eee;
+        border-radius: 50%;
+      }
     }
     .base-info {
       padding-left: 30px;
       .el-form-item div {
         color: #999;
+      }
+      .sex {
+        margin-top: -10px;
+      }
+      .intro {
+        margin-top: -10px;
       }
       .el-input {
         width: 50%;
@@ -245,8 +412,94 @@ export default {
         justify-content: center;
         padding: 15px 0;
       }
+      .btn {
+        text-align: center;
+        margin-top: 10px;
+      }
     }
   }
+}
+
+.company-info {
+  width: 627px;
+  height: 560px;
+  background: #fff;
+  padding: 20px 30px 10px 30px;
+  margin: 20px 0 20px 0;
+  .company-info-content {
+    .head {
+      border-bottom: 1px solid #d4d4d4;
+      padding-bottom: 10px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .uploader {
+        width: 50px;
+        height: 50px;
+        background: #eee;
+        border-radius: 50%;
+      }
+    }
+    .base-info {
+      padding-left: 30px;
+      .el-form-item div {
+        color: #999;
+      }
+      .sex {
+        margin-top: -10px;
+      }
+      .intro {
+        margin-top: -10px;
+      }
+      .el-input {
+        width: 100%;
+      }
+      .footer-btn {
+        display: flex;
+        justify-content: center;
+        padding: 15px 0;
+      }
+      .business {
+        margin-bottom: 30px;
+      }
+      .btn {
+        text-align: center;
+      }
+    }
+  }
+}
+
+.avatar-uploader {
+  text-align: center;
+}
+
+.avatar-uploader .el-upload {
+  border: 1px dashed #d9d9d9;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.avatar-uploader .el-upload:hover {
+  border-color: #409EFF;
+}
+.avatar-uploader-icon {
+  font-size: 20px;
+  color: #8c939d;
+  // width: 178px;
+  // height: 178px;
+  line-height: 50px;
+  text-align: center;
+}
+.avatar {
+  // width: 178px;
+  // height: 178px;
+  // width: 50px;
+  // height: 50px;
+  width: 100%;
+  display: block;
 }
 
 </style>

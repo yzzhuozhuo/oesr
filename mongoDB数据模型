@@ -16,6 +16,7 @@
 }
 题库 questionPage
 {
+  companyId: '', // 缺少字段
   tagType: '', // 题库tab的类型 software / hardware
   themeTitle: '', // 试卷名称
   companyName: '',
@@ -53,6 +54,7 @@
 
 职位表 position
 {
+  companyId: '', // 缺少字段
   companyName: '', // 公司名称
   companyImgUrl: '', // 公司图标
   companyProfile: '', // 公司简介
@@ -79,4 +81,33 @@
     '有优秀的逻辑分析能力，能够对业务逻辑进行合理的抽象和拆分。',
     '有强烈的求知欲，优秀的学习和沟通能力。'
   ]
+}
+
+学生主页表 student
+{
+  studentId: 'xxx', 注册后那条数据的_id 确保唯一
+  studentImgUrl: 'xxx',
+  studentName: '',
+  sex: '',
+  introduction: '',
+  address: '',
+  graduateTime: '', // 毕业时间
+  education: '',  // 学历
+  school: '', // 学校
+  attentionSchedule: [], // 关注的校招日程，默认为[]
+  interestedCompany: [], // 感兴趣的公司，求职主页的推荐列表会根据此字段去筛选
+  interestedClassify: '', ['software', 'hardware'] 软件/硬件 题库主页根据此字段去展示
+  interestedPost: [], // 感兴趣的职位
+}
+
+公司主页表 company
+{
+  companyId: '', 公司唯一的id，注册后那条数据的_id 确保唯一
+  companyName: '',
+  companyImgUrl: '',
+  companyProfile: '', // 公司简介
+  companyWelfare: '', // 薪酬福利
+  companyAddress: '', // 公司所在地
+  companyBusiness: '', // 主页业务体系
+  recuritPosts: '' // 需招职位
 }
