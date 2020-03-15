@@ -17,6 +17,10 @@
             <el-input v-model="loginForm.password" class="get-code-inp" placeholder="请输入验证码"></el-input>
             <el-button type="success" plain class="get-code-btn" size="small">获取验证码</el-button>
           </el-form-item>
+          <el-form-item label="类型" class="user-type">
+            <el-radio v-model="loginForm.userType" label="student">学生</el-radio>
+            <el-radio v-model="loginForm.userType" label="company">企业</el-radio>
+          </el-form-item>
           <el-form-item label="">
             <el-checkbox v-model="loginForm.automaticLogin">下次自动登录</el-checkbox>
             <el-button type="text" class="forgot-bth" @click="toPasswordBack">忘记密码？</el-button>
@@ -44,6 +48,7 @@ export default {
       loginForm: {
         tel: '',
         password: '',
+        userType: '', // 用户类型分为，学生和企业
         automaticLogin: true
       },
       isMSMLogin: false,
@@ -122,6 +127,9 @@ export default {
             width: 40%;
             margin-left: 6px;
           }
+        }
+        .user-type {
+          margin: -10px 0 -8px;
         }
         .forgot-bth {
           padding-left: 76px;

@@ -3,29 +3,31 @@
     <div class="main-content">
       <el-container>
         <el-header height="100%">
-          <div class="header-content" v-for="(item, index) in userInfo" :key="index">
+          <div class="header-content">
             <div class="avatar">
-              <img :src="item.avatar">
+              <img :src="userInfo.studentImgUrl">
             </div>
             <div class="info">
               <div class="info-top">
-                <div class="username">{{item.username}}</div>
-                <i v-if="item.sex === 'male'" class="el-icon-male" style="color: blue"></i>
+                <div class="username">{{userInfo.studentName}}</div>
+                <i v-if="userInfo.sex === 'male'" class="el-icon-male" style="color: blue"></i>
                 <i v-else class="el-icon-female" style="color: red"></i>
-                <div class="introduction">{{item.introduction}}</div>
+                <div class="introduction">{{userInfo.introduction}}</div>
               </div>
               <div class="info-bottom">
                 <div>
                   <i class="el-icon-location"></i>
-                  <span>{{item.address}}</span>
+                  <span>{{userInfo.address}}</span>
                 </div>
                 <div class="center-item">
                   <i class="el-icon-suitcase"></i>
-                  <span>{{item.loveCompany}}</span>
+                  <div v-for="(item, index) in userInfo.interestedCompany" :key="index" class="interested-company">
+                    <span>{{item}}</span>
+                  </div>
                 </div>
                 <div>
                   <i class="el-icon-school"></i>
-                  <span>{{item.school}}</span>
+                  <span>{{userInfo.school}}</span>
                 </div>
               </div>
             </div>
@@ -62,7 +64,7 @@
           </el-aside>
           <el-main>
             <div class="user-info">
-              <div v-for="(item, index) in userInfo" :key="index" class="user-info-content">
+              <div class="user-info-content">
                 <div class="head">
                   <span>基本信息</span>
                   <div class="btn" v-if="isEdit">
@@ -73,12 +75,12 @@
                 <div class="base-info">
                   <el-form label-position="right" label-width="100px" :model="newUserInfo">
                     <el-form-item label="我的昵称">
-                      <div v-if="!isEdit">{{item.username}}</div>
-                      <el-input v-else v-model="newUserInfo.username"></el-input>
+                      <div v-if="!isEdit">{{userInfo.studentName}}</div>
+                      <el-input v-else v-model="newUserInfo.studentName"></el-input>
                     </el-form-item>
                     <el-form-item label="我的性别">
                       <div v-if="!isEdit">
-                        <i v-if="item.sex === 'male'" class="el-icon-male" style="color: blue"></i>
+                        <i v-if="userInfo.sex === 'male'" class="el-icon-male" style="color: blue"></i>
                         <i v-else class="el-icon-female" style="color: red"></i>
                       </div>
                       <div v-else>
@@ -87,31 +89,47 @@
                       </div>
                     </el-form-item>
                     <el-form-item label="我的简介">
-                      <div v-if="!isEdit">{{item.introduction}}</div>
+                      <div v-if="!isEdit">{{userInfo.introduction}}</div>
                       <el-input v-else v-model="newUserInfo.introduction" type="textarea"></el-input>
                     </el-form-item>
                     <el-form-item label="我居住地">
-                      <div v-if="!isEdit">{{item.address}}</div>
+                      <div v-if="!isEdit">{{userInfo.address}}</div>
                       <el-input v-else v-model="newUserInfo.address"></el-input>
                     </el-form-item>
                     <el-form-item label="毕业年份">
-                      <div v-if="!isEdit">{{item.graduateTime}}</div>
+                      <div v-if="!isEdit">{{userInfo.graduateTime}}</div>
                       <el-input v-else v-model="newUserInfo.graduateTime"></el-input>
                     </el-form-item>
                     <el-form-item label="我的学历">
-                      <div v-if="!isEdit">{{item.education}}</div>
+                      <div v-if="!isEdit">{{userInfo.education}}</div>
                       <el-input v-else v-model="newUserInfo.education"></el-input>
                     </el-form-item>
                     <el-form-item label="我的学校">
-                      <div v-if="!isEdit">{{item.school}}</div>
+                      <div v-if="!isEdit">{{userInfo.school}}</div>
                       <el-input v-else v-model="newUserInfo.school"></el-input>
                     </el-form-item>
-                    <el-form-item label="我想去的公司">
-                      <div v-if="!isEdit">{{item.loveCompany}}</div>
-                      <el-input v-else v-model="newUserInfo.loveCompany"></el-input>
+                    <el-form-item label="感兴趣的公司">
+                      <div v-if="!isEdit" class="interested">
+                        <div v-for="(item, index) in userInfo.interestedCompany" :key="index" class="interested-company">
+                          <span>{{item}}</span>
+                        </div>
+                      </div>
+                      <el-select v-else v-model="newUserInfo.interestedCompany" multiple placeholder="请选择感兴趣的公司" style="width: 436px">
+                        <el-option
+                          v-for="item in companyOptions"
+                          :key="item.value"
+                          :label="item.label"
+                          :value="item.value">
+                        </el-option>
+                      </el-select>
                     </el-form-item>
                     <el-form-item label="感兴趣的工作">
-                      <div v-if="!isEdit">{{item.interestedClassify === 'soft' ? '技术（软件）/信息技术类' : '技术（硬件）/电子技术类'}}—{{item.interestedPost}}</div>
+                      <div v-if="!isEdit" class="interested">
+                        <span>{{userInfo.interestedClassify === 'soft' ? '技术（软件）/信息技术类' : '技术（硬件）/电子技术类'}}—</span>
+                        <div v-for="(item, index) in userInfo.interestedPost" :key="index" class="interested-company">
+                          <span>{{item}}</span>
+                        </div>
+                        </div>
                       <div v-else>
                         <el-select v-model="newUserInfo.interestedClassify" placeholder="请选择方向">
                           <el-option
@@ -121,7 +139,7 @@
                             :value="item.value">
                           </el-option>
                         </el-select>
-                        <el-select v-model="newUserInfo.interestedPost" placeholder="请选择职位">
+                        <el-select v-model="newUserInfo.interestedPost" multiple placeholder="请选择职位">
                           <el-option
                             v-for="item in postOptions"
                             :key="item.value"
@@ -196,37 +214,87 @@ export default {
       }
     }
     return {
-      userInfo: [
-        {
-          username: '前端小菜猪~',
-          avatar: 'https://images.nowcoder.com/images/20190928/638373518_1569674550437_27E42C56E73D70CBE3050C38883E4E56?x-oss-process=image/resize,m_mfit,h_200,w_200',
-          sex: 'female',
-          introduction: '我热爱前端，想要找个可以学习的平台',
-          address: '陕西西安',
-          graduateTime: '2020',
-          education: '本科',
-          school: '西安科技大学',
-          loveCompany: '网易',
-          interestedClassify: 'software',
-          interestedPost: '前端工程师'
-        }
-      ],
+      userInfo: {
+        studentName: '前端小菜猪~',
+        studentImgUrl: 'https://images.nowcoder.com/images/20190928/638373518_1569674550437_27E42C56E73D70CBE3050C38883E4E56?x-oss-process=image/resize,m_mfit,h_200,w_200',
+        sex: 'female',
+        introduction: '我热爱前端，想要找个可以学习的平台',
+        address: '陕西西安',
+        graduateTime: '2020',
+        education: '本科',
+        school: '西安科技大学',
+        interestedCompany: ['网易', '头条'],
+        interestedClassify: 'software',
+        interestedPost: ['前端工程师', 'Java工程师'],
+        attentionSchedule: [] // 关注的校招日程，默认为[]
+      },
       newUserInfo: {
-        username: '',
-        avatar: '',
+        studentName: '',
+        studentImgUrl: '',
         sex: '',
         introduction: '',
         address: '',
         graduateTime: '',
         education: '',
         school: '',
-        loveCompany: '',
+        interestedCompany: [],
         interestedClassify: '',
-        interestedPost: ''
+        interestedPost: [],
+        attentionSchedule: [] // 关注的校招日程，默认为[]
       },
       isEdit: false,
       isSetting: false,
       dialogSettingVisible: false,
+      companyOptions: [
+        {
+          label: '全部',
+          value: ''
+        },
+        {
+          label: '字节跳动',
+          value: '字节跳动'
+        },
+        {
+          label: '腾讯',
+          value: '腾讯'
+        },
+        {
+          label: '百度',
+          value: '百度'
+        },
+        {
+          label: '阿里巴巴',
+          value: '阿里巴巴'
+        },
+        {
+          label: '滴滴',
+          value: '滴滴'
+        },
+        {
+          label: '美团',
+          value: '美团'
+        },
+        {
+          label: '唯品会',
+          value: '唯品会'
+        },
+        {
+          label: '携程旅行',
+          value: '携程旅行'
+        },
+        {
+          label: 'Shopee',
+          value: 'Shopee'
+        },
+        {
+          label: '网易',
+          value: '网易'
+        },
+        {
+          label: '深信服',
+          value: '深信服'
+        }
+      ],
       classifyOptions: [
         {
           label: '技术（软件）/信息技术类',
@@ -238,6 +306,10 @@ export default {
         }
       ],
       postOptions: [
+        {
+          label: '全部',
+          value: ''
+        },
         {
           label: '前端工程师',
           value: '前端工程师'
@@ -270,7 +342,7 @@ export default {
     }
   },
   mounted () {
-    this.newUserInfo = _.cloneDeep(this.userInfo[0])
+    this.newUserInfo = _.cloneDeep(this.userInfo)
   },
   methods: {
     handleSelect (keyPath) {
@@ -391,6 +463,13 @@ export default {
         .info-bottom .center-item {
           margin: 0 10px;
         }
+        .center-item {
+          display: flex;
+          align-items: center;
+        }
+        .center-item i {
+          padding-right: 5px;
+        }
       }
     }
   }
@@ -441,5 +520,15 @@ export default {
       }
     }
   }
+}
+
+.interested {
+  display: flex;
+  align-items: center;
+}
+
+.interested-company {
+  // display: flex;
+  margin-right: 5px;
 }
 </style>
