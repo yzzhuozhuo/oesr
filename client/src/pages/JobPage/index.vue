@@ -39,26 +39,6 @@
       </div>
     </div>
     <div class="rec-wrap">
-      <card-title titleName="实习职位" />
-      <div class="post-selector">
-        <div class="city">
-          <span class="location">地点</span>
-          <selector :selectList="cityList" />
-        </div>
-        <div class="city">
-          <span class="location">类别</span>
-          <selector :selectList="typeList" />
-        </div>
-      </div>
-      <div class="post-list">
-        <post-card
-          v-for="(item, index) in 32"
-          :key="index"
-          :postCardData="item"
-        />
-      </div>
-    </div>
-    <div class="rec-wrap">
       <card-title titleName="公司主页" />
       <div class="company-wrap">
         <company-card
@@ -130,7 +110,7 @@ export default {
       menuCardData: [
         {
           src: practice,
-          title: '实习广场',
+          title: '求职广场',
           routerPath: 'practiceSquare'
         },
         {

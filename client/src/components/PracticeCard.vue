@@ -1,17 +1,24 @@
 <template>
-  <div class="practice">
-    <div class="name">{{cardData.name}}</div>
-    <div class="type">{{cardData.intr}}</div>
+  <div
+    class="practice"
+    @click.stop="jump(practiceCardData.url)"
+  >
+    <div class="name">{{practiceCardData.name}}</div>
+    <div class="type">{{practiceCardData.intro}}</div>
   </div>
 </template>
 
 <script>
 export default {
-  props: ['cardData'],
+  props: ['practiceCardData'],
   data () {
     return {}
   },
-  mounted () {}
+  methods: {
+    jump (url) {
+      window.location.href = url
+    }
+  }
 }
 </script>
 
@@ -23,6 +30,7 @@ export default {
   padding: 20px;
   box-sizing: border-box;
   display: inline-block;
+  vertical-align: middle;
 
   &:hover {
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);

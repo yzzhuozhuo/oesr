@@ -1,16 +1,16 @@
 <template>
   <div class="wrap">
-    <div class="title-name">职业能力评测</div>
+    <div class="title-name">{{professionData.listName}}</div>
     <div class="test-card">
       <profession-card
-        v-for="(item, index) in professionData"
+        v-for="(item, index) in professionData.listCard"
         :key="index"
-        :professionData="item"
+        :professionCardData="item"
       />
     </div>
-    <div class="title-name">名企真题</div>
+    <div class="title-name">{{famousQuestion.listName}}</div>
     <logo-list />
-    <around-card :practiceCardData="practiceCardData" />
+    <around-card :aroundCardData="aroundCardData" />
   </div>
 </template>
 
@@ -25,9 +25,20 @@ export default {
     LogoList,
     AroundCard
   },
-  props: ['practiceCardData', 'professionData'],
+  props: ['firstCardData'],
   data () {
     return {}
+  },
+  computed: {
+    professionData () {
+      return this.firstCardData[0]
+    },
+    famousQuestion () {
+      return this.firstCardData[1]
+    },
+    aroundCardData () {
+      return this.firstCardData.slice(2)
+    }
   },
   mounted () {}
 }

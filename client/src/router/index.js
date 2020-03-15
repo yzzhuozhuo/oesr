@@ -76,7 +76,7 @@ export default new Router({
     },
     {
       path: '/practiceSquare',
-      name: '实习广场页',
+      name: '求职广场页',
       component: PracticeSquare
     },
     {

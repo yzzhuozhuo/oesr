@@ -1,22 +1,24 @@
 <template>
   <div
     class="profession"
-    @click.stop="jumpTpTestPage(professionData.jumpUrl)"
+    @click.stop="jump(professionCardData.url)"
   >
-    <div class="profession-name">{{professionData.name}}</div>
+    <div class="profession-name">{{professionCardData.name}}</div>
     <img
       class="profession-img"
-      :src="professionData.img"
+      :src="professionCardData.img"
     />
   </div>
 </template>
 
 <script>
 export default {
-  props: ['professionData'],
+  props: ['professionCardData'],
   methods: {
-    jumpTpTestPage (jumpUrl) {
-      window.location.href = jumpUrl
+    jump (path) {
+      this.$router.push({
+        path
+      })
     }
   }
 }

@@ -10,41 +10,17 @@
           <card-title titleName="分享与求助" />
           <div
             class="pub-btn"
-            @click="toPublish"
+            @click="jump('publishComment')"
           >我要发布</div>
         </div>
         <div class="selector">
-          <selector :selectList="disscussList" />
+          <selector
+            :selectList="selectList"
+            @selectedLabel="selectedLabel"
+          />
         </div>
-        <div class="comment-wrap">
-          <div
-            class="comment"
-            v-for="(item, index) in 10"
-            :key="index"
-          >
-            <img
-              src="https://images.nowcoder.com/images/20200221/999991342_1582251610228_6D9DCA1EE42757CAD66E3EA71709F9B8?x-oss-process=image/resize,m_mfit,h_100,w_100"
-              alt=""
-            >
-            <div class="main">
-              <div
-                class="comment-word"
-                @click="toDetail('discussDetail')"
-              >
-                2020届补招专场｜春招补招，抓住上岸翻盘的最后机会！
-              </div>
-              <mark-type
-                v-for="(item, index) in markData"
-                :key="index"
-                :markData="item"
-              />
-              <div class="info">
-                <div class="info-left">大大大菠萝 2020-02-13</div>
-                <div class="info-right">回复14 | 赞18 | 浏览38953</div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <publish @selectPublish="selectPublish" />
+        <discuss :discussList="discussList" />
       </div>
       <div class="right">
         <card-title titleName="近期热帖" />
@@ -58,11 +34,13 @@
 </template>
 
 <script>
+import { mapActions, mapState } from 'vuex'
 import Banner from '@/components/Banner'
 import CardTitle from '@/components/CardTitle'
-import Selector from '@/components/Selector'
 import HotDiscuss from '@/components/HotDiscuss'
-import MarkType from './MarkType'
+import Selector from './Selector'
+import Discuss from './Discuss'
+import Publish from './Publish'
 
 export default {
   name: 'DiscussPage',
@@ -71,40 +49,54 @@ export default {
     CardTitle,
     Selector,
     HotDiscuss,
-    MarkType
+    Discuss,
+    Publish
   },
   data () {
     return {
       bannerImg:
         'https://uploadfiles.nowcoder.com/images/20200227/339694163_1582802393641_2EA1149C6B414F2169207C5987D77BCB',
-      disscussList: [
-        '全部',
-        '站内公告',
-        '笔经面经',
-        '我要提问',
-        '技术交流',
-        '产品运营',
-        '留学生',
-        '职业发展',
-        '招聘信息',
-        '资源分享',
-        '猿生活',
-        '工作以后'
+      selectList: [
+        { label: 0, name: '全部' },
+        { label: 1, name: '站内公告' },
+        { label: 2, name: '笔经面经' },
+        { label: 3, name: '我要提问' },
+        { label: 4, name: '技术交流' },
+        { label: 5, name: '产品运营' },
+        { label: 6, name: '留学生' },
+        { label: 7, name: '职业发展' },
+        { label: 8, name: '招聘信息' },
+        { label: 9, name: '资源分享' },
+        { label: 10, name: '猿生活' },
+        { label: 11, name: '工作以后' }
       ],
-      markData: ['春招', '内推', '补招']
+      publish: 0,
+      label: 0
     }
+  },
+  computed: {
+    ...mapState({ discussList: state => state.discuss.discussList })
+  },
+  created () {
+    this.fetchDiscussInfo(this.publish, this.label)
   },
   mounted () {},
   methods: {
-    toPublish () {
-      this.$router.push({
-        path: 'publishComment'
-      })
-    },
-    toDetail (path) {
+    ...mapActions(['fetchDiscussInfo']),
+    jump (path) {
       this.$router.push({
         path
       })
+    },
+    selectedLabel (label) {
+      if (this.label === label) return
+      this.fetchDiscussInfo({ label, publish: this.publish })
+      this.label = label
+    },
+    selectPublish (publish) {
+      if (this.publish === publish) return
+      this.fetchDiscussInfo({ label: this.label, publish })
+      this.publish = publish
     }
   }
 }
@@ -160,56 +152,6 @@ export default {
 .selector {
   background-color: #f5f5f5;
   padding: 10px;
-}
-
-.comment-wrap {
-  width: 100%;
-  padding: 5px;
-  margin-top: 10px;
-  box-sizing: border-box;
-}
-
-.comment {
-  height: 113px;
-  border-radius: 3px;
-  box-sizing: border-box;
-  padding: 15px;
-  border-bottom: 1px solid #ddd;
-  display: flex;
-  flex-direction: row;
-
-  img {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    margin-right: 10px;
-  }
-}
-
-.comment:hover {
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-}
-
-.main {
-  width: 570px;
-  box-sizing: border-box;
-
-  .comment-word {
-    margin-bottom: 7px;
-    cursor: pointer;
-
-    &:hover {
-      color: #4dbfae;
-    }
-  }
-
-  .info {
-    display: flex;
-    font-size: 12px;
-    color: #999999;
-    justify-content: space-between;
-    margin-top: 8px;
-  }
 }
 
 .right {

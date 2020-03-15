@@ -15,6 +15,12 @@ export const fetchUserInfo = function ({ state, commit, rootState }) {
   }).catch(generateErrorHandler(commit))
 }
 
+export const fetchHomeInfo = function ({ state, commit, rootState }) {
+  return api.fetchHomeInfo().then(homeInfo => {
+    commit(types.FETCH_HOME_INFO, homeInfo)
+  })
+}
+
 export const fetchCalendarList = function ({ commit }) {
   return api.fetchCalendarList().then(data => {
     // console.log(123321, data)
@@ -39,6 +45,12 @@ export const updatePreachList = function ({ commit }, data) {
   return api.updatePreachList(data).then(data => {
     return data
   }).catch(generateErrorHandler(commit))
+}
+
+export const fetchDiscussInfo = function ({ state, commit, rootState }, data) {
+  return api.fetchDiscussInfo(data).then(discussInfo => {
+    commit(types.FETCH_DISCUSS_INFO, discussInfo)
+  })
 }
 
 export const fetchPositionList = function ({ commit }, data) {

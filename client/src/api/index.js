@@ -83,3 +83,19 @@ function params (obj) {
   }
   return param.join('&')
 }
+
+export function fetchHomeInfo () {
+  let url = '/oesr/home'
+  return axios.get(url).then(utils.checkHttpStatus).then(utils.checkResponse).catch()
+}
+
+export function fetchDiscussInfo (data) {
+  let url = '/oesr/discuss'
+  return axios.get(`${url}?${params(data)}`, {
+    method: 'GET',
+    credentials: 'same-origin',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }).then(utils.checkHttpStatus).then(utils.checkResponse).catch()
+}

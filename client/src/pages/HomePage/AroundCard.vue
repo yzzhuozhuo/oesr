@@ -1,12 +1,18 @@
 <template>
-  <div class="list">
-    <div class="left">专项练习</div>
-    <div class="right">
-      <practice-card
-        v-for="(item, index) in practiceCardData"
-        :key="index"
-        :cardData="item"
-      />
+  <div class="around">
+    <div
+      class="list"
+      v-for="(aroundCard, index) in aroundCardData"
+      :key="index"
+    >
+      <div class="left">{{aroundCard.listName}}</div>
+      <div class="right">
+        <practice-card
+          v-for="(item, index) in aroundCard.listCard"
+          :key="index"
+          :practiceCardData="item"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -18,7 +24,7 @@ export default {
   components: {
     PracticeCard
   },
-  props: ['aroundCardData', 'practiceCardData'],
+  props: ['aroundCardData'],
   data () {
     return {}
   },
