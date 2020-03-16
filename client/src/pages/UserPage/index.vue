@@ -114,7 +114,15 @@
                           <span>{{item}}</span>
                         </div>
                       </div>
-                      <el-select v-else v-model="newUserInfo.interestedCompany" multiple placeholder="请选择感兴趣的公司" style="width: 436px">
+                      <el-select
+                        v-else
+                        v-model="newUserInfo.interestedCompany"
+                        filterable
+                        allow-create
+                        default-first-option
+                        multiple
+                        placeholder="请选择公司，或自己输入按回车添加"
+                        style="width: 436px">
                         <el-option
                           v-for="item in companyOptions"
                           :key="item.value"
@@ -139,7 +147,13 @@
                             :value="item.value">
                           </el-option>
                         </el-select>
-                        <el-select v-model="newUserInfo.interestedPost" multiple placeholder="请选择职位">
+                        <el-select
+                          v-model="newUserInfo.interestedPost"
+                          multiple
+                          filterable
+                          allow-create
+                          default-first-option
+                          placeholder="请选择职位,或自己添加">
                           <el-option
                             v-for="item in postOptions"
                             :key="item.value"
@@ -222,10 +236,6 @@ export default {
       dialogSettingVisible: false,
       companyOptions: [
         {
-          label: '全部',
-          value: ''
-        },
-        {
           label: '字节跳动',
           value: '字节跳动'
         },
@@ -281,10 +291,6 @@ export default {
         }
       ],
       postOptions: [
-        {
-          label: '全部',
-          value: ''
-        },
         {
           label: '前端工程师',
           value: '前端工程师'

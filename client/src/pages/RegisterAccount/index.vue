@@ -1,7 +1,7 @@
 <template>
   <div class="main">
     <div class="main-content">
-      <div class="form-content" v-if="!hasRegister">
+      <!-- <div class="form-content" v-if="!hasRegister">
         <el-form ref="form" :model="loginForm" label-width="80px" class="form-box">
           <el-form-item label="" class="title">
             <div>注册账号</div>
@@ -27,8 +27,8 @@
             <el-button type="primary" class="btn" @click="register">立即注册</el-button>
           </el-form-item>
         </el-form>
-      </div>
-      <div class="user-info"  v-if="!hasRegister && isStudentType">
+      </div> -->
+      <div class="user-info"  v-if="!hasRegister">
         <div class="user-info-content">
           <div class="head">
             <span>个人信息填写</span>
@@ -45,33 +45,40 @@
             </div>
           </div>
           <div class="base-info">
-            <el-form label-position="right" label-width="100px" :model="newUserInfo">
-              <el-form-item label="我的昵称">
+            <el-form :model="newUserInfo" ref="studentInfoForm" :rules="studentInfoRules" label-position="right" label-width="100px">
+              <el-form-item label="我的昵称" prop="studentName">
                 <el-input v-model="newUserInfo.studentName" placeholder="请输入昵称"></el-input>
               </el-form-item>
-              <el-form-item label="我的性别" class="sex">
+              <el-form-item label="我的性别" class="sex" prop="sex">
                 <div>
                   <el-radio v-model="newUserInfo.sex" label="male">男</el-radio>
                   <el-radio v-model="newUserInfo.sex" label="female">女</el-radio>
                 </div>
               </el-form-item>
-              <el-form-item label="我的简介" class="intro">
+              <el-form-item label="我的简介" class="intro" prop="introduction">
                 <el-input v-model="newUserInfo.introduction" type="textarea" placeholder="请输入个人简介"></el-input>
               </el-form-item>
-              <el-form-item label="我居住地">
+              <el-form-item label="我居住地" prop="address">
                 <el-input v-model="newUserInfo.address" placeholder="请输入居住地"></el-input>
               </el-form-item>
-              <el-form-item label="毕业年份">
+              <el-form-item label="毕业年份" prop="graduateTime">
                 <el-input v-model="newUserInfo.graduateTime" placeholder="请输入毕业年份"></el-input>
               </el-form-item>
-              <el-form-item label="我的学历">
+              <el-form-item label="我的学历" prop="education">
                 <el-input v-model="newUserInfo.education" placeholder="请输入学历"></el-input>
               </el-form-item>
-              <el-form-item label="我的学校">
+              <el-form-item label="我的学校" prop="school">
                 <el-input v-model="newUserInfo.school" placeholder="请输入学校"></el-input>
               </el-form-item>
-              <el-form-item label="感兴趣的公司">
-                <el-select v-model="newUserInfo.interestedCompany" multiple placeholder="请选择感兴趣的公司" style="width: 436px">
+              <el-form-item label="感兴趣的公司" prop="interestedCompany">
+                <el-select
+                  v-model="newUserInfo.interestedCompany"
+                  multiple
+                  filterable
+                  allow-create
+                  default-first-option
+                  placeholder="请选择公司，或者自己输入并按回车，会自动添加"
+                  style="width: 436px">
                   <el-option
                     v-for="item in companyOptions"
                     :key="item.value"
@@ -80,7 +87,7 @@
                   </el-option>
                 </el-select>
               </el-form-item>
-              <el-form-item label="感兴趣的工作">
+              <el-form-item label="感兴趣的工作" prop="interestedClassify">
                 <div>
                   <el-select v-model="newUserInfo.interestedClassify" placeholder="请选择方向">
                     <el-option
@@ -90,7 +97,13 @@
                       :value="item.value">
                     </el-option>
                   </el-select>
-                  <el-select v-model="newUserInfo.interestedPost" multiple placeholder="请选择职位">
+                  <el-select
+                    v-model="newUserInfo.interestedPost"
+                    multiple
+                    filterable
+                    allow-create
+                    default-first-option
+                    placeholder="请选择职位，或者自己添加">
                     <el-option
                       v-for="item in postOptions"
                       :key="item.value"
@@ -107,7 +120,7 @@
           </div>
         </div>
       </div>
-      <div class="company-info"  v-if="hasRegister">
+      <div class="company-info"  v-if="hasRegister && isStudentType">
         <div class="company-info-content">
           <div class="head">
             <span>企业信息填写</span>
@@ -124,7 +137,7 @@
             </div>
           </div>
           <div class="base-info">
-            <el-form  :model="newCompanyInfo" label-position="right" ref="infoForm" :rules="infoRules" label-width="100px">
+            <el-form  :model="newCompanyInfo" label-position="right" ref="companyInfoForm" :rules="companyInfoRules" label-width="100px">
               <el-form-item label="公司名称" prop="companyName">
                 <el-input v-model="newCompanyInfo.companyName" placeholder="请输入公司名称"></el-input>
               </el-form-item>
@@ -195,7 +208,7 @@ export default {
         companyBusiness: '', // 主页业务体系
         recuritPosts: '' // 需招职位
       },
-      infoRules: {
+      companyInfoRules: {
         companyName: [
           { required: true, message: '请输入公司名称', trigger: 'blur' }
         ],
@@ -218,11 +231,30 @@ export default {
           { required: true, message: '请输入需要招聘的职位', trigger: 'blur' }
         ]
       },
+      studentInfoRules: {
+        studentName: [
+          { required: true, message: '请输入用户昵称', trigger: 'blur' }
+        ],
+        sex: [
+          { required: true, message: '请选择性别', trigger: 'change' }
+        ],
+        introduction: [
+          { required: true, message: '请输入个人简介', trigger: 'blur' }
+        ],
+        address: [
+          { required: true, message: '请输入居住地', trigger: 'blur' }
+        ],
+        graduateTime: [
+          { required: true, message: '请输入毕业时间', trigger: 'blur' }
+        ],
+        education: [
+          { required: true, message: '请输入学历', trigger: 'blur' }
+        ],
+        school: [
+          { required: true, message: '请输入学校', trigger: 'blur' }
+        ]
+      },
       companyOptions: [
-        {
-          label: '全部',
-          value: ''
-        },
         {
           label: '字节跳动',
           value: '字节跳动'
@@ -280,10 +312,6 @@ export default {
       ],
       postOptions: [
         {
-          label: '全部',
-          value: ''
-        },
-        {
           label: '前端工程师',
           value: '前端工程师'
         },
@@ -311,14 +339,17 @@ export default {
       this.hasRegister = true
     },
     updateStudentInfo () {
-      console.log(123, this.newUserInfo)
-      this.addStudentList(this.newUserInfo)
-      // this.$router.replace({
-      //   path: 'login'
-      // })
+      this.$refs['studentInfoForm'].validate((valid) => {
+        if (!valid) {
+          this.handleMessage('error', '表单输入异常！')
+          return false
+        } else {
+          this.addStudentList(this.newUserInfo)
+        }
+      })
     },
     updateCompanyInfo () {
-      this.$refs['infoForm'].validate((valid) => {
+      this.$refs['companyInfoForm'].validate((valid) => {
         if (!valid) {
           this.handleMessage('error', '表单输入异常！')
           return false
@@ -334,7 +365,6 @@ export default {
     beforeAvatarUpload (file) {
       const isPNG = file.type === 'image/png'
       const isLt2M = file.size / 1024 / 1024 < 2
-
       if (!isPNG) {
         this.$message.error('上传头像图片只能是 PNG 格式!')
       }
