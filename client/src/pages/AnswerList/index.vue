@@ -284,7 +284,7 @@ export default {
       this.index = index
       if (index < len) {
         if (index < 0) {
-          index = this.topic[1].length - 1
+          index = this.topic['chooseLists'].length - 1
           this.change(index)
         } else {
           this.title = '请在横线处填写答案'
@@ -305,7 +305,7 @@ export default {
       this.index = index
       if (this.index < len) {
         if (this.index < 0) {
-          this.index = this.topic[2].length - 1
+          this.index = this.topic['fillLists'].length - 1
           this.fill(this.index)
         } else {
           this.title = '请作出正确判断'
