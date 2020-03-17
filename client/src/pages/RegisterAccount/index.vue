@@ -218,7 +218,7 @@
                   </el-option>
                 </el-select>
               </el-form-item>
-              <el-form-item label="感兴趣的工作">
+              <el-form-item label="感兴趣的工作" prop="interestedClassify">
                 <div>
                   <el-select
                     v-model="newUserInfo.interestedClassify"
@@ -235,8 +235,10 @@
                   <el-select
                     v-model="newUserInfo.interestedPost"
                     multiple
-                    placeholder="请选择职位"
-                  >
+                    filterable
+                    allow-create
+                    default-first-option
+                    placeholder="请选择职位，或者自己添加">
                     <el-option
                       v-for="item in postOptions"
                       :key="item.value"
@@ -257,10 +259,7 @@
           </div>
         </div>
       </div>
-      <div
-        class="company-info"
-        v-if="hasRegister"
-      >
+      <div class="company-info"  v-if="hasRegister && isStudentType">
         <div class="company-info-content">
           <div class="head">
             <span>企业信息填写</span>
@@ -366,8 +365,8 @@ export default {
       isCompanyType: true,
       hasRegister: false,
       newUserInfo: {
-        studentImgUrl:
-          'https://uploadfiles.nowcoder.com/files/20190710/4107856_1562753015408_%E7%9B%9B%E8%B6%A3%E6%B8%B8%E6%88%8F120.png',
+        studentId: '123',
+        studentImgUrl: 'https://images.nowcoder.com/images/20190928/638373518_1569674550437_27E42C56E73D70CBE3050C38883E4E56?x-oss-process=image/resize,m_mfit,h_200,w_200',
         studentName: '',
         sex: '',
         introduction: '',
@@ -381,19 +380,62 @@ export default {
         attentionSchedule: []
       },
       newCompanyInfo: {
+        companyId: '123',
         companyName: '',
-        companyImgUrl: '',
+        companyImgUrl: 'https://images.nowcoder.com/images/20180718/921290_1531896583092_901BA20B5E086190E85C74B8628FA8D2?x-oss-process=image/resize,m_mfit,h_200,w_200',
         companyProfile: '', // 公司简介
         companyWelfare: '', // 薪酬福利
         companyAddress: '', // 公司所在地
         companyBusiness: '', // 主页业务体系
         recuritPosts: '' // 需招职位
       },
+      companyInfoRules: {
+        companyName: [
+          { required: true, message: '请输入公司名称', trigger: 'blur' }
+        ],
+        companyImgUrl: [
+          { required: true, message: '请上传公司图片' }
+        ],
+        companyProfile: [
+          { required: true, message: '请输入公司简介', trigger: 'blur' }
+        ],
+        companyWelfare: [
+          { required: true, message: '请输入薪酬福利', trigger: 'blur' }
+        ],
+        companyAddress: [
+          { required: true, message: '请输入公司所在城市', trigger: 'blur' }
+        ],
+        companyBusiness: [
+          { required: true, message: '请输入公司主页业务体系', trigger: 'blur' }
+        ],
+        recuritPosts: [
+          { required: true, message: '请输入需要招聘的职位', trigger: 'blur' }
+        ]
+      },
+      studentInfoRules: {
+        studentName: [
+          { required: true, message: '请输入用户昵称', trigger: 'blur' }
+        ],
+        sex: [
+          { required: true, message: '请选择性别', trigger: 'change' }
+        ],
+        introduction: [
+          { required: true, message: '请输入个人简介', trigger: 'blur' }
+        ],
+        address: [
+          { required: true, message: '请输入居住地', trigger: 'blur' }
+        ],
+        graduateTime: [
+          { required: true, message: '请输入毕业时间', trigger: 'blur' }
+        ],
+        education: [
+          { required: true, message: '请输入学历', trigger: 'blur' }
+        ],
+        school: [
+          { required: true, message: '请输入学校', trigger: 'blur' }
+        ]
+      },
       companyOptions: [
-        {
-          label: '全部',
-          value: ''
-        },
         {
           label: '字节跳动',
           value: '字节跳动'
@@ -451,10 +493,6 @@ export default {
       ],
       postOptions: [
         {
-          label: '全部',
-          value: ''
-        },
-        {
           label: '前端工程师',
           value: '前端工程师'
         },
@@ -472,8 +510,13 @@ export default {
   computed: {},
   mounted () {},
   methods: {
-    ...mapActions(['addAccount', 'findTel']),
-    // 提交表单校验
+    ...mapActions([
+      'addStudentList',
+      'addCompanyList',
+      'fetchCompanyList',
+      'addAccount',
+      'findTel'
+    ]),
     register () {
       this.$refs['loginForm'].validate(valid => {
         if (valid) {
@@ -506,13 +549,24 @@ export default {
       return callback()
     },
     updateStudentInfo () {
-      console.log(123, this.newUserInfo)
-      // this.$router.replace({
-      //   path: 'login'
-      // })
+      this.$refs['studentInfoForm'].validate((valid) => {
+        if (!valid) {
+          this.handleMessage('error', '表单输入异常！')
+          return false
+        } else {
+          this.addStudentList(this.newUserInfo)
+        }
+      })
     },
     updateCompanyInfo () {
-      console.log(46, this.newCompanyInfo)
+      this.$refs['companyInfoForm'].validate((valid) => {
+        if (!valid) {
+          this.handleMessage('error', '表单输入异常！')
+          return false
+        } else {
+          this.addCompanyList(this.newCompanyInfo)
+        }
+      })
     },
     handleAvatarSuccess (res, file) {
       this.newUserInfo.studentImgUrl = URL.createObjectURL(file.raw)
@@ -521,7 +575,6 @@ export default {
     beforeAvatarUpload (file) {
       const isPNG = file.type === 'image/png'
       const isLt2M = file.size / 1024 / 1024 < 2
-
       if (!isPNG) {
         this.$message.error('上传头像图片只能是 PNG 格式!')
       }
@@ -730,5 +783,6 @@ export default {
   // height: 50px;
   width: 100%;
   display: block;
+  border-radius: 50%;
 }
 </style>

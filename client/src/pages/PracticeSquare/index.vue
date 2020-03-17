@@ -95,7 +95,7 @@
                 <el-input v-model="addPositionForm.positionType" placeholder="请输入职位类型，例如：研发/前端/测试..."></el-input>
               </el-form-item>
               <el-form-item label="所在城市">
-                <el-input v-model="addPositionForm.PositionCity" placeholder="请输入职位所在城市，例如杭州"></el-input>
+                <el-input v-model="addPositionForm.positionCity" placeholder="请输入职位所在城市，例如杭州"></el-input>
               </el-form-item>
               <el-form-item label="薪酬待遇">
                 <el-input v-model="addPositionForm.compensation" placeholder="请输入职位的薪酬待遇，例如面谈/200-300元/天..."></el-input>
@@ -449,14 +449,16 @@ export default {
       let data = _.cloneDeep(this.addPositionForm)
       data.jobResponsibilities = data.jobResponsibilities.split(/[\s\n]/)
       data.jobRequirements = data.jobRequirements.split(/[\s\n]/)
-      this.updatePositionList(data).then(() => {
-        this.addMesDialogVisible = false
-        this.fetchPositionDataList()
-        this.$message({
-          type: 'success',
-          message: '发表职位成功~'
-        })
-      })
+      data.companyId = '123'
+      console.log(666, data)
+      // this.updatePositionList(data).then(() => {
+      //   this.addMesDialogVisible = false
+      //   this.fetchPositionDataList()
+      //   this.$message({
+      //     type: 'success',
+      //     message: '发表职位成功~'
+      //   })
+      // })
     },
     publishPost () {
       // TODO发布职位

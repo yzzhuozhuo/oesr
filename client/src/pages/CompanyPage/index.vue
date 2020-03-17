@@ -70,30 +70,30 @@
                   </div>
                 </div>
                 <div class="base-info">
-                  <el-form label-position="right" label-width="100px" :model="newcompanyInfo">
+                  <el-form label-position="right" label-width="100px" :model="newCompanyInfo">
                     <el-form-item label="公司名称">
                       <div v-if="!isEdit">{{companyInfo.companyName}}</div>
-                      <el-input v-else v-model="newcompanyInfo.companyName"></el-input>
+                      <el-input v-else v-model="newCompanyInfo.companyName"></el-input>
                     </el-form-item>
                     <el-form-item label="所在城市">
                       <div v-if="!isEdit">{{companyInfo.companyAddress}}</div>
-                      <el-input v-else v-model="newcompanyInfo.companyAddress"></el-input>
+                      <el-input v-else v-model="newCompanyInfo.companyAddress"></el-input>
                     </el-form-item>
                     <el-form-item label="公司简介">
                       <div v-if="!isEdit">{{companyInfo.companyProfile}}</div>
-                      <el-input v-else v-model="newcompanyInfo.companyProfile" type="textarea"></el-input>
+                      <el-input v-else v-model="newCompanyInfo.companyProfile" type="textarea"></el-input>
                     </el-form-item>
                     <el-form-item label="薪酬项目">
                       <div v-if="!isEdit">{{companyInfo.companyWelfare}}</div>
-                      <el-input v-else v-model="newcompanyInfo.companyWelfare" type="textarea"></el-input>
+                      <el-input v-else v-model="newCompanyInfo.companyWelfare" type="textarea"></el-input>
                     </el-form-item>
                     <el-form-item label="业务体系">
                       <div v-if="!isEdit">{{companyInfo.companyBusiness}}</div>
-                      <el-input v-else v-model="newcompanyInfo.companyBusiness" type="textarea"></el-input>
+                      <el-input v-else v-model="newCompanyInfo.companyBusiness" type="textarea"></el-input>
                     </el-form-item>
                     <el-form-item label="需招职位">
                       <div v-if="!isEdit">{{companyInfo.recuritPosts}}</div>
-                      <el-input v-else v-model="newcompanyInfo.recuritPosts"></el-input>
+                      <el-input v-else v-model="newCompanyInfo.recuritPosts"></el-input>
                     </el-form-item>
                   </el-form>
                   <div class="footer-btn" v-if="isEdit">
@@ -136,6 +136,7 @@
 
 <script>
 import _ from 'lodash'
+import { mapState, mapActions } from 'vuex'
 
 export default {
   name: 'UserPage',
@@ -160,7 +161,7 @@ export default {
       }
     }
     return {
-      companyInfo: {
+      companyInfo1: {
         companyName: '网易',
         companyImgUrl: 'https://images.nowcoder.com/images/20180718/921290_1531896583092_901BA20B5E086190E85C74B8628FA8D2?x-oss-process=image/resize,m_mfit,h_200,w_200',
         companyProfile: '网易(NASDAQ: NTES)，1997年由丁磊先生在广州创办、2000年在美国NASDAQ股票交易所挂牌上市，是中国领先的互联网技术公司，在开发互联网应用、服务等方面始终保持中国业界领先地位。本着对中国互联网发展强烈的使命感，缔造美好生活的愿景，网易利用最先进的互联网技术，加强人与人之间信息的交流和共享，为海量用户提供优质的产品和服务，始终秉持着"以匠心、致创新"的理念，通过科技创新改变生活。',
@@ -169,7 +170,7 @@ export default {
         companyBusiness: '网易游戏 网易严选 网易云音乐 有道',
         recuritPosts: 'Java工程师 C++工程师 前端工程师'
       },
-      newcompanyInfo: {
+      newCompanyInfo1: {
         companyName: '',
         companyImgUrl: '',
         companyProfile: '',
@@ -178,6 +179,8 @@ export default {
         companyBusiness: '',
         recuritPosts: ''
       },
+      companyInfo: {},
+      newCompanyInfo: {},
       isEdit: false,
       isSetting: false,
       dialogSettingVisible: false,
@@ -223,13 +226,30 @@ export default {
       }
     }
   },
+  computed: {
+    ...mapState({
+      companyList: state => state.company.companyList
+    })
+  },
+  watch: {
+    companyList () {
+      this.companyInfo = this.companyList
+    }
+  },
+  created () {
+    this.fetchCompanyList({ companyId: '123' })
+  },
   mounted () {
-    this.newcompanyInfo = _.cloneDeep(this.companyInfo)
   },
   methods: {
+    ...mapActions([
+      'fetchCompanyList',
+      'updateCompanyList'
+    ]),
     handleSelect (keyPath) {
       console.log(234, keyPath)
       if (keyPath === 'edit') {
+        this.newCompanyInfo = _.cloneDeep(this.companyInfo)
         this.isEdit = true
         console.log(this.isEdit)
       } else if (keyPath === 'setting') {
@@ -239,8 +259,12 @@ export default {
       }
     },
     updatecompanyInfo () {
-      console.log(this.newcompanyInfo)
-      this.isEdit = false
+      console.log(this.newCompanyInfo)
+      this.updateCompanyList(this.newCompanyInfo).then(() => {
+        this.fetchCompanyList({ companyId: '123' }).then(() => {
+          this.isEdit = false
+        })
+      })
     },
     cancelUpdatecompanyInfo () {
       this.isEdit = false

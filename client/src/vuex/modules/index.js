@@ -6,6 +6,8 @@ import preach from './preach'
 import discuss from './discuss'
 import position from './position'
 import account from './account'
+import student from './student'
+import company from './company'
 
 export default {
   user,
@@ -15,5 +17,7 @@ export default {
   preach,
   discuss,
   position,
-  account
+  account,
+  student,
+  company
 }
