@@ -5,25 +5,21 @@
 const mongoose = require('mongoose')
 
 const accountSchema = mongoose.Schema({
-  account: {
+  tel: {
     type: String,
-    require: true
+    require: true,
+    unique: true
   },
   password: {
     type: String,
-    require: true
+    set (val) { // 密码加密
+      return require('bcryptjs').hashSync(val, 10)
+    }
   },
-  // password: {
-  //   type: String,
-  //   select: false,
-  //   set(val) {
-  //     return require('bcrypt').hashSync(val, 10)
-  //   }
-  // },
   accountType: {
     type: String, //student|company
     require: true
   }
-}, { collection: 'account'} )
+}, { collection: 'account' })
 
 module.exports = mongoose.model('account', accountSchema)

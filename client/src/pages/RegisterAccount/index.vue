@@ -1,35 +1,123 @@
 <template>
   <div class="main">
     <div class="main-content">
-      <div class="form-content" v-if="!hasRegister">
+      <div
+        class="form-content"
+        v-if="!hasRegister"
+      >
         <!-- <div>欢迎登录</div> -->
-        <el-form ref="form" :model="loginForm" label-width="80px" class="form-box">
-          <el-form-item label="" class="title">
+        <el-form
+          ref="loginForm"
+          label-width="80px"
+          class="form-box"
+          :model="loginForm"
+        >
+          <el-form-item
+            label=""
+            class="title"
+          >
             <div>注册账号</div>
           </el-form-item>
-          <el-form-item label="手机号码">
-            <el-input v-model="loginForm.tel" placeholder="请输入手机号码"></el-input>
+          <el-form-item
+            label="手机号码"
+            prop="tel"
+            :rules="[
+              { required: true, message: '请输入手机号'},
+              {
+                validator: (rule, value, callback) => { validateTel(rule, value, callback) },
+                trigger: ['blur']
+              }
+            ]"
+          >
+            <el-input
+              v-model="loginForm.tel"
+              placeholder="请输入手机号码"
+            >
+            </el-input>
           </el-form-item>
-          <el-form-item label="验证码" class="code">
-            <el-input v-model="loginForm.password" class="get-code-inp" placeholder="请输入验证码"></el-input>
-            <el-button type="success" plain class="get-code-btn" size="small">获取验证码</el-button>
+          <el-form-item
+            label="验证码"
+            class="code"
+            prop="verCode"
+            :rules="[
+              { required: true, message: '请输入验证码'}
+            ]"
+          >
+            <el-input
+              v-model="loginForm.verCode"
+              class="get-code-inp"
+              placeholder="请输入验证码"
+            ></el-input>
+            <el-button
+              type="success"
+              plain
+              class="get-code-btn"
+              size="small"
+            >获取验证码</el-button>
           </el-form-item>
-          <el-form-item label="密码">
-            <el-input v-model="loginForm.password" placeholder="请输入密码"></el-input>
+          <el-form-item
+            label="密码"
+            prop="password"
+            :rules="[
+              { required: true, message: '请输入密码'}
+            ]"
+          >
+            <el-input
+              v-model="loginForm.password"
+              type="password"
+              placeholder="请输入密码"
+            ></el-input>
           </el-form-item>
-          <el-form-item label="重输密码">
-            <el-input v-model="loginForm.password" placeholder="请再次输入密码"></el-input>
+          <el-form-item
+            label="重输密码"
+            prop="rePassword"
+            :rules="[
+              { required: true, message: '请再次输入密码'},
+              {
+                validator: (rule, value, callback) => { validatePsd(rule, value, callback) },
+                trigger: ['blur']
+              }
+            ]"
+          >
+            <el-input
+              v-model="loginForm.rePassword"
+              type="password"
+              placeholder="请再次输入密码"
+            ></el-input>
           </el-form-item>
-          <el-form-item label="类型" class="user-type">
-            <el-radio v-model="loginForm.userType" label="student">学生</el-radio>
-            <el-radio v-model="loginForm.userType" label="company">企业</el-radio>
+          <el-form-item
+            label="类型"
+            class="user-type"
+            prop="userType"
+            :rules="[
+              { required: true, message: '请选择注册类型'}
+            ]"
+          >
+            <el-radio
+              v-model="loginForm.userType"
+              label="student"
+            >学生</el-radio>
+            <el-radio
+              v-model="loginForm.userType"
+              label="company"
+            >企业</el-radio>
           </el-form-item>
-          <el-form-item label="" class="login-btn">
-            <el-button type="primary" class="btn" @click="register">立即注册</el-button>
+          <el-form-item
+            label=""
+            class="login-btn"
+          >
+            <el-button
+              type="primary"
+              class="btn"
+              @click="register"
+            >立即注册</el-button>
           </el-form-item>
         </el-form>
       </div>
-      <div class="user-info" v-if="hasRegister && isStudentType">
+      <div
+        class="user-info"
+        v-if="hasRegister && isStudentType"
+      >
         <div class="user-info-content">
           <div class="head">
             <span>个人信息填写</span>
@@ -39,76 +127,140 @@
                 action="https://jsonplaceholder.typicode.com/posts/"
                 :show-file-list="false"
                 :on-success="handleAvatarSuccess"
-                :before-upload="beforeAvatarUpload">
-                <img v-if="newUserInfo.studentImgUrl" :src="newUserInfo.studentImgUrl" class="avatar">
-                <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                :before-upload="beforeAvatarUpload"
+              >
+                <img
+                  v-if="newUserInfo.studentImgUrl"
+                  :src="newUserInfo.studentImgUrl"
+                  class="avatar"
+                >
+                <i
+                  v-else
+                  class="el-icon-plus avatar-uploader-icon"
+                ></i>
               </el-upload>
             </div>
           </div>
           <div class="base-info">
-            <el-form label-position="right" label-width="100px" :model="newUserInfo">
+            <el-form
+              label-position="right"
+              label-width="100px"
+              :model="newUserInfo"
+            >
               <el-form-item label="我的昵称">
-                <el-input v-model="newUserInfo.studentName" placeholder="请输入昵称"></el-input>
+                <el-input
+                  v-model="newUserInfo.studentName"
+                  placeholder="请输入昵称"
+                ></el-input>
               </el-form-item>
-              <el-form-item label="我的性别" class="sex">
+              <el-form-item
+                label="我的性别"
+                class="sex"
+              >
                 <div>
-                  <el-radio v-model="newUserInfo.sex" label="male">男</el-radio>
-                  <el-radio v-model="newUserInfo.sex" label="female">女</el-radio>
+                  <el-radio
+                    v-model="newUserInfo.sex"
+                    label="male"
+                  >男</el-radio>
+                  <el-radio
+                    v-model="newUserInfo.sex"
+                    label="female"
+                  >女</el-radio>
                 </div>
               </el-form-item>
-              <el-form-item label="我的简介" class="intro">
-                <el-input v-model="newUserInfo.introduction" type="textarea" placeholder="请输入个人简介"></el-input>
+              <el-form-item
+                label="我的简介"
+                class="intro"
+              >
+                <el-input
+                  v-model="newUserInfo.introduction"
+                  type="textarea"
+                  placeholder="请输入个人简介"
+                ></el-input>
               </el-form-item>
               <el-form-item label="我居住地">
-                <el-input v-model="newUserInfo.address" placeholder="请输入居住地"></el-input>
+                <el-input
+                  v-model="newUserInfo.address"
+                  placeholder="请输入居住地"
+                ></el-input>
               </el-form-item>
               <el-form-item label="毕业年份">
-                <el-input v-model="newUserInfo.graduateTime" placeholder="请输入毕业年份"></el-input>
+                <el-input
+                  v-model="newUserInfo.graduateTime"
+                  placeholder="请输入毕业年份"
+                ></el-input>
               </el-form-item>
               <el-form-item label="我的学历">
-                <el-input v-model="newUserInfo.education" placeholder="请输入学历"></el-input>
+                <el-input
+                  v-model="newUserInfo.education"
+                  placeholder="请输入学历"
+                ></el-input>
               </el-form-item>
               <el-form-item label="我的学校">
-                <el-input v-model="newUserInfo.school" placeholder="请输入学校"></el-input>
+                <el-input
+                  v-model="newUserInfo.school"
+                  placeholder="请输入学校"
+                ></el-input>
               </el-form-item>
               <el-form-item label="感兴趣的公司">
-                <el-select v-model="newUserInfo.interestedCompany" multiple placeholder="请选择感兴趣的公司" style="width: 436px">
+                <el-select
+                  v-model="newUserInfo.interestedCompany"
+                  multiple
+                  placeholder="请选择感兴趣的公司"
+                  style="width: 436px"
+                >
                   <el-option
                     v-for="item in companyOptions"
                     :key="item.value"
                     :label="item.label"
-                    :value="item.value">
+                    :value="item.value"
+                  >
                   </el-option>
                 </el-select>
               </el-form-item>
               <el-form-item label="感兴趣的工作">
                 <div>
-                  <el-select v-model="newUserInfo.interestedClassify" placeholder="请选择方向">
+                  <el-select
+                    v-model="newUserInfo.interestedClassify"
+                    placeholder="请选择方向"
+                  >
                     <el-option
                       v-for="item in classifyOptions"
                       :key="item.value"
                       :label="item.label"
-                      :value="item.value">
+                      :value="item.value"
+                    >
                     </el-option>
                   </el-select>
-                  <el-select v-model="newUserInfo.interestedPost" multiple placeholder="请选择职位">
+                  <el-select
+                    v-model="newUserInfo.interestedPost"
+                    multiple
+                    placeholder="请选择职位"
+                  >
                     <el-option
                       v-for="item in postOptions"
                       :key="item.value"
                       :label="item.label"
-                      :value="item.value">
+                      :value="item.value"
+                    >
                     </el-option>
                   </el-select>
                 </div>
               </el-form-item>
             </el-form>
             <div class="btn">
-              <el-button @click="updateStudentInfo" type="primary">保存信息</el-button>
+              <el-button
+                @click="updateStudentInfo"
+                type="primary"
+              >保存信息</el-button>
             </div>
           </div>
         </div>
       </div>
-      <div class="company-info" v-if="hasRegister">
+      <div
+        class="company-info"
+        v-if="hasRegister"
+      >
         <div class="company-info-content">
           <div class="head">
             <span>企业信息填写</span>
@@ -118,35 +270,76 @@
                 action="https://jsonplaceholder.typicode.com/posts/"
                 :show-file-list="false"
                 :on-success="handleAvatarSuccess"
-                :before-upload="beforeAvatarUpload">
-                <img v-if="newCompanyInfo.companyImgUrl" :src="newCompanyInfo.companyImgUrl" class="avatar">
-                <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                :before-upload="beforeAvatarUpload"
+              >
+                <img
+                  v-if="newCompanyInfo.companyImgUrl"
+                  :src="newCompanyInfo.companyImgUrl"
+                  class="avatar"
+                >
+                <i
+                  v-else
+                  class="el-icon-plus avatar-uploader-icon"
+                ></i>
               </el-upload>
             </div>
           </div>
           <div class="base-info">
-            <el-form label-position="right" label-width="100px" :model="newCompanyInfo">
+            <el-form
+              label-position="right"
+              label-width="100px"
+              :model="newCompanyInfo"
+            >
               <el-form-item label="公司名称">
-                <el-input v-model="newCompanyInfo.companyName" placeholder="请输入公司名称"></el-input>
+                <el-input
+                  v-model="newCompanyInfo.companyName"
+                  placeholder="请输入公司名称"
+                ></el-input>
               </el-form-item>
-              <el-form-item label="公司简介" class="intro">
-                <el-input v-model="newCompanyInfo.companyProfile" type="textarea" placeholder="请输入公司简介"></el-input>
+              <el-form-item
+                label="公司简介"
+                class="intro"
+              >
+                <el-input
+                  v-model="newCompanyInfo.companyProfile"
+                  type="textarea"
+                  placeholder="请输入公司简介"
+                ></el-input>
               </el-form-item>
               <el-form-item label="所在城市">
-                <el-input v-model="newCompanyInfo.companyAddress" placeholder="请输入公司所在城市，多个城市请用空车分隔"></el-input>
+                <el-input
+                  v-model="newCompanyInfo.companyAddress"
+                  placeholder="请输入公司所在城市，多个城市请用空车分隔"
+                ></el-input>
               </el-form-item>
               <el-form-item label="需招职位">
-                <el-input v-model="newCompanyInfo.recuritPosts" placeholder="请输入职位名称，多个职位请用空格分隔"></el-input>
+                <el-input
+                  v-model="newCompanyInfo.recuritPosts"
+                  placeholder="请输入职位名称，多个职位请用空格分隔"
+                ></el-input>
               </el-form-item>
               <el-form-item label="薪酬福利">
-                <el-input v-model="newCompanyInfo.companyWelfare" placeholder="请输入公司薪酬福利情况"></el-input>
+                <el-input
+                  v-model="newCompanyInfo.companyWelfare"
+                  placeholder="请输入公司薪酬福利情况"
+                ></el-input>
               </el-form-item>
-              <el-form-item label="业务体系" class="business">
-                <el-input v-model="newCompanyInfo.companyBusiness" type="textarea" placeholder="请输入公司业务体系"></el-input>
+              <el-form-item
+                label="业务体系"
+                class="business"
+              >
+                <el-input
+                  v-model="newCompanyInfo.companyBusiness"
+                  type="textarea"
+                  placeholder="请输入公司业务体系"
+                ></el-input>
               </el-form-item>
             </el-form>
             <div class="btn">
-              <el-button @click="updateCompanyInfo" type="primary">保存信息</el-button>
+              <el-button
+                @click="updateCompanyInfo"
+                type="primary"
+              >保存信息</el-button>
             </div>
           </div>
         </div>
@@ -156,14 +349,16 @@
 </template>
 
 <script>
-
+import { mapActions } from 'vuex'
 export default {
   name: 'RegisterAccount',
   data () {
     return {
       loginForm: {
+        verCode: '', // 验证码
         tel: '',
         password: '',
+        rePassword: '',
         userType: '',
         automaticLogin: true
       },
@@ -171,7 +366,8 @@ export default {
       isCompanyType: true,
       hasRegister: false,
       newUserInfo: {
-        studentImgUrl: 'https://uploadfiles.nowcoder.com/files/20190710/4107856_1562753015408_%E7%9B%9B%E8%B6%A3%E6%B8%B8%E6%88%8F120.png',
+        studentImgUrl:
+          'https://uploadfiles.nowcoder.com/files/20190710/4107856_1562753015408_%E7%9B%9B%E8%B6%A3%E6%B8%B8%E6%88%8F120.png',
         studentName: '',
         sex: '',
         introduction: '',
@@ -273,12 +469,41 @@ export default {
       ]
     }
   },
-  mounted () {
-  },
+  computed: {},
+  mounted () {},
   methods: {
+    ...mapActions(['addAccount', 'findTel']),
+    // 提交表单校验
     register () {
-      // 立即注册之后，要填写个人信息，将数据保存数据库，用户主页的个人信息的数据就来源此
-      this.hasRegister = true
+      this.$refs['loginForm'].validate(valid => {
+        if (valid) {
+          this.hasRegister = true
+          this.addAccount({
+            tel: this.loginForm.tel,
+            password: this.loginForm.password,
+            accountType: this.loginForm.accountType
+          })
+        } else {
+          return false
+        }
+      })
+    },
+    // 验证二次密码
+    validatePsd (rule, value, callback) {
+      if (this.loginForm.password !== value) {
+        return callback(new Error('两次密码不一致'))
+      }
+      return callback()
+    },
+    // 验证手机号
+    async validateTel (rule, value, callback) {
+      if (!/^1[3456789]\d{9}$/.test(value)) {
+        return callback(new Error('手机格式不正确'))
+      } else {
+        const result = await this.findTel({ tel: value })
+        if (result.message) return callback(new Error(result.message))
+      }
+      return callback()
     },
     updateStudentInfo () {
       console.log(123, this.newUserInfo)
@@ -317,14 +542,15 @@ export default {
     justify-content: center;
     // align-items: center;
     height: 780px;
-    background: url('http://static.nowcoder.com/images/res/infoComplete/bg.jpg') no-repeat;
+    background: url('http://static.nowcoder.com/images/res/infoComplete/bg.jpg')
+      no-repeat;
     background-size: 100% 100%;
     .form-content {
       padding: 30px 80px 70px;
       width: 400px;
       // height: 300px;
       border-radius: 4px;
-      background: rgba(255,255,255,.8);
+      background: rgba(255, 255, 255, 0.8);
       margin: 60px auto 0;
       border: 1px solid #eee;
       height: 360px;
@@ -353,7 +579,11 @@ export default {
           }
         }
         .user-type {
-          margin: -10px 0 -8px;
+          margin: -10px 0 0px;
+
+          & >>> .el-form-item__error {
+            margin-top: -5px !important;
+          }
         }
         .forgot-bth {
           padding-left: 76px;
@@ -483,7 +713,7 @@ export default {
   overflow: hidden;
 }
 .avatar-uploader .el-upload:hover {
-  border-color: #409EFF;
+  border-color: #409eff;
 }
 .avatar-uploader-icon {
   font-size: 20px;
@@ -501,5 +731,4 @@ export default {
   width: 100%;
   display: block;
 }
-
 </style>

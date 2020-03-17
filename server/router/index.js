@@ -7,6 +7,7 @@ const calendarController = require('../controller/calendar')
 const preachController = require('../controller/preach')
 const discussController = require('../controller/discuss')
 const positionController = require('../controller/position')
+const accountController = require('../controller/account')
 
 router
   .get('/oesr/user', userController.user)
@@ -19,6 +20,10 @@ router
   .get('/oesr/positionList', positionController.getPosition)
   .post('/oesr/addPositionList', positionController.addPosition)
   .get('/oesr/positionDetailList', positionController.getPositionDetail)
+  .post('/oesr/addAccount', accountController.addAccount)
+  .post('/oesr/findAccount', accountController.findAccount)
+  .get('/oesr/findTel', accountController.findTel)
+  .get('/oesr/getUserInfo', accountController.getUserInfo)
   .use('/', express.static(path.resolve(__dirname, '../../client/dist')))
 
 module.exports = router

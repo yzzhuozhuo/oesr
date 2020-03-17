@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^8.5.1",
     "connect-multiparty": "^2.1.1",
     "connect-redis": "^3.4.0",
     "dayjs": "^1.8.15",

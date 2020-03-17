@@ -71,3 +71,31 @@ export const fetchPositionDetailList = function ({ commit }, data) {
     commit(types.FETCH_POSITION_DETAIL_LIST, data)
   }).catch(generateErrorHandler(commit))
 }
+
+export const addAccount = function ({ commit }, data) {
+  return api.addAccount(data).then(data => {
+    console.info(data)
+    return data
+  }).catch(generateErrorHandler(commit))
+}
+
+export const findTel = function ({ commit }, data) {
+  return api.findTel(data).then(data => {
+    return data
+  }).catch(generateErrorHandler(commit))
+}
+
+export const findAccount = function ({ commit }, data) {
+  return api.findAccount(data).then(data => {
+    commit(types.FIND_ACCOUNT, data)
+    return data
+  }).catch(generateErrorHandler(commit))
+}
+
+export const getUserInfo = function ({ commit }, data) {
+  return api.getUserInfo(data).then(data => {
+    console.info('---getUserInfo---')
+    console.info(data)
+    return data
+  }).catch(generateErrorHandler(commit))
+}

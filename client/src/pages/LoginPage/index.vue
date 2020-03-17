@@ -3,35 +3,103 @@
     <div class="main-content">
       <div class="form-content">
         <!-- <div>欢迎登录</div> -->
-        <el-form ref="form" :model="loginForm" label-width="60px" class="form-box">
-          <el-form-item label="" class="title">
+        <el-form
+          ref="loginForm"
+          :model="loginForm"
+          label-width="60px"
+          class="form-box"
+        >
+          <el-form-item
+            label=""
+            class="title"
+          >
             <div>欢迎登录智能招聘平台</div>
           </el-form-item>
-          <el-form-item label="手机">
-            <el-input v-model="loginForm.tel" placeholder="请输入手机号码"></el-input>
+          <el-form-item
+            label="手机"
+            prop="tel"
+            :rules="[
+              { required: true, message: '请输入手机号'},
+              {
+                validator: (rule, value, callback) => { validateTel(rule, value, callback) },
+                trigger: ['blur']
+              }
+            ]"
+          >
+            <el-input
+              v-model="loginForm.tel"
+              placeholder="请输入手机号码"
+            ></el-input>
           </el-form-item>
-          <el-form-item label="密码" v-if="isAccountLogin">
-            <el-input v-model="loginForm.password" placeholder="请输入密码"></el-input>
+          <el-form-item
+            v-if="isAccountLogin"
+            label="密码"
+            prop="password"
+            :rules="[
+              { required: true, message: '请输入密码'},
+              {
+                validator: (rule, value, callback) => { validatePsd(rule, value, callback) },
+                trigger: []
+              }
+            ]"
+          >
+            <el-input
+              v-model="loginForm.password"
+              placeholder="请输入密码"
+              type="password"
+            ></el-input>
           </el-form-item>
-          <el-form-item label="验证码" class="code" v-if="isMSMLogin">
-            <el-input v-model="loginForm.password" class="get-code-inp" placeholder="请输入验证码"></el-input>
-            <el-button type="success" plain class="get-code-btn" size="small">获取验证码</el-button>
-          </el-form-item>
-          <el-form-item label="类型" class="user-type">
-            <el-radio v-model="loginForm.userType" label="student">学生</el-radio>
-            <el-radio v-model="loginForm.userType" label="company">企业</el-radio>
+          <el-form-item
+            label="验证码"
+            class="code"
+            v-if="isMSMLogin"
+          >
+            <el-input
+              v-model="loginForm.password"
+              class="get-code-inp"
+              placeholder="请输入验证码"
+            ></el-input>
+            <el-button
+              type="success"
+              plain
+              class="get-code-btn"
+              size="small"
+            >获取验证码</el-button>
           </el-form-item>
           <el-form-item label="">
             <el-checkbox v-model="loginForm.automaticLogin">下次自动登录</el-checkbox>
-            <el-button type="text" class="forgot-bth" @click="toPasswordBack">忘记密码？</el-button>
+            <el-button
+              type="text"
+              class="forgot-bth"
+              @click="toPasswordBack"
+            >忘记密码？</el-button>
           </el-form-item>
-          <el-form-item label="" class="login-btn">
-            <el-button type="primary" class="btn" @click="login">立即登录</el-button>
+          <el-form-item
+            label=""
+            class="login-btn"
+          >
+            <el-button
+              type="primary"
+              class="btn"
+              @click="login"
+            >立即登录</el-button>
           </el-form-item>
           <el-form-item label="">
-            <el-button type="text" @click="toMSMLogin" v-if="isAccountLogin">短信验证登录</el-button>
-            <el-button type="text" @click="toAccountLogin" v-if="isMSMLogin">账号密码登录</el-button>
-            <el-button type="text" class="register-btn" @click="toRegister">注册账号</el-button>
+            <el-button
+              type="text"
+              @click="toMSMLogin"
+              v-if="isAccountLogin"
+            >短信验证登录</el-button>
+            <el-button
+              type="text"
+              @click="toAccountLogin"
+              v-if="isMSMLogin"
+            >账号密码登录</el-button>
+            <el-button
+              type="text"
+              class="register-btn"
+              @click="toRegister"
+            >注册账号</el-button>
           </el-form-item>
         </el-form>
       </div>
@@ -40,6 +108,7 @@
 </template>
 
 <script>
+import { mapActions, mapState } from 'vuex'
 
 export default {
   name: 'LoginPage',
@@ -48,16 +117,21 @@ export default {
       loginForm: {
         tel: '',
         password: '',
-        userType: '', // 用户类型分为，学生和企业
         automaticLogin: true
       },
       isMSMLogin: false,
       isAccountLogin: true
     }
   },
-  mounted () {
+  computed: {
+    ...mapState({
+      account: state => state.account.account,
+      token: state => state.account.token
+    })
   },
+  mounted () {},
   methods: {
+    ...mapActions(['findTel', 'findAccount']),
     toMSMLogin () {
       this.isAccountLogin = false
       this.isMSMLogin = true
@@ -77,9 +151,34 @@ export default {
       })
     },
     login () {
-      this.$router.push({
-        path: '/'
+      this.$refs['loginForm'].validate(async valid => {
+        if (valid) {
+          this.$router.push({
+            path: '/'
+          })
+        } else {
+          return false
+        }
       })
+    },
+    async validateTel (rule, value, callback) {
+      if (!/^1[3456789]\d{9}$/.test(value)) {
+        return callback(new Error('手机格式不正确'))
+      } else {
+        const result = await this.findTel({ tel: value })
+        if (!result.message) return callback(new Error('该手机号尚未注册'))
+      }
+      return callback()
+    },
+    async validatePsd (rule, value, callback) {
+      const result = await this.findAccount({
+        tel: this.loginForm.tel,
+        password: this.loginForm.password
+      })
+      if (!result.token) return callback(new Error(result.message))
+      console.info(this.account)
+      console.info(this.token)
+      return callback()
     }
   }
 }
@@ -93,14 +192,15 @@ export default {
     justify-content: center;
     // align-items: center;
     height: 700px;
-    background: url('http://static.nowcoder.com/images/res/infoComplete/bg.jpg') no-repeat;
+    background: url('http://static.nowcoder.com/images/res/infoComplete/bg.jpg')
+      no-repeat;
     background-size: 100% 100%;
     .form-content {
       padding: 40px 70px 50px;
       width: 400px;
       // height: 300px;
       border-radius: 4px;
-      background: rgba(255,255,255,.8);
+      background: rgba(255, 255, 255, 0.8);
       margin: 60px auto 0;
       border: 1px solid #eee;
       height: 320px;
@@ -129,7 +229,11 @@ export default {
           }
         }
         .user-type {
-          margin: -10px 0 -8px;
+          margin: -10px 0 0px;
+
+          & >>> .el-form-item__error {
+            margin-top: -8px !important;
+          }
         }
         .forgot-bth {
           padding-left: 76px;

@@ -14,6 +14,7 @@
 import AppMenu from './components/AppMenu'
 import AppFooter from './components/AppFooter'
 import AppSidebar from './components/AppSidebar'
+import { mapActions } from 'vuex'
 
 export default {
   name: 'App',
@@ -21,6 +22,12 @@ export default {
     AppMenu,
     AppFooter,
     AppSidebar
+  },
+  mounted () {
+    this.getUserInfo()
+  },
+  methods: {
+    ...mapActions(['getUserInfo'])
   }
 }
 </script>

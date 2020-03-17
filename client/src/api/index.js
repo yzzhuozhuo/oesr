@@ -99,3 +99,42 @@ export function fetchDiscussInfo (data) {
     }
   }).then(utils.checkHttpStatus).then(utils.checkResponse).catch()
 }
+
+export function addAccount (body) {
+  let url = '/oesr/addAccount'
+  return fetch(url, {
+    method: 'POST',
+    credentials: 'same-origin',
+    body: JSON.stringify(body),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }).then(utils.checkHttpStatus).then(utils.checkResponse).catch({})
+}
+
+export function findTel (data) {
+  let url = '/oesr/findTel'
+  return axios.get(`${url}?${params(data)}`, {
+    method: 'GET',
+    credentials: 'same-origin',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }).then(utils.checkHttpStatus).then(utils.checkResponse).catch()
+}
+
+export function findAccount (body) {
+  let url = '/oesr/findAccount'
+  return axios.post(url, body).then(utils.checkHttpStatus).then(utils.checkResponse).catch({})
+}
+
+export function getUserInfo () {
+  let url = '/oesr/getUserInfo'
+  return axios.get(url, {
+    method: 'GET',
+    credentials: 'same-origin',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }).then(utils.checkHttpStatus).then(utils.checkResponse).catch()
+}
