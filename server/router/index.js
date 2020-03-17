@@ -9,6 +9,7 @@ const discussController = require('../controller/discuss')
 const positionController = require('../controller/position')
 const studentController = require('../controller/student')
 const companyController = require('../controller/company')
+const themeController = require('../controller/theme')
 
 router
   .get('/oesr/user', userController.user)
@@ -29,6 +30,10 @@ router
   .get('/oesr/companyList', companyController.getCompany)
   .post('/oesr/addCompanyList', companyController.addCompany)
   .put('/oesr/updateCompanyList', companyController.updateCompany)
+
+  .get('/oesr/themeList', themeController.getTheme)
+  .post('/oesr/addThemeList', themeController.addTheme)
+  .get('/oesr/themeDetailList', themeController.getThemeDetail)
   .use('/', express.static(path.resolve(__dirname, '../../client/dist')))
 
 module.exports = router

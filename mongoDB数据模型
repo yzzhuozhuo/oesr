@@ -26,7 +26,7 @@
   hot: '', // 热度指数
   rate: 1-5, // 难度系数，星星个数
   createAt: Date, //创建时间，点击最新时进行排序,
-  questionLists: [
+  questionLists: {
     chooseLists: [{
       "question": "主机A向主机B发送一个（SYN=1，seq=2000）的TCP报文，期望与主机B建立连接，若主机B接受连接请求，则主机B发送的正确有TCP报文可能是（ ）",
       "answerA": "（SYN=0,ACK=0,seq=2001,ack=2001）",
@@ -49,7 +49,7 @@
       "score": 2,
       "analysis": null
     }]
-  ] 
+  }
 }
 
 职位表 position

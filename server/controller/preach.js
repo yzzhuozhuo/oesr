@@ -11,6 +11,7 @@ exports.getPreach = function (req, res) {
     pageNum = 10
   } = req.query
   pageNum = +pageNum
+  currentPage = +currentPage
   preachStartTime = +preachStartTime
   preachEndTime = +preachEndTime
   preachService.getPreachList(searchValue, selectCity, selectSchool, currentPage, pageNum, preachStartTime, preachEndTime).then(data => {

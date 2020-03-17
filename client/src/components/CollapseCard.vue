@@ -12,7 +12,7 @@
         </template>
         <div class="company">
           <div v-for="(item, index) in collapseCardData" :key="index">
-            <img :src="item.companyUrl" class="companyImage" @click="selectedVal(item.companyName, key='companyName')">
+            <img :src="item.companyImageUrl" class="companyImage" @click="selectedVal(item.companyName, key='companyName')">
           </div>
         </div>
       </el-collapse-item>
@@ -28,7 +28,6 @@
         <el-tag
           v-for="(item, index) in collapseCardData"
           :key="index"
-          :type="item.tagType"
           @click="selectedVal(item.post, key='post')">
           {{item.post}}
         </el-tag>
@@ -37,16 +36,16 @@
         <template slot="title">
           <span class="collapse-title">年份</span>
           <i class="header-icon el-icon-time"></i>
-          <div v-if="selected.time" class="user-selected">
+          <div v-if="selected.years" class="user-selected">
             <span>您选择的年份是—— </span>
-            <span class="selected-val">{{ selected.time }}</span>
+            <span class="selected-val">{{ selected.years }}</span>
           </div>
         </template>
         <el-tag
           v-for="(item, index) in tagVal"
           :key="index"
           type="danger"
-          @click="selectedVal(item, key='time')">
+          @click="selectedVal(item, key='years')">
           {{item}}
         </el-tag>
       </el-collapse-item>
@@ -66,7 +65,7 @@ export default {
       selected: {
         companyName: '',
         post: '',
-        time: ''
+        years: ''
       },
       selectedValList: {}
     }
@@ -92,7 +91,7 @@ export default {
     },
     handleTagVal (data) {
       let repeatTime = data.map(item => {
-        return item.time
+        return item.years
       })
       return [...new Set(repeatTime)]
     }

@@ -7,6 +7,7 @@ import discuss from './discuss'
 import position from './position'
 import student from './student'
 import company from './company'
+import theme from './theme'
 
 export default {
   user,
@@ -17,5 +18,6 @@ export default {
   discuss,
   position,
   student,
-  company
+  company,
+  theme
 }

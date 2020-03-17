@@ -3,11 +3,13 @@
     <div v-for="(item, index) in questionCardData" :key="index" class="no-margin">
       <el-card class="box-card" v-if="questionCardData">
         <div class="box-card-main">
-          <span>{{ item.title }}</span>
-          <img :src="item.url">
-          <div class="hot">热度指数: {{ item.hot }}</div>
-          <div class="job">匹配职位: {{ item.job }}</div>
-          <el-button type="primary" size="mini" @click="toQuestionList">查看详情</el-button>
+          <span>{{ item.themeTitle }}</span>
+          <div class="image">
+            <img :src="item.themeImageUrl">
+          </div>
+          <div class="hot">发布时间: {{ item.createdAt }}</div>
+          <div class="job">匹配职位: {{ item.post }}</div>
+          <el-button type="primary" size="mini" @click="toQuestionList(item._id)">查看详情</el-button>
         </div>
       </el-card>
       <div class="rate-content">
@@ -37,9 +39,12 @@ export default {
     }
   },
   methods: {
-    toQuestionList () {
+    toQuestionList (id) {
       this.$router.push({
-        path: 'questionList'
+        path: 'questionList',
+        query: {
+          themeDetailId: id
+        }
       })
     }
   }
@@ -89,15 +94,9 @@ export default {
   /* padding-left: 10px; */
   /* justify-content: space-between; */
 }
-.contant-card-box div {
-  /* margin-right: 10.5px; */
-}
-.no-margin:nth-child(5n) {
-  /* margin-right: -10px; */
-  /* background: red; */
-}
+
 .hot {
-  font-size: 16px;
+  font-size: 14px;
   padding: 5px 0 10px 0;
 }
 .job {
@@ -123,4 +122,13 @@ export default {
   height: 50px;
   padding-bottom: 20px
 }
+/* .image {
+  width: 80px;
+  height: 80px;
+  border: 1px solid #eee;
+}
+.image img {
+  width: 100%;
+  border-radius: 50%;
+} */
 </style>

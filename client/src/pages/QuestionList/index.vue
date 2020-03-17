@@ -1,13 +1,13 @@
 <template>
   <div class="main">
-    <div class="header-title">首页 > 题库 > 奇安信2019校招笔试题</div>
+    <div class="header-title">首页 > 题库 > {{themeDetailData.themeTitle}}</div>
     <div class="main-content">
-      <div class="content-card" v-for="(item, index) in questionData" :key="index">
+      <div class="content-card">
         <img src="../../assets/question-head.png" class="head-image">
-        <img :src="item.companyUrl" class="company-logo">
+        <img :src="themeDetailData.themeImageUrl" class="company-logo">
         <div class="content-card-body">
-          <div class="title">{{item.companyName}}{{item.time}}校招笔试题</div>
-          <div class="post">匹配职位：{{item.post}}</div>
+          <div class="title">{{themeDetailData.themeTitle}}</div>
+          <div class="post">匹配职位：{{themeDetailData.post}}</div>
           <el-table
             class="table"
             :data="tableData"
@@ -21,24 +21,24 @@
             </el-table-column>
             <el-table-column
               align="center"
-              prop="select"
+              prop="chooseNum"
               label="单选">
             </el-table-column>
             <el-table-column
               align="center"
-              prop="fill"
+              prop="fillNum"
               label="填空">
             </el-table-column>
             <el-table-column
               align="center"
-              prop="judge"
+              prop="judgeNum"
               label="判断">
             </el-table-column>
           </el-table>
           <el-button type="primary" class="btn" @click="toAnswerList">开始答题</el-button>
           <el-divider content-position="center" class="explain">答题说明</el-divider>
           <div class="explain-content">
-            <div>1、本套题满分100分，请认真作答。</div>
+            <div>1、本套题由公司所出，请认真作答。</div>
             <div class="explain-content-two">2、系统将会根据您所选/所选答案进行正确的判断，并计算您的得分情况。</div>
             <div>3、答题时间为100分钟，请合理把控答题时间。</div>
             <div class="explain-content-four">4、点击"开始答题"按钮，即表示你同意 <span style="color: #25bb9b">《用户隐私政策》</span>，系统会视你和企业适配程度，向企业主动推荐你。</div>
@@ -71,32 +71,19 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex'
 
 export default {
   name: 'QuestionList',
   data () {
     return {
-      questionData: [
-        {
-          category: 'software',
-          companyName: '奇安信',
-          companyUrl: 'https://uploadfiles.nowcoder.com/files/20190524/63_1558668315246_奇安信-80x80.png',
-          post: 'Java工程师',
-          time: '2020',
-          tagType: 'danger',
-          totalScore: 100,
-          questionLists: {
-            select: [{}],
-            fill: [{}],
-            judge: [{}]
-          }
-        }
-      ],
+      themeDetailData: {},
+      themeDetailId: '',
       tableData: [{
         type: '数量',
-        select: '30',
-        fill: '10',
-        judge: '20'
+        chooseNum: '',
+        fillNum: '',
+        judgeNum: ''
       }],
       userData: [
         {
@@ -132,13 +119,42 @@ export default {
       ]
     }
   },
+  computed: {
+    ...mapState({
+      themeDetailList: state => state.theme.themeDetailList
+    })
+  },
+  watch: {
+    themeDetailList () {
+      this.themeDetailData = this.themeDetailList
+      this.tableData.map(item => {
+        item.chooseNum = this.themeDetailList.questionLists.chooseLists.length
+        item.fillNum = this.themeDetailList.questionLists.fillLists.length
+        item.judgeNum = this.themeDetailList.questionLists.judgeLists.length
+        return item
+      })
+      this.themeDetailId = this.themeDetailList._id
+    }
+  },
+  created () {
+    let themeDetailId = this.$route.query.themeDetailId
+    this.fetchThemeDetailList({ themeDetailId })
+  },
+  mounted () {
+  },
   methods: {
+    ...mapActions([
+      'fetchThemeDetailList'
+    ]),
     fetchUserLists () {
       console.log('请求用户数据')
     },
     toAnswerList () {
       this.$router.push({
-        path: 'answerList'
+        path: 'answerList',
+        query: {
+          themeDetailId: this.themeDetailId
+        }
       })
     }
   }
