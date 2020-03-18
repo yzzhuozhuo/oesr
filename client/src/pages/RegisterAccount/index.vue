@@ -88,17 +88,17 @@
           <el-form-item
             label="类型"
             class="user-type"
-            prop="userType"
+            prop="accountType"
             :rules="[
               { required: true, message: '请选择注册类型'}
             ]"
           >
             <el-radio
-              v-model="loginForm.userType"
+              v-model="loginForm.accountType"
               label="student"
             >学生</el-radio>
             <el-radio
-              v-model="loginForm.userType"
+              v-model="loginForm.accountType"
               label="company"
             >企业</el-radio>
           </el-form-item>
@@ -116,7 +116,7 @@
       </div>
       <div
         class="user-info"
-        v-if="hasRegister && isStudentType"
+        v-if="hasRegister && loginForm.accountType === 'student'"
       >
         <div class="user-info-content">
           <div class="head">
@@ -146,6 +146,7 @@
               label-position="right"
               label-width="100px"
               :model="newUserInfo"
+              ref="studentInfoForm"
             >
               <el-form-item label="我的昵称">
                 <el-input
@@ -259,7 +260,7 @@
           </div>
         </div>
       </div>
-      <div class="company-info"  v-if="hasRegister && isStudentType">
+      <div class="company-info"  v-if="hasRegister && loginForm.accountType === 'company'">
         <div class="company-info-content">
           <div class="head">
             <span>企业信息填写</span>
@@ -288,6 +289,7 @@
               label-position="right"
               label-width="100px"
               :model="newCompanyInfo"
+              ref="companyInfoForm"
             >
               <el-form-item label="公司名称">
                 <el-input
@@ -358,14 +360,12 @@ export default {
         tel: '',
         password: '',
         rePassword: '',
-        userType: '',
+        accountType: '',
         automaticLogin: true
       },
-      isStudentType: false,
-      isCompanyType: true,
       hasRegister: false,
       newUserInfo: {
-        studentId: '123',
+        studentId: '5e71777db30fad55e4773471',
         studentImgUrl: 'https://images.nowcoder.com/images/20190928/638373518_1569674550437_27E42C56E73D70CBE3050C38883E4E56?x-oss-process=image/resize,m_mfit,h_200,w_200',
         studentName: '',
         sex: '',
@@ -518,14 +518,24 @@ export default {
       'findTel'
     ]),
     register () {
-      this.$refs['loginForm'].validate(valid => {
+      this.$refs['loginForm'].validate(async valid => {
         if (valid) {
-          this.hasRegister = true
-          this.addAccount({
+          await this.addAccount({
             tel: this.loginForm.tel,
             password: this.loginForm.password,
             accountType: this.loginForm.accountType
           })
+          await this.$message({
+            message: '注册成功',
+            type: 'success'
+          })
+          this.hasRegister = true
+          // this.$router.replace({
+          //   name: 'login',
+          //   params: {
+          //     tel: this.loginForm.tel
+          //   }
+          // })
         } else {
           return false
         }
@@ -549,7 +559,7 @@ export default {
       return callback()
     },
     updateStudentInfo () {
-      this.$refs['studentInfoForm'].validate((valid) => {
+      this.$refs['studentInfoForm'].validate(valid => {
         if (!valid) {
           this.handleMessage('error', '表单输入异常！')
           return false

@@ -6,7 +6,13 @@ const SECRET = 'asdafadfadgaag' // token 秘钥
 exports.addAccount = async function (req, res) {
   const { tel, password, accountType } = req.body
   const data = await accountService.addAccount({ tel, password, accountType })
-  res.send({ code: '200', data })
+  res.send({
+    code: '200', data: {
+      accountType,
+      tel,
+      _id: data._doc._id
+    }
+  })
 }
 
 // 查询手机号是否存在
@@ -33,7 +39,9 @@ exports.findAccount = async function (req, res) {
 
     const token = jwt.sign({
       id: String(account._id)
-    }, SECRET)
+    }, SECRET, {
+      expiresIn: 60 * 60 * 24 * 7 // 过期时间为 7 天
+    })
     req.session.userInfo = {
       tel: account.tel,
       accountType: account.accountType,
@@ -54,6 +62,11 @@ exports.getUserInfo = async function (req, res) {
   } else {
     res.send({ code: '200', data: { code: -1 } })
   }
+}
+
+exports.logout = async function name(req, res) {
+  Reflect.deleteProperty(req.session, 'userInfo')
+  res.send({ code: '200', data: { message: '成功退出', code: 0 } })
 }
 
 // exports.getAccountInfo = async function (req, res, next) {

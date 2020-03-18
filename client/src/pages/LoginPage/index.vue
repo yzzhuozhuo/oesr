@@ -115,7 +115,7 @@ export default {
   data () {
     return {
       loginForm: {
-        tel: '',
+        tel: this.$route.params.tel || '',
         password: '',
         automaticLogin: true
       },
@@ -129,7 +129,6 @@ export default {
       token: state => state.account.token
     })
   },
-  mounted () {},
   methods: {
     ...mapActions(['findTel', 'findAccount']),
     toMSMLogin () {
@@ -153,7 +152,7 @@ export default {
     login () {
       this.$refs['loginForm'].validate(async valid => {
         if (valid) {
-          this.$router.push({
+          this.$router.replace({
             path: '/'
           })
         } else {
@@ -176,8 +175,10 @@ export default {
         password: this.loginForm.password
       })
       if (!result.token) return callback(new Error(result.message))
-      console.info(this.account)
-      console.info(this.token)
+      console.info('登录信息')
+      console.info(result)
+      localStorage.clear()
+      localStorage.setItem('account', JSON.stringify(result))
       return callback()
     }
   }

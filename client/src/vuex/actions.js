@@ -120,12 +120,22 @@ export const updateCompanyList = function ({ commit }, data) {
 }
 
 export const getUserInfo = function ({ commit }, data) {
+  // const account = localStorage.getItem('account')
+  // if (account) return commit(types.GET_USER_INFO, JSON.parse(account))
   return api.getUserInfo(data).then(data => {
-    console.info('---getUserInfo---')
-    console.info(data)
+    commit(types.GET_USER_INFO, data)
     return data
   }).catch(generateErrorHandler(commit))
 }
+
+export const logout = function ({ commit }) {
+  return api.logout().then(data => {
+    console.info(data)
+    localStorage.clear()
+    commit(types.LOGOUT)
+  })
+}
+
 export const addCompanyList = function ({ commit }, data) {
   return api.addCompanyList(data).then(data => {
     return data

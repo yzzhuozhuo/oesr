@@ -102,14 +102,7 @@ export function fetchDiscussInfo (data) {
 
 export function addAccount (body) {
   let url = '/oesr/addAccount'
-  return fetch(url, {
-    method: 'POST',
-    credentials: 'same-origin',
-    body: JSON.stringify(body),
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  }).then(utils.checkHttpStatus).then(utils.checkResponse).catch({})
+  return axios.post(url, body).then(utils.checkHttpStatus).then(utils.checkResponse).catch({})
 }
 export function fetchStudentList (data) {
   return axios.get(`/oesr/studentList?${params(data)}`, {
@@ -177,6 +170,11 @@ export function getUserInfo () {
       'Content-Type': 'application/json'
     }
   }).then(utils.checkHttpStatus).then(utils.checkResponse).catch({})
+}
+
+export function logout () {
+  let url = '/oesr/logout'
+  return axios.get(url).then(utils.checkHttpStatus).then(utils.checkResponse).catch({})
 }
 
 export function addCompanyList (body) {

@@ -12,9 +12,9 @@ const mutations = {
 
 // 验证是否登录
 const getters = {
-  hasLogin: (state, getters, rootState) => {
-    return !!state.studentList.studentId
-  }
+  // hasLogin: (state, getters, rootState) => {
+  //   return !!state.studentList.studentId
+  // }
 }
 
 export default {

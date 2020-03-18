@@ -22,10 +22,12 @@ router
   .get('/oesr/positionList', positionController.getPosition)
   .post('/oesr/addPositionList', positionController.addPosition)
   .get('/oesr/positionDetailList', positionController.getPositionDetail)
+
   .post('/oesr/addAccount', accountController.addAccount)
   .post('/oesr/findAccount', accountController.findAccount)
   .get('/oesr/findTel', accountController.findTel)
   .get('/oesr/getUserInfo', accountController.getUserInfo)
+  .get('/oesr/logout', accountController.logout)
 
   .get('/oesr/studentList', studentController.getStudent)
   .post('/oesr/addStudentList', studentController.addStudent)
