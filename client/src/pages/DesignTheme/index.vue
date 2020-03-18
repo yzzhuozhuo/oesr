@@ -589,11 +589,11 @@ export default {
       let data = {
         companyId: '123',
         companyName: '奇安信', // 从公司主页的接口中拿
-        companyImageUrl: 'https://uploadfiles.nowcoder.com/files/20200211/999991354_1581407969193_奇安信90.jpg', // 从公司主页信息中拿
-        themeImageUrl: 'https://uploadfiles.nowcoder.com/files/20190524/63_1558668315246_奇安信-80x80.png', // 由出题人上传，试题上显示的图片
+        themeImageUrl: 'https://uploadfiles.nowcoder.com/files/20190524/63_1558668315246_奇安信-80x80.png', // 由公司信息拿，试题上显示的图片
         themeTitle: this.themeTitle, // 试题名称
         post: this.post, // 职位
         years: this.years, // 年份
+        tagType: this.interestedClassify,
         hot: this.optionHotValue, // 热度
         rate: this.optionDifficultyValue, // 难度
         questionLists: {
