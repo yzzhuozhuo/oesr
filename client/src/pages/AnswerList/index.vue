@@ -5,8 +5,7 @@
      <div class="top">
        <div class="item">
          <div><i class="el-icon-s-fold" ref="toggle" @click="slider_flag = !slider_flag"></i></div>
-         <!-- <div>{{examData.type}}-{{examData.source}}</div> -->
-         <div>奇安信2019校招笔试题</div>
+         <div>{{this.themeDetailList.themeTitle}}</div>
        </div>
      </div>
      <div class="flexarea">
@@ -33,31 +32,31 @@
             </ul>
             <div class="l-bottom">
               <div class="item">
-                <p>选择题部分</p>
+                <p>一、选择题部分 (共{{topicCount[0]}}题)</p>
                 <ul>
-                  <li v-for="(list, index1) in topic[1]" :key="index1">
+                  <li v-for="(list, index1) in topic['chooseLists']" :key="index1">
                     <a href="javascript:;"
                       @click="change(index1)"
-                      :class="{'border': index === index1 && currentType === 1,'bg': bg_flag && topic[1][index1].isClick === true}">
-                      <span :class="{'mark': topic[1][index1].isMark === true}"></span>
+                      :class="{'border': index === index1 && currentType === 1,'bg': bg_flag && topic['chooseLists'][index1].isClick === true}">
+                      <span :class="{'mark': topic['chooseLists'][index1].isMark === true}"></span>
                       {{index1+1}}
                     </a>
                   </li>
                 </ul>
               </div>
               <div class="item">
-                <p>填空题部分</p>
+                <p>二、填空题部分 (共{{topicCount[1]}}题)</p>
                 <ul>
-                  <li v-for="(list, index2) in topic[2]" :key="index2">
-                    <a href="javascript:;" @click="fill(index2)" :class="{'border': index === index2 && currentType === 2,'bg': fillAnswer[index2][3] === true}"><span :class="{'mark': topic[2][index2].isMark === true}"></span>{{topicCount[0]+index2+1}}</a>
+                  <li v-for="(list, index2) in topic['fillLists']" :key="index2">
+                    <a href="javascript:;" @click="fill(index2)" :class="{'border': index === index2 && currentType === 2,'bg': fillAnswer[index2][3] === true}"><span :class="{'mark': topic['fillLists'][index2].isMark === true}"></span>{{topicCount[0]+index2+1}}</a>
                   </li>
                 </ul>
               </div>
               <div class="item">
-                <p>判断题部分</p>
+                <p>三、判断题部分 (共{{topicCount[2]}}题)</p>
                 <ul>
-                  <li v-for="(list, index3) in topic[3]" :key="index3">
-                    <a href="javascript:;" @click="judge(index3)" :class="{'border': index === index3 && currentType === 3,'bg': bg_flag && topic[3][index3].isClick === true}"><span :class="{'mark': topic[3][index3].isMark === true}"></span>{{topicCount[0]+topicCount[1]+index3+1}}</a>
+                  <li v-for="(list, index3) in topic['judgeLists']" :key="index3">
+                    <a href="javascript:;" @click="judge(index3)" :class="{'border': index === index3 && currentType === 3,'bg': bg_flag && topic['judgeLists'][index3].isClick === true}"><span :class="{'mark': topic['judgeLists'][index3].isMark === true}"></span>{{topicCount[0]+topicCount[1]+index3+1}}</a>
                   </li>
                 </ul>
               </div>
@@ -74,9 +73,12 @@
             <span>全卷共{{topicCount[0] + topicCount[1] + topicCount[2]}}题  <i class="iconfont icon-time"></i>倒计时：<b>{{time}}</b>分钟</span>
           </div>
           <div class="content">
-            <p class="topic"><span class="number">{{number}}</span>{{showQuestion}}</p>
+            <div class="topic">
+              <div class="number">{{number}}</div>
+              <div>{{showQuestion}}</div>
+            </div>
             <div v-if="currentType === 1">
-              <el-radio-group v-model="radio[index]" @change="getChangeLabel" >
+              <el-radio-group v-model="radio[index]" @change="getChangeLabel" class="radio-group">
                 <el-radio :label="1">{{showAnswer.answerA}}</el-radio>
                 <el-radio :label="2">{{showAnswer.answerB}}</el-radio>
                 <el-radio :label="3">{{showAnswer.answerC}}</el-radio>
@@ -91,8 +93,9 @@
               </div>
             </div>
             <div class="fill" v-if="currentType === 2">
-              <div v-for="(item,currentIndex) in part" :key="currentIndex">
-                <el-input placeholder="请填在此处"
+              <div v-for="(item, currentIndex) in part" :key="currentIndex" class="fill-input">
+                <span>{{currentIndex + 1}}、</span>
+                <el-input placeholder="请按顺序将答案填在此处"
                   v-model="fillAnswer[index][currentIndex]"
                   clearable
                   @blur="fillBG">
@@ -100,9 +103,9 @@
               </div>
               <div class="analysis" v-if="isPractice">
                 <ul>
-                  <li> <el-tag type="success">正确姿势：</el-tag><span class="right">{{topic[2][index].answer}}</span></li>
+                  <li> <el-tag type="success">正确姿势：</el-tag><span class="right">{{topic['fillLists'][index].answer}}</span></li>
                   <li><el-tag>题目解析：</el-tag></li>
-                  <li>{{topic[2][index].analysis === null ? '暂无解析': topic[2][index].analysis}}</li>
+                  <li>{{topic['fillLists'][index].analysis === null ? '暂无解析': topic['fillLists'][index].analysis}}</li>
                 </ul>
               </div>
             </div>
@@ -113,19 +116,27 @@
               </el-radio-group>
               <div class="analysis" v-if="isPractice">
                 <ul>
-                  <li> <el-tag type="success">正确姿势：</el-tag><span class="right">{{topic[3][index].answer}}</span></li>
+                  <li> <el-tag type="success">正确姿势：</el-tag><span class="right">{{topic['judgeLists'][index].answer}}</span></li>
                   <li><el-tag>题目解析：</el-tag></li>
-                  <li>{{topic[3][index].analysis === null ? '暂无解析': topic[3][index].analysis}}</li>
+                  <li>{{topic['judgeLists'][index].analysis === null ? '暂无解析': topic['judgeLists'][index].analysis}}</li>
                 </ul>
               </div>
             </div>
           </div>
           <div class="operation">
-            <ul class="end">
-              <li @click="previous()"><i class="iconfont icon-previous"></i><span>上一题</span></li>
-              <li @click="mark()"><i class="iconfont icon-mark-o"></i><span>标记</span></li>
-              <li @click="next()"><span>下一题</span><i class="iconfont icon-next"></i></li>
-            </ul>
+            <div class="end">
+              <div @click="previous()">
+                <i class="el-icon-arrow-left"></i>
+                <span>上一题</span>
+              </div>
+              <div @click="mark()">
+                <span>标记</span>
+              </div>
+              <div @click="next()">
+                <span>下一题</span>
+                <i class="el-icon-arrow-right"></i>
+              </div>
+            </div>
           </div>
         </div>
         </transition>
@@ -134,12 +145,15 @@
 </template>
 
 <script>
-import topicData from '../../../debug/topic.json'
+// import topicData from '../../../debug/topic.json'
+import { mapState, mapActions } from 'vuex'
+import moment from 'moment'
 
 export default {
   name: 'AnswerList',
   data () {
     return {
+      themeDetailData: {},
       startTime: null, // 考试开始时间
       endTime: null, // 考试结束时间
       time: null, // 考试持续时间
@@ -153,19 +167,13 @@ export default {
       radio: [], // 保存考生所有选择题的选项
       title: '请选择正确的选项',
       index: 0, // 全局index
-      userInfo: { // 用户信息
-        name: 'yz',
-        id: 123
-      },
       topicCount: [], // 每种类型题目的总数
       score: [], // 每种类型分数的总数
       examData: { // 考试信息
         // source: null,
         // totalScore: null,
       },
-      topic: { // 试卷信息
-
-      },
+      topic: {}, // 试卷信息,
       showQuestion: [], // 当前显示题目信息
       showAnswer: {}, // 当前题目对应的答案选项
       number: 1, // 题号
@@ -177,135 +185,85 @@ export default {
       isPractice: false
     }
   },
+  computed: {
+    ...mapState({
+      themeDetailList: state => state.theme.themeDetailList
+    })
+  },
+  watch: {
+    themeDetailList () {
+      this.themeDetailData = this.themeDetailList
+    }
+  },
   created () {
-    // this.getCookies()
     this.getExamData()
     this.showTime()
   },
   mounted () {
-    console.log(888, topicData)
+    console.log(555, this.themeDetailList)
   },
   methods: {
-    getTime (date) { // 日期格式化
-      let year = date.getFullYear()
-      let month = date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1
-      let day = date.getDate() < 10 ? '0' + date.getDate() : date.getDate()
-      let hours = date.getHours() < 10 ? '0' + date.getHours() : date.getHours()
-      let minutes = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()
-      let seconds = date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds()
-      // 拼接
-      return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`
+    ...mapActions([
+      'fetchThemeDetailList'
+    ]),
+    formatTime (date) {
+      const TIME_FORMAT = 'YYYY-MM-DD HH:mm:ss'
+      date = moment(date).format(TIME_FORMAT)
+      return date
     },
-    getCookies () { // 获取cookie
-      this.userInfo.name = this.$cookies.get('cname')
-      this.userInfo.id = this.$cookies.get('cid')
-    },
-    calcuScore () { // 计算答题分数
+    handleMessage (type, message) {
+      this.$message({
+        type,
+        message
+      })
     },
     getExamData () { // 获取当前试卷所有信息
-      let date = new Date()
-      this.startTime = this.getTime(date)
-      // let examCode = this.$route.query.examCode //获取路由传递过来的试卷编号
-      // this.$axios(`/api/exam/${examCode}`).then(res => {  //通过examCode请求试卷详细信息
-      // this.examData = { ...res.data.data} //获取考试详情
-      let resData = {
-        examCode: 20190001,
-        description: '2019年上期期末考试',
-        source: '计算机网络1',
-        paperId: 1001,
-        examDate: '2019-03-21',
-        totalTime: null,
-        grade: '2018',
-        term: '1',
-        major: '计算机科学与技术',
-        institute: '软件工程学院',
-        totalScore: 100,
-        type: '期末考试',
-        tips: '快乐千万条，学习第一条，平时不努力，考试两行泪'
-      }
-      this.examData = {...resData}
-      this.index = 0
-      this.time = this.examData.totalScore // 获取分钟数
-      // let paperId = this.examData.paperId
-      // this.$axios(`/api/paper/${paperId}`).then(res => {  //通过paperId获取试题题目信息
-      // this.topic = {...res.data}
-      this.topic = {...topicData}
-      let reduceAnswer = this.topic[1][this.index]
-      this.reduceAnswer = reduceAnswer
-      let keys = Object.keys(this.topic) // 对象转数组
-      keys.forEach(e => {
-        let data = this.topic[e]
-        this.topicCount.push(data.length)
-        let currentScore = 0
-        for (let i = 0; i < data.length; i++) { // 循环每种题型,计算出总分
-          currentScore += data[i].score
+      this.fetchThemeDetailList({ themeDetailId: this.$route.query.themeDetailId }).then(() => {
+        this.startTime = this.formatTime(Date.now())
+        this.index = 0
+        this.time = 60 // 设置倒计时分钟数
+        // this.topic = {...topicData.questionLists}
+        this.topic = {...this.themeDetailData.questionLists}
+        // console.log(11111, this.topic)
+        // console.log(2222, topicA)
+        let reduceAnswer = this.topic['chooseLists'][this.index]
+        this.reduceAnswer = reduceAnswer
+        let keys = Object.keys(this.topic) // 对象转数组
+        keys.forEach(e => {
+          let data = this.topic[e]
+          this.topicCount.push(data.length)
+          let currentScore = 0
+          for (let i = 0; i < data.length; i++) { // 循环每种题型,计算出总分
+            currentScore += data[i].score
+          }
+          this.score.push(currentScore) // 把每种题型总分存入score
+        })
+        let len = this.topicCount[1]
+        let father = []
+        for (let i = 0; i < len; i++) { // 根据填空题数量创建二维空数组存放每道题答案
+          let children = [null, null, null, null]
+          father.push(children)
         }
-        this.score.push(currentScore) // 把每种题型总分存入score
+        this.fillAnswer = father
+        let dataInit = this.topic['chooseLists']
+        this.number = 1
+        this.showQuestion = dataInit[0].question
+        this.showAnswer = dataInit[0]
       })
-      let len = this.topicCount[1]
-      let father = []
-      for (let i = 0; i < len; i++) { // 根据填空题数量创建二维空数组存放每道题答案
-        let children = [null, null, null, null]
-        father.push(children)
-      }
-      this.fillAnswer = father
-      let dataInit = this.topic[1]
-      this.number = 1
-      this.showQuestion = dataInit[0].question
-      this.showAnswer = dataInit[0]
     },
-    // getExamData() { //获取当前试卷所有信息
-    //   let date = new Date()
-    //   this.startTime = this.getTime(date)
-    //   let examCode = this.$route.query.examCode //获取路由传递过来的试卷编号
-    //   this.$axios(`/api/exam/${examCode}`).then(res => {  //通过examCode请求试卷详细信息
-    //     this.examData = { ...res.data.data} //获取考试详情
-    //     this.index = 0
-    //     this.time = this.examData.totalScore //获取分钟数
-    //     let paperId = this.examData.paperId
-    //     this.$axios(`/api/paper/${paperId}`).then(res => {  //通过paperId获取试题题目信息
-    //       this.topic = {...res.data}
-    //       let reduceAnswer = this.topic[1][this.index]
-    //       this.reduceAnswer = reduceAnswer
-    //       let keys = Object.keys(this.topic) //对象转数组
-    //       keys.forEach(e => {
-    //         let data = this.topic[e]
-    //         this.topicCount.push(data.length)
-    //         let currentScore = 0
-    //         for(let i = 0; i< data.length; i++) { //循环每种题型,计算出总分
-    //           currentScore += data[i].score
-    //         }
-    //         this.score.push(currentScore) //把每种题型总分存入score
-    //       })
-    //       let len = this.topicCount[1]
-    //       let father = []
-    //       for(let i = 0; i < len; i++) { //根据填空题数量创建二维空数组存放每道题答案
-    //         let children = [null,null,null,null]
-    //         father.push(children)
-    //       }
-    //       this.fillAnswer = father
-    //       let dataInit = this.topic[1]
-    //       this.number = 1
-    //       this.showQuestion = dataInit[0].question
-    //       this.showAnswer = dataInit[0]
-    //     })
-    //   })
-    // },
     change (index) { // 选择题
       this.index = index
-      let reduceAnswer = this.topic[1][this.index]
+      let reduceAnswer = this.topic['chooseLists'][this.index]
       this.reduceAnswer = reduceAnswer
       this.isFillClick = true
       this.currentType = 1
-      let len = this.topic[1].length
+      let len = this.topic['chooseLists'].length
       if (this.index < len) {
         if (this.index <= 0) {
           this.index = 0
         }
-        console.log(`总长度${len}`)
-        console.log(`当前index:${index}`)
         this.title = '请选择正确的选项'
-        let Data = this.topic[1]
+        let Data = this.topic['chooseLists']
         // console.log(Data)
         this.showQuestion = Data[this.index].question // 获取题目信息
         this.showAnswer = Data[this.index]
@@ -321,7 +279,7 @@ export default {
       }
     },
     fill (index) { // 填空题
-      let len = this.topic[2].length
+      let len = this.topic['fillLists'].length
       this.currentType = 2
       this.index = index
       if (index < len) {
@@ -329,11 +287,8 @@ export default {
           index = this.topic[1].length - 1
           this.change(index)
         } else {
-          console.log(`总长度${len}`)
-          console.log(`当前index:${index}`)
           this.title = '请在横线处填写答案'
-          let Data = this.topic[2]
-          console.log(Data)
+          let Data = this.topic['fillLists']
           this.showQuestion = Data[index].question // 获取题目信息
           let part = this.showQuestion.split('()').length - 1 // 根据题目中括号的数量确定填空横线数量
           this.part = part
@@ -345,7 +300,7 @@ export default {
       }
     },
     judge (index) { // 判断题
-      let len = this.topic[3].length
+      let len = this.topic['judgeLists'].length
       this.currentType = 3
       this.index = index
       if (this.index < len) {
@@ -353,11 +308,8 @@ export default {
           this.index = this.topic[2].length - 1
           this.fill(this.index)
         } else {
-          console.log(`总长度${len}`)
-          console.log(`当前index:${this.index}`)
           this.title = '请作出正确判断'
-          let Data = this.topic[3]
-          console.log(Data)
+          let Data = this.topic['judgeLists']
           this.showQuestion = Data[index].question // 获取题目信息
           this.number = this.topicCount[0] + this.topicCount[1] + index + 1
         }
@@ -369,7 +321,7 @@ export default {
     getChangeLabel (val) { // 获取选择题作答选项
       this.radio[this.index] = val // 当前选择的序号
       if (val) {
-        let data = this.topic[1]
+        let data = this.topic['chooseLists']
         this.bg_flag = true
         data[this.index]['isClick'] = true
       }
@@ -379,7 +331,7 @@ export default {
     getJudgeLabel (val) { // 获取判断题作答选项
       this.judgeAnswer[this.index] = val
       if (val) {
-        let data = this.topic[3]
+        let data = this.topic['judgeLists']
         this.bg_flag = true
         data[this.index]['isClick'] = true
       }
@@ -415,13 +367,16 @@ export default {
     mark () { // 标记功能
       switch (this.currentType) {
         case 1:
-          this.topic[1][this.index]['isMark'] = true // 选择题标记
+          this.topic['chooseLists'][this.index]['isMark'] = true // 选择题标记
+          this.handleMessage('success', `您标记了选择题第 ${this.index + 1} 道~`)
           break
         case 2:
-          this.topic[2][this.index]['isMark'] = true // 填空题标记
+          this.topic['fillLists'][this.index]['isMark'] = true // 填空题标记
+          this.handleMessage('success', `您标记了填空题第 ${this.index + 1} 道~`)
           break
         case 3:
-          this.topic[3][this.index]['isMark'] = true // 判断题标记
+          this.topic['judgeLists'][this.index]['isMark'] = true // 判断题标记
+          this.handleMessage('success', `您标记了判断题第 ${this.index + 1} 道~`)
       }
     },
     commit () { // 答案提交计算分数
@@ -444,22 +399,20 @@ export default {
             case 4:
               right = 'D'
           }
-          if (right === this.topic[1][index].rightAnswer) { // 当前选项与正确答案对比
-            finalScore += this.topic[1][index].score // 计算总分数
+          if (right === this.topic['chooseLists'][index].rightAnswer) { // 当前选项与正确答案对比
+            finalScore += Number(this.topic['chooseLists'][index].score) // 计算总分数
           }
-          console.log(right, this.topic[1][index].rightAnswer)
+          console.log(right, this.topic['chooseLists'][index].rightAnswer)
         }
-        // console.log(topic1Answer)
+        console.log(123213, this.topic['chooseLists'][index].score)
       })
-      /* 计算判断题总分 */
-      // console.log(`this.fillAnswer${this.fillAnswer}`)
-      // console.log(this.topic[2][this.index])
+      /* 计算填空题总分 */
       let fillAnswer = this.fillAnswer
       fillAnswer.forEach((element, index) => { // 此处index和 this.index数据不一致，注意
         element.forEach((inner) => {
-          if (this.topic[2][index].answer.includes(inner)) { // 判断填空答案是否与数据库一致
+          if (this.topic['fillLists'][index].answer.includes(inner)) { // 判断填空答案是否与数据库一致
             console.log('正确')
-            finalScore += this.topic[2][this.index].score
+            finalScore += Number(this.topic['fillLists'][this.index].score)
           }
         })
       })
@@ -474,8 +427,8 @@ export default {
           case 2:
             right = 'F'
         }
-        if (right === this.topic[3][index].answer) { // 当前选项与正确答案对比
-          finalScore += this.topic[3][index].score // 计算总分数
+        if (right === this.topic['judgeLists'][index].answer) { // 当前选项与正确答案对比
+          finalScore += Number(this.topic['judgeLists'][index].score) // 计算总分数
         }
       })
       console.log(`6666------目前总分${finalScore}`)
@@ -486,10 +439,9 @@ export default {
           type: 'warning'
         }).then(() => {
           console.log('交卷')
-          let date = new Date()
-          this.endTime = this.getTime(date)
-          let answerDate = this.endTime.substr(0, 10)
-          console.log(111, date, this.showTime, this.endTime, answerDate)
+          this.endTime = this.formatTime(Date.now())
+          // let answerDate = this.endTime.substr(0, 10)
+          console.log(111, this.endTime, this.startTime, finalScore)
           // 请求接口，将最终的分数保存数据库中
         }).catch(() => {
           console.log('继续答题')
@@ -505,9 +457,9 @@ export default {
             type: 'error',
             message: '考生注意,考试时间还剩10分钟！！！'
           })
-          if (this.time === 0) {
-            console.log('考试时间已到,强制交卷。')
-          }
+        }
+        if (this.time === 0) {
+          console.log('考试时间到！！！！')
         }
       }, 1000 * 60)
     }
@@ -535,17 +487,26 @@ export default {
   }
   ul li:nth-child(3) {
     padding: 10px;
-    background-color: #d3c6c9;
+    background-color: #eeeeee;
     border-radius: 4px;
   }
 }
+
+.analysis ul {
+  list-style: none;
+}
+
+.analysis ul li /deep/ .el-tag--light {
+  font-size: 14px;
+}
+
 .analysis span:nth-child(1) {
   font-size: 18px;
 }
 .mark {
   position: absolute;
-  width: 4px;
-  height: 4px;
+  width: 6px;
+  height: 6px;
   content: "";
   background-color: red;
   border-radius: 50%;
@@ -559,10 +520,19 @@ export default {
 .bg {
   background-color: #5188b8 !important;
 }
+
+.fill .fill-input {
+  margin-bottom: 10px;
+}
+.fill span {
+  color: #999;
+  font-size: 14px;
+  margin-left: 5px;
+}
 .fill .el-input {
   display: inline-flex;
-  width: 150px;
-  margin-left: 20px;
+  width: 300px;
+  // margin-left: 20px;
   .el-input__inner {
     border: 1px solid transparent;
     border-bottom: 1px solid #eee;
@@ -581,7 +551,7 @@ export default {
   opacity: 0;
 }
 
-.operation .end li:nth-child(2) {
+.operation .end div:nth-child(2) {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -592,7 +562,7 @@ export default {
   height: 50px;
   color: #fff;
 }
-.operation .end li {
+.operation .end div {
   cursor: pointer;
   margin: 0 100px;
 }
@@ -604,20 +574,27 @@ export default {
 }
 .operation .end {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   color: rgb(39, 118, 223);
 }
-.content .number {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  width: 20px;
-  height: 20px;
-  background-color: rgb(39, 118, 223);
-  border-radius: 4px;
-  margin-right: 4px;
+
+.content {
+  .topic {
+    display: flex;
+    // align-items: center;
+    .number {
+      height: 20px;
+      background: #e5e5e5;
+      float: left;
+      padding: 4px 8px 2px;
+      margin-right: 5px;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+  }
 }
+
 .content {
   padding: 0px 20px;
 }
@@ -629,15 +606,19 @@ export default {
   background-color: #fff;
   margin: 10px;
   margin-left: 0px;
-  height: 470px;
+  height: 440px;
 }
 .content .el-radio-group label {
-  color: #000;
-  margin: 5px 0px;
+  color: #888;
+  margin: 10px 0px;
 }
 .content .el-radio-group {
   display: flex;
   flex-direction:column;
+  margin-left: 10px;
+}
+.el-radio /deep/ span {
+  font-size: 15px;
 }
 .right .title p {
   margin-left: 20px;
@@ -670,7 +651,7 @@ export default {
   cursor: pointer;
   display: inline-block;
   text-align: center;
- background-color: rgb(39, 118, 223);
+  background-color: rgb(39, 118, 223);
   width: 240px;
   margin: 20px 0px 20px 10px;
   border-radius: 4px;
@@ -688,8 +669,9 @@ export default {
   background-color: #fff;
 }
 .l-bottom .item p {
-  margin-bottom: 15px;
-  margin-top: 10px;
+  font-size: 16px;
+  margin-bottom: 5px;
+  margin-top: 15px;
   color: #000;
   margin-left: 10px;
   letter-spacing: 2px;
@@ -708,23 +690,23 @@ export default {
   width: 100%;
   margin-bottom: -8px;
   display: flex;
-  justify-content: space-around;
+  // justify-content: space-around;
   flex-wrap: wrap;
-  margin-left: -42px;
+  margin-left: -20px;
 }
 .l-bottom .item ul li a {
   position: relative;
   justify-content: center;
   display: inline-flex;
   align-items: center;
-  width: 30px;
-  height: 30px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   background-color: #fff;
   border: 1px solid #eee;
   text-align: center;
   color: #000;
-  font-size: 16px;
+  font-size: 15px;
   text-decoration: none;
 }
 .left .l-top {
@@ -753,8 +735,8 @@ export default {
   border: 1px solid #eee;
 }
 .left .l-top li:nth-child(4) a::before {
-  width: 4px;
-  height: 4px;
+  width: 6px;
+  height: 6px;
   content: " ";
   position: absolute;
   background-color: red;

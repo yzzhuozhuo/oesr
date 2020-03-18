@@ -2,15 +2,38 @@
   <div class="main">
     <div class="main-content">
       <div v-if="!hasAmount">
-        <span class="title">请先填写试题信息：系统会智能规划题目格式</span>
+        <div class="header">
+          <span class="title">请先填写试题信息：系统会智能规划题目格式</span>
+          <div class="btn">
+            <el-button type="primary" @click="next">下一步</el-button>
+          </div>
+        </div>
         <div class="theme-amount">
           <div class="theme-title">
             <span>试题名称：</span>
-            <el-input v-model="themeTitle" placeholder="请输入试题名称" style="width: 200px"></el-input>
+            <el-input
+              v-model="themeTitle"
+              placeholder="请输入试题名称，例如奇安信2020春招C++方向笔试题"
+              style="width: 370px">
+            </el-input>
+          </div>
+          <div class="total" v-if="chooseNum && fillNum && judgeNum">总分：{{3 * chooseNum + 2 * fillNum + 2 * judgeNum}}</div>
+        </div>
+        <div class="choose-num">
+          <div class="classify">
+            <span>选择类别：</span>
+            <el-select v-model="interestedClassify" placeholder="请选择试题类别">
+              <el-option
+                v-for="item in classifyOptions"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value">
+              </el-option>
+            </el-select>
           </div>
           <div class="choose">
             <span>选择题：</span>
-            <el-select v-model="chooseNum" placeholder="请选择数量" style="width: 120px">
+            <el-select v-model="chooseNum" placeholder="请选择数量" style="width: 130px">
               <el-option
                 v-for="item in chooseNumOptions"
                 :key="item.value"
@@ -21,7 +44,7 @@
           </div>
           <div class="fill">
             <span>填空题：</span>
-            <el-select v-model="fillNum" placeholder="请选择数量" style="width: 120px">
+            <el-select v-model="fillNum" placeholder="请选择数量" style="width: 130px">
               <el-option
                 v-for="item in fillNumOptions"
                 :key="item.value"
@@ -32,7 +55,7 @@
           </div>
           <div class="judge">
             <span>判断题：</span>
-            <el-select v-model="judgeNum" placeholder="请选择数量" style="width: 120px">
+            <el-select v-model="judgeNum" placeholder="请选择数量" style="width: 130px">
               <el-option
                 v-for="item in judgeNumOptions"
                 :key="item.value"
@@ -41,10 +64,8 @@
               </el-option>
             </el-select>
           </div>
-          <div class="btn">
-            <el-button type="primary" @click="next">下一步</el-button>
-          </div>
         </div>
+        <div class="tips">备注：选择题3分/道，填空题2分/道，判断题2分/道，请合理安排试题数量</div>
         <div class="no-data">
           <img src="//static.nowcoder.com//images/res/empty/2.png">
           <div>请先设置题目主体信息</div>
@@ -53,38 +74,44 @@
       <div class="theme-content" v-if="hasAmount">
         <div class="header">
           <div class="theme-type">
-            <span>题目类型：</span>
-            <el-select v-model="optionTypeValue" placeholder="请选择题型" class="select-el" style="width: 110px">
-              <el-option
-                v-for="item in themeTypeOptions"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value">
-              </el-option>
-            </el-select>
-            <span>难度系数：</span>
-            <el-select v-model="optionDifficultyValue" placeholder="请选择" class="select-el" style="width: 110px">
-              <el-option
-                v-for="item in difficultyOptions"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value">
-              </el-option>
-            </el-select>
-            <span>热度系数：</span>
-            <el-select v-model="optionHotValue" placeholder="请选择" class="select-el" style="width: 110px">
-              <el-option
-                v-for="item in hotOptions"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value">
-              </el-option>
-            </el-select>
-            <span>匹配职位：</span>
-            <el-input v-model="post" placeholder="请输入职位" style="width: 110px"></el-input>
-            <span>年份：</span>
-            <el-input v-model="years" placeholder="请输入年份" style="width: 110px"></el-input>
-            <el-button type="primary" @click="updateLastData">提交</el-button>
+            <div>
+              <span>题目类型：</span>
+              <el-select v-model="optionTypeValue" placeholder="请选择题型" class="select-el" style="width: 150px">
+                <el-option
+                  v-for="item in themeTypeOptions"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value">
+                </el-option>
+              </el-select>
+            </div>
+            <div>
+              <span>难度系数：</span>
+              <el-select v-model="optionDifficultyValue" placeholder="请选择试题难度" class="select-el" style="width: 150px">
+                <el-option
+                  v-for="item in difficultyOptions"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value">
+                </el-option>
+              </el-select>
+            </div>
+            <div>
+              <span>匹配职位：</span>
+              <el-input v-model="post" placeholder="请输入匹配的职位" style="width: 150px"></el-input>
+            </div>
+            <div>
+              <span>年份：</span>
+              <el-select v-model="years" placeholder="请选择试题年份" class="select-el" style="width: 150px">
+                <el-option
+                  v-for="item in yearsOptions"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value">
+                </el-option>
+              </el-select>
+            </div>
+            <el-button type="primary" @click="updateLastData" :loading="isLoading">提交</el-button>
           </div>
         </div>
         <div class="content">
@@ -239,21 +266,35 @@
 
 <script>
 import _ from 'lodash'
+import { mapActions } from 'vuex'
 
 export default {
   name: 'DesignTheme',
   data () {
     return {
+      isLoading: false,
       themeTitle: '',
       chooseNum: '',
       fillNum: '',
       judgeNum: '',
+      isNotFull: false,
       hasAmount: false,
       optionTypeValue: '选择题',
       optionDifficultyValue: '',
-      optionHotValue: '',
+      optionHotValue: 100,
       post: '',
       years: '',
+      interestedClassify: '',
+      classifyOptions: [
+        {
+          label: '技术（软件）/信息技术类',
+          value: 'software'
+        },
+        {
+          label: '技术（硬件）/电子技术类',
+          value: 'hardware'
+        }
+      ],
       chooseNumOptions: [
         {
           label: '1道题',
@@ -356,6 +397,48 @@ export default {
           value: 5
         }
       ],
+      yearsOptions: [
+        {
+          label: '2020年',
+          value: '2020'
+        },
+        {
+          label: '2019年',
+          value: '2019'
+        },
+        {
+          label: '2018年',
+          value: '2018'
+        },
+        {
+          label: '2017年',
+          value: '2017'
+        },
+        {
+          label: '2016年',
+          value: '2016'
+        },
+        {
+          label: '2015年',
+          value: '2014'
+        },
+        {
+          label: '2013年',
+          value: '2013'
+        },
+        {
+          label: '2012年',
+          value: '2012'
+        },
+        {
+          label: '2011年',
+          value: '2011'
+        },
+        {
+          label: '2010年',
+          value: '2010'
+        }
+      ],
       hotOptions: [
         {
           label: '一般',
@@ -399,7 +482,7 @@ export default {
         answerB: '',
         answerC: '',
         answerD: '',
-        score: '2'
+        score: '3'
       },
       postFill: { // 填空题提交内容
         answer: '', // 正确答案
@@ -413,6 +496,11 @@ export default {
         analysis: '', // 解析
         score: '2'
       }
+    }
+  },
+  computed: {
+    isShowSubmit () {
+      return this.validate(this.chooseLists) && this.validate(this.fillLists) && this.validate(this.judgeLists)
     }
   },
   watch: {
@@ -429,34 +517,97 @@ export default {
   mounted () {
   },
   methods: {
+    ...mapActions([
+      'addThemeList'
+    ]),
     next () {
+      if (!this.themeTitle || !this.chooseNum || !this.fillNum || !this.judgeNum || !this.interestedClassify) {
+        this.$message({
+          type: 'error',
+          message: '请先完成试题信息的填写，再进行下一步操作'
+        })
+        return
+      }
       this.hasAmount = true
     },
+    handleMessage (type, message) {
+      this.$message({
+        type,
+        message
+      })
+    },
+    validate (themeLists) {
+      return themeLists.every(params => {
+        return Object.values(params).every(item => {
+          return !!item
+        })
+      })
+    },
     updateChooseLists () {
-      console.log('aaa')
+      if (!this.validate(this.chooseLists)) {
+        this.handleMessage('error', '所出选择题内容不完整，请仔细检查后保存~')
+      } else {
+        this.handleMessage('success', '保存选择题部分成功，请出填空题部分~')
+        this.optionTypeValue = '填空题'
+      }
     },
     updateFillLists () {
-      console.log('bbb')
+      if (!this.validate(this.fillLists)) {
+        this.handleMessage('error', '所出填空题内容不完整，请仔细检查后保存~')
+      } else {
+        this.handleMessage('success', '保存填空题部分成功，请出判断题部分~')
+        this.optionTypeValue = '判断题'
+      }
     },
     updateJudgeLists () {
-      console.log('ccc')
+      if (!this.validate(this.judgeLists)) {
+        this.handleMessage('error', '所出判断题内容不完整，请仔细检查后保存~')
+      } else {
+        this.handleMessage('success', '保存判断题部分成功，请提交整套题~')
+        this.optionTypeValue = '判断题'
+      }
     },
     updateLastData () {
+      if (!this.optionDifficultyValue) {
+        this.handleMessage('error', '请先选择套题难度系数')
+        return
+      }
+      if (!this.post) {
+        this.handleMessage('error', '请先填写匹配职位')
+        return
+      }
+      if (!this.years) {
+        this.handleMessage('error', '请先选择试题年份')
+        return
+      }
+      let res = this.validate(this.chooseLists) && this.validate(this.fillLists) && this.validate(this.judgeLists)
+      if (!res) {
+        this.handleMessage('error', '题目内容不完整，请检查并补充后提交~')
+        return
+      }
       // 保存数据
       let data = {
+        companyId: '123',
+        companyName: '奇安信', // 从公司主页的接口中拿
+        companyImageUrl: 'https://uploadfiles.nowcoder.com/files/20200211/999991354_1581407969193_奇安信90.jpg', // 从公司主页信息中拿
+        themeImageUrl: 'https://uploadfiles.nowcoder.com/files/20190524/63_1558668315246_奇安信-80x80.png', // 由出题人上传，试题上显示的图片
         themeTitle: this.themeTitle, // 试题名称
-        companyName: '', // 从公司主页的接口中拿
         post: this.post, // 职位
         years: this.years, // 年份
         hot: this.optionHotValue, // 热度
         rate: this.optionDifficultyValue, // 难度
-        questionLists: [{
+        questionLists: {
           chooseLists: this.chooseLists,
           fillLists: this.fillLists,
           judgeLists: this.judgeLists
-        }]
+        }
       }
       console.log(666, data)
+      this.isLoading = true
+      this.addThemeList(data).then(() => {
+        this.isLoading = false
+        this.handleMessage('success', '出题成功')
+      })
     }
   }
 }
@@ -473,13 +624,25 @@ export default {
     margin: 20px;
     padding: 20px;
     // height: 500px;
+    .header {
+      display: flex;
+      align-items: center;
+      .btn {
+        padding-left: 626px;
+      }
+    }
     .title {
       font-size: 18px;
       font-weight: bold;
     }
+    .tips {
+      font-size: 14px;
+      color: #999;
+      margin-top: 20px;
+    }
     .no-data {
       text-align: center;
-      padding: 130px;
+      padding: 110px;
     }
     .no-data img {
       padding-bottom: 10px;
@@ -487,28 +650,25 @@ export default {
     .theme-amount {
       margin-top: 20px;
       display: flex;
+      align-items: center;
+      .total {
+        margin-left: 20px;
+      }
+    }
+    .choose-num {
+      margin-top: 20px;
+      display: flex;
+      align-items: center;
+      .classify {
+        margin-right: 25px;
+      }
       .choose, .fill, .judge {
         display: flex;
         align-items: center;
         justify-content: center;
       }
-      .choose {
-        margin-left: 25px;
-      }
       .fill {
         margin: 0 25px;
-      }
-      .btn {
-        margin-left: 30px;
-      }
-      .choose .el-input {
-          width: 104px;
-      }
-      .fill .el-input {
-        width: 104px;
-      }
-      .judge .el-input {
-        width: 104px;
       }
     }
   }
@@ -584,8 +744,14 @@ export default {
 }
 
 .theme-type {
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.btn {
+// margin-left: 30px;
+  float: right;
 }
 </style>

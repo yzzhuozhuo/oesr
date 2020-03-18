@@ -141,3 +141,21 @@ export const addCompanyList = function ({ commit }, data) {
     return data
   }).catch(generateErrorHandler(commit))
 }
+
+export const fetchThemeList = function ({ commit }, data) {
+  return api.fetchThemeList(data).then(data => {
+    commit(types.FETCH_THEME_LIST, data)
+  }).catch(generateErrorHandler(commit))
+}
+
+export const addThemeList = function ({ commit }, data) {
+  return api.addThemeList(data).then(data => {
+    return data
+  }).catch(generateErrorHandler(commit))
+}
+
+export const fetchThemeDetailList = function ({ commit }, data) {
+  return api.fetchThemeDetailList(data).then(data => {
+    commit(types.FETCH_THEME_DETAIL_LIST, data)
+  }).catch(generateErrorHandler(commit))
+}

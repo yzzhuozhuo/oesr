@@ -1,16 +1,20 @@
-const PositionService = require('../service/position')
+const themeService = require('../service/theme')
 
-exports.getPosition = function (req, res) {
+exports.getTheme = function (req, res) {
   let {
-    selectType = '',
-    selectCity = '',
-    selectTab = '',
+    companyId = '',
+    companyName = '',
+    post = '',
+    years = '',
+    searchValue = '',
+    tagType = '', // software|hardware
+    sortType = '',
     currentPage = 1,
     pageNum = 10
   } = req.query
   pageNum = +pageNum
   currentPage = +currentPage
-  PositionService.getPositionList(selectType, selectCity, selectTab, currentPage, pageNum).then(data => {
+  themeService.getThemeList(companyId, searchValue, companyName, post, years, currentPage, pageNum, tagType, sortType).then(data => {
     res.send({
       code: '200',
       data: {
@@ -28,9 +32,9 @@ exports.getPosition = function (req, res) {
   })
 }
 
-exports.addPosition = function (req, res) {
+exports.addTheme = function (req, res) {
   let data = req.body
-  PositionService.addPositionList(data).then(data => {
+  themeService.addThemeList(data).then(data => {
     res.send({
       code: '200',
       data: data
@@ -43,9 +47,9 @@ exports.addPosition = function (req, res) {
   })
 }
 
-exports.getPositionDetail = function (req, res) {
-  let { positionDetailId = '' } = req.query
-  PositionService.getPositionDetailList(positionDetailId).then(data => {
+exports.getThemeDetail = function (req, res) {
+  let { themeDetailId = '' } = req.query
+  themeService.getThemeDetailList(themeDetailId).then(data => {
     res.send({
       code: '200',
       data: data

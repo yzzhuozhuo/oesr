@@ -6,28 +6,39 @@
       <el-input v-model="searchVal" class="searchInput" placeholder="请输入公司/试卷名称" prefix-icon="el-icon-search" size="small"></el-input>
       <el-tabs v-model="activeName" @tab-click="handleClick">
         <el-tab-pane label="技术（软件）/信息技术类" name="software">
-          <collapse-card :collapseCardData="collapseData" @selectedValList="selectedValList"> </collapse-card>
+          <collapse-card :collapseCardData="themeData" @selectedValList="selectedValList"> </collapse-card>
         </el-tab-pane>
         <el-tab-pane label="技术（硬件）/电子信息类" name="hardware">
-          <collapse-card :collapseCardData="collapseData" @selectedValList="selectedValList"> </collapse-card>
+          <collapse-card :collapseCardData="themeData" @selectedValList="selectedValList"> </collapse-card>
         </el-tab-pane>
       </el-tabs>
     </div>
     <div class="contant-card">
       <el-tabs v-model="activeCardName" @tab-click="handleCardClick" type="border-card">
-        <el-tab-pane label="默认" name="default">
+        <el-tab-pane label="默认" name="">
           <!-- <span>根据默认排序</span> -->
-          <question-card :questionCardData="cardContent"></question-card>
+          <question-card :questionCardData="themeData"></question-card>
         </el-tab-pane>
         <el-tab-pane label="最新" name="newest">
           <!-- <span>根据最新排序</span> -->
-          <question-card :questionCardData="cardContent"></question-card>
+          <question-card :questionCardData="themeData"></question-card>
         </el-tab-pane>
-        <el-tab-pane label="最热" name="hottest">
+        <el-tab-pane label="最难" name="hardest">
           <!-- <span>根据最热排序</span> -->
-          <question-card :questionCardData="cardContent"></question-card>
+          <question-card :questionCardData="themeData"></question-card>
         </el-tab-pane>
       </el-tabs>
+      <div class="pagination" v-if="this.themeData.length !== 0">
+        <el-pagination
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
+          :current-page.sync="currentPage"
+          :page-sizes="[10, 20, 50, 100]"
+          :page-size.sync="pageNum"
+          layout="total, sizes, prev, pager, next, jumper"
+          :total="total">
+        </el-pagination>
+      </div>
     </div>
   </div>
 </template>
@@ -36,6 +47,8 @@
 import CollapseCard from '@/components/CollapseCard'
 import QuestionCard from '@/components/QuestionCard'
 import _ from 'lodash'
+import moment from 'moment'
+import { mapState, mapActions } from 'vuex'
 
 export default {
   name: 'QuestionPage',
@@ -46,16 +59,18 @@ export default {
   data () {
     return {
       activeName: 'software',
-      activeCardName: 'default',
+      activeCardName: '',
+      currentPage: 1, // 分页
+      pageNum: 10,
+      total: 0,
       searchVal: '',
       activeNames: ['1'],
-      selectedCompany: '',
-      selectedTime: '',
-      selectedJob: '',
+      tagType: '',
+      sortType: '',
       searchSelectedVal: {
         companyName: '',
         post: '',
-        time: ''
+        years: ''
       },
       collapseData: [
         {
@@ -125,37 +140,6 @@ export default {
           category: 'software', companyName: '点我达', companyUrl: 'https://uploadfiles.nowcoder.com/images/20181207/59_1544163131168_6C3A469CB69F397E0EF46C021A6FEE24', post: '前端工程师', time: '2020', tagType: 'success'
         }
       ],
-      timeTags: [
-        { name: '2020', type: '' },
-        { name: '2019', type: 'success' },
-        { name: '2018', type: 'info' },
-        { name: '2017', type: 'warning' },
-        { name: '2016', type: 'danger' },
-        { name: '2015', type: '' },
-        { name: '2014', type: 'success' },
-        { name: '2013', type: 'info' },
-        { name: '2012', type: 'warning' },
-        { name: '2011', type: 'danger' }
-      ],
-      jobTags: [
-        { name: 'Java工程师', type: '' },
-        { name: 'C++工程师', type: 'success' },
-        { name: 'PHP工程师', type: 'info' },
-        { name: 'golang工程师', type: 'warning' },
-        { name: '前端工程师', type: 'danger' },
-        { name: '安卓工程师', type: '' },
-        { name: 'iOS工程师', type: 'success' },
-        { name: '算法工程师', type: 'info' },
-        { name: '大数据开发工程师', type: 'warning' },
-        { name: '信息技术岗', type: 'danger' },
-        { name: '运维工程师', type: '' },
-        { name: '安全工程师', type: 'success' },
-        { name: '数据分析师', type: 'info' },
-        { name: '数据库开发工程师', type: 'warning' },
-        { name: '游戏研发工程师', type: 'danger' },
-        { name: '测试开发工程师', type: '' },
-        { name: '测试工程师', type: 'success' }
-      ],
       cardContent: [
         { title: '奇安信2019秋招C++方向笔试题（B）', url: 'https://uploadfiles.nowcoder.com/files/20190524/63_1558668315246_奇安信-80x80.png', job: '前端工程师', hot: 100, rate: 1 },
         { title: '奇安信2019秋招C++方向笔试题（B）', url: 'https://uploadfiles.nowcoder.com/files/20190524/63_1558668315246_奇安信-80x80.png', job: '前端工程师', hot: 200, rate: 2 },
@@ -167,21 +151,94 @@ export default {
         { title: '奇安信2019秋招C++方向笔试题（B）', url: 'https://uploadfiles.nowcoder.com/files/20190524/63_1558668315246_奇安信-80x80.png', job: '前端工程师', hot: 300, rate: 3 },
         { title: '奇安信2019秋招C++方向笔试题（B）', url: 'https://uploadfiles.nowcoder.com/files/20190524/63_1558668315246_奇安信-80x80.png', job: '前端工程师', hot: 400, rate: 4 },
         { title: '奇安信2019秋招C++方向笔试题（B）', url: 'https://uploadfiles.nowcoder.com/files/20190524/63_1558668315246_奇安信-80x80.png', job: '前端工程师', hot: 500, rate: 5 }
-      ]
+      ],
+      themeData1: [
+        {
+          _id: 'abc',
+          themeTitle: '奇安信2019秋招C++方向笔试题（B）',
+          companyName: '奇安信',
+          companyImageUrl: 'https://uploadfiles.nowcoder.com/files/20200211/999991354_1581407969193_奇安信90.jpg',
+          themeImageUrl: 'https://uploadfiles.nowcoder.com/files/20190524/63_1558668315246_奇安信-80x80.png',
+          post: '前端工程师',
+          hot: 100,
+          rate: 1,
+          createdAt: '2020-3-14 14:00',
+          // createdAt: 1584364925558,
+          years: '2020',
+          tagType: 'sofeware' // hardware
+        }
+      ],
+      themeData: []
     }
   },
   computed: {
+    ...mapState({
+      themeList: state => state.theme.themeList || [],
+      totalPage: state => state.theme.totalPage || 0,
+      pageNumber: state => state.theme.pageNumber || 10,
+      page: state => state.theme.page || 1
+    }),
     fetchFilters () {
-      return `${this.searchSelectedVal.companyName}_${this.searchSelectedVal.post}_${this.searchSelectedVal.time}` +
-        `${this.activeName}_${this.activeCardName}`
+      return `${this.searchSelectedVal.companyName}_${this.searchSelectedVal.post}_${this.searchSelectedVal.years}` +
+        `${this.activeName}_${this.activeCardName}_${this.searchVal}`
     }
   },
   watch: {
+    themeList () {
+      this.themeData = this.formatTime(this.themeList)
+    },
+    totalPage () {
+      this.total = this.totalPage
+    },
+    pageNumber () {
+      this.pageNum = this.pageNumber
+    },
+    page () {
+      this.currentPage = this.page
+    },
     fetchFilters () {
-      this.fetchQuestionsList()
+      this.fetchLastThemeList()
     }
   },
+  mounted () {
+    this.fetchThemeList()
+  },
   methods: {
+    ...mapActions([
+      'fetchThemeList'
+    ]),
+    formatTime (themeData) {
+      const TIME_FORMAT = 'YYYY-MM-DD HH:mm'
+      const data = _.cloneDeep(themeData)
+      return data.map(item => {
+        item.createdAt = moment(item.createdAt).format(TIME_FORMAT)
+        return item
+      })
+    },
+    fetchLastThemeList () {
+      console.log('要请求数据啦！！！')
+      let params = {
+        companyName: this.searchSelectedVal.companyName,
+        post: this.searchSelectedVal.post,
+        years: this.searchSelectedVal.years,
+        searchValue: this.searchVal, // input的值
+        tagType: '',
+        sortType: this.activeCardName,
+        currentPage: this.currentPage,
+        pageNum: this.pageNum
+      }
+      this.fetchThemeList(params)
+    },
+    handleSizeChange (val) {
+      console.log(`每页 ${val} 条`)
+      this.pageNum = val
+      this.fetchLastThemeList()
+    },
+    handleCurrentChange (val) {
+      console.log(`当前页: ${val}`)
+      this.currentPage = val
+      this.fetchLastThemeList()
+    },
     handleClick (tab, event) {
       // software handware 用这两个字段去请求数据
       console.log(333, this.activeName)
@@ -189,7 +246,8 @@ export default {
     },
     handleCardClick (tab, event) {
       console.log(222333, tab.name)
-      // tab.name = 'default' || 'newest' || 'hosttest'
+      // this.sortType = tab.name
+      // tab.name = 'default' || 'newest' || 'hardest'
       // 将tab.name的类型传递给后端，后端用次type去进行查询，排序
       // console.log(tab, event)
     },
@@ -197,28 +255,9 @@ export default {
       console.log(1111, this.activeNames)
       console.log(1234, val)
     },
-    selectCompany (companyName) {
-      this.selectedCompany = companyName
-      console.log(222, companyName)
-    },
-    selectJob (job) {
-      this.selectedJob = job
-    },
-    selectTime (time) {
-      this.selectedTime = time
-      // 点击年份进行查询过滤
-      console.log(111, time)
-    },
     selectedValList (selectedValList) {
       // 子组件传来选择的值 公司 职位 年份 {}
       this.searchSelectedVal = _.cloneDeep(selectedValList)
-    },
-    fetchQuestionsList () {
-      console.log('要请求数据啦！！！')
-      let params = this.searchSelectedVal
-      let category = this.activeName
-      let status = this.activeCardName
-      console.log(678, params, category, status)
     }
   }
 }
@@ -286,6 +325,11 @@ export default {
 .user-selected {
   font-size: 10px;
   margin-left: 10px;
+}
+
+.pagination {
+  padding: 10px;
+  float: right;
 }
 
 </style> /* eslint-disable */

@@ -198,3 +198,34 @@ export function updateCompanyList (body) {
     }
   }).then(utils.checkHttpStatus).then(utils.checkResponse).catch({})
 }
+
+export function fetchThemeList (data) {
+  return axios.get(`/oesr/themeList?${params(data)}`, {
+    method: 'GET',
+    credentials: 'same-origin',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }).then(utils.checkHttpStatus).then(utils.checkResponse).catch({})
+}
+
+export function addThemeList (body) {
+  return fetch('/oesr/addThemeList', {
+    method: 'POST',
+    credentials: 'same-origin',
+    body: JSON.stringify(body),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }).then(utils.checkHttpStatus).then(utils.checkResponse).catch({})
+}
+
+export function fetchThemeDetailList (data) {
+  return axios.get(`/oesr/themeDetailList?${params(data)}`, {
+    method: 'GET',
+    credentials: 'same-origin',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }).then(utils.checkHttpStatus).then(utils.checkResponse).catch({})
+}
