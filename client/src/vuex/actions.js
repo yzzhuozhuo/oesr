@@ -124,3 +124,26 @@ export const fetchThemeDetailList = function ({ commit }, data) {
     commit(types.FETCH_THEME_DETAIL_LIST, data)
   }).catch(generateErrorHandler(commit))
 }
+
+export const fetchScoreList = function ({ commit }, data) {
+  return api.fetchScoreList(data).then(data => {
+    commit(types.FETCH_SCORE_LIST, data)
+  }).catch(generateErrorHandler(commit))
+}
+
+export const addScoreList = function ({ commit }, data) {
+  return api.addScoreList(data).then(data => {
+    commit(types.FETCH_DETAIL_SCORE_LIST, data)
+    if (Array.isArray(data)) {
+      return data[0]
+    } else {
+      return data
+    }
+  }).catch(generateErrorHandler(commit))
+}
+
+export const fetchScoreDetailList = function ({ commit }, data) {
+  return api.fetchScoreList(data).then(data => {
+    commit(types.FETCH_DETAIL_SCORE_LIST, data)
+  }).catch(generateErrorHandler(commit))
+}

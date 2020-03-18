@@ -54,15 +54,19 @@
               <i class="el-icon-refresh-left"></i>
             </el-button>
           </div>
-          <div v-for="(item, index) in userData" :key="index" class="box-card-item">
+          <div v-for="(item, index) in scoreData" :key="index" class="box-card-item">
             <div class="rank-index">{{index + 1}}</div>
             <div>
-              <img :src="item.userImageUrl" class="userImage">
+              <img :src="item.studentImageUrl" class="userImage">
             </div>
             <div>
-              <div class="user-name">{{item.userName}}</div>
-              <div class="user-score">{{item.userScore}} 分</div>
+              <div class="user-name">{{item.studentName}}</div>
+              <div class="user-score">{{item.totalScore}} 分</div>
             </div>
+          </div>
+          <div class="no-data" v-if="scoreData.length === 0">
+            <div>暂无排名,快去答题上榜吧~</div>
+            <img src="@/assets/xiaolian.png">
           </div>
         </el-card>
       </div>
@@ -85,43 +89,45 @@ export default {
         fillNum: '',
         judgeNum: ''
       }],
-      userData: [
+      scoreData: [],
+      scoreData1: [
         {
-          userName: 'yangzhuo',
-          userImageUrl: 'https://images.nowcoder.com/images/20190928/638373518_1569674550437_27E42C56E73D70CBE3050C38883E4E56?x-oss-process=image/resize,m_mfit,h_100,w_100',
-          userScore: 100
+          studentName: 'yangzhuo',
+          studentImageUrl: 'https://images.nowcoder.com/images/20190928/638373518_1569674550437_27E42C56E73D70CBE3050C38883E4E56?x-oss-process=image/resize,m_mfit,h_100,w_100',
+          studentScore: 100
         },
         {
-          userName: 'yangzhuo',
-          userImageUrl: 'https://images.nowcoder.com/images/20190928/638373518_1569674550437_27E42C56E73D70CBE3050C38883E4E56?x-oss-process=image/resize,m_mfit,h_100,w_100',
-          userScore: 100
+          studentName: 'yangzhuo',
+          studentImageUrl: 'https://images.nowcoder.com/images/20190928/638373518_1569674550437_27E42C56E73D70CBE3050C38883E4E56?x-oss-process=image/resize,m_mfit,h_100,w_100',
+          studentScore: 100
         },
         {
-          userName: 'yangzhuo',
-          userImageUrl: 'https://images.nowcoder.com/images/20190928/638373518_1569674550437_27E42C56E73D70CBE3050C38883E4E56?x-oss-process=image/resize,m_mfit,h_100,w_100',
-          userScore: 100
+          studentName: 'yangzhuo',
+          studentImageUrl: 'https://images.nowcoder.com/images/20190928/638373518_1569674550437_27E42C56E73D70CBE3050C38883E4E56?x-oss-process=image/resize,m_mfit,h_100,w_100',
+          studentScore: 100
         },
         {
-          userName: 'yangzhuo',
-          userImageUrl: 'https://images.nowcoder.com/images/20190928/638373518_1569674550437_27E42C56E73D70CBE3050C38883E4E56?x-oss-process=image/resize,m_mfit,h_100,w_100',
-          userScore: 100
+          studentName: 'yangzhuo',
+          studentImageUrl: 'https://images.nowcoder.com/images/20190928/638373518_1569674550437_27E42C56E73D70CBE3050C38883E4E56?x-oss-process=image/resize,m_mfit,h_100,w_100',
+          studentScore: 100
         },
         {
-          userName: 'yangzhuo',
-          userImageUrl: 'https://images.nowcoder.com/images/20190928/638373518_1569674550437_27E42C56E73D70CBE3050C38883E4E56?x-oss-process=image/resize,m_mfit,h_100,w_100',
-          userScore: 100
+          studentName: 'yangzhuo',
+          studentImageUrl: 'https://images.nowcoder.com/images/20190928/638373518_1569674550437_27E42C56E73D70CBE3050C38883E4E56?x-oss-process=image/resize,m_mfit,h_100,w_100',
+          studentScore: 100
         },
         {
-          userName: 'yangzhuo',
-          userImageUrl: 'https://images.nowcoder.com/images/20190928/638373518_1569674550437_27E42C56E73D70CBE3050C38883E4E56?x-oss-process=image/resize,m_mfit,h_100,w_100',
-          userScore: 100
+          studentName: 'yangzhuo',
+          studentImageUrl: 'https://images.nowcoder.com/images/20190928/638373518_1569674550437_27E42C56E73D70CBE3050C38883E4E56?x-oss-process=image/resize,m_mfit,h_100,w_100',
+          studentScore: 100
         }
       ]
     }
   },
   computed: {
     ...mapState({
-      themeDetailList: state => state.theme.themeDetailList
+      themeDetailList: state => state.theme.themeDetailList,
+      scoreList: state => state.score.scoreList
     })
   },
   watch: {
@@ -134,20 +140,25 @@ export default {
         return item
       })
       this.themeDetailId = this.themeDetailList._id
+    },
+    scoreList () {
+      this.scoreData = this.scoreList
     }
   },
   created () {
     let themeDetailId = this.$route.query.themeDetailId
     this.fetchThemeDetailList({ themeDetailId })
+    this.fetchScoreList({ themeId: themeDetailId })
   },
   mounted () {
   },
   methods: {
     ...mapActions([
-      'fetchThemeDetailList'
+      'fetchThemeDetailList',
+      'fetchScoreList'
     ]),
     fetchUserLists () {
-      console.log('请求用户数据')
+      this.fetchScoreList({ themeId: this.$route.query.themeDetailId })
     },
     toAnswerList () {
       this.$router.push({
@@ -211,8 +222,8 @@ export default {
 }
 .message {
   width: 300px;
-  height: 200px;
-  background: #fff;
+  /* height: 200px; */
+  /* background: #fff; */
   margin-left: 10px;
 }
 .explain {
@@ -278,5 +289,16 @@ export default {
   text-align: center;
   color: #fff;
   background: #ff6745;
+}
+.no-data {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 60px 0;
+}
+.no-data img {
+  width: 30px;
+  height: 30px;
+  /* margin-bottom: 15px; */
 }
 </style>

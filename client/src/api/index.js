@@ -13,7 +13,7 @@ export function fetchCalendarList () {
 
 export function updateCalendarList (body) {
   return fetch('/oesr/addCalendarList', {
-    method: 'PUT',
+    method: 'POST',
     credentials: 'same-origin',
     body: JSON.stringify(body),
     headers: {
@@ -123,7 +123,7 @@ export function addStudentList (body) {
 
 export function updateStudentList (body) {
   return fetch('/oesr/updateStudentList', {
-    method: 'PUT',
+    method: 'POST',
     credentials: 'same-origin',
     body: JSON.stringify(body),
     headers: {
@@ -155,7 +155,7 @@ export function addCompanyList (body) {
 
 export function updateCompanyList (body) {
   return fetch('/oesr/updateCompanyList', {
-    method: 'PUT',
+    method: 'POST',
     credentials: 'same-origin',
     body: JSON.stringify(body),
     headers: {
@@ -189,6 +189,27 @@ export function fetchThemeDetailList (data) {
   return axios.get(`/oesr/themeDetailList?${params(data)}`, {
     method: 'GET',
     credentials: 'same-origin',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }).then(utils.checkHttpStatus).then(utils.checkResponse).catch({})
+}
+
+export function fetchScoreList (data) {
+  return axios.get(`/oesr/scoreList?${params(data)}`, {
+    method: 'GET',
+    credentials: 'same-origin',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }).then(utils.checkHttpStatus).then(utils.checkResponse).catch({})
+}
+
+export function addScoreList (body) {
+  return axios.post('/oesr/addScoreList', {
+    method: 'POST',
+    credentials: 'same-origin',
+    body: body,
     headers: {
       'Content-Type': 'application/json'
     }
