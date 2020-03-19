@@ -1,10 +1,10 @@
 <template>
-  <div class="job-card" @click="toCompanyPage(jobCardData.href)">
+  <div class="job-card" @click="toCompanyPage(jobCardData.campusHref)">
     <img
       class="job-img"
-      :src="jobCardData.src"
+      :src="jobCardData.campusImageUrl"
       alt="">
-    <div class="job-name">{{jobCardData.title}}</div>
+    <div class="job-name">{{jobCardData.campusTitle}}</div>
   </div>
 </template>
 

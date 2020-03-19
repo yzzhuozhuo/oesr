@@ -215,3 +215,13 @@ export function addScoreList (body) {
     }
   }).then(utils.checkHttpStatus).then(utils.checkResponse).catch({})
 }
+
+export function fetchCampusList (data) {
+  return axios.get(`/oesr/campusList?${params(data)}`, {
+    method: 'GET',
+    credentials: 'same-origin',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }).then(utils.checkHttpStatus).then(utils.checkResponse).catch({})
+}

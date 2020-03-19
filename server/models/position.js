@@ -7,30 +7,30 @@ const mongoose = require('mongoose')
 const positionSchema = mongoose.Schema({
   companyId: {
     type: String,
-    // require: true
+    // required: true
   },
   companyName: {
     type: String,
-    // require: true // 等公司表做好，记得加上TODO
+    // required: true // 等公司表做好，记得加上TODO
   },
   companyImgUrl: {
     type: String,
-    // require: true
+    // required: true
   },
   companyProfile: {
     type: String
   },
   positionTitle: {
     type: String,
-    require: true
+    required: true
   },
   positionType: {
     type: String,
-    require: true
+    required: true
   },
   positionCity: {
     type: String,
-    require: true
+    required: true
   },
   createdAt: {
     type: Number,
@@ -39,22 +39,22 @@ const positionSchema = mongoose.Schema({
   },
   processingRatio: {
     type: Number,
-    require: true,
+    required: true,
     default: 1 // 1，0.9...
   },
   processingTime: {
     type: Number,
-    require: true
+    required: true
   },
   processingSpeed: {
     type: String,
-    require: true
+    required: true
   },
   compensation: {
     type: String,
-    require: true
+    required: true
   },
-  practiceRequire: {
+  practicerequired: {
     type: String
   },
   becomeOfficial: {
@@ -62,11 +62,11 @@ const positionSchema = mongoose.Schema({
   },
   jobResponsibilities: {
     type: Array,
-    required: true
+    requiredd: true
   },
-  jobRequirements: {
+  jobrequiredments: {
     type: Array,
-    required: true
+    requiredd: true
   }
 }, { collection: 'position' })
 

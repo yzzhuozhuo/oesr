@@ -56,12 +56,12 @@ export default {
   },
   methods: {
     toMainPage () {
-      this.$router.push({
+      this.$router.replace({
         path: '/'
       })
     },
     toCheckResult () {
-      this.$router.push({
+      this.$router.replace({
         path: 'answerList',
         query: {
           themeDetailId: this.scoreDetailData.themeId,

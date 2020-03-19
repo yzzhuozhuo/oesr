@@ -9,6 +9,7 @@ import student from './student'
 import company from './company'
 import theme from './theme'
 import score from './score'
+import campus from './campus'
 
 export default {
   user,
@@ -21,5 +22,6 @@ export default {
   student,
   company,
   theme,
-  score
+  score,
+  campus
 }

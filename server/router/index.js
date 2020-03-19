@@ -11,6 +11,7 @@ const studentController = require('../controller/student')
 const companyController = require('../controller/company')
 const themeController = require('../controller/theme')
 const scoreController = require('../controller/score')
+const campusController = require('../controller/campus')
 
 router
   .get('/oesr/user', userController.user)
@@ -38,6 +39,8 @@ router
 
   .get('/oesr/scoreList', scoreController.getScore)
   .post('/oesr/addScoreList', scoreController.addScore)
+
+  .get('/oesr/campusList', campusController.getCampus)
   .use('/', express.static(path.resolve(__dirname, '../../client/dist')))
 
 module.exports = router

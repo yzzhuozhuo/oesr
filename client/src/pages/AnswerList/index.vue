@@ -95,8 +95,8 @@
               </el-radio-group>
               <div class="analysis" v-if="isCheck">
                 <ul>
-                  <li> <el-tag type="success">正确姿势：</el-tag><span class="right">{{reduceAnswer.rightAnswer}}</span></li>
-                  <li><el-tag>题目解析：</el-tag></li>
+                  <li> <el-tag type="success" size="small">正确姿势：</el-tag><span class="right">{{reduceAnswer.rightAnswer}}</span></li>
+                  <li><el-tag size="small">题目解析：</el-tag></li>
                   <li>{{reduceAnswer.analysis === null ? '暂无解析': reduceAnswer.analysis}}</li>
                 </ul>
               </div>
@@ -112,8 +112,8 @@
               </div>
               <div class="analysis" v-if="isCheck">
                 <ul>
-                  <li> <el-tag type="success">正确姿势：</el-tag><span class="right">{{topic['fillLists'][index].answer}}</span></li>
-                  <li><el-tag>题目解析：</el-tag></li>
+                  <li> <el-tag type="success" size="small">正确姿势：</el-tag><span class="right">{{topic['fillLists'][index].answer}}</span></li>
+                  <li><el-tag size="small">题目解析：</el-tag></li>
                   <li>{{topic['fillLists'][index].analysis === null ? '暂无解析': topic['fillLists'][index].analysis}}</li>
                 </ul>
               </div>
@@ -125,8 +125,8 @@
               </el-radio-group>
               <div class="analysis" v-if="isCheck">
                 <ul>
-                  <li> <el-tag type="success">正确姿势：</el-tag><span class="right">{{topic['judgeLists'][index].answer}}</span></li>
-                  <li><el-tag>题目解析：</el-tag></li>
+                  <li> <el-tag type="success" size="small">正确姿势：</el-tag><span class="right">{{topic['judgeLists'][index].answer}}</span></li>
+                  <li><el-tag size="small">题目解析：</el-tag></li>
                   <li>{{topic['judgeLists'][index].analysis === null ? '暂无解析': topic['judgeLists'][index].analysis}}</li>
                 </ul>
               </div>
@@ -205,6 +205,7 @@ export default {
     this.isCheck = this.$route.query.isCheck
     console.log(this.isCheck)
     if (!this.isCheck) {
+      this.time = 11 // 设置倒计时分钟数
       this.showTime()
       console.log('倒计时开始啦')
     }
@@ -232,7 +233,7 @@ export default {
       this.fetchThemeDetailList({ themeDetailId: this.$route.query.themeDetailId }).then(() => {
         this.startTime = this.formatTime(Date.now())
         this.index = 0
-        this.time = 11 // 设置倒计时分钟数
+        // this.time = 11 // 设置倒计时分钟数
         this.topic = {...this.themeDetailData.questionLists}
         let reduceAnswer = this.topic['chooseLists'][this.index]
         this.reduceAnswer = reduceAnswer
@@ -467,7 +468,7 @@ export default {
         endTime: this.endTime
       }
       this.addScoreList(data).then((data) => {
-        this.$router.push({
+        this.$router.replace({
           path: 'answerResult',
           query: {
             data
@@ -482,20 +483,24 @@ export default {
     },
     showTime () { // 倒计时
       console.log('这是开始倒计时的函数')
-      setInterval(() => {
-        this.time -= 1
-        if (this.time === 10) {
-          this.$message({
+      let _this = this
+      const timer = setInterval(() => {
+        _this.time -= 1
+        if (_this.time === 10) {
+          _this.$message({
             showClose: true,
-            type: 'error',
+            type: 'info',
             message: '考生注意,考试时间还剩10分钟！！！'
           })
         }
-        if (this.time === 0) {
+        if (_this.time === 0) {
           console.log('考试时间到，强制交卷！！！！')
-          this.saveExamInfo()
+          _this.saveExamInfo()
         }
       }, 1000 * 60)
+      this.$once('hook:beforeDestroy', () => {
+        window.clearInterval(timer)
+      })
     }
   }
 }

@@ -147,3 +147,9 @@ export const fetchScoreDetailList = function ({ commit }, data) {
     commit(types.FETCH_DETAIL_SCORE_LIST, data)
   }).catch(generateErrorHandler(commit))
 }
+
+export const fetchCampusList = function ({ commit }, data) {
+  return api.fetchCampusList(data).then(data => {
+    commit(types.FETCH_CAMPUS_LIST, data)
+  }).catch(generateErrorHandler(commit))
+}

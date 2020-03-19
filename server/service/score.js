@@ -25,7 +25,9 @@ exports.addScoreList = function (data) {
     studentId
   }
   return ScoreModel.find(findConditions).then((data) => {
-    if (data) {
+    if (!data.length) {
+      return ScoreModel.insertMany(newData)
+    } else {
       return ScoreModel.findOneAndUpdate(
         findConditions, 
       {
@@ -36,8 +38,6 @@ exports.addScoreList = function (data) {
         upsert: true,
         new: true
       })
-    } else {
-      return ScoreModel.insertMany(data)
     }
   })
 }
