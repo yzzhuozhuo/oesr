@@ -225,3 +225,24 @@ export function fetchCampusList (data) {
     }
   }).then(utils.checkHttpStatus).then(utils.checkResponse).catch({})
 }
+
+export function fetchResumeList (data) {
+  return axios.get(`/oesr/resumeList?${params(data)}`, {
+    method: 'GET',
+    credentials: 'same-origin',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }).then(utils.checkHttpStatus).then(utils.checkResponse).catch({})
+}
+
+export function addResumeList (body) {
+  return axios.post('/oesr/addResumeList', {
+    method: 'POST',
+    credentials: 'same-origin',
+    body: body,
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }).then(utils.checkHttpStatus).then(utils.checkResponse).catch({})
+}

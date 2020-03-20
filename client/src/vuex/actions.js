@@ -153,3 +153,15 @@ export const fetchCampusList = function ({ commit }, data) {
     commit(types.FETCH_CAMPUS_LIST, data)
   }).catch(generateErrorHandler(commit))
 }
+
+export const fetchResumeList = function ({ commit }, data) {
+  return api.fetchResumeList(data).then(data => {
+    commit(types.FETCH_RESUME_LIST, data)
+  }).catch(generateErrorHandler(commit))
+}
+
+export const addResumeList = function ({ commit }, data) {
+  return api.addResumeList(data).then(data => {
+    return data
+  }).catch(generateErrorHandler(commit))
+}

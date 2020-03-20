@@ -48,7 +48,7 @@
                 </div>
               </div>
               <div class="apply">
-                <el-button type="success">申请</el-button>
+                <el-button type="success" @click="applyPositon" :disabled="isDisabled" :loading="isLoading">申请</el-button>
               </div>
             </div>
           </div>
@@ -107,6 +107,8 @@ export default {
   data () {
     return {
       positionDetailData: {},
+      isDisabled: false,
+      isLoading: false,
       positionDetailDataOld: {
         companyName: '蚂蚁金服',
         companyImgUrl: 'https://uploadfiles.nowcoder.com/files/20170318/1697873_1489806769570_2.jpg',
@@ -136,23 +138,51 @@ export default {
   created () {
     let positionDetailId = this.$route.query.positionDetailId
     this.fetchPositionDetailList({ positionDetailId: positionDetailId })
+    this.fetchResumeList({ positionId: positionDetailId, studentId: '123' })
   },
   mounted () {
   },
   computed: {
     ...mapState({
-      positionDetailList: state => state.position.positionDetailList || {}
+      positionDetailList: state => state.position.positionDetailList || {},
+      resumeList: state => state.resumeList.resumeList || []
     })
   },
   watch: {
     positionDetailList () {
       this.positionDetailData = this.positionDetailList
+    },
+    resumeList () {
+      !this.resumeList.length ? this.isDisabled = false : this.isDisabled = true
     }
   },
   methods: {
     ...mapActions([
-      'fetchPositionDetailList'
-    ])
+      'fetchPositionDetailList',
+      'addResumeList',
+      'fetchResumeList'
+    ]),
+    applyPositon () {
+      let data = {
+        studentId: '123',
+        studentName: '小卓子嘻嘻~',
+        companyId: this.positionDetailData.companyId,
+        positionId: this.positionDetailData._id,
+        positionTitle: this.positionDetailData.positionTitle,
+        resumeTitle: '杨卓-前端工程师-2020届',
+        resumeUrl: 'https://uploadfiles.nowcoder.com/files/20190807/638373518_1565181935743_20%E6%A0%A1%E6%8B%9B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91_%E6%9D%A8%E5%8D%93.pdf'
+      }
+      console.log(666, data)
+      this.isLoading = true
+      this.addResumeList(data).then(data => {
+        this.isLoading = false
+        this.isDisabled = true
+        this.$message({
+          type: 'success',
+          message: '申请成功~'
+        })
+      })
+    }
   }
 }
 </script>
