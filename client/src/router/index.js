@@ -22,6 +22,7 @@ import PasswordBack from '@/pages/PasswordBack'
 import RegisterAccount from '@/pages/RegisterAccount'
 import CompanyPage from '@/pages/CompanyPage'
 import DesignTheme from '@/pages/DesignTheme'
+import AnswerResult from '@/pages/AnswerResult'
 
 Vue.use(Router)
 
@@ -143,6 +144,11 @@ export default new Router({
       path: '/company/page',
       name: '公司主页',
       component: CompanyPage
+    },
+    {
+      path: '/answerResult',
+      name: '答题结果页',
+      component: AnswerResult
     }
   ]
 })

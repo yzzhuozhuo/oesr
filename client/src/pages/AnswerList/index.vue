@@ -60,7 +60,8 @@
                   </li>
                 </ul>
               </div>
-              <div class="final" @click="commit()">结束考试</div>
+              <div class="final" @click="commit" v-if="!isCheck">结束考试</div>
+              <div class="final" @click="cancelCheck" v-if="isCheck">结束查看</div>
             </div>
           </div>
         </transition>
@@ -68,9 +69,17 @@
         <transition name="slider-fade">
         <div class="right">
           <div class="title">
-            <p>{{title}}</p>
-            <i class="iconfont icon-right auto-right"></i>
-            <span>全卷共{{topicCount[0] + topicCount[1] + topicCount[2]}}题  <i class="iconfont icon-time"></i>倒计时：<b>{{time}}</b>分钟</span>
+            <div v-if="!isCheck">{{title}}</div>
+            <div v-else>请查看正确答案和解析</div>
+            <div v-if="!isCheck">
+              <i class="el-icon-document"></i>
+              <span>全卷共 {{topicCount[0] + topicCount[1] + topicCount[2]}} 题</span>
+              <i class="el-icon-time"></i>
+              <span>倒计时：<b>{{time}}</b>分钟</span>
+            </div>
+            <div v-else>
+              <el-button type="text" @click="cancelCheck">返回题库首页</el-button>
+            </div>
           </div>
           <div class="content">
             <div class="topic">
@@ -84,10 +93,10 @@
                 <el-radio :label="3">{{showAnswer.answerC}}</el-radio>
                 <el-radio :label="4">{{showAnswer.answerD}}</el-radio>
               </el-radio-group>
-              <div class="analysis" v-if="isPractice">
+              <div class="analysis" v-if="isCheck">
                 <ul>
-                  <li> <el-tag type="success">正确姿势：</el-tag><span class="right">{{reduceAnswer.rightAnswer}}</span></li>
-                  <li><el-tag>题目解析：</el-tag></li>
+                  <li> <el-tag type="success" size="small">正确姿势：</el-tag><span class="right">{{reduceAnswer.rightAnswer}}</span></li>
+                  <li><el-tag size="small">题目解析：</el-tag></li>
                   <li>{{reduceAnswer.analysis === null ? '暂无解析': reduceAnswer.analysis}}</li>
                 </ul>
               </div>
@@ -101,10 +110,10 @@
                   @blur="fillBG">
                 </el-input>
               </div>
-              <div class="analysis" v-if="isPractice">
+              <div class="analysis" v-if="isCheck">
                 <ul>
-                  <li> <el-tag type="success">正确姿势：</el-tag><span class="right">{{topic['fillLists'][index].answer}}</span></li>
-                  <li><el-tag>题目解析：</el-tag></li>
+                  <li> <el-tag type="success" size="small">正确姿势：</el-tag><span class="right">{{topic['fillLists'][index].answer}}</span></li>
+                  <li><el-tag size="small">题目解析：</el-tag></li>
                   <li>{{topic['fillLists'][index].analysis === null ? '暂无解析': topic['fillLists'][index].analysis}}</li>
                 </ul>
               </div>
@@ -114,10 +123,10 @@
                 <el-radio :label="1">正确</el-radio>
                 <el-radio :label="2">错误</el-radio>
               </el-radio-group>
-              <div class="analysis" v-if="isPractice">
+              <div class="analysis" v-if="isCheck">
                 <ul>
-                  <li> <el-tag type="success">正确姿势：</el-tag><span class="right">{{topic['judgeLists'][index].answer}}</span></li>
-                  <li><el-tag>题目解析：</el-tag></li>
+                  <li> <el-tag type="success" size="small">正确姿势：</el-tag><span class="right">{{topic['judgeLists'][index].answer}}</span></li>
+                  <li><el-tag size="small">题目解析：</el-tag></li>
                   <li>{{topic['judgeLists'][index].analysis === null ? '暂无解析': topic['judgeLists'][index].analysis}}</li>
                 </ul>
               </div>
@@ -169,10 +178,6 @@ export default {
       index: 0, // 全局index
       topicCount: [], // 每种类型题目的总数
       score: [], // 每种类型分数的总数
-      examData: { // 考试信息
-        // source: null,
-        // totalScore: null,
-      },
       topic: {}, // 试卷信息,
       showQuestion: [], // 当前显示题目信息
       showAnswer: {}, // 当前题目对应的答案选项
@@ -182,7 +187,8 @@ export default {
       judgeAnswer: [], // 保存所有判断题答案
       topic1Answer: [], // 学生选择题作答编号
       rightAnswer: '',
-      isPractice: false
+      isCheck: false,
+      totalScore: ''
     }
   },
   computed: {
@@ -196,15 +202,21 @@ export default {
     }
   },
   created () {
+    this.isCheck = this.$route.query.isCheck
+    console.log(this.isCheck)
+    if (!this.isCheck) {
+      this.time = 11 // 设置倒计时分钟数
+      this.showTime()
+      console.log('倒计时开始啦')
+    }
     this.getExamData()
-    this.showTime()
   },
   mounted () {
-    console.log(555, this.themeDetailList)
   },
   methods: {
     ...mapActions([
-      'fetchThemeDetailList'
+      'fetchThemeDetailList',
+      'addScoreList'
     ]),
     formatTime (date) {
       const TIME_FORMAT = 'YYYY-MM-DD HH:mm:ss'
@@ -221,11 +233,8 @@ export default {
       this.fetchThemeDetailList({ themeDetailId: this.$route.query.themeDetailId }).then(() => {
         this.startTime = this.formatTime(Date.now())
         this.index = 0
-        this.time = 60 // 设置倒计时分钟数
-        // this.topic = {...topicData.questionLists}
+        // this.time = 11 // 设置倒计时分钟数
         this.topic = {...this.themeDetailData.questionLists}
-        // console.log(11111, this.topic)
-        // console.log(2222, topicA)
         let reduceAnswer = this.topic['chooseLists'][this.index]
         this.reduceAnswer = reduceAnswer
         let keys = Object.keys(this.topic) // 对象转数组
@@ -284,7 +293,7 @@ export default {
       this.index = index
       if (index < len) {
         if (index < 0) {
-          index = this.topic[1].length - 1
+          index = this.topic['chooseLists'].length - 1
           this.change(index)
         } else {
           this.title = '请在横线处填写答案'
@@ -305,7 +314,7 @@ export default {
       this.index = index
       if (this.index < len) {
         if (this.index < 0) {
-          this.index = this.topic[2].length - 1
+          this.index = this.topic['fillLists'].length - 1
           this.fill(this.index)
         } else {
           this.title = '请作出正确判断'
@@ -402,9 +411,7 @@ export default {
           if (right === this.topic['chooseLists'][index].rightAnswer) { // 当前选项与正确答案对比
             finalScore += Number(this.topic['chooseLists'][index].score) // 计算总分数
           }
-          console.log(right, this.topic['chooseLists'][index].rightAnswer)
         }
-        console.log(123213, this.topic['chooseLists'][index].score)
       })
       /* 计算填空题总分 */
       let fillAnswer = this.fillAnswer
@@ -432,6 +439,7 @@ export default {
         }
       })
       console.log(`6666------目前总分${finalScore}`)
+      this.totalScore = finalScore
       if (this.time !== 0) {
         this.$confirm('考试结束时间未到,是否提前交卷', '友情提示', {
           confirmButtonText: '立即交卷',
@@ -440,28 +448,59 @@ export default {
         }).then(() => {
           console.log('交卷')
           this.endTime = this.formatTime(Date.now())
-          // let answerDate = this.endTime.substr(0, 10)
-          console.log(111, this.endTime, this.startTime, finalScore)
+          // console.log(111, this.endTime, this.startTime, finalScore)
           // 请求接口，将最终的分数保存数据库中
+          this.saveExamInfo()
         }).catch(() => {
           console.log('继续答题')
         })
       }
     },
+    saveExamInfo () {
+      let data = {
+        themeId: this.themeDetailData._id,
+        studentId: '123',
+        studentName: '小卓子嘻嘻~',
+        studentImageUrl: 'https://images.nowcoder.com/images/20190928/638373518_1569674550437_27E42C56E73D70CBE3050C38883E4E56?x-oss-process=image/resize,m_mfit,h_100,w_100',
+        themeTitle: this.themeDetailData.themeTitle,
+        totalScore: this.totalScore,
+        startTime: this.startTime,
+        endTime: this.endTime
+      }
+      this.addScoreList(data).then((data) => {
+        this.$router.replace({
+          path: 'answerResult',
+          query: {
+            data
+          }
+        })
+      })
+    },
+    cancelCheck () {
+      this.$router.replace({
+        path: 'questionPage'
+      })
+    },
     showTime () { // 倒计时
-      setInterval(() => {
-        this.time -= 1
-        if (this.time === 10) {
-          this.$message({
+      console.log('这是开始倒计时的函数')
+      let _this = this
+      const timer = setInterval(() => {
+        _this.time -= 1
+        if (_this.time === 10) {
+          _this.$message({
             showClose: true,
-            type: 'error',
+            type: 'info',
             message: '考生注意,考试时间还剩10分钟！！！'
           })
         }
-        if (this.time === 0) {
-          console.log('考试时间到！！！！')
+        if (_this.time === 0) {
+          console.log('考试时间到，强制交卷！！！！')
+          _this.saveExamInfo()
         }
       }, 1000 * 60)
+      this.$once('hook:beforeDestroy', () => {
+        window.clearInterval(timer)
+      })
     }
   }
 }
@@ -635,14 +674,19 @@ export default {
   margin-right: 10px;
 }
 .right .title {
+  padding: 15px;
   margin-right: 10px;
   padding-right: 30px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   // margin-top: 10px;
   background-color: #fff;
   // height: 50px;
   // line-height: 50px;
+  .el-icon-time {
+    padding-left: 10px;
+  }
 }
 .clearfix {
   clear: both;

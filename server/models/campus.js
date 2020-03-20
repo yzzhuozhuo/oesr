@@ -1,12 +1,30 @@
-/**
- * 校招日程 schema
- */
-const mongooes = require('mongoose')
+//
+// 求职首页的校园招聘表
+//
 
-const campusSchema = mongooes.Schema({
-  companyId: Number,
-  campusImg: String,
-  campusTime: Array
+const mongoose = require('mongoose')
+
+const campusSchema = mongoose.Schema({
+  companyName: {
+    type: String,
+    required: true
+  },
+  campusTitle: {
+    type: String,
+    required: true
+  },
+  campusHref: {
+    type: String,
+    required: true
+  },
+  campusImageUrl: {
+    type: String,
+    required: true
+  },
+  companyImageUrl: {
+    type: String,
+    required: true
+  }
 }, { collection: 'campus' })
 
-module.exports = mongooes.model('campus', campusSchema)
+module.exports = mongoose.model('campus', campusSchema)

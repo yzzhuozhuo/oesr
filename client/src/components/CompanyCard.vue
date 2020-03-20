@@ -1,13 +1,13 @@
 <template>
   <div
     class="company"
-    @click.stop="jumpToCompany(companyData.url)"
+    @click.stop="jumpToCompany(companyData.campusHref)"
   >
     <img
-      :src="companyData.img"
+      :src="companyData.companyImageUrl"
       alt=""
     >
-    <div class="company-name">{{companyData.name}}</div>
+    <div class="company-name">{{companyData.companyName}}</div>
   </div>
 </template>
 
@@ -16,7 +16,7 @@ export default {
   props: ['companyData'],
   methods: {
     jumpToCompany (url) {
-      window.location.href = url
+      window.open(url)
     }
   }
 }

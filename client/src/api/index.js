@@ -13,7 +13,7 @@ export function fetchCalendarList () {
 
 export function updateCalendarList (body) {
   return fetch('/oesr/addCalendarList', {
-    method: 'PUT',
+    method: 'POST',
     credentials: 'same-origin',
     body: JSON.stringify(body),
     headers: {
@@ -135,6 +135,15 @@ export function findTel (data) {
     }
   }).then(utils.checkHttpStatus).then(utils.checkResponse).catch()
 }
+export function updateStudentList (body) {
+  return fetch('/oesr/updateStudentList', {
+    method: 'POST',
+    credentials: 'same-origin',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }).then(utils.checkHttpStatus).then(utils.checkResponse).catch()
+}
 
 export function updateStudentList (body) {
   const url = '/oesr/updateStudentList'
@@ -230,6 +239,58 @@ export function fetchThemeDetailList (data) {
   return axios.get(`/oesr/themeDetailList?${params(data)}`, {
     method: 'GET',
     credentials: 'same-origin',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }).then(utils.checkHttpStatus).then(utils.checkResponse).catch({})
+}
+
+export function fetchScoreList (data) {
+  return axios.get(`/oesr/scoreList?${params(data)}`, {
+    method: 'GET',
+    credentials: 'same-origin',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }).then(utils.checkHttpStatus).then(utils.checkResponse).catch({})
+}
+
+export function addScoreList (body) {
+  return axios.post('/oesr/addScoreList', {
+    method: 'POST',
+    credentials: 'same-origin',
+    body: body,
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }).then(utils.checkHttpStatus).then(utils.checkResponse).catch({})
+}
+
+export function fetchCampusList (data) {
+  return axios.get(`/oesr/campusList?${params(data)}`, {
+    method: 'GET',
+    credentials: 'same-origin',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }).then(utils.checkHttpStatus).then(utils.checkResponse).catch({})
+}
+
+export function fetchResumeList (data) {
+  return axios.get(`/oesr/resumeList?${params(data)}`, {
+    method: 'GET',
+    credentials: 'same-origin',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }).then(utils.checkHttpStatus).then(utils.checkResponse).catch({})
+}
+
+export function addResumeList (body) {
+  return axios.post('/oesr/addResumeList', {
+    method: 'POST',
+    credentials: 'same-origin',
+    body: body,
     headers: {
       'Content-Type': 'application/json'
     }

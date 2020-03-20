@@ -7,19 +7,19 @@ const mongoose = require('mongoose')
 const preachSchema = mongoose.Schema({
   preachCompany: {
     type: String,
-    require: true
+    required: true
   },
   preachCity: {
     type: String,
-    require: true
+    required: true
   },
   preachSchool: {
     type: String,
-    require: true
+    required: true
   },
   preachTime: {
     type: Number,
-    require: true
+    required: true
   }
 }, { collection: 'preach' })
 

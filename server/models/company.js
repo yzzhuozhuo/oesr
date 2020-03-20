@@ -17,35 +17,35 @@ const mongoose = require('mongoose')
 const companySchema = mongoose.Schema({
   companyId: {
     type: String,
-    require: true
+    required: true
   },
   companyName: {
     type: String,
-    require: true
+    required: true
   },
   companyImgUrl: {
     type: String,
-    require: true
+    required: true
   },
   companyProfile: {
     type: String,
-    require: true
+    required: true
   },
   companyWelfare: {
     type: String,
-    require: true
+    required: true
   },
   companyAddress: {
     type: String,
-    require: true
+    required: true
   },
   companyBusiness: {
     type: String,
-    require: true
+    required: true
   },
   recuritPosts: {
     type: String,
-    require: true
+    required: true
   }
 }, { collection: 'company' })
 

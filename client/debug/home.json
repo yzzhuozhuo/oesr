@@ -1,6 +1,6 @@
 [
   {
-    "menuName": "求职备战",
+    "menuName": "求职必备",
     "icon": "location",
     "subMenu": [
       {
@@ -1407,7 +1407,7 @@
     ]
   },
   {
-    "menuName": "基础提升",
+    "menuName": "工作技能",
     "icon": "menu",
     "subMenu": [
       {

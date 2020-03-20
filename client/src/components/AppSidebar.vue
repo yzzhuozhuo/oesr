@@ -4,17 +4,53 @@
       <div class="contant-img" @click="backTop">
         <img src="../assets/top.png">
       </div>
-      <div class="contant-img qq" @mouseover="showQQ">
-        <img src="../assets/qq.png">
+      <div class="contant-img qq">
+        <el-popover
+          placement="left"
+          width="160"
+          trigger="hover">
+          <div class="popover-qq">
+            <img src="../assets/qq1.jpg">
+            <span>有系统问题,加我qq哦~</span>
+          </div>
+          <img src="../assets/qq.png" slot="reference">
+        </el-popover>
       </div>
-      <div class="contant-img" @mouseover="showWeixin">
-        <img src="../assets/weixin.png">
+      <div class="contant-img">
+        <el-popover
+          placement="left"
+          width="160"
+          trigger="hover">
+          <div class="popover-qq">
+            <img src="../assets/weixin.jpg">
+            <span>有系统问题,加我微信哦~</span>
+          </div>
+          <img src="../assets/weixin.png" slot="reference">
+        </el-popover>
       </div>
-      <div class="contant-img email" @mouseover="showEmail">
-        <img src="../assets/email.png">
+      <div class="contant-img email">
+        <el-popover
+          placement="left"
+          width="180"
+          trigger="hover">
+          <div class="popover-qq">
+            <span>1585171898@qq.com</span>
+            <span>有系统问题,可发我邮箱哦~</span>
+          </div>
+          <img src="../assets/email.png" slot="reference">
+        </el-popover>
       </div>
-      <div class="contant-img" @mouseover="showPhone">
-        <img src="../assets/phone.png">
+      <div class="contant-img">
+        <el-popover
+          placement="left"
+          width="180"
+          trigger="hover">
+          <div class="popover-qq">
+            <span>电话：18792566635</span>
+            <span>有系统问题,可拨打电话哦~</span>
+          </div>
+          <img src="../assets/phone.png" slot="reference">
+        </el-popover>
       </div>
     </div>
   </div>
@@ -34,18 +70,6 @@ export default {
       console.log('ooooooooooooooooo')
       document.body.scrollTop = 0
       document.documentElement.scrollTop = 0
-    },
-    showQQ () {
-      console.log('qq')
-    },
-    showWeixin () {
-      console.log('weixin')
-    },
-    showEmail () {
-      console.log('email')
-    },
-    showPhone () {
-      console.log('phone')
     }
   }
 }
@@ -78,4 +102,18 @@ export default {
 .qq, .email {
   margin: 5px 0;
 }
+.popover-qq {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.popover-qq img {
+  width: 140px;
+  height: 180px;
+}
+.popover-qq span {
+  font-weight: bold;
+}
+
 </style>

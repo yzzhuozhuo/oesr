@@ -8,15 +8,15 @@ const mongoose = require('mongoose')
 const calendarSchema = mongoose.Schema({
   months: {
     type: Array,
-    require: true
+    required: true
   },
   days: {
     type: Array,
-    require: true
+    required: true
   },
   things: {
     type: String,
-    require: true
+    required: true
   }
 }, { collection: 'calendar' })
 

@@ -9,6 +9,9 @@ import account from './account'
 import student from './student'
 import company from './company'
 import theme from './theme'
+import score from './score'
+import campus from './campus'
+import resumeList from './resumeList'
 
 export default {
   user,
@@ -21,5 +24,8 @@ export default {
   account,
   student,
   company,
-  theme
+  theme,
+  score,
+  campus,
+  resumeList
 }

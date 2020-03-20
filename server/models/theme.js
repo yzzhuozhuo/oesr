@@ -13,11 +13,11 @@ const themeSchema = mongoose.Schema({
     type: String,
     required: true
   },
-  companyImageUrl: {
-    type: String,
-    required: true
-  },
-  themeImageUrl: { // 得加上题上的图标，要不然用公司那个圆的太丑了
+  // companyImageUrl: { 不需要了，是独立的，前端写死
+  //   type: String,
+  //   required: true
+  // },
+  themeImageUrl: { // 题上显示的图片，就用公司信息的图片
     type: String,
     required: true
   },

@@ -1,4 +1,4 @@
-const PositionService = require('../service/position')
+const positionService = require('../service/position')
 
 exports.getPosition = function (req, res) {
   let {
@@ -10,7 +10,7 @@ exports.getPosition = function (req, res) {
   } = req.query
   pageNum = +pageNum
   currentPage = +currentPage
-  PositionService.getPositionList(selectType, selectCity, selectTab, currentPage, pageNum).then(data => {
+  positionService.getPositionList(selectType, selectCity, selectTab, currentPage, pageNum).then(data => {
     res.send({
       code: '200',
       data: {
@@ -30,7 +30,7 @@ exports.getPosition = function (req, res) {
 
 exports.addPosition = function (req, res) {
   let data = req.body
-  PositionService.addPositionList(data).then(data => {
+  positionService.addPositionList(data).then(data => {
     res.send({
       code: '200',
       data: data
@@ -45,7 +45,7 @@ exports.addPosition = function (req, res) {
 
 exports.getPositionDetail = function (req, res) {
   let { positionDetailId = '' } = req.query
-  PositionService.getPositionDetailList(positionDetailId).then(data => {
+  positionService.getPositionDetailList(positionDetailId).then(data => {
     res.send({
       code: '200',
       data: data

@@ -7,23 +7,23 @@ const mongoose = require('mongoose')
 const studentSchema = mongoose.Schema({
   studentId: {
     type: String,
-    require: true
+    required: true
   },
   studentImgUrl: {
     type: String,
-    require: true
+    required: true
   },
   studentName: {
     type: String,
-    require: true
+    required: true
   },
   sex: {
     type: String,
-    require: true
+    required: true
   },
   introduction: {
     type: String,
-    require: true
+    required: true
   },
   address: {
     type: String
@@ -45,7 +45,7 @@ const studentSchema = mongoose.Schema({
   },
   interestedClassify: {
     type: String, // 'software|hardware',
-    require: true
+    required: true
   },
   interestedPost: {
     type: Array

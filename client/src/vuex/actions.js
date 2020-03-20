@@ -180,3 +180,44 @@ export const uploadImg = function ({ commit }, data) {
     return imageUrl
   }).catch(generateErrorHandler(commit))
 }
+
+export const fetchScoreList = function ({ commit }, data) {
+  return api.fetchScoreList(data).then(data => {
+    commit(types.FETCH_SCORE_LIST, data)
+  }).catch(generateErrorHandler(commit))
+}
+
+export const addScoreList = function ({ commit }, data) {
+  return api.addScoreList(data).then(data => {
+    commit(types.FETCH_DETAIL_SCORE_LIST, data)
+    if (Array.isArray(data)) {
+      return data[0]
+    } else {
+      return data
+    }
+  }).catch(generateErrorHandler(commit))
+}
+
+export const fetchScoreDetailList = function ({ commit }, data) {
+  return api.fetchScoreList(data).then(data => {
+    commit(types.FETCH_DETAIL_SCORE_LIST, data)
+  }).catch(generateErrorHandler(commit))
+}
+
+export const fetchCampusList = function ({ commit }, data) {
+  return api.fetchCampusList(data).then(data => {
+    commit(types.FETCH_CAMPUS_LIST, data)
+  }).catch(generateErrorHandler(commit))
+}
+
+export const fetchResumeList = function ({ commit }, data) {
+  return api.fetchResumeList(data).then(data => {
+    commit(types.FETCH_RESUME_LIST, data)
+  }).catch(generateErrorHandler(commit))
+}
+
+export const addResumeList = function ({ commit }, data) {
+  return api.addResumeList(data).then(data => {
+    return data
+  }).catch(generateErrorHandler(commit))
+}
