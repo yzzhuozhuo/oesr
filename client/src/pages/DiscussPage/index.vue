@@ -89,7 +89,8 @@ export default {
       discussList: state => state.discuss.discussList,
       currentPage: state => state.discuss.currentPage,
       pageNum: state => state.discuss.pageNum,
-      total: state => state.discuss.total
+      total: state => state.discuss.total,
+      account: state => state.account
     })
   },
   created () {
@@ -104,6 +105,12 @@ export default {
   methods: {
     ...mapActions(['fetchDiscussInfo']),
     jump (path) {
+      if (!this.account.token) {
+        this.$message.error('请先登录！')
+        return this.$router.replace({
+          path: '/login'
+        })
+      }
       this.$router.push({
         path
       })

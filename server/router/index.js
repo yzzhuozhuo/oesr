@@ -22,7 +22,11 @@ router
   .put('/oesr/addCalendarList', calendarController.addCalendar)
   .get('/oesr/preachList', preachController.getPreach)
   .post('/oesr/addPreachList', preachController.addPreach)
+
   .get('/oesr/discuss', discussController.getDiscuss)
+  .post('/oesr/addDiscuss', discussController.addDiscuss)
+  .get('/oesr/findDiscussById', discussController.findDiscussById)
+
   .get('/oesr/positionList', positionController.getPosition)
   .post('/oesr/addPositionList', positionController.addPosition)
   .get('/oesr/positionDetailList', positionController.getPositionDetail)

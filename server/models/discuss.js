@@ -19,7 +19,6 @@
 const mongooes = require('mongoose')
 
 const discussSchema = mongooes.Schema({
-  discussId: Number,
   title: String,
   content: String,
   hot: Number,
@@ -29,7 +28,7 @@ const discussSchema = mongooes.Schema({
     name: String
   },
   user: {
-    id: Number,
+    id: String,
     name: String,
     avatar: String
   },

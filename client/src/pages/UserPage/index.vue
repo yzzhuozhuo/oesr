@@ -358,6 +358,7 @@ export default {
       isSetting: false,
       dialogSettingVisible: false,
       dialogMyResume: false,
+      cacheUrl: '',
       companyOptions: [
         {
           label: '字节跳动',
@@ -532,7 +533,7 @@ export default {
       return callback()
     },
     async handleAvatarSuccess (res, file) {
-      const url = URL.createObjectURL(file.raw)
+      const url = this.cacheUrl
       const name = file.name
       this.newUserInfo.resume = { name, url }
       const result = await this.updateStudentList(this.newUserInfo)
@@ -546,7 +547,7 @@ export default {
       }
     },
     async handleRemove () {
-      this.newUserInfo.resume = null
+      delete this.newUserInfo.resume
       const result = await this.updateStudentList(this.newUserInfo)
       if (result) {
         this.$message({
@@ -563,10 +564,10 @@ export default {
         domain: this.domain,
         qiniuaddr: this.qiniuaddr
       })
-      console.info(result)
+      this.cacheUrl = result
     },
     async handleClick (file) {
-      window.open(this.fileList[0].url)
+      window.open(this.newUserInfo.resume.url)
     }
   }
 }

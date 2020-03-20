@@ -27,6 +27,7 @@ export default {
   p,
   span {
     width: 100% !important;
+    white-space: nowrap;
   }
 }
 </style>

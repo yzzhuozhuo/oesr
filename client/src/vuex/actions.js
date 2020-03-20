@@ -221,3 +221,15 @@ export const addResumeList = function ({ commit }, data) {
     return data
   }).catch(generateErrorHandler(commit))
 }
+
+export const addDiscuss = function ({ commit }, data) {
+  return api.addDiscuss(data).then(data => {
+    return data
+  }).catch(generateErrorHandler(commit))
+}
+
+export const findDiscussById = function ({ commit }, data) {
+  return api.findDiscussById(data).then(data => {
+    return data
+  }).catch(generateErrorHandler(commit))
+}

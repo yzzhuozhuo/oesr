@@ -2,23 +2,20 @@
   <div class="head">
     <div class="title">
       <img :src="comment">
-      <span>2020届补招专场｜春招补招，抓住上岸翻盘的最后机会！</span>
+      <span>{{title}}</span>
     </div>
     <div class="user">
-      <img
-        src="https://images.nowcoder.com/images/20200221/999991342_1582251610228_6D9DCA1EE42757CAD66E3EA71709F9B8?x-oss-process=image/resize,m_mfit,h_100,w_100"
-        alt=""
-      >
+      <img :src="user.avatar">
       <div class="info">
-        <div class="info-top">大大大菠萝</div>
+        <div class="info-top">{{user.name}}</div>
         <div class="info-bottom">
-          <div class="date">编辑于 2020-02-29 11:34:00</div>
-          <div class="like">
+          <div class="date">编辑于 {{createAt}}</div>
+          <!-- <div class="like">
             <span>赞 18</span>|
             <span>收藏 166</span>|
             <span>回复14</span>|
             <span>浏览42357</span>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -29,7 +26,7 @@
 import comment from '@/assets/comment.png'
 
 export default {
-  props: [''],
+  props: ['createAt', 'title', 'user'],
   data () {
     return {
       comment
