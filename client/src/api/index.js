@@ -135,15 +135,6 @@ export function findTel (data) {
     }
   }).then(utils.checkHttpStatus).then(utils.checkResponse).catch()
 }
-export function updateStudentList (body) {
-  return fetch('/oesr/updateStudentList', {
-    method: 'POST',
-    credentials: 'same-origin',
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  }).then(utils.checkHttpStatus).then(utils.checkResponse).catch()
-}
 
 export function updateStudentList (body) {
   const url = '/oesr/updateStudentList'
