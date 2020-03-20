@@ -165,7 +165,7 @@ export default {
           contenthrefs: [
             {
               title: '开篇词：为什么要学Python',
-              href: 'https://blog.nowcoder.net/n/03efd5531e874cfe9bea5fe221f3d7fa'
+              href: 'https://www.boxuegu.com/news/2153.html'
             },
             {
               title: 'Python安装与调试工具',
@@ -459,8 +459,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.main {
-}
 .contet {
   padding-top: 20px;
   display: flex;
