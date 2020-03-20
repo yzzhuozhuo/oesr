@@ -2,18 +2,18 @@
   <div class="header">
     <img
       class="img"
-      src="https://uploadfiles.nowcoder.com/files/20191129/4107856_1575019666538_60x60-2.png"
+      :src="companyImgUrl"
     >
     <div class="company">
-      <div class="name">字节跳动 2020校招</div>
+      <div class="name">{{companyName}} 2020校招</div>
       <div
         class="home"
         @click.stop="jumpToCompany('company')"
       >
-        <img :src="home">
-        <span>公司主页</span>
+        <!-- <img :src="home">
+        <span>公司主页</span> -->
       </div>
-      <div class="follow">+ 关注</div>
+      <!-- <div class="follow">+ 关注</div> -->
     </div>
   </div>
 </template>
@@ -22,7 +22,7 @@
 import home from '@/assets/home.png'
 
 export default {
-  props: ['postCardData'],
+  props: ['companyName', 'companyImgUrl'],
   data () {
     return {
       home
@@ -51,6 +51,7 @@ export default {
     width: 60px;
     height: 60px;
     margin-right: 30px;
+    border-radius: 50%;
     cursor: pointer;
   }
 

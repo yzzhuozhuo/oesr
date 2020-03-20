@@ -14,6 +14,7 @@ const themeController = require('../controller/theme')
 const scoreController = require('../controller/score')
 const campusController = require('../controller/campus')
 const resumeListController = require('../controller/resumeList')
+const campusDateController = require('../controller/campusDate')
 
 router
   .get('/oesr/user', userController.user)
@@ -37,6 +38,10 @@ router
   .get('/oesr/getUserInfo', accountController.getUserInfo)
   .get('/oesr/logout', accountController.logout)
   .post('/oesr/updatePsd', accountController.updatePsd)
+
+  .post('/oesr/addCampusDate', campusDateController.addCampusDate)
+  .get('/oesr/getCampusDate', campusDateController.getCampusDate)
+  .get('/oesr/getCampusDateById', campusDateController.getCampusDateById)
 
   .get('/oesr/uploadImg', studentController.uploadImg)
 

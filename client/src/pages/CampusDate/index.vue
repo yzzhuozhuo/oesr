@@ -5,9 +5,9 @@
       class="campus-bread"
     >
       <el-breadcrumb-item :to="{ path: '/recruitSchedule' }">校招日程</el-breadcrumb-item>
-      <el-breadcrumb-item>字节跳动</el-breadcrumb-item>
+      <el-breadcrumb-item>{{campusDate.companyName}}</el-breadcrumb-item>
     </el-breadcrumb>
-    <card-header />
+    <card-header :companyName="campusDate.companyName" :companyImgUrl="campusDate.companyImgUrl" />
     <time-table :plans="plans" />
     <!-- <find-post /> -->
   </div>
@@ -17,6 +17,7 @@
 import CardHeader from './CardHeader'
 import TimeTable from './TimeTable'
 import FindPost from './FindPost'
+import { mapActions } from 'vuex'
 
 export default {
   name: 'CampusDate',
@@ -27,42 +28,57 @@ export default {
   },
   data () {
     return {
-      plans: [
+      campusDate: {}
+    }
+  },
+  computed: {
+    plans () {
+      return [
         {
           content: '内推',
-          timestamp: '2月24日-4月30日',
+          timestamp: this.campusDate.timeTable && this.campusDate.timeTable.neitui,
           color: '#0bbd87'
         },
         {
           content: '网申',
-          timestamp: '2月24日-4月30日',
+          timestamp: this.campusDate.timeTable && this.campusDate.timeTable.wangshen,
           color: '#0bbd87'
         },
         {
           content: '线上宣讲',
-          timestamp: '3月9日-3月13日 每天19:00',
+          timestamp: this.campusDate.timeTable && this.campusDate.timeTable.neitui,
           color: '#0bbd87'
         },
         {
           content: '笔试',
-          timestamp: '3月上旬-5月中旬',
+          timestamp: this.campusDate.timeTable && this.campusDate.timeTable.bishi,
           color: '#0bbd87'
         },
         {
           content: '面试',
-          timestamp: '3月上旬起',
+          timestamp: this.campusDate.timeTable && this.campusDate.timeTable.mianshi,
           color: '#0bbd87'
         },
         {
           content: 'offer',
-          timestamp: '3月上旬起',
+          timestamp: this.campusDate.timeTable && this.campusDate.timeTable.offer,
           color: '#0bbd87'
         }
       ]
     }
   },
-  mounted () {},
-  methods: {}
+  mounted () {
+    this.getCampusDate()
+  },
+  methods: {
+    ...mapActions(['getCampusDateById']),
+    async getCampusDate () {
+      const { id } = this.$route.query
+      const campusDate = await this.getCampusDateById(id)
+      console.info(campusDate)
+      this.campusDate = campusDate
+    }
+  }
 }
 </script>
 

@@ -195,6 +195,33 @@ export function updatePsd (body) {
   return axios.post(url, body).then(utils.checkHttpStatus).then(utils.checkResponse).catch({})
 }
 
+export function addCampusDate (body) {
+  let url = '/oesr/addCampusDate'
+  return axios.post(url, body).then(utils.checkHttpStatus).then(utils.checkResponse).catch({})
+}
+
+export function getCampusDate () {
+  let url = '/oesr/getCampusDate'
+  return axios.get(url, {
+    method: 'GET',
+    credentials: 'same-origin',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }).then(utils.checkHttpStatus).then(utils.checkResponse).catch({})
+}
+
+export function getCampusDateById (data) {
+  let url = '/oesr/getCampusDateById'
+  return axios.get(`${url}?id=${data}`, {
+    method: 'GET',
+    credentials: 'same-origin',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }).then(utils.checkHttpStatus).then(utils.checkResponse).catch()
+}
+
 export function getUserInfo () {
   let url = '/oesr/getUserInfo'
   return axios.get(url, {

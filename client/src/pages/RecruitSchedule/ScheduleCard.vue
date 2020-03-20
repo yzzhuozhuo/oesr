@@ -1,15 +1,12 @@
 <template>
   <div
     class="wrap"
-    @click.stop="jumpToCampus('campusDate')"
+    @click.stop="jump"
   >
-    <img
-      src="https://uploadfiles.nowcoder.com/files/20160729/60_1469787222046_sougou.png"
-      alt=""
-    >
+    <img :src="campusDate && campusDate.coverImg">
     <div class="content">
       <div class="head">
-        <div class="name">搜狗</div>
+        <div class="name">{{campusDate && campusDate.companyName}}</div>
         <div class="follow">+ 关注</div>
       </div>
       <card-bottom
@@ -33,6 +30,7 @@ export default {
   components: {
     CardBottom
   },
+  props: ['campusDate'],
   data () {
     return {
       neitui,
@@ -40,35 +38,38 @@ export default {
         {
           img: neitui,
           type: '内推',
-          date: '2月-3月'
+          date: this.campusDate && this.campusDate.timeTable.neitui
         },
         {
           img: wangshen,
           type: '网申',
-          date: '2月-3月'
+          date: this.campusDate && this.campusDate.timeTable.wangshen
         },
         {
           img: bishi,
           type: '笔试',
-          date: ''
+          date: this.campusDate && this.campusDate.timeTable.bishi
         },
         {
           img: mianshi,
           type: '面试',
-          date: '3月-4月'
+          date: this.campusDate && this.campusDate.timeTable.mianshi
         },
         {
           img: offer,
           type: 'offer',
-          date: '3月-5月'
+          date: this.campusDate && this.campusDate.timeTable.offer
         }
       ]
     }
   },
   methods: {
-    jumpToCampus (path) {
+    jump () {
       this.$router.push({
-        path
+        path: 'campusDate',
+        query: {
+          id: this.campusDate._id
+        }
       })
     }
   }

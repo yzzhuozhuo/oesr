@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
+import { mapActions } from 'vuex'
 
 import CardTitle from '@/components/CardTitle'
 import HotDiscuss from '@/components/HotDiscuss'
