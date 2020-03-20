@@ -38,7 +38,7 @@
         />
       </div>
     </div>
-    <div class="rec-wrap">
+    <!-- <div class="rec-wrap">
       <card-title titleName="公司主页" />
       <div class="company-wrap">
         <company-card
@@ -47,7 +47,7 @@
           :companyData="item"
         />
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 

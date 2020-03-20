@@ -122,7 +122,7 @@ export default new Router({
     },
     {
       path: '/login',
-      name: '登录页面',
+      name: 'login',
       component: LoginPage
     },
     {

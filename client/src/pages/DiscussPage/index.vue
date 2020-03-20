@@ -21,13 +21,21 @@
         </div>
         <publish @selectPublish="selectPublish" />
         <discuss :discussList="discussList" />
+        <pagination
+          :currentPage="currentPage"
+          :pageNum="pageNum"
+          :total="total"
+          :changePagination="changePagination"
+        />
       </div>
       <div class="right">
-        <card-title titleName="近期热帖" />
-        <hot-discuss
-          v-for="(item, index) in 18"
-          :key="index"
-        />
+        <div class="right-wrap">
+          <card-title titleName="近期热帖" />
+          <hot-discuss
+            v-for="(item, index) in 10"
+            :key="index"
+          />
+        </div>
       </div>
     </div>
   </div>
@@ -41,6 +49,7 @@ import HotDiscuss from '@/components/HotDiscuss'
 import Selector from './Selector'
 import Discuss from './Discuss'
 import Publish from './Publish'
+import Pagination from './Pagination'
 
 export default {
   name: 'DiscussPage',
@@ -50,7 +59,8 @@ export default {
     Selector,
     HotDiscuss,
     Discuss,
-    Publish
+    Publish,
+    Pagination
   },
   data () {
     return {
@@ -75,10 +85,20 @@ export default {
     }
   },
   computed: {
-    ...mapState({ discussList: state => state.discuss.discussList })
+    ...mapState({
+      discussList: state => state.discuss.discussList,
+      currentPage: state => state.discuss.currentPage,
+      pageNum: state => state.discuss.pageNum,
+      total: state => state.discuss.total
+    })
   },
   created () {
-    this.fetchDiscussInfo(this.publish, this.label)
+    this.fetchDiscussInfo({
+      publish: this.publish,
+      label: this.label,
+      currentPage: this.currentPage,
+      pageNum: this.pageNum
+    })
   },
   mounted () {},
   methods: {
@@ -90,13 +110,31 @@ export default {
     },
     selectedLabel (label) {
       if (this.label === label) return
-      this.fetchDiscussInfo({ label, publish: this.publish })
+      this.fetchDiscussInfo({
+        label,
+        publish: this.publish,
+        currentPage: this.currentPage,
+        pageNum: this.pageNum
+      })
       this.label = label
     },
     selectPublish (publish) {
       if (this.publish === publish) return
-      this.fetchDiscussInfo({ label: this.label, publish })
+      this.fetchDiscussInfo({
+        label: this.label,
+        publish,
+        currentPage: this.currentPage,
+        pageNum: this.pageNum
+      })
       this.publish = publish
+    },
+    changePagination (currentPage) {
+      this.fetchDiscussInfo({
+        publish: this.publish,
+        label: this.label,
+        currentPage,
+        pageNum: this.pageNum
+      })
     }
   }
 }
@@ -120,7 +158,6 @@ export default {
   background-color: #fff;
   padding: 15px 0;
   box-sizing: border-box;
-  /* text-align: center; */
   border: 1px solid #e0e0e0;
   border-radius: 3px;
 }
@@ -128,7 +165,6 @@ export default {
 .head {
   display: flex;
   justify-content: space-between;
-  /* align-items: center; */
 }
 
 .pub-btn {
@@ -156,9 +192,12 @@ export default {
 
 .right {
   width: 300px;
-  padding: 15px 0;
   box-sizing: border-box;
-  background-color: #fff;
-  border: 1px solid #e0e0e0;
+
+  &-wrap {
+    border: 1px solid #e0e0e0;
+    padding: 15px 0;
+    background-color: #fff;
+  }
 }
 </style>

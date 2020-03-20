@@ -19,14 +19,40 @@
     <el-menu-item index='/learnPage'>学习</el-menu-item>
     <el-menu-item index="/jobPage">求职</el-menu-item>
     <el-menu-item index="/discussPage">讨论区</el-menu-item>
-    <el-menu-item class="logoutBtn" @click="logout()">退出登陆</el-menu-item>
-    <el-menu-item index="/userPage">个人主页</el-menu-item>
-    <el-menu-item index="/company/designTheme">在线出题</el-menu-item>
-    <el-menu-item index="/practiceSquare">职位发布</el-menu-item>
-    <el-menu-item index="/preachList">宣讲会发布</el-menu-item>
-    <el-menu-item index="/company/page">公司主页</el-menu-item>
-    <el-menu-item v-if="hasLogin && !isLogout" style="float: right">{{userInfo && userInfo.studentName}}</el-menu-item>
-    <el-menu-item style="float: right" index="/login">登录/注册</el-menu-item>
+    <el-menu-item
+      v-if="hasLogin"
+      class="logoutBtn"
+      @click="handleLogout()"
+    >退出登陆</el-menu-item>
+    <el-menu-item
+      v-if="hasLogin && accountType === 'student'"
+      index="/userPage"
+    >个人主页</el-menu-item>
+    <el-menu-item
+      v-if="accountType === 'company'"
+      index="/company/designTheme"
+    >在线出题</el-menu-item>
+    <el-menu-item
+      v-if="accountType === 'company'"
+      index="/practiceSquare"
+    >职位发布</el-menu-item>
+    <el-menu-item
+      v-if="accountType === 'company'"
+      index="/preachList"
+    >宣讲会发布</el-menu-item>
+    <el-menu-item
+      v-if="accountType === 'company'"
+      index="/company/page"
+    >公司主页</el-menu-item>
+    <el-menu-item
+      v-if="hasLogin"
+      style="float: right"
+    >{{userName}}</el-menu-item>
+    <el-menu-item
+      v-if="!hasLogin"
+      style="float: right"
+      index="/login"
+    >登录/注册</el-menu-item>
     <!-- <el-menu-item style="float: right">
       <el-input v-model="searchVal" class="searchInput" size="mini" placeholder="请输入试题、公司" prefix-icon="el-icon-search"></el-input>
     </el-menu-item> -->
@@ -40,24 +66,32 @@ export default {
   data () {
     return {
       activeIndex: this.$route.path,
-      searchVal: '',
-      isLogout: false
+      searchVal: ''
     }
   },
   computed: {
     ...mapState({
-      userInfo: state => state.student.studentList
+      userInfo: state => state.student.studentList,
+      companyInfo: state => state.company.companyList
     }),
-    ...mapGetters(['hasLogin'])
-  },
-  mounted () {
-    this.fetchStudentList({studentId: '123'})
+    ...mapGetters(['hasLogin', 'accountType']),
+    userName () {
+      if (this.userInfo && this.accountType === 'student') {
+        return this.userInfo.studentName
+      } else if (this.companyInfo && this.accountType === 'company') {
+        return this.companyInfo.companyName
+      } else {
+        return ''
+      }
+    }
   },
   methods: {
-    ...mapActions(['fetchStudentList']),
-    logout () {
-      console.log('退出登录')
-      this.isLogout = true
+    ...mapActions(['logout']),
+    async handleLogout () {
+      await this.logout()
+      this.$router.replace({
+        path: '/'
+      })
     }
   }
 }
@@ -76,7 +110,7 @@ export default {
 } */
 .searchInput .el-input__inner {
   color: #fff;
-  background-color: #51575D;
+  background-color: #51575d;
 }
 .logoutBtn {
   float: right;

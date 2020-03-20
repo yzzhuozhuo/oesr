@@ -1,4 +1,4 @@
-/* 
+/*
   学生信息表
 */
 
@@ -49,6 +49,10 @@ const studentSchema = mongoose.Schema({
   },
   interestedPost: {
     type: Array
+  },
+  resume: {
+    type: Object,
+    require: true
   }
 }, { collection: 'student' })
 

@@ -100,6 +100,10 @@ export function fetchDiscussInfo (data) {
   }).then(utils.checkHttpStatus).then(utils.checkResponse).catch()
 }
 
+export function addAccount (body) {
+  let url = '/oesr/addAccount'
+  return axios.post(url, body).then(utils.checkHttpStatus).then(utils.checkResponse).catch({})
+}
 export function fetchStudentList (data) {
   return axios.get(`/oesr/studentList?${params(data)}`, {
     method: 'GET',
@@ -121,15 +125,38 @@ export function addStudentList (body) {
   }).then(utils.checkHttpStatus).then(utils.checkResponse).catch({})
 }
 
-export function updateStudentList (body) {
-  return fetch('/oesr/updateStudentList', {
-    method: 'POST',
+export function findTel (data) {
+  let url = '/oesr/findTel'
+  return axios.get(`${url}?${params(data)}`, {
+    method: 'GET',
     credentials: 'same-origin',
-    body: JSON.stringify(body),
     headers: {
       'Content-Type': 'application/json'
     }
-  }).then(utils.checkHttpStatus).then(utils.checkResponse).catch({})
+  }).then(utils.checkHttpStatus).then(utils.checkResponse).catch()
+}
+
+export function updateStudentList (body) {
+  const url = '/oesr/updateStudentList'
+  return axios.put(url, body).then(utils.checkHttpStatus).then(utils.checkResponse).catch({})
+}
+
+export async function uploadImg ({ file, domain, qiniuaddr }) {
+  const url = '/oesr/uploadImg'
+  const config = {
+    headers: { 'Content-Type': 'multipart/form-data' }
+  }
+  const filetype = file.type
+  // 重命名要上传的文件
+  const keyname = 'zed' + Date.now() + Math.floor(Math.random() * 100) + '.' + filetype
+  const res = await axios.get(url)
+  console.log(res)
+  const formdata = new FormData()
+  formdata.append('file', file)
+  formdata.append('token', res.data.data)
+  formdata.append('key', keyname)
+  // 获取到凭证之后再将文件上传到七牛云空间
+  return axios.post(domain, formdata, config)
 }
 
 export function fetchCompanyList (data) {
@@ -139,29 +166,43 @@ export function fetchCompanyList (data) {
     headers: {
       'Content-Type': 'application/json'
     }
+  }).then(utils.checkHttpStatus).then(utils.checkResponse).catch()
+}
+
+export function findAccount (body) {
+  let url = '/oesr/findAccount'
+  return axios.post(url, body).then(utils.checkHttpStatus).then(utils.checkResponse).catch({})
+}
+
+export function updatePsd (body) {
+  let url = '/oesr/updatePsd'
+  return axios.post(url, body).then(utils.checkHttpStatus).then(utils.checkResponse).catch({})
+}
+
+export function getUserInfo () {
+  let url = '/oesr/getUserInfo'
+  return axios.get(url, {
+    method: 'GET',
+    credentials: 'same-origin',
+    headers: {
+      'Content-Type': 'application/json'
+    }
   }).then(utils.checkHttpStatus).then(utils.checkResponse).catch({})
+}
+
+export function logout () {
+  let url = '/oesr/logout'
+  return axios.get(url).then(utils.checkHttpStatus).then(utils.checkResponse).catch({})
 }
 
 export function addCompanyList (body) {
-  return fetch('/oesr/addCompanyList', {
-    method: 'POST',
-    credentials: 'same-origin',
-    body: JSON.stringify(body),
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  }).then(utils.checkHttpStatus).then(utils.checkResponse).catch({})
+  const url = '/oesr/addCompanyList'
+  return axios.post(url, body).then(utils.checkHttpStatus).then(utils.checkResponse).catch({})
 }
 
 export function updateCompanyList (body) {
-  return fetch('/oesr/updateCompanyList', {
-    method: 'POST',
-    credentials: 'same-origin',
-    body: JSON.stringify(body),
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  }).then(utils.checkHttpStatus).then(utils.checkResponse).catch({})
+  const url = '/oesr/updateCompanyList'
+  return axios.put(url, body).then(utils.checkHttpStatus).then(utils.checkResponse).catch({})
 }
 
 export function fetchThemeList (data) {

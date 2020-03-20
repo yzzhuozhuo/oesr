@@ -1,12 +1,19 @@
 import * as types from '../mutation-types'
 
 const state = {
-  discussList: []
+  discussList: [],
+  currentPage: 1,
+  pageNum: 6,
+  total: 11
 }
 
 const mutations = {
-  [types.FETCH_DISCUSS_INFO] (state, discussList) {
-    state.discussList = discussList
+  [types.FETCH_DISCUSS_INFO] (state, data) {
+    console.info(data)
+    state.discussList = data.data
+    state.currentPage = data.currentPage
+    state.pageNum = data.pageNum
+    state.total = data.total
   }
 }
 
