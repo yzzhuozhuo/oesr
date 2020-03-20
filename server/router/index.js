@@ -29,6 +29,9 @@ router
   .get('/oesr/findTel', accountController.findTel)
   .get('/oesr/getUserInfo', accountController.getUserInfo)
   .get('/oesr/logout', accountController.logout)
+  .post('/oesr/updatePsd', accountController.updatePsd)
+
+  .get('/oesr/uploadImg', studentController.uploadImg)
 
   .get('/oesr/studentList', studentController.getStudent)
   .post('/oesr/addStudentList', studentController.addStudent)

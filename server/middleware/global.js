@@ -15,8 +15,8 @@ router
     .use(session({
         secret: credentials.secret,
         resave: true,
-        saveUninitialized: true,
-        cookie: { maxAge: 60 * 1000 * 60 } //过期时间
+        saveUninitialized: true
+        // cookie: { maxAge: 60 * 1000 * 60 } //过期时间
     }));
 
 module.exports = router

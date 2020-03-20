@@ -130,7 +130,12 @@ export default {
     })
   },
   methods: {
-    ...mapActions(['findTel', 'findAccount']),
+    ...mapActions([
+      'findTel',
+      'findAccount',
+      'fetchStudentList',
+      'fetchCompanyList'
+    ]),
     toMSMLogin () {
       this.isAccountLogin = false
       this.isMSMLogin = true
@@ -152,6 +157,10 @@ export default {
     login () {
       this.$refs['loginForm'].validate(async valid => {
         if (valid) {
+          await this.$message({
+            message: '登录成功',
+            type: 'success'
+          })
           this.$router.replace({
             path: '/'
           })
@@ -177,8 +186,20 @@ export default {
       if (!result.token) return callback(new Error(result.message))
       console.info('登录信息')
       console.info(result)
+      if (result.accountType === 'student') {
+        await this.fetchStudentList({
+          studentId: result.userId
+        })
+      } else if (result.accountType === 'company') {
+        await this.fetchCompanyList({
+          companyId: result.userId
+        })
+      }
       localStorage.clear()
-      localStorage.setItem('account', JSON.stringify(result))
+      console.info(this.loginForm.automaticLogin)
+      if (this.loginForm.automaticLogin) {
+        localStorage.setItem('account', JSON.stringify(result))
+      }
       return callback()
     }
   }

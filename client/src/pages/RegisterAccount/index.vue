@@ -124,7 +124,8 @@
             <div class="uploader">
               <el-upload
                 class="avatar-uploader"
-                action="https://jsonplaceholder.typicode.com/posts/"
+                :action="domain"
+                :http-request="handleUpload"
                 :show-file-list="false"
                 :on-success="handleAvatarSuccess"
                 :before-upload="beforeAvatarUpload"
@@ -148,7 +149,13 @@
               :model="newUserInfo"
               ref="studentInfoForm"
             >
-              <el-form-item label="我的昵称">
+              <el-form-item
+                label="我的昵称"
+                prop="studentName"
+                :rules="[
+                  { required: true, message: '昵称不能为空' }
+                ]"
+              >
                 <el-input
                   v-model="newUserInfo.studentName"
                   placeholder="请输入昵称"
@@ -157,6 +164,10 @@
               <el-form-item
                 label="我的性别"
                 class="sex"
+                prop="sex"
+                :rules="[
+                  { required: true, message: '请选择性别'}
+                ]"
               >
                 <div>
                   <el-radio
@@ -172,32 +183,60 @@
               <el-form-item
                 label="我的简介"
                 class="intro"
+                prop="introduction"
+                :rules="[
+                  { required: true, message: '请填写简历'}
+                ]"
               >
                 <el-input
                   v-model="newUserInfo.introduction"
                   type="textarea"
-                  placeholder="请输入个人简介"
+                  placeholder="我这个人很懒，什么也没留下"
                 ></el-input>
               </el-form-item>
-              <el-form-item label="我居住地">
+              <el-form-item
+                label="我居住地"
+                prop="address"
+                :rules="[
+                  { required: true, message: '请输入居住地'}
+                ]"
+              >
                 <el-input
                   v-model="newUserInfo.address"
                   placeholder="请输入居住地"
                 ></el-input>
               </el-form-item>
-              <el-form-item label="毕业年份">
+              <el-form-item
+                label="毕业年份"
+                prop="graduateTime"
+                :rules="[
+                  { required: true, message: '请输入毕业年份'}
+                ]"
+              >
                 <el-input
                   v-model="newUserInfo.graduateTime"
                   placeholder="请输入毕业年份"
                 ></el-input>
               </el-form-item>
-              <el-form-item label="我的学历">
+              <el-form-item
+                label="我的学历"
+                prop="education"
+                :rules="[
+                  { required: true, message: '请输入学历'}
+                ]"
+              >
                 <el-input
                   v-model="newUserInfo.education"
                   placeholder="请输入学历"
                 ></el-input>
               </el-form-item>
-              <el-form-item label="我的学校">
+              <el-form-item
+                label="我的学校"
+                prop="school"
+                :rules="[
+                  { required: true, message: '请输入学校'}
+                ]"
+              >
                 <el-input
                   v-model="newUserInfo.school"
                   placeholder="请输入学校"
@@ -219,7 +258,10 @@
                   </el-option>
                 </el-select>
               </el-form-item>
-              <el-form-item label="感兴趣的工作" prop="interestedClassify">
+              <el-form-item
+                label="感兴趣的工作"
+                prop="interestedClassify"
+              >
                 <div>
                   <el-select
                     v-model="newUserInfo.interestedClassify"
@@ -239,7 +281,8 @@
                     filterable
                     allow-create
                     default-first-option
-                    placeholder="请选择职位，或者自己添加">
+                    placeholder="请选择职位，或者自己添加"
+                  >
                     <el-option
                       v-for="item in postOptions"
                       :key="item.value"
@@ -260,14 +303,18 @@
           </div>
         </div>
       </div>
-      <div class="company-info"  v-if="hasRegister && loginForm.accountType === 'company'">
+      <div
+        class="company-info"
+        v-if="hasRegister && loginForm.accountType === 'company'"
+      >
         <div class="company-info-content">
           <div class="head">
             <span>企业信息填写</span>
             <div class="uploader">
               <el-upload
                 class="avatar-uploader"
-                action="https://jsonplaceholder.typicode.com/posts/"
+                :action="domain"
+                :http-request="handleUpload"
                 :show-file-list="false"
                 :on-success="handleAvatarSuccess"
                 :before-upload="beforeAvatarUpload"
@@ -288,10 +335,14 @@
             <el-form
               label-position="right"
               label-width="100px"
-              :model="newCompanyInfo"
               ref="companyInfoForm"
+              :model="newCompanyInfo"
+              :rules="companyInfoRules"
             >
-              <el-form-item label="公司名称">
+              <el-form-item
+                label="公司名称"
+                prop="companyName"
+              >
                 <el-input
                   v-model="newCompanyInfo.companyName"
                   placeholder="请输入公司名称"
@@ -300,6 +351,7 @@
               <el-form-item
                 label="公司简介"
                 class="intro"
+                prop="companyProfile"
               >
                 <el-input
                   v-model="newCompanyInfo.companyProfile"
@@ -307,19 +359,28 @@
                   placeholder="请输入公司简介"
                 ></el-input>
               </el-form-item>
-              <el-form-item label="所在城市">
+              <el-form-item
+                label="所在城市"
+                prop="companyAddress"
+              >
                 <el-input
                   v-model="newCompanyInfo.companyAddress"
                   placeholder="请输入公司所在城市，多个城市请用空车分隔"
                 ></el-input>
               </el-form-item>
-              <el-form-item label="需招职位">
+              <el-form-item
+                label="需招职位"
+                prop="recuritPosts"
+              >
                 <el-input
                   v-model="newCompanyInfo.recuritPosts"
                   placeholder="请输入职位名称，多个职位请用空格分隔"
                 ></el-input>
               </el-form-item>
-              <el-form-item label="薪酬福利">
+              <el-form-item
+                label="薪酬福利"
+                prop="companyWelfare"
+              >
                 <el-input
                   v-model="newCompanyInfo.companyWelfare"
                   placeholder="请输入公司薪酬福利情况"
@@ -328,6 +389,7 @@
               <el-form-item
                 label="业务体系"
                 class="business"
+                prop="companyBusiness"
               >
                 <el-input
                   v-model="newCompanyInfo.companyBusiness"
@@ -355,6 +417,8 @@ export default {
   name: 'RegisterAccount',
   data () {
     return {
+      domain: 'https://upload.qiniup.com',
+      qiniuaddr: 'q7heq11s7.bkt.clouddn.com',
       loginForm: {
         verCode: '', // 验证码
         tel: '',
@@ -364,9 +428,10 @@ export default {
         automaticLogin: true
       },
       hasRegister: false,
+      cacheUrl: '',
       newUserInfo: {
-        studentId: '5e71777db30fad55e4773471',
-        studentImgUrl: 'https://images.nowcoder.com/images/20190928/638373518_1569674550437_27E42C56E73D70CBE3050C38883E4E56?x-oss-process=image/resize,m_mfit,h_200,w_200',
+        studentId: '',
+        studentImgUrl: '',
         studentName: '',
         sex: '',
         introduction: '',
@@ -377,12 +442,13 @@ export default {
         interestedCompany: '', // []
         interestedClassify: '',
         interestedPost: '', // []
-        attentionSchedule: []
+        attentionSchedule: [],
+        resume: {}
       },
       newCompanyInfo: {
-        companyId: '123',
+        companyId: '',
         companyName: '',
-        companyImgUrl: 'https://images.nowcoder.com/images/20180718/921290_1531896583092_901BA20B5E086190E85C74B8628FA8D2?x-oss-process=image/resize,m_mfit,h_200,w_200',
+        companyImgUrl: '',
         companyProfile: '', // 公司简介
         companyWelfare: '', // 薪酬福利
         companyAddress: '', // 公司所在地
@@ -393,9 +459,7 @@ export default {
         companyName: [
           { required: true, message: '请输入公司名称', trigger: 'blur' }
         ],
-        companyImgUrl: [
-          { required: true, message: '请上传公司图片' }
-        ],
+        companyImgUrl: [{ required: true, message: '请上传公司图片' }],
         companyProfile: [
           { required: true, message: '请输入公司简介', trigger: 'blur' }
         ],
@@ -416,24 +480,16 @@ export default {
         studentName: [
           { required: true, message: '请输入用户昵称', trigger: 'blur' }
         ],
-        sex: [
-          { required: true, message: '请选择性别', trigger: 'change' }
-        ],
+        sex: [{ required: true, message: '请选择性别', trigger: 'change' }],
         introduction: [
           { required: true, message: '请输入个人简介', trigger: 'blur' }
         ],
-        address: [
-          { required: true, message: '请输入居住地', trigger: 'blur' }
-        ],
+        address: [{ required: true, message: '请输入居住地', trigger: 'blur' }],
         graduateTime: [
           { required: true, message: '请输入毕业时间', trigger: 'blur' }
         ],
-        education: [
-          { required: true, message: '请输入学历', trigger: 'blur' }
-        ],
-        school: [
-          { required: true, message: '请输入学校', trigger: 'blur' }
-        ]
+        education: [{ required: true, message: '请输入学历', trigger: 'blur' }],
+        school: [{ required: true, message: '请输入学校', trigger: 'blur' }]
       },
       companyOptions: [
         {
@@ -515,12 +571,13 @@ export default {
       'addCompanyList',
       'fetchCompanyList',
       'addAccount',
-      'findTel'
+      'findTel',
+      'uploadImg'
     ]),
     register () {
       this.$refs['loginForm'].validate(async valid => {
         if (valid) {
-          await this.addAccount({
+          const result = await this.addAccount({
             tel: this.loginForm.tel,
             password: this.loginForm.password,
             accountType: this.loginForm.accountType
@@ -530,12 +587,13 @@ export default {
             type: 'success'
           })
           this.hasRegister = true
-          // this.$router.replace({
-          //   name: 'login',
-          //   params: {
-          //     tel: this.loginForm.tel
-          //   }
-          // })
+          console.info('---注册成功---')
+          console.info(result)
+          if (result.accountType === 'student') {
+            this.newUserInfo.studentId = result._id
+          } else {
+            this.newCompanyInfo.companyId = result._id
+          }
         } else {
           return false
         }
@@ -559,28 +617,43 @@ export default {
       return callback()
     },
     updateStudentInfo () {
-      this.$refs['studentInfoForm'].validate(valid => {
+      this.$refs['studentInfoForm'].validate(async valid => {
+        console.info(valid)
         if (!valid) {
-          this.handleMessage('error', '表单输入异常！')
           return false
         } else {
-          this.addStudentList(this.newUserInfo)
+          await this.addStudentList(this.newUserInfo)
+          this.$router.replace({
+            name: 'login',
+            params: {
+              tel: this.loginForm.tel
+            }
+          })
         }
       })
     },
     updateCompanyInfo () {
-      this.$refs['companyInfoForm'].validate((valid) => {
+      this.$refs['companyInfoForm'].validate(async valid => {
+        console.info(valid)
         if (!valid) {
-          this.handleMessage('error', '表单输入异常！')
           return false
         } else {
-          this.addCompanyList(this.newCompanyInfo)
+          await this.addCompanyList(this.newCompanyInfo)
+          this.$router.replace({
+            name: 'login',
+            params: {
+              tel: this.loginForm.tel
+            }
+          })
         }
       })
     },
     handleAvatarSuccess (res, file) {
-      this.newUserInfo.studentImgUrl = URL.createObjectURL(file.raw)
-      console.log(111, this.newUserInfo.studentImgUrl)
+      if (this.loginForm.accountType === 'student') {
+        this.newUserInfo.studentImgUrl = this.cacheUrl
+      } else if (this.loginForm.accountType === 'company') {
+        this.newCompanyInfo.companyImgUrl = this.cacheUrl
+      }
     },
     beforeAvatarUpload (file) {
       const isPNG = file.type === 'image/png'
@@ -592,6 +665,14 @@ export default {
         this.$message.error('上传头像图片大小不能超过 2MB!')
       }
       return isPNG && isLt2M
+    },
+    async handleUpload (req) {
+      const result = await this.uploadImg({
+        file: req.file,
+        domain: this.domain,
+        qiniuaddr: this.qiniuaddr
+      })
+      this.cacheUrl = result
     }
   }
 }
@@ -693,6 +774,9 @@ export default {
       }
       .sex {
         margin-top: -10px;
+        & >>> .el-form-item__error {
+          margin-top: -5px !important;
+        }
       }
       .intro {
         margin-top: -10px;
@@ -744,7 +828,7 @@ export default {
         margin-top: -10px;
       }
       .intro {
-        margin-top: -10px;
+        // margin-top: -10px;
       }
       .el-input {
         width: 100%;

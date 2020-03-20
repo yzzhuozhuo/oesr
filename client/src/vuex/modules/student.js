@@ -7,6 +7,9 @@ const state = {
 const mutations = {
   [types.FETCH_STUDENT_LIST] (state, data) {
     state.studentList = data[0]
+  },
+  [types.UPDATE_STUDENT] (state, data) {
+    state.studentList = data
   }
 }
 

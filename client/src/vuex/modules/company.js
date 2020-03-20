@@ -7,6 +7,9 @@ const state = {
 const mutations = {
   [types.FETCH_COMPANY_LIST] (state, data) {
     state.companyList = data[0]
+  },
+  [types.UPDATE_COMPANY] (state, data) {
+    state.companyList = data
   }
 }
 
