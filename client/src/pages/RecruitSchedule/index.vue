@@ -5,50 +5,51 @@
     <div class="content">
       <div class="content-btn">
         <div
-          v-if="account.accountType === 'company'"
-          class="btn"
-          @click.stop="publish"
-        >发布职位</div>
-        <!-- <div
           v-if="account.accountType === 'student'"
           class="btn"
-        >我关注的</div> -->
+          @click.stop="publish"
+        >发布日程</div>
+        <div
+          v-if="account.accountType === 'student'"
+          class="btn"
+        >我关注的</div>
       </div>
       <div class="setting-content">
         <el-dialog
-          title="发布职位"
+          title="发布校招日程"
           :visible.sync="dialogPublish"
-          width="30%"
+          width="40%"
         >
-          <div class="pic">上传图片</div>
-          <el-upload
-            class="avatar-uploader"
-            :action="domain"
-            :show-file-list="false"
-            :http-request="handleUpload"
-            :on-success="handleAvatarSuccess"
-            :before-upload="beforeAvatarUpload"
-          >
-            <img
-              v-if="schemaForm.coverUrl"
-              :src="schemaForm.coverUrl"
-              class="avatar"
-            >
-            <i
-              v-else
-              class="el-icon-plus avatar-uploader-icon"
-            ></i>
-          </el-upload>
           <div class="form-content">
             <el-form
               :model="schemaForm"
               status-icon
               ref="schemaForm"
-              label-width="100px"
+              label-width="80px"
               class="demo-ruleForm"
             >
+              <el-form-item label="上传图片">
+                <el-upload
+                  class="avatar-uploader"
+                  :action="domain"
+                  :show-file-list="false"
+                  :http-request="handleUpload"
+                  :on-success="handleAvatarSuccess"
+                  :before-upload="beforeAvatarUpload"
+                >
+                  <img
+                    v-if="schemaForm.coverUrl"
+                    :src="schemaForm.coverUrl"
+                    class="avatar"
+                  >
+                  <i
+                    v-else
+                    class="el-icon-plus avatar-uploader-icon"
+                  ></i>
+                </el-upload>
+              </el-form-item>
               <el-form-item
-                label="类型"
+                label="职位类型"
                 prop="type"
                 :rules="[
                   { required: true, message: '请选择职位类型'},
@@ -76,31 +77,31 @@
                   ></el-option>
                 </el-select>
               </el-form-item>
-              <el-form-item label="内推">
+              <el-form-item label="内推时间">
                 <el-input
                   v-model="schemaForm.neitui"
                   placeholder="请输入内推时间"
                 ></el-input>
               </el-form-item>
-              <el-form-item label="网申">
+              <el-form-item label="网申时间">
                 <el-input
                   v-model="schemaForm.wangshen"
                   placeholder="请输入网申时间"
                 ></el-input>
               </el-form-item>
-              <el-form-item label="笔试">
+              <el-form-item label="笔试时间">
                 <el-input
                   v-model="schemaForm.bishi"
                   placeholder="请输入笔试时间"
                 ></el-input>
               </el-form-item>
-              <el-form-item label="面试">
+              <el-form-item label="面试时间">
                 <el-input
                   v-model="schemaForm.mianshi"
                   placeholder="请输入面试时间"
                 ></el-input>
               </el-form-item>
-              <el-form-item label="offer">
+              <el-form-item label="offer时间">
                 <el-input
                   v-model="schemaForm.offer"
                   placeholder="请输入offer发放时间"
@@ -239,9 +240,9 @@ export default {
           path: '/login'
         })
       }
-      this.$router.push({
-        path
-      })
+      // this.$router.push({
+      //   path
+      // })
       this.dialogPublish = true
     },
     resetForm () {
@@ -339,7 +340,11 @@ export default {
 
   .setting-content {
     .form-content {
-      margin-left: -22px;
+      // margin-left: -22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       .form-btn {
         display: flex;
         justify-content: center;
