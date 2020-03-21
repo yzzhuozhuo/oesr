@@ -31,10 +31,6 @@
                     class="el-menu-vertical-demo"
                     @select="handleSelect"
                   >
-                    <el-menu-item index="edit">
-                      <i class="el-icon-edit"></i>
-                      <span slot="title">编辑信息</span>
-                    </el-menu-item>
                     <el-menu-item index="company">
                       <i class="el-icon-office-building"></i>
                       <span slot="title">公司信息</span>

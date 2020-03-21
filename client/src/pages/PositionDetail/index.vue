@@ -145,7 +145,8 @@ export default {
   computed: {
     ...mapState({
       positionDetailList: state => state.position.positionDetailList || {},
-      resumeList: state => state.resumeList.resumeList || []
+      resumeList: state => state.resumeList.resumeList || [],
+      studentList: state => state.student.studentList
     })
   },
   watch: {
@@ -163,14 +164,15 @@ export default {
       'fetchResumeList'
     ]),
     applyPositon () {
+      console.log(555, this.positionDetailData)
       let data = {
-        studentId: '123',
-        studentName: '小卓子嘻嘻~',
+        studentId: this.studentList.studentId,
+        studentName: this.studentList.studentName,
         companyId: this.positionDetailData.companyId,
         positionId: this.positionDetailData._id,
         positionTitle: this.positionDetailData.positionTitle,
-        resumeTitle: '杨卓-前端工程师-2020届',
-        resumeUrl: 'https://uploadfiles.nowcoder.com/files/20190807/638373518_1565181935743_20%E6%A0%A1%E6%8B%9B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91_%E6%9D%A8%E5%8D%93.pdf'
+        resumeTitle: this.studentList.resume.name,
+        resumeUrl: this.studentList.resume.url
       }
       console.log(666, data)
       this.isLoading = true

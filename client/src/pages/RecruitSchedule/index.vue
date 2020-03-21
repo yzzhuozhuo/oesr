@@ -20,7 +20,7 @@
         <el-dialog
           title="发布校招日程"
           :visible.sync="dialogPublish"
-          width="420px"
+          width="40%"
         >
           <div class="form-content">
             <el-form

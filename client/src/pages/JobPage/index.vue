@@ -38,7 +38,7 @@
         />
       </div>
     </div>
-    <!-- <div class="rec-wrap">
+    <div class="rec-wrap">
       <card-title titleName="公司主页" />
       <div class="company-wrap">
         <company-card
@@ -47,7 +47,7 @@
           :companyData="item"
         />
       </div>
-    </div> -->
+    </div>
   </div>
 </template>
 
@@ -131,13 +131,15 @@ export default {
         }
       ],
       campusData: [],
-      interestedData: []
+      interestedData: [],
+      studentData: []
     }
   },
   computed: {
     ...mapState({
       campusList: state => state.campus.campusList,
-      interestedCompany: state => state.campus.interestedCompany
+      interestedCompany: state => state.campus.interestedCompany,
+      studentList: state => state.student.studentList
     })
   },
   watch: {
@@ -149,14 +151,15 @@ export default {
     }
   },
   created () {
-    // 根据学生感兴趣的公司进行推荐，即要拿到学生的信息
-    let params = {
-      // interestedCompany: ['网易']
-      interestedCompany: ['网易', '携程旅行', '字节跳动', '度小满', '完美世界', '作业帮', '网易互娱', '蘑菇街']
-    }
-    this.fetchCampusList(params)
   },
   mounted () {
+    console.log(1111, this.studentList)
+    // 根据学生感兴趣的公司进行推荐，即要拿到学生的信息
+    let params = {
+      interestedCompany: this.studentList.interestedCompany
+      // interestedCompany: ['网易', '携程旅行', '字节跳动', '度小满', '完美世界', '作业帮', '网易互娱', '蘑菇街']
+    }
+    this.fetchCampusList(params)
   },
   methods: {
     ...mapActions([
