@@ -4,7 +4,7 @@
       <img :src="comment">
       <span>{{title}}</span>
     </div>
-    <div class="user">
+    <div class="user" v-if="user && user.name">
       <img :src="user.avatar">
       <div class="info">
         <div class="info-top">{{user.name}}</div>
