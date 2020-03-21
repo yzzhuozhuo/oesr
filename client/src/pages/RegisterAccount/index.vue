@@ -443,7 +443,8 @@ export default {
         interestedClassify: '',
         interestedPost: '', // []
         attentionSchedule: [],
-        resume: {}
+        resume: {},
+        followCampus: []
       },
       newCompanyInfo: {
         companyId: '',
@@ -622,6 +623,7 @@ export default {
         if (!valid) {
           return false
         } else {
+          if (!this.cacheUrl) return this.$message.error('请上传图片')
           await this.addStudentList(this.newUserInfo)
           this.$router.replace({
             name: 'login',
@@ -638,6 +640,7 @@ export default {
         if (!valid) {
           return false
         } else {
+          if (!this.cacheUrl) return this.$message.error('请上传图片')
           await this.addCompanyList(this.newCompanyInfo)
           this.$router.replace({
             name: 'login',

@@ -253,3 +253,21 @@ export const getCampusDateById = function ({ commit }, data) {
     return data
   }).catch(generateErrorHandler(commit))
 }
+
+export const followCampusItem = function ({ commit }, data) {
+  commit(types.FOLLOW_CAMPUS_ITEM, data)
+  return api.updateStudentList(data.userInfo).then(data => {
+    return data
+  }).catch(generateErrorHandler(commit))
+}
+
+export const unFollowCampusItem = function ({ commit }, data) {
+  commit(types.UN_FOLLOW_CAMPUS_ITEM, data)
+  return api.updateStudentList(data.userInfo).then(data => {
+    return data
+  }).catch(generateErrorHandler(commit))
+}
+
+export const filterCampusList = function ({ commit }, data) {
+  commit(types.FILTER_FOLLOW_CAMPUS_ITEM, data)
+}

@@ -11,6 +11,14 @@ const mutations = {
   [types.ADD_CAMPUS_DATE_LIST] (state, data) {
     console.info(data)
     state.campusDateList.push(data)
+  },
+  [types.FILTER_FOLLOW_CAMPUS_ITEM] (state, data) {
+    console.info(data)
+    if (data.isFollow) {
+      state.campusDateList = state.campusDateList.filter(item => {
+        return data.followCampus.includes(item._id)
+      })
+    }
   }
 }
 
