@@ -53,6 +53,9 @@ const studentSchema = mongoose.Schema({
   resume: {
     type: Object,
     require: true
+  },
+  followCampus: {
+    type: Array
   }
 }, { collection: 'student' })
 

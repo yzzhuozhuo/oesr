@@ -79,31 +79,46 @@
                   ></el-option>
                 </el-select>
               </el-form-item>
-              <el-form-item label="内推时间">
+              <el-form-item
+                label="内推时间"
+                prop="neitui"
+              >
                 <el-input
                   v-model="schemaForm.neitui"
                   placeholder="请输入内推时间"
                 ></el-input>
               </el-form-item>
-              <el-form-item label="网申时间">
+              <el-form-item
+                label="网申时间"
+                prop="wangshen"
+              >
                 <el-input
                   v-model="schemaForm.wangshen"
                   placeholder="请输入网申时间"
                 ></el-input>
               </el-form-item>
-              <el-form-item label="笔试时间">
+              <el-form-item
+                label="笔试时间"
+                prop="bishi"
+              >
                 <el-input
                   v-model="schemaForm.bishi"
                   placeholder="请输入笔试时间"
                 ></el-input>
               </el-form-item>
-              <el-form-item label="面试时间">
+              <el-form-item
+                label="面试时间"
+                prop="mianshi"
+              >
                 <el-input
                   v-model="schemaForm.mianshi"
                   placeholder="请输入面试时间"
                 ></el-input>
               </el-form-item>
-              <el-form-item label="offer时间">
+              <el-form-item
+                label="offer时间"
+                prop="offer"
+              >
                 <el-input
                   v-model="schemaForm.offer"
                   placeholder="请输入offer发放时间"
@@ -131,8 +146,11 @@
         >
           <schedule-card
             v-for="(item, index) in campusDateList"
-            :key="index"
+            :key="index + Math.random()"
             :campusDate="item"
+            :followCampus="followCampus"
+            @followItem="followItem"
+            @unfollowItem="unfollowItem"
           />
         </el-tab-pane>
         <el-tab-pane
@@ -141,8 +159,12 @@
           class="pane"
         >
           <schedule-card
-            v-for="(item, index) in 1"
-            :key="index"
+            v-for="(item, index) in campusDateListFilter(1)"
+            :key="index + Math.random()"
+            :campusDate="item"
+            :followCampus="followCampus"
+            @followItem="followItem"
+            @unfollowItem="unfollowItem"
           />
         </el-tab-pane>
         <el-tab-pane
@@ -151,8 +173,12 @@
           class="pane"
         >
           <schedule-card
-            v-for="(item, index) in 0"
-            :key="index"
+            v-for="(item, index) in campusDateListFilter(2)"
+            :key="index + Math.random()"
+            :campusDate="item"
+            :followCampus="followCampus"
+            @followItem="followItem"
+            @unfollowItem="unfollowItem"
           />
         </el-tab-pane>
         <el-tab-pane
@@ -161,8 +187,12 @@
           class="pane"
         >
           <schedule-card
-            v-for="(item, index) in 0"
-            :key="index"
+            v-for="(item, index) in campusDateListFilter(3)"
+            :key="index + Math.random()"
+            :campusDate="item"
+            :followCampus="followCampus"
+            @followItem="followItem"
+            @unfollowItem="unfollowItem"
           />
         </el-tab-pane>
         <el-tab-pane
@@ -171,8 +201,12 @@
           class="pane"
         >
           <schedule-card
-            v-for="(item, index) in 9"
-            :key="index"
+            v-for="(item, index) in campusDateListFilter(4)"
+            :key="index + Math.random()"
+            :campusDate="item"
+            :followCampus="followCampus"
+            @followItem="followItem"
+            @unfollowItem="unfollowItem"
           />
         </el-tab-pane>
       </el-tabs>
@@ -184,7 +218,7 @@
 import TopBanner from './TopBanner'
 import MiddleBanner from './MiddleBanner'
 import ScheduleCard from './ScheduleCard'
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapActions, mapGetters } from 'vuex'
 
 export default {
   name: 'RecruitSchedule',
@@ -223,18 +257,30 @@ export default {
   },
   computed: {
     ...mapState({
+      userInfo: state => state.student.studentList,
       company: state => state.company.companyList,
       account: state => state.account,
       campusDateList: state => state.campusDate.campusDateList
-    })
+    }),
+    ...mapGetters(['followCampus'])
   },
   mounted () {
     this.getCampusDate()
   },
   methods: {
-    ...mapActions(['uploadImg', 'addCampusDate', 'getCampusDate']),
+    ...mapActions([
+      'uploadImg',
+      'addCampusDate',
+      'getCampusDate',
+      'followCampusItem',
+      'unFollowCampusItem',
+      'filterCampusList'
+    ]),
+    campusDateListFilter (index) {
+      return this.campusDateList.filter(item => item.companyType === index)
+    },
     handleClick (tab, event) {
-      console.log(tab, event)
+      console.log(this.userInfo)
     },
     publish () {
       if (!this.account.token) {
@@ -266,6 +312,7 @@ export default {
       console.info(data)
       this.$refs['schemaForm'].validate(async valid => {
         if (valid) {
+          if (!this.cacheUrl) return this.$message.error('请上传图片')
           await this.addCampusDate(data)
           await this.$message({
             message: '发布成功',
@@ -302,6 +349,27 @@ export default {
     },
     handleFollow () {
       this.isFollow = !this.isFollow
+      const data = {
+        followCampus: this.followCampus,
+        isFollow: this.isFollow
+      }
+      if (this.isFollow) {
+        this.filterCampusList(data)
+      } else {
+        this.getCampusDate()
+      }
+    },
+    followItem (id) {
+      this.followCampusItem({
+        campusDateId: id,
+        userInfo: this.userInfo
+      })
+    },
+    unfollowItem (id) {
+      this.unFollowCampusItem({
+        campusDateId: id,
+        userInfo: this.userInfo
+      })
     }
   }
 }
@@ -379,7 +447,6 @@ export default {
     .avatar-uploader {
       width: 100px;
       height: 100px;
-      margin: 0 0 20px 78px;
       border: 1px solid #d9d9d9;
     }
     .avatar-uploader .el-upload {

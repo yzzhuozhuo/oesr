@@ -7,7 +7,11 @@
     <div class="content">
       <div class="head">
         <div class="name">{{campusDate && campusDate.companyName}}</div>
-        <div class="follow">+ 关注</div>
+        <div
+          class="follow"
+          :class="isFollow ? 'active' : 'nomal'"
+          @click.stop="handleFollow"
+        >{{isFollow ? '已关注' : '+ 关注'}}</div>
       </div>
       <card-bottom
         v-for="(item, index) in listInfo"
@@ -30,10 +34,9 @@ export default {
   components: {
     CardBottom
   },
-  props: ['campusDate'],
+  props: ['campusDate', 'followCampus', 'followItem'],
   data () {
     return {
-      neitui,
       listInfo: [
         {
           img: neitui,
@@ -60,8 +63,14 @@ export default {
           type: 'offer',
           date: this.campusDate && this.campusDate.timeTable.offer
         }
-      ]
+      ],
+      isFollow: false
     }
+  },
+  mounted () {
+    const isFollow =
+      this.followCampus && this.followCampus.includes(this.campusDate._id)
+    this.isFollow = !!isFollow
   },
   methods: {
     jump () {
@@ -71,6 +80,14 @@ export default {
           id: this.campusDate._id
         }
       })
+    },
+    handleFollow () {
+      if (!this.isFollow) {
+        this.$emit('followItem', this.campusDate._id)
+      } else {
+        this.$emit('unfollowItem', this.campusDate._id)
+      }
+      this.isFollow = !this.isFollow
     }
   }
 }
@@ -122,8 +139,17 @@ export default {
         height: 18px;
         padding: 1px 6px;
         font-size: 12px;
+      }
+
+      .active {
         background-color: #25bb9b;
         color: #fff;
+      }
+
+      .nomal {
+        background-color: #fff;
+        color: #25bb9b;
+        font-size: 13px;
       }
     }
   }
