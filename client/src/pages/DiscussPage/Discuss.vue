@@ -9,7 +9,7 @@
       <div class="main">
         <div
           class="comment-word"
-          @click="jump('discussDetail')"
+          @click="jump(discuss)"
         >
           {{discuss.title}}
         </div>
@@ -44,9 +44,12 @@ export default {
     formatTime (time) {
       return moment(time).format('YYYY-MM-DD')
     },
-    jump (path) {
+    jump (discuss) {
       this.$router.push({
-        path
+        path: 'discussDetail',
+        query: {
+          id: discuss._id
+        }
       })
     }
   }

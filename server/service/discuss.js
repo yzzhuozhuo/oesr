@@ -28,3 +28,11 @@ exports.getDiscussInfo = function (query) {
     }
   })
 }
+
+exports.addDiscuss = function (data) {
+  return DiscussModel.insertMany(data)
+}
+
+exports.findDiscussById = function (_id) {
+  return DiscussModel.findById(_id)
+}

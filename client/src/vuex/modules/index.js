@@ -12,6 +12,7 @@ import theme from './theme'
 import score from './score'
 import campus from './campus'
 import resumeList from './resumeList'
+import campusDate from './campusDate'
 
 export default {
   user,
@@ -27,5 +28,6 @@ export default {
   theme,
   score,
   campus,
-  resumeList
+  resumeList,
+  campusDate
 }

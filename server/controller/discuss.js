@@ -10,3 +10,22 @@ exports.getDiscuss = function (req, res) {
     console.log(222, err)
   })
 }
+
+exports.addDiscuss = async function (req, res) {
+  const data = await discussService.addDiscuss(req.body)
+  console.info(data)
+  res.send({
+    code: '200',
+    data: 'ok'
+  })
+}
+
+exports.findDiscussById = async function (req, res) {
+  const { id } = req.query
+  const data = await discussService.findDiscussById(id)
+  console.info(id)
+  res.send({
+    code: '200',
+    data
+  })
+}

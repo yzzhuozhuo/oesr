@@ -117,7 +117,7 @@ export default new Router({
     },
     {
       path: '/discussDetail',
-      name: '帖子详情',
+      name: 'discussDetail',
       component: DiscussDetail
     },
     {

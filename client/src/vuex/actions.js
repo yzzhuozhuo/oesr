@@ -221,3 +221,35 @@ export const addResumeList = function ({ commit }, data) {
     return data
   }).catch(generateErrorHandler(commit))
 }
+
+export const addDiscuss = function ({ commit }, data) {
+  return api.addDiscuss(data).then(data => {
+    return data
+  }).catch(generateErrorHandler(commit))
+}
+
+export const findDiscussById = function ({ commit }, data) {
+  return api.findDiscussById(data).then(data => {
+    return data
+  }).catch(generateErrorHandler(commit))
+}
+
+export const addCampusDate = function ({ commit }, data) {
+  return api.addCampusDate(data).then(data => {
+    commit(types.ADD_CAMPUS_DATE_LIST, data)
+    return data
+  }).catch(generateErrorHandler(commit))
+}
+
+export const getCampusDate = function ({ commit }, data) {
+  return api.getCampusDate(data).then(data => {
+    commit(types.FETCH_CAMPUS_DATE_LIST, data)
+    return data
+  }).catch(generateErrorHandler(commit))
+}
+
+export const getCampusDateById = function ({ commit }, data) {
+  return api.getCampusDateById(data).then(data => {
+    return data
+  }).catch(generateErrorHandler(commit))
+}

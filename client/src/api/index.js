@@ -100,6 +100,22 @@ export function fetchDiscussInfo (data) {
   }).then(utils.checkHttpStatus).then(utils.checkResponse).catch()
 }
 
+export function addDiscuss (body) {
+  let url = '/oesr/addDiscuss'
+  return axios.post(url, body).then(utils.checkHttpStatus).then(utils.checkResponse).catch()
+}
+
+export function findDiscussById (data) {
+  let url = '/oesr/findDiscussById'
+  return axios.get(`${url}?id=${data}`, {
+    method: 'GET',
+    credentials: 'same-origin',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }).then(utils.checkHttpStatus).then(utils.checkResponse).catch()
+}
+
 export function addAccount (body) {
   let url = '/oesr/addAccount'
   return axios.post(url, body).then(utils.checkHttpStatus).then(utils.checkResponse).catch({})
@@ -177,6 +193,33 @@ export function findAccount (body) {
 export function updatePsd (body) {
   let url = '/oesr/updatePsd'
   return axios.post(url, body).then(utils.checkHttpStatus).then(utils.checkResponse).catch({})
+}
+
+export function addCampusDate (body) {
+  let url = '/oesr/addCampusDate'
+  return axios.post(url, body).then(utils.checkHttpStatus).then(utils.checkResponse).catch({})
+}
+
+export function getCampusDate () {
+  let url = '/oesr/getCampusDate'
+  return axios.get(url, {
+    method: 'GET',
+    credentials: 'same-origin',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }).then(utils.checkHttpStatus).then(utils.checkResponse).catch({})
+}
+
+export function getCampusDateById (data) {
+  let url = '/oesr/getCampusDateById'
+  return axios.get(`${url}?id=${data}`, {
+    method: 'GET',
+    credentials: 'same-origin',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }).then(utils.checkHttpStatus).then(utils.checkResponse).catch()
 }
 
 export function getUserInfo () {
