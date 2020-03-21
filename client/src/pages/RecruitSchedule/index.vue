@@ -6,19 +6,21 @@
       <div class="content-btn">
         <div
           v-if="account.accountType === 'company'"
-          class="btn"
+          class="btn hover"
           @click.stop="publish"
         >发布职位</div>
-        <!-- <div
+        <div
           v-if="account.accountType === 'student'"
           class="btn"
-        >我关注的</div> -->
+          :class="isFollow ? 'active' : 'nomal'"
+          @click.stop="handleFollow"
+        >我关注的</div>
       </div>
       <div class="setting-content">
         <el-dialog
           title="发布职位"
           :visible.sync="dialogPublish"
-          width="30%"
+          width="420px"
         >
           <div class="pic">上传图片</div>
           <el-upload
@@ -195,6 +197,7 @@ export default {
       domain: 'https://upload.qiniup.com',
       qiniuaddr: 'q7heq11s7.bkt.clouddn.com',
       activeName: 'first',
+      isFollow: false,
       bannerImg:
         'https://static.nowcoder.com/images-nk/img/campusRecruitment/tip-bg.png',
       dialogPublish: false,
@@ -239,9 +242,6 @@ export default {
           path: '/login'
         })
       }
-      this.$router.push({
-        path
-      })
       this.dialogPublish = true
     },
     resetForm () {
@@ -298,6 +298,9 @@ export default {
         qiniuaddr: this.qiniuaddr
       })
       this.cacheUrl = result
+    },
+    handleFollow () {
+      this.isFollow = !this.isFollow
     }
   }
 }
@@ -323,16 +326,26 @@ export default {
       z-index: 100;
       right: 30px;
       color: #fff;
+      cursor: pointer;
 
       .btn {
         padding: 5px 8px;
         background-color: #25bb9b;
         border-radius: 5px;
+      }
 
-        &:hover {
-          cursor: pointer;
-          background-color: #0fa786;
-        }
+      .hover:hover {
+        background-color: #0fa786;
+      }
+
+      .nomal {
+        background-color: #fff;
+        color: #333;
+      }
+
+      .active {
+        background-color: #25bb9b;
+        color: #fff;
       }
     }
   }
@@ -356,7 +369,7 @@ export default {
       left: 28px;
     }
     >>> .el-input__inner {
-      width: 320px;
+      width: 300px;
     }
     .avatar-uploader {
       width: 100px;
