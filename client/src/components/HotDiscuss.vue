@@ -1,9 +1,12 @@
 <template>
-  <div class="hot">
-    <div class="top">腾讯后台一面面经</div>
+  <div
+    class="hot"
+    @click="jump(hotCommentData)"
+  >
+    <div class="top">{{hotCommentData.title}}</div>
     <div class="bottom">
-      <div class="time">发表于 2020-03-07 15:25:41</div>
-      <div class="reword">回复（10）</div>
+      <div class="time">发表于 {{hotCommentData.createAt}}</div>
+      <div class="reword">精</div>
     </div>
   </div>
 </template>
@@ -14,7 +17,17 @@ export default {
   data () {
     return {}
   },
-  mounted () {}
+  mounted () {},
+  methods: {
+    jump (hotCommentData) {
+      this.$router.push({
+        path: 'discussDetail',
+        query: {
+          id: hotCommentData._id
+        }
+      })
+    }
+  }
 }
 </script>
 
@@ -43,6 +56,10 @@ export default {
     display: flex;
     margin: 10px 0;
     justify-content: space-between;
+
+    .reword {
+      color: #f1777d;
+    }
   }
 }
 </style>
