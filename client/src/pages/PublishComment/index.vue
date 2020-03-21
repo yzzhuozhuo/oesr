@@ -170,7 +170,9 @@ export default {
   },
   computed: {
     ...mapState({
-      userInfo: state => state.student.studentList
+      userInfo: state => state.student.studentList,
+      companyInfo: state => state.company.companyList,
+      account: state => state.account
     })
   },
   methods: {
@@ -198,6 +200,16 @@ export default {
           const classifyObj = this.classifyList.filter(
             item => item.value === classify
           )
+          let id, name, avatar
+          if (this.account.accountType === 'student') {
+            id = this.userInfo.studentId
+            name = this.userInfo.studentName
+            avatar = this.userInfo.studentImgUrl
+          } else if (this.account.accountType === 'company') {
+            id = this.companyInfo.companyId
+            name = this.companyInfo.companyName
+            avatar = this.companyInfo.companyImgUrl
+          }
           const data = {
             title: this.comment.title || '',
             content: this.comment.main || '',
@@ -208,9 +220,9 @@ export default {
               name: classifyObj[0].label
             },
             user: {
-              id: this.userInfo.studentId,
-              name: this.userInfo.studentName,
-              avatar: this.userInfo.studentImgUrl
+              id,
+              name,
+              avatar
             }
           }
           const res = await this.addDiscuss(data)

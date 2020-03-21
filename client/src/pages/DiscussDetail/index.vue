@@ -22,10 +22,11 @@
       </div>
       <div class="right">
         <div class="right-wrap">
-          <card-title titleName="近期热帖" />
-          <hot-discuss
-            v-for="(item, index) in 18"
+          <card-title titleName="励志语句" />
+          <famous
+            v-for="(item, index) in famousList"
             :key="index"
+            :famous="item"
           />
         </div>
       </div>
@@ -35,9 +36,8 @@
 
 <script>
 import { mapActions } from 'vuex'
-
 import CardTitle from '@/components/CardTitle'
-import HotDiscuss from '@/components/HotDiscuss'
+import Famous from './Famous'
 import ContentHeader from './ContentHeader'
 import Comment from './Comment'
 import ReplyComment from './ReplyComment'
@@ -46,17 +46,59 @@ export default {
   name: 'DiscussDetail',
   components: {
     CardTitle,
-    HotDiscuss,
+    Famous,
     ContentHeader,
     Comment,
     ReplyComment
   },
   data () {
     return {
-      discuss: {}
+      discuss: {},
+      famousList: [
+        {
+          title: '世上没有常胜将军',
+          name: '治愈系文字'
+        },
+        {
+          title: '自己才是最靠得住的人',
+          name: '治愈系文字'
+        },
+        {
+          title: '不是井里没有水，而是你挖的不够深',
+          name: '格局'
+        },
+        {
+          title: '自己选择的路，跪着也要把它走完',
+          name: '旅途'
+        },
+        {
+          title: '我现在没空，忙着优秀。',
+          name: '优秀人'
+        },
+        {
+          title: '越努力越幸运',
+          name: '治愈系文字'
+        },
+        {
+          title: '成长是一场和自己的比赛',
+          name: '奥德赛'
+        },
+        {
+          title: '从来没有一种坚持会被辜负',
+          name: '坚持'
+        },
+        {
+          title: '没有哪种教育能及得上逆境',
+          name: '逆境'
+        },
+        {
+          title: '去变成你自己。',
+          name: '治愈系文字'
+        }
+      ]
     }
   },
-  mounted () {
+  created () {
     this.getDiscussInfo()
   },
   methods: {

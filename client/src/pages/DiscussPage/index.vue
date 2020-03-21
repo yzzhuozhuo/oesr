@@ -32,8 +32,9 @@
         <div class="right-wrap">
           <card-title titleName="近期热帖" />
           <hot-discuss
-            v-for="(item, index) in 10"
+            v-for="(item, index) in discussList"
             :key="index"
+            :hotCommentData="item"
           />
         </div>
       </div>
