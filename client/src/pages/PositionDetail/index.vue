@@ -100,7 +100,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapActions, mapGetters } from 'vuex'
 
 export default {
   name: 'PositionDetail',
@@ -138,16 +138,20 @@ export default {
   created () {
     let positionDetailId = this.$route.query.positionDetailId
     this.fetchPositionDetailList({ positionDetailId: positionDetailId })
-    this.fetchResumeList({ positionId: positionDetailId, studentId: '123' })
+    if (this.hasLogin) {
+      this.fetchResumeList({ positionId: positionDetailId, studentId: '123' })
+    }
   },
   mounted () {
   },
   computed: {
     ...mapState({
+      account: state => state.account,
       positionDetailList: state => state.position.positionDetailList || {},
       resumeList: state => state.resumeList.resumeList || [],
       studentList: state => state.student.studentList
-    })
+    }),
+    ...mapGetters(['hasLogin'])
   },
   watch: {
     positionDetailList () {
@@ -164,6 +168,12 @@ export default {
       'fetchResumeList'
     ]),
     applyPositon () {
+      if (!this.account.token) {
+        this.$message.error('请先登录，才能申请职位哦~')
+        return this.$router.replace({
+          path: '/login'
+        })
+      }
       console.log(555, this.positionDetailData)
       let data = {
         studentId: this.studentList.studentId,

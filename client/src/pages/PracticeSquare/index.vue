@@ -71,7 +71,7 @@
         </div>
       </div>
       <div class="right">
-        <div class="publish" @click="publishPost">
+        <div class="publish" @click="publishPost" v-if="accountType === 'company'">
           <div class="img"></div>
           <span>发布职位</span>
         </div>
@@ -152,7 +152,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapActions, mapGetters } from 'vuex'
 import _ from 'lodash'
 import moment from 'moment'
 import Banner from '@/components/Banner'
@@ -373,11 +373,13 @@ export default {
   },
   computed: {
     ...mapState({
+      account: state => state.account,
       positionList: state => state.position.positionList || [],
       totalPage: state => state.position.totalPage || 0,
       pageNumber: state => state.position.pageNumber || 10,
       page: state => state.position.page || 1
     }),
+    ...mapGetters(['accountType']),
     fetchList () {
       return `${this.selectCity}_${this.selectType}_${this.selectTab}`
     }
@@ -462,6 +464,12 @@ export default {
     },
     publishPost () {
       // TODO发布职位
+      if (!this.account.token) {
+        this.$message.error('请先登录，才能发布职位哦~')
+        return this.$router.replace({
+          path: '/login'
+        })
+      }
       this.addMesDialogVisible = true
     },
     fetchPositionDataList () {

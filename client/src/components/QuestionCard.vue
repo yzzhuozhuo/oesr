@@ -31,6 +31,8 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
   props: ['questionCardData'],
   data () {
@@ -38,8 +40,19 @@ export default {
 
     }
   },
+  computed: {
+    ...mapState({
+      account: state => state.account
+    })
+  },
   methods: {
     toQuestionList (id) {
+      if (!this.account.token) {
+        this.$message.error('请先登录，才能查看哦~')
+        return this.$router.replace({
+          path: '/login'
+        })
+      }
       this.$router.push({
         path: 'questionList',
         query: {

@@ -2,7 +2,9 @@
   <div class="main">
     <div class="header-title">
       <span>求职 > 校招日历</span>
-      <el-button type="primary" size="small" @click="addCalendarData">添加日历</el-button>
+      <el-button type="primary" size="small" @click="addCalendarData" v-if="!hasLogin">添加日历</el-button>
+      <el-button type="primary" size="small" @click="addCalendarData" v-if="accountType === 'student'">添加日历</el-button>
+      <el-button type="primary" size="small" @click="addCalendarData" v-if="accountType === 'company'">发布日历</el-button>
     </div>
     <div class="calendar">
       <el-calendar v-model="value" class="calendar-content">
@@ -59,7 +61,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapActions, mapGetters } from 'vuex'
 import moment from 'moment'
 
 export default {
@@ -78,8 +80,10 @@ export default {
   },
   computed: {
     ...mapState({
-      calendarList: state => state.calendar.calendarList || []
-    })
+      calendarList: state => state.calendar.calendarList || [],
+      account: state => state.account
+    }),
+    ...mapGetters(['hasLogin', 'accountType'])
   },
   watch: {
     calendarList () {
@@ -114,6 +118,12 @@ export default {
       this.addDialogVisible = false
     },
     addCalendarData () {
+      if (!this.account.token) {
+        this.$message.error('请先登录，才能添加哦~')
+        return this.$router.replace({
+          path: '/login'
+        })
+      }
       this.addDialogVisible = true
     }
   }

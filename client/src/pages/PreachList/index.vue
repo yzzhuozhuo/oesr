@@ -26,7 +26,9 @@
           <div class="point"></div>
           <span class="preach">近期宣讲会</span>
           <span class="totle">共{{this.total}}条信息</span>
-          <el-button type="text" class="btn" @click="addMsg">+我要添加</el-button>
+          <el-button type="text" class="btn" @click="addMsg" v-if="!hasLogin">+我要添加</el-button>
+          <el-button type="text" class="btn" @click="addMsg" v-if="accountType === 'student'">+我要添加</el-button>
+          <el-button type="text" class="btn" @click="addMsg" v-if="accountType === 'company'">+我要发布</el-button>
         </div>
         <div class="select">
           <el-select clearable v-model="selectCity" placeholder="请选择宣讲城市">
@@ -134,7 +136,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapActions, mapGetters } from 'vuex'
 import moment from 'moment'
 import _ from 'lodash'
 const tomorrowStart = new Date(new Date(new Date().toLocaleDateString()).getTime() + 3600 * 1000 * 24 * 1)
@@ -235,11 +237,13 @@ export default {
   },
   computed: {
     ...mapState({
+      account: state => state.account,
       preachList: state => state.preach.preachList || [],
       totalPage: state => state.preach.totalPage || 0,
       pageNumber: state => state.preach.pageNumber || 10,
       page: state => state.preach.page || 1
     }),
+    ...mapGetters(['hasLogin', 'accountType']),
     fetchList () {
       return `${this.searchVal}_${this.selectCity}_${this.selectSchool}_${this.pickDateVal}`
     }
@@ -290,6 +294,12 @@ export default {
       this.fetchPreachList(params)
     },
     addMsg () {
+      if (!this.account.token) {
+        this.$message.error('请先登录，才能添加哦~')
+        return this.$router.replace({
+          path: '/login'
+        })
+      }
       console.log('增加信息')
       this.addMesDialogVisible = true
       console.log(111, this.preachData)

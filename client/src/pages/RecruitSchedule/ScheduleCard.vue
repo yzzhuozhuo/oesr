@@ -8,6 +8,13 @@
       <div class="head">
         <div class="name">{{campusDate && campusDate.companyName}}</div>
         <div
+          v-if="!hasLogin"
+          class="follow"
+          style="color: #25bb9b"
+          @click.stop="handleFollow"
+        >+ 关注</div>
+        <div
+          v-if="hasLogin && accountType === 'student'"
           class="follow"
           :class="isFollow ? 'active' : 'nomal'"
           @click.stop="handleFollow"
@@ -23,6 +30,7 @@
 </template>
 
 <script>
+import { mapGetters, mapState } from 'vuex'
 import CardBottom from './CardBottom'
 import neitui from '@/assets/neitui.png'
 import wangshen from '@/assets/wangshen.png'
@@ -67,6 +75,12 @@ export default {
       isFollow: false
     }
   },
+  computed: {
+    ...mapState({
+      account: state => state.account
+    }),
+    ...mapGetters(['hasLogin', 'accountType'])
+  },
   mounted () {
     const isFollow =
       this.followCampus && this.followCampus.includes(this.campusDate._id)
@@ -82,6 +96,12 @@ export default {
       })
     },
     handleFollow () {
+      if (!this.account.token) {
+        this.$message.error('请先登录，才能添加关注哦~')
+        return this.$router.replace({
+          path: '/login'
+        })
+      }
       if (!this.isFollow) {
         this.$emit('followItem', this.campusDate._id)
       } else {

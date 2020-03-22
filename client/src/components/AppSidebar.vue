@@ -93,7 +93,7 @@ export default {
   cursor: pointer;
 }
 .contant-img:hover {
-  border: 2px solid rgb(76, 0, 255);
+  border: 2px solid #707070;
 }
 .contant-img img {
   width: 90%;

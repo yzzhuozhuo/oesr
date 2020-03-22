@@ -14,20 +14,21 @@
         <span>oesr</span>
       </div>
     </el-menu-item>
-    <el-menu-item index='/'>首页</el-menu-item>
-    <el-menu-item index='/questionPage'>题库</el-menu-item>
-    <el-menu-item index='/learnPage'>学习</el-menu-item>
-    <el-menu-item index="/jobPage">求职</el-menu-item>
-    <el-menu-item index="/discussPage">讨论区</el-menu-item>
+    <el-menu-item index='/' v-if="!hasLogin">首页</el-menu-item>
+    <el-menu-item index='/questionPage' v-if="!hasLogin">题库</el-menu-item>
+    <el-menu-item index='/learnPage' v-if="!hasLogin">学习</el-menu-item>
+    <el-menu-item index="/jobPage" v-if="!hasLogin">求职</el-menu-item>
+    <el-menu-item index="/discussPage" v-if="!hasLogin">讨论区</el-menu-item>
+    <el-menu-item index='/' v-if="accountType === 'student'">首页</el-menu-item>
+    <el-menu-item index='/questionPage' v-if="accountType === 'student'">题库</el-menu-item>
+    <el-menu-item index='/learnPage' v-if="accountType === 'student'">学习</el-menu-item>
+    <el-menu-item index="/jobPage" v-if="accountType === 'student'">求职</el-menu-item>
+    <el-menu-item index="/discussPage" v-if="accountType === 'student'">讨论区</el-menu-item>
     <el-menu-item
       v-if="hasLogin"
       class="logoutBtn"
       @click="handleLogout()"
     >退出登陆</el-menu-item>
-    <el-menu-item
-      v-if="hasLogin && accountType === 'student'"
-      index="/userPage"
-    >个人主页</el-menu-item>
     <el-menu-item
       v-if="accountType === 'company'"
       index="/company/designTheme"
@@ -38,16 +39,24 @@
     >职位发布</el-menu-item>
     <el-menu-item
       v-if="accountType === 'company'"
-      index="/preachList"
-    >宣讲会发布</el-menu-item>
+      index="/recruitSchedule"
+    >校招日程发布</el-menu-item>
     <el-menu-item
       v-if="accountType === 'company'"
-      index="/company/page"
-    >公司主页</el-menu-item>
+      index="/writeCalendar"
+    >笔试日历发布</el-menu-item>
+    <el-menu-item
+      v-if="accountType === 'company'"
+      index="/preachList"
+    >宣讲会发布</el-menu-item>
+    <el-menu-item index="/discussPage" v-if="accountType === 'company'">讨论区</el-menu-item>
     <el-menu-item
       v-if="hasLogin"
-      style="float: right"
-    >{{userName}}</el-menu-item>
+      style="float: right;"
+      :index="toUserPage"
+    >
+      <img :src="avatar" style="width: 45px; border-radius: 50%">
+    </el-menu-item>
     <el-menu-item
       v-if="!hasLogin"
       style="float: right"
@@ -80,6 +89,24 @@ export default {
         return this.userInfo.studentName
       } else if (this.companyInfo && this.accountType === 'company') {
         return this.companyInfo.companyName
+      } else {
+        return ''
+      }
+    },
+    avatar () {
+      if (this.userInfo && this.accountType === 'student') {
+        return this.userInfo.studentImgUrl
+      } else if (this.companyInfo && this.accountType === 'company') {
+        return this.companyInfo.companyImgUrl
+      } else {
+        return ''
+      }
+    },
+    toUserPage () {
+      if (this.userInfo && this.accountType === 'student') {
+        return '/userPage'
+      } else if (this.companyInfo && this.accountType === 'company') {
+        return '/company/page'
       } else {
         return ''
       }
