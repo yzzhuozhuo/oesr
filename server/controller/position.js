@@ -5,12 +5,13 @@ exports.getPosition = function (req, res) {
     selectType = '',
     selectCity = '',
     selectTab = '',
+    searchPosition = '',
     currentPage = 1,
     pageNum = 10
   } = req.query
   pageNum = +pageNum
   currentPage = +currentPage
-  positionService.getPositionList(selectType, selectCity, selectTab, currentPage, pageNum).then(data => {
+  positionService.getPositionList(selectType, selectCity, selectTab, searchPosition, currentPage, pageNum).then(data => {
     res.send({
       code: '200',
       data: {

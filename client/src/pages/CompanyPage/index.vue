@@ -39,7 +39,7 @@
                       <i class="el-icon-edit"></i>
                       <span slot="title">出题列表</span>
                     </el-menu-item>
-                    <el-menu-item index="positon">
+                    <el-menu-item index="position">
                       <i class="el-icon-user"></i>
                       <span slot="title">职位列表</span>
                     </el-menu-item>
@@ -158,15 +158,210 @@
                 </div>
               </div>
               <div
+                v-if="isTheme"
+                class="resume-box"
+              >
+                <div class="resume-content">
+                  <div class="header">
+                    <span>发布的题目列表</span>
+                    <div>
+                      <el-input
+                        v-model="searchThemeValue"
+                        style="width: 200px"
+                        placeholder="请输入题目名称进行筛选"
+                        size="mini"
+                      ></el-input>
+                      <el-button
+                        type="primary"
+                        size="mini"
+                        @click="searchTheme"
+                      >查询</el-button>
+                    </div>
+                  </div>
+                  <div class="resume-list">
+                    <div
+                      v-for="(item, index) in themeData"
+                      :key="index"
+                      class="resume-item"
+                    >
+                      <div class="top">
+                        <span>题目名称：{{item.themeTitle}}</span>
+                        <el-button
+                          type="text"
+                          @click="viewTheme(item._id)"
+                        >查看详情</el-button>
+                      </div>
+                      <div class="bottom">
+                        <span>匹配职位：{{item.post}}</span>
+                        <div class="rate">
+                          <span>题目难度：</span>
+                          <el-rate
+                            v-model="item.rate"
+                            disabled
+                            show-score
+                            text-color="#ff9900"
+                            score-template="{value}">
+                          </el-rate>
+                        </div>
+                        <span>发布时间：{{item.createdAt}}</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="pagination"
+                    v-if="this.themeData.length !== 0"
+                  >
+                    <el-pagination
+                      @size-change="handleThemeSizeChange"
+                      @current-change="handleThemeCurrentChange"
+                      :current-page.sync="currentThemePage"
+                      :page-sizes="[10, 20, 50, 100]"
+                      :page-size.sync="pageThemeNum"
+                      layout="total, sizes, prev, pager, next, jumper"
+                      :total="totalTheme"
+                    >
+                    </el-pagination>
+                  </div>
+                  <div class="no-data" v-if="themeData.length === 0">
+                    <img src="@/assets/no-data.png" class="no-data-img">
+                    <div class="no-data-title">暂无数据哦~</div>
+                  </div>
+                </div>
+              </div>
+              <div
+                v-if="isPosition"
+                class="resume-box"
+              >
+                <div class="resume-content">
+                  <div class="header">
+                    <span>发布的职位列表</span>
+                    <div>
+                      <el-input
+                        v-model="searchPositionValue"
+                        style="width: 200px"
+                        placeholder="请输入职位名称进行筛选"
+                        size="mini"
+                      ></el-input>
+                      <el-button
+                        type="primary"
+                        size="mini"
+                        @click="searchPosition"
+                      >查询</el-button>
+                    </div>
+                  </div>
+                  <div class="resume-list">
+                    <div
+                      v-for="(item, index) in positionData"
+                      :key="index"
+                      class="resume-item"
+                    >
+                      <div class="top">
+                        <span>职位名称：{{item.positionTitle}}</span>
+                        <el-button
+                          type="text"
+                          @click="viewPositonResume(item._id)"
+                        >所收简历</el-button>
+                      </div>
+                      <div class="bottom">
+                        <span>职位类型：{{item.positionType}}</span>
+                        <span>所在城市：{{item.positionCity}}</span>
+                        <span>发布时间：{{item.createdAt}}</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="pagination"
+                    v-if="this.positionData.length !== 0"
+                  >
+                    <el-pagination
+                      @size-change="handlePositionSizeChange"
+                      @current-change="handlePositionCurrentChange"
+                      :current-page.sync="currentPositionPage"
+                      :page-sizes="[10, 20, 50, 100]"
+                      :page-size.sync="pagePositionNum"
+                      layout="total, sizes, prev, pager, next, jumper"
+                      :total="totalPosition"
+                    >
+                    </el-pagination>
+                  </div>
+                  <div class="no-data" v-if="positionData.length === 0">
+                    <img src="@/assets/no-data.png" class="no-data-img">
+                    <div class="no-data-title">暂无数据哦~</div>
+                  </div>
+                </div>
+              </div>
+              <div
+                v-if="isPreach"
+                class="resume-box"
+              >
+                <div class="resume-content">
+                  <div class="header">
+                    <span>发布的宣讲会列表</span>
+                    <div>
+                      <el-input
+                        v-model="searchPreachValue"
+                        style="width: 200px"
+                        placeholder="请输入宣讲会名称进行筛选"
+                        size="mini"
+                      ></el-input>
+                      <el-button
+                        type="primary"
+                        size="mini"
+                        @click="searchPreach"
+                      >查询</el-button>
+                    </div>
+                  </div>
+                  <div class="resume-list">
+                    <div
+                      v-for="(item, index) in preachData"
+                      :key="index"
+                      class="resume-item"
+                    >
+                      <div class="top">
+                        <span>宣讲会名称：{{item.preachCompany}}</span>
+                        <el-button
+                          type="text"
+                          @click="viewPreach(item._id)"
+                        >查看详情</el-button>
+                      </div>
+                      <div class="bottom">
+                        <span>宣讲城市：{{item.preachCity}}</span>
+                        <span>宣讲城市：{{item.preachSchool}}</span>
+                        <span>宣讲时间：{{item.preachTime}}</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="pagination"
+                    v-if="this.preachData.length !== 0"
+                  >
+                    <el-pagination
+                      @size-change="handlePreachSizeChange"
+                      @current-change="handlePreachCurrentChange"
+                      :current-page.sync="currentPreachPage"
+                      :page-sizes="[10, 20, 50, 100]"
+                      :page-size.sync="pagePreachNum"
+                      layout="total, sizes, prev, pager, next, jumper"
+                      :total="totalPreach"
+                    >
+                    </el-pagination>
+                  </div>
+                  <div class="no-data" v-if="preachData.length === 0">
+                    <img src="@/assets/no-data.png" class="no-data-img">
+                    <div class="no-data-title">暂无数据哦~</div>
+                  </div>
+                </div>
+              </div>
+              <div
                 v-if="isResume"
                 class="resume-box"
               >
                 <div class="resume-content">
                   <div class="header">
-                    <span>收到的简历</span>
+                    <span>收到的简历列表</span>
                     <div>
                       <el-input
-                        v-model="searchValue"
+                        v-model="searchResumeValue"
                         style="width: 200px"
                         placeholder="请输入职位名称进行筛选"
                         size="mini"
@@ -203,15 +398,19 @@
                     v-if="this.resumeData.length !== 0"
                   >
                     <el-pagination
-                      @size-change="handleSizeChange"
-                      @current-change="handleCurrentChange"
-                      :current-page.sync="currentPage"
+                      @size-change="handleResumeSizeChange"
+                      @current-change="handleResumeCurrentChange"
+                      :current-page.sync="currentResumePage"
                       :page-sizes="[10, 20, 50, 100]"
-                      :page-size.sync="pageNum"
+                      :page-size.sync="pageResumeNum"
                       layout="total, sizes, prev, pager, next, jumper"
-                      :total="total"
+                      :total="totalResume"
                     >
                     </el-pagination>
+                  </div>
+                  <div class="no-data" v-if="resumeData.length === 0">
+                    <img src="@/assets/no-data.png" class="no-data-img">
+                    <div class="no-data-title">暂无数据哦~</div>
                   </div>
                 </div>
               </div>
@@ -307,15 +506,33 @@ export default {
     }
     return {
       newCompanyInfo: {},
-      resumeData: [],
-      currentPage: 1, // 分页
-      pageNum: 10,
-      total: 0,
-      searchValue: '',
+      resumeData: [], // 简历
+      currentResumePage: 1, // 分页
+      pageResumeNum: 10,
+      totalResume: 0,
+      searchResumeValue: '',
+      themeData: [], // 试题
+      currentThemePage: 1, // 分页
+      pageThemeNum: 10,
+      totalTheme: 0,
+      searchThemeValue: '',
+      positionData: [], // 职位
+      currentPositionPage: 1, // 分页
+      pagePositionNum: 10,
+      totalPosition: 0,
+      searchPositionValue: '',
+      preachData: [], // 宣讲会
+      currentPreachPage: 1, // 分页
+      pagePreachNum: 10,
+      totalPreach: 0,
+      searchPreachValue: '',
       isCompanyInfo: true,
       isEdit: false,
       isSetting: false,
       isResume: false,
+      isTheme: false,
+      isPosition: false,
+      isPreach: false,
       dialogSettingVisible: false,
       classifyOptions: [
         {
@@ -361,35 +578,85 @@ export default {
     ...mapState({
       companyInfo: state => state.company.companyList,
       account: state => state.account,
-      resumeList: state => state.resumeList.resumeList,
-      totalPage: state => state.resumeList.totalPage || 0,
-      pageNumber: state => state.resumeList.pageNumber || 10,
-      page: state => state.resumeList.page || 1
+      resumeList: state => state.resumeList.resumeList, // 简历
+      totalResumePage: state => state.resumeList.totalPage || 0,
+      pageResumeNumber: state => state.resumeList.pageNumber || 10,
+      pageResume: state => state.resumeList.page || 1,
+      themeList: state => state.theme.themeList, // 题库
+      totalThemePage: state => state.theme.totalPage || 0,
+      pageThemeNumber: state => state.theme.pageNumber || 10,
+      pageTheme: state => state.theme.page || 1,
+      positionList: state => state.position.positionList, // 职位
+      totalPositionPage: state => state.position.totalPage || 0,
+      pagePositionNumber: state => state.position.pageNumber || 10,
+      pagePosition: state => state.position.page || 1,
+      preachList: state => state.preach.preachList, // 宣讲会
+      totalPreachPage: state => state.preach.totalPage || 0,
+      pagePreachNumber: state => state.preach.pageNumber || 10,
+      pagePreach: state => state.preach.page || 1
     })
   },
   watch: {
-    resumeList () {
+    resumeList () { // 简历
       this.resumeData = this.formatTime(this.resumeList)
     },
-    totalPage () {
-      this.total = this.totalPage
+    totalResumePage () {
+      this.totalResume = this.totalResumePage
     },
-    pageNumber () {
-      this.pageNum = this.pageNumber
+    pageResumeNumber () {
+      this.pageResumeNum = this.pageResumeNumber
     },
-    page () {
-      this.currentPage = this.page
+    pageResume () {
+      this.currentResumePage = this.pageResume
+    },
+    themeList () { // 题库
+      this.themeData = this.formatTime(this.themeList)
+    },
+    totalThemePage () {
+      this.totalTheme = this.totalThemePage
+    },
+    pageThemeNumber () {
+      this.pageThemeNum = this.pageThemeNumber
+    },
+    pageTheme () {
+      this.currentThemePage = this.pageTheme
+    },
+    positionList () { // 职位
+      this.positionData = this.formatTime(this.positionList)
+    },
+    totalPositionPage () {
+      this.totalPosition = this.totalPositionPage
+    },
+    pagePositionNumber () {
+      this.pagePositionNum = this.pagePositionNumber
+    },
+    pagePosition () {
+      this.currentPositionPage = this.pagePosition
+    },
+    preachList () { // 宣讲会
+      this.preachData = this.preachList
+    },
+    totalPreachPage () {
+      this.totalPreach = this.totalPreachPage
+    },
+    pagePreachNumber () {
+      this.pagePreachNum = this.pagePreachNumber
+    },
+    pagePreach () {
+      this.currentPreachPage = this.pagePreach
     }
   },
   created () {
-    this.fetchResumeDataList()
   },
   mounted () {},
   methods: {
     ...mapActions([
       'updateCompanyList',
       'fetchResumeList',
-      'logout'
+      'logout',
+      'fetchThemeList',
+      'fetchPositionList',
+      'fetchPreachList'
     ]),
     formatTime (resumeList) {
       const TIME_FORMAT = 'YYYY-MM-DD HH:mm'
@@ -401,30 +668,72 @@ export default {
     },
     fetchResumeDataList () {
       let params = {
+        // companyId: this.companyInfo.companyId,
         companyId: '123',
-        searchValue: this.searchValue,
-        currentPage: this.currentPage,
-        pageNum: this.pageNum
+        searchValue: this.searchResumeValue,
+        currentPage: this.currentResumePage,
+        pageNum: this.pageResumeNum
       }
       this.fetchResumeList(params)
+    },
+    fetchThemeDataList () {
+      let params = {
+        companyId: '123',
+        searchValue: this.searchThemeValue,
+        currentPage: this.currentThemePage,
+        pageNum: this.pageThemeNum
+      }
+      this.fetchThemeList(params)
+    },
+    fetchPositionDataList () {
+      let params = {
+        companyId: '123',
+        searchPosition: this.searchPositionValue,
+        currentPage: this.currentPositionPage,
+        pageNum: this.pagePositionNum
+      }
+      this.fetchPositionList(params)
+    },
+    fetchPreachDataList () {
+      let params = {
+        companyId: '123',
+        searchValue: this.searchPreachValue,
+        currentPage: this.currentPreachPage,
+        pageNum: this.pagePreachNum
+      }
+      this.fetchPreachList(params)
     },
     editCompanyInfo () {
       this.newCompanyInfo = _.cloneDeep(this.companyInfo)
       this.isEdit = true
     },
+    initPath () {
+      this.isCompanyInfo = false
+      this.isResume = false
+      this.isPosition = false
+      this.isTheme = false
+      this.isPreach = false
+    },
     handleSelect (keyPath) {
-      console.log(234, keyPath)
       if (keyPath === 'company') {
+        this.initPath()
         this.isCompanyInfo = true
-        this.isResume = false
-        console.log(this.isEdit)
-      } else if (keyPath === 'setting') {
-        this.isSetting = true
-        this.dialogSettingVisible = true
-        console.log(123, keyPath)
       } else if (keyPath === 'resume') {
+        this.fetchResumeDataList()
+        this.initPath()
         this.isResume = true
-        this.isCompanyInfo = false
+      } else if (keyPath === 'theme') {
+        this.fetchThemeDataList()
+        this.initPath()
+        this.isTheme = true
+      } else if (keyPath === 'position') {
+        this.fetchPositionDataList()
+        this.initPath()
+        this.isPosition = true
+      } else if (keyPath === 'preach') {
+        this.fetchPreachDataList()
+        this.initPath()
+        this.isPreach = true
       } else if (keyPath === 'logout') {
         this.logout()
         this.$router.replace({
@@ -462,21 +771,70 @@ export default {
     resetForm (formName) {
       this.$refs[formName].resetFields()
     },
-    viewResume (resumeUrl) {
-      window.open(resumeUrl)
-    },
-    handleSizeChange (val) {
+    handleResumeSizeChange (val) {
       console.log(`每页 ${val} 条`)
-      this.pageNum = val
+      this.pageResumeNum = val
       this.fetchResumeDataList()
     },
-    handleCurrentChange (val) {
+    handleResumeCurrentChange (val) {
       console.log(`当前页: ${val}`)
-      this.currentPage = val
+      this.currentResumePage = val
       this.fetchResumeDataList()
+    },
+    handleThemeSizeChange (val) {
+      console.log(`每页 ${val} 条`)
+      this.pageThemeNum = val
+      this.fetchThemeDataList()
+    },
+    handleThemeCurrentChange (val) {
+      console.log(`当前页: ${val}`)
+      this.currentThemePage = val
+      this.fetchThemeDataList()
+    },
+    handlePositionSizeChange (val) {
+      console.log(`每页 ${val} 条`)
+      this.pagePositionNum = val
+      this.fetchPositionDataList()
+    },
+    handlePositionCurrentChange (val) {
+      console.log(`当前页: ${val}`)
+      this.currentPositionPage = val
+      this.fetchPositionDataList()
+    },
+    handlePreachSizeChange (val) {
+      console.log(`每页 ${val} 条`)
+      this.pagePreachNum = val
+      this.fetchPreachDataList()
+    },
+    handlePreachCurrentChange (val) {
+      console.log(`当前页: ${val}`)
+      this.currentPreachPage = val
+      this.fetchPreachDataList()
     },
     searchResume () {
       this.fetchResumeDataList()
+    },
+    searchTheme () {
+      this.fetchThemeDataList()
+    },
+    searchPosition () {
+      this.fetchPositionDataList()
+    },
+    searchPreach () {
+      this.fetchPreachDataList()
+    },
+    viewResume (resumeUrl) {
+      window.open(resumeUrl)
+    },
+    viewTheme (id) {
+      console.log(23213, id)
+      console.log(666, this.companyInfo)
+    },
+    viewPositonResume (id) {
+      console.log('查看该职位所收的简历')
+    },
+    viewPreach (id) {
+      console.log('查看宣讲会')
     }
   }
 }
@@ -657,12 +1015,33 @@ export default {
           display: flex;
           justify-content: space-between;
           align-items: center;
+          .rate {
+            display: flex;
+            align-items: center;
+          }
         }
       }
     }
     .pagination {
       float: right;
     }
+  }
+}
+
+.no-data {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 160px 0;
+  border: 1px solid #d4d4d4;
+  border-radius: 6px;
+  .no-data-img {
+    width: 100px;
+    margin-bottom: 15px;
+  }
+  .no-data-title {
+    color: #999;
   }
 }
 </style>

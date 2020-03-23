@@ -1,8 +1,9 @@
 const PositionModel = require('../models/position')
 
-exports.getPositionList = function (selectType, selectCity, selectTab, currentPage, pageNum) {
+exports.getPositionList = function (selectType, selectCity, selectTab, searchPosition, currentPage, pageNum) {
   let skipCounts = (currentPage - 1) * pageNum
   let findConditions = {}
+  if (searchPosition) findConditions.positionTitle = searchPosition
   if (selectType) findConditions.positionType = selectType
   if (selectCity) findConditions.positionCity = selectCity
   // 根据 最新发布 最快处理 处理率最高 进行排序 默认不排序

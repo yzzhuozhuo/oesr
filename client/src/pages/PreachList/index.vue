@@ -106,14 +106,14 @@
         width="40%">
         <div class="form-content">
           <el-form ref="form" :model="addPreachForm" label-width="80px">
-            <el-form-item label="宣讲公司">
-              <el-input v-model="addPreachForm.preachCompany"></el-input>
+            <el-form-item label="宣讲标题">
+              <el-input v-model="addPreachForm.preachCompany" placeholder="请输入宣讲会标题"></el-input>
             </el-form-item>
             <el-form-item label="宣讲城市">
-              <el-input v-model="addPreachForm.preachCity"></el-input>
+              <el-input v-model="addPreachForm.preachCity" placeholder="请输入宣讲会所在城市"></el-input>
             </el-form-item>
             <el-form-item label="宣讲学校">
-              <el-input v-model="addPreachForm.preachSchool"></el-input>
+              <el-input v-model="addPreachForm.preachSchool" placeholder="请输入宣讲会所在学校"></el-input>
             </el-form-item>
             <el-form-item label="宣讲时间">
               <el-col :span="11">
