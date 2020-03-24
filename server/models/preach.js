@@ -5,6 +5,9 @@
 const mongoose = require('mongoose')
 
 const preachSchema = mongoose.Schema({
+  companyId: {
+    type: String
+  },
   preachCompany: {
     type: String,
     required: true

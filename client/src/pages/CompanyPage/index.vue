@@ -167,8 +167,8 @@
                     <div>
                       <el-input
                         v-model="searchThemeValue"
-                        style="width: 200px"
-                        placeholder="请输入题目名称进行筛选"
+                        style="width: 220px"
+                        placeholder="请输入题目名称/匹配职位进行筛选"
                         size="mini"
                       ></el-input>
                       <el-button
@@ -300,8 +300,8 @@
                     <div>
                       <el-input
                         v-model="searchPreachValue"
-                        style="width: 200px"
-                        placeholder="请输入宣讲会名称进行筛选"
+                        style="width: 240px"
+                        placeholder="请输入宣讲会名称/地点/城市进行筛选"
                         size="mini"
                       ></el-input>
                       <el-button
@@ -317,12 +317,11 @@
                       :key="index"
                       class="resume-item"
                     >
-                      <div class="top">
+                      <div class="top" style="margin: 10px 0">
                         <span>宣讲会名称：{{item.preachCompany}}</span>
-                        <el-button
-                          type="text"
-                          @click="viewPreach(item._id)"
-                        >查看详情</el-button>
+                        <el-tag effect="dark" size="mini" v-if="new Date(item.preachTime).getDate() < new Date().getDate()" type="info">已结束</el-tag>
+                        <el-tag effect="dark" size="mini" v-if="new Date(item.preachTime).getDate() === new Date().getDate()" type="success">今日</el-tag>
+                        <el-tag effect="dark" size="mini" v-if="tomorrowStart <= new Date(item.preachTime) && new Date(item.preachTime) <= tomorrowEnd">明日</el-tag>
                       </div>
                       <div class="bottom">
                         <span>宣讲城市：{{item.preachCity}}</span>
@@ -481,6 +480,8 @@
 import { mapState, mapActions } from 'vuex'
 import _ from 'lodash'
 import moment from 'moment'
+const tomorrowStart = new Date(new Date(new Date().toLocaleDateString()).getTime() + 3600 * 1000 * 24 * 1)
+const tomorrowEnd = new Date(new Date(new Date().toLocaleDateString()).getTime() + 3600 * 1000 * 24 * 1 + 24 * 60 * 60 * 1000 - 1)
 
 export default {
   name: 'UserPage',
@@ -505,12 +506,15 @@ export default {
       }
     }
     return {
+      tomorrowStart: tomorrowStart,
+      tomorrowEnd: tomorrowEnd,
       newCompanyInfo: {},
       resumeData: [], // 简历
       currentResumePage: 1, // 分页
       pageResumeNum: 10,
       totalResume: 0,
       searchResumeValue: '',
+      positionId: '',
       themeData: [], // 试题
       currentThemePage: 1, // 分页
       pageThemeNum: 10,
@@ -634,7 +638,7 @@ export default {
       this.currentPositionPage = this.pagePosition
     },
     preachList () { // 宣讲会
-      this.preachData = this.preachList
+      this.preachData = this.formatPreachTime(this.preachList)
     },
     totalPreachPage () {
       this.totalPreach = this.totalPreachPage
@@ -658,11 +662,19 @@ export default {
       'fetchPositionList',
       'fetchPreachList'
     ]),
-    formatTime (resumeList) {
+    formatTime (dataList) {
       const TIME_FORMAT = 'YYYY-MM-DD HH:mm'
-      const data = _.cloneDeep(resumeList)
+      const data = _.cloneDeep(dataList)
       return data.map(item => {
         item.createdAt = moment(item.createdAt).format(TIME_FORMAT)
+        return item
+      })
+    },
+    formatPreachTime (preachList) {
+      const TIME_FORMAT = 'YYYY-MM-DD HH:mm'
+      const data = _.cloneDeep(preachList)
+      return data.map(item => {
+        item.preachTime = moment(item.preachTime).format(TIME_FORMAT)
         return item
       })
     },
@@ -672,7 +684,9 @@ export default {
         companyId: '123',
         searchValue: this.searchResumeValue,
         currentPage: this.currentResumePage,
-        pageNum: this.pageResumeNum
+        pageNum: this.pageResumeNum,
+        accountType: 'company',
+        positionId: this.positionId
       }
       this.fetchResumeList(params)
     },
@@ -681,7 +695,8 @@ export default {
         companyId: '123',
         searchValue: this.searchThemeValue,
         currentPage: this.currentThemePage,
-        pageNum: this.pageThemeNum
+        pageNum: this.pageThemeNum,
+        accountType: 'company'
       }
       this.fetchThemeList(params)
     },
@@ -690,7 +705,8 @@ export default {
         companyId: '123',
         searchPosition: this.searchPositionValue,
         currentPage: this.currentPositionPage,
-        pageNum: this.pagePositionNum
+        pageNum: this.pagePositionNum,
+        accountType: 'company'
       }
       this.fetchPositionList(params)
     },
@@ -699,7 +715,8 @@ export default {
         companyId: '123',
         searchValue: this.searchPreachValue,
         currentPage: this.currentPreachPage,
-        pageNum: this.pagePreachNum
+        pageNum: this.pagePreachNum,
+        accountType: 'company'
       }
       this.fetchPreachList(params)
     },
@@ -827,11 +844,19 @@ export default {
       window.open(resumeUrl)
     },
     viewTheme (id) {
-      console.log(23213, id)
-      console.log(666, this.companyInfo)
+      this.$router.push({
+        path: '/questionList',
+        query: {
+          themeDetailId: id,
+          accountType: 'company'
+        }
+      })
     },
     viewPositonResume (id) {
-      console.log('查看该职位所收的简历')
+      this.isPosition = false
+      this.isResume = true
+      this.positionId = id
+      this.fetchResumeDataList()
     },
     viewPreach (id) {
       console.log('查看宣讲会')
@@ -1004,10 +1029,14 @@ export default {
         padding: 6px 15px 15px;
         border-radius: 5px;
         margin-bottom: 10px;
+        cursor: pointer;
         .top {
           display: flex;
           justify-content: space-between;
           align-items: center;
+        }
+        .top span {
+          user-select: text;
         }
         .bottom {
           color: #999;
@@ -1019,6 +1048,9 @@ export default {
             display: flex;
             align-items: center;
           }
+        }
+        .bottom span {
+          user-select: text;
         }
       }
     }

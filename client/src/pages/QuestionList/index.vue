@@ -35,7 +35,8 @@
               label="判断">
             </el-table-column>
           </el-table>
-          <el-button type="primary" class="btn" @click="toAnswerList">开始答题</el-button>
+          <el-button v-if="!isCompanyType" type="primary" class="btn" @click="toAnswerList">开始答题</el-button>
+          <el-button v-else type="primary" class="btn" @click="toViewAnswerList">查看题目</el-button>
           <el-divider content-position="center" class="explain">答题说明</el-divider>
           <div class="explain-content">
             <div>1、本套题由公司所出，请认真作答。</div>
@@ -65,7 +66,8 @@
             </div>
           </div>
           <div class="no-data" v-if="scoreData.length === 0">
-            <div>暂无排名,快去答题上榜吧~</div>
+            <div v-if="!isCompanyType">暂无排名,快去答题上榜吧~</div>
+            <div v-else>该套题暂无答题排名哦~</div>
             <img src="@/assets/xiaolian.png">
           </div>
         </el-card>
@@ -82,6 +84,7 @@ export default {
   data () {
     return {
       themeDetailData: {},
+      isCompanyType: false,
       themeDetailId: '',
       tableData: [{
         type: '数量',
@@ -89,39 +92,7 @@ export default {
         fillNum: '',
         judgeNum: ''
       }],
-      scoreData: [],
-      scoreData1: [
-        {
-          studentName: 'yangzhuo',
-          studentImageUrl: 'https://images.nowcoder.com/images/20190928/638373518_1569674550437_27E42C56E73D70CBE3050C38883E4E56?x-oss-process=image/resize,m_mfit,h_100,w_100',
-          studentScore: 100
-        },
-        {
-          studentName: 'yangzhuo',
-          studentImageUrl: 'https://images.nowcoder.com/images/20190928/638373518_1569674550437_27E42C56E73D70CBE3050C38883E4E56?x-oss-process=image/resize,m_mfit,h_100,w_100',
-          studentScore: 100
-        },
-        {
-          studentName: 'yangzhuo',
-          studentImageUrl: 'https://images.nowcoder.com/images/20190928/638373518_1569674550437_27E42C56E73D70CBE3050C38883E4E56?x-oss-process=image/resize,m_mfit,h_100,w_100',
-          studentScore: 100
-        },
-        {
-          studentName: 'yangzhuo',
-          studentImageUrl: 'https://images.nowcoder.com/images/20190928/638373518_1569674550437_27E42C56E73D70CBE3050C38883E4E56?x-oss-process=image/resize,m_mfit,h_100,w_100',
-          studentScore: 100
-        },
-        {
-          studentName: 'yangzhuo',
-          studentImageUrl: 'https://images.nowcoder.com/images/20190928/638373518_1569674550437_27E42C56E73D70CBE3050C38883E4E56?x-oss-process=image/resize,m_mfit,h_100,w_100',
-          studentScore: 100
-        },
-        {
-          studentName: 'yangzhuo',
-          studentImageUrl: 'https://images.nowcoder.com/images/20190928/638373518_1569674550437_27E42C56E73D70CBE3050C38883E4E56?x-oss-process=image/resize,m_mfit,h_100,w_100',
-          studentScore: 100
-        }
-      ]
+      scoreData: []
     }
   },
   computed: {
@@ -147,6 +118,10 @@ export default {
   },
   created () {
     let themeDetailId = this.$route.query.themeDetailId
+    let accountType = this.$route.query.accountType
+    if (accountType) {
+      this.isCompanyType = true
+    }
     this.fetchThemeDetailList({ themeDetailId })
     this.fetchScoreList({ themeId: themeDetailId })
   },
@@ -165,6 +140,16 @@ export default {
         path: 'answerList',
         query: {
           themeDetailId: this.themeDetailId
+        }
+      })
+    },
+    toViewAnswerList () {
+      this.$router.push({
+        path: 'answerList',
+        query: {
+          themeDetailId: this.themeDetailId,
+          isCheck: true,
+          accountType: 'company'
         }
       })
     }

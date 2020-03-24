@@ -77,8 +77,11 @@
               <i class="el-icon-time"></i>
               <span>倒计时：<b>{{time}}</b>分钟</span>
             </div>
-            <div v-else>
+            <div v-if="isCheck && !isCompanyType">
               <el-button type="text" @click="cancelCheck">返回题库首页</el-button>
+            </div>
+            <div v-if="isCheck && isCompanyType">
+              <el-button type="text" @click="cancelCheck">返回公司首页</el-button>
             </div>
           </div>
           <div class="content">
@@ -188,7 +191,8 @@ export default {
       topic1Answer: [], // 学生选择题作答编号
       rightAnswer: '',
       isCheck: false,
-      totalScore: ''
+      totalScore: '',
+      isCompanyType: false
     }
   },
   computed: {
@@ -204,6 +208,10 @@ export default {
   created () {
     this.isCheck = this.$route.query.isCheck
     console.log(this.isCheck)
+    let accountType = this.$route.query.accountType
+    if (accountType && accountType === 'company') {
+      this.isCompanyType = true
+    }
     if (!this.isCheck) {
       this.time = 11 // 设置倒计时分钟数
       this.showTime()
@@ -477,9 +485,15 @@ export default {
       })
     },
     cancelCheck () {
-      this.$router.replace({
-        path: 'questionPage'
-      })
+      if (!this.isCompanyType) {
+        this.$router.replace({
+          path: 'questionPage'
+        })
+      } else {
+        this.$router.replace({
+          path: '/company/page'
+        })
+      }
     },
     showTime () { // 倒计时
       console.log('这是开始倒计时的函数')

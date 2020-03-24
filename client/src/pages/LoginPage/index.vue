@@ -108,7 +108,7 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
+import { mapActions, mapState, mapGetters } from 'vuex'
 
 export default {
   name: 'LoginPage',
@@ -127,7 +127,8 @@ export default {
     ...mapState({
       account: state => state.account.account,
       token: state => state.account.token
-    })
+    }),
+    ...mapGetters(['accountType'])
   },
   methods: {
     ...mapActions([
@@ -161,9 +162,15 @@ export default {
             message: '登录成功',
             type: 'success'
           })
-          this.$router.replace({
-            path: '/'
-          })
+          if (this.accountType === 'student') {
+            this.$router.replace({
+              path: '/'
+            })
+          } else {
+            this.$router.replace({
+              path: '/company/page'
+            })
+          }
         } else {
           return false
         }

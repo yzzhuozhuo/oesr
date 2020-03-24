@@ -1,6 +1,6 @@
 const PositionModel = require('../models/position')
 
-exports.getPositionList = function (selectType, selectCity, selectTab, searchPosition, currentPage, pageNum) {
+exports.getPositionList = function (accountType, selectType, selectCity, selectTab, searchPosition, currentPage, pageNum) {
   let skipCounts = (currentPage - 1) * pageNum
   let findConditions = {}
   if (searchPosition) findConditions.positionTitle = searchPosition
@@ -8,6 +8,7 @@ exports.getPositionList = function (selectType, selectCity, selectTab, searchPos
   if (selectCity) findConditions.positionCity = selectCity
   // 根据 最新发布 最快处理 处理率最高 进行排序 默认不排序
   let sortCondition = {}
+  if (accountType === 'company') sortCondition.createdAt = -1 
   if (selectTab === 'new') sortCondition.createdAt = -1
   if (selectTab === 'fast') sortCondition.processingTime = 1
   if (selectTab === 'ratio') sortCondition.processingRatio = -1

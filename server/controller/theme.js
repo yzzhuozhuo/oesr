@@ -2,6 +2,7 @@ const themeService = require('../service/theme')
 
 exports.getTheme = function (req, res) {
   let {
+    accountType = '',
     companyId = '',
     companyName = '',
     post = '',
@@ -14,7 +15,7 @@ exports.getTheme = function (req, res) {
   } = req.query
   pageNum = +pageNum
   currentPage = +currentPage
-  themeService.getThemeList(companyId, searchValue, companyName, post, years, currentPage, pageNum, tagType, sortType).then(data => {
+  themeService.getThemeList(accountType, companyId, searchValue, companyName, post, years, currentPage, pageNum, tagType, sortType).then(data => {
     res.send({
       code: '200',
       data: {

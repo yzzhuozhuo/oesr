@@ -2,6 +2,7 @@ const preachService = require('../service/preach')
 
 exports.getPreach = function (req, res) {
   let {
+    accountType = '',
     searchValue = '',
     selectCity = '',
     selectSchool = '',
@@ -14,7 +15,7 @@ exports.getPreach = function (req, res) {
   currentPage = +currentPage
   preachStartTime = +preachStartTime
   preachEndTime = +preachEndTime
-  preachService.getPreachList(searchValue, selectCity, selectSchool, currentPage, pageNum, preachStartTime, preachEndTime).then(data => {
+  preachService.getPreachList(accountType, searchValue, selectCity, selectSchool, currentPage, pageNum, preachStartTime, preachEndTime).then(data => {
     res.send({
       code: '200',
       data: {

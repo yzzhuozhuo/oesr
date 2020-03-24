@@ -237,6 +237,7 @@ export default {
   },
   computed: {
     ...mapState({
+      companyInfo: state => state.company.companyList,
       account: state => state.account,
       preachList: state => state.preach.preachList || [],
       totalPage: state => state.preach.totalPage || 0,
@@ -331,13 +332,21 @@ export default {
         preachSchool: this.addPreachForm.preachSchool,
         preachTime: formatTime
       }
+      if (this.accountType === 'company') data.companyId = this.companyInfo.companyId
       this.updatePreachList(data).then(() => {
         this.addMesDialogVisible = false
         this.fetchPreachDataList()
-        this.$message({
-          type: 'success',
-          message: '添加宣讲信息成功~'
-        })
+        if (this.accountType === 'student') {
+          this.$message({
+            type: 'success',
+            message: '添加宣讲信息成功~'
+          })
+        } else {
+          this.$message({
+            type: 'success',
+            message: '发布宣讲信息成功~'
+          })
+        }
       })
     }
   }
