@@ -8,6 +8,15 @@
       <div class="left">
         <div class="head">
           <card-title titleName="分享与求助" />
+          <el-input
+            placeholder="请输入内容"
+            prefix-icon="el-icon-search"
+            class="searchContent"
+            v-model="searchContent"
+            clearable
+            @change="handleChange"
+          >
+          </el-input>
           <div
             class="pub-btn"
             @click="jump('publishComment')"
@@ -65,6 +74,7 @@ export default {
   },
   data () {
     return {
+      searchContent: '',
       bannerImg:
         'https://uploadfiles.nowcoder.com/images/20200227/339694163_1582802393641_2EA1149C6B414F2169207C5987D77BCB',
       selectList: [
@@ -99,7 +109,8 @@ export default {
       publish: this.publish,
       label: this.label,
       currentPage: this.currentPage,
-      pageNum: this.pageNum
+      pageNum: this.pageNum,
+      title: this.searchContent
     })
   },
   mounted () {},
@@ -122,7 +133,8 @@ export default {
         label,
         publish: this.publish,
         currentPage: this.currentPage,
-        pageNum: this.pageNum
+        pageNum: this.pageNum,
+        title: this.searchContent
       })
       this.label = label
     },
@@ -132,7 +144,8 @@ export default {
         label: this.label,
         publish,
         currentPage: this.currentPage,
-        pageNum: this.pageNum
+        pageNum: this.pageNum,
+        title: this.searchContent
       })
       this.publish = publish
     },
@@ -141,7 +154,17 @@ export default {
         publish: this.publish,
         label: this.label,
         currentPage,
-        pageNum: this.pageNum
+        pageNum: this.pageNum,
+        title: this.searchContent
+      })
+    },
+    handleChange (title) {
+      this.fetchDiscussInfo({
+        publish: this.publish,
+        label: this.label,
+        currentPage: this.currentPage,
+        pageNum: this.pageNum,
+        title
       })
     }
   }
@@ -149,6 +172,26 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+>>> .el-input--prefix {
+  height: 30px;
+  margin-top: -3px;
+  margin-left: -250px;
+}
+
+.searchContent {
+  width: 200px;
+  margin-bottom: -10px;
+}
+
+>>> .el-input__inner {
+  height: 30px;
+}
+
+>>> .el-input__icon {
+  height: 30px;
+  line-height: 30px;
+}
+
 .discuss {
   width: 1000px;
   margin: 80px auto;
