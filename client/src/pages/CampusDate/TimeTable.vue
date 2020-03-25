@@ -17,7 +17,7 @@
       </el-timeline>
     </div>
     <div class="neitui">寻找内部员工内推</div>
-    <div class="neitui toudi">官网投递</div>
+    <div class="neitui toudi" @click="toCampus">官网投递</div>
   </div>
 </template>
 
@@ -28,11 +28,16 @@ export default {
   components: {
     CardTitle
   },
-  props: ['plans'],
+  props: ['plans', 'campusUrl'],
   data () {
     return {}
   },
-  mounted () {}
+  mounted () {},
+  methods: {
+    toCampus () {
+      window.open(this.campusUrl)
+    }
+  }
 }
 </script>
 

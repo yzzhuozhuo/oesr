@@ -9,6 +9,7 @@ const campusDateSchema = mongoose.Schema({
   companyType: Number,
   companyName: String,
   companyImgUrl: String,
+  campusUrl: String,
   coverImg: String,
   timeTable: Object
 }, { collection: 'campusDate' })

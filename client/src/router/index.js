@@ -107,7 +107,7 @@ export default new Router({
     },
     {
       path: '/campusDate',
-      name: '公司校招日程',
+      name: '校招日程详情页',
       component: CampusDate
     },
     {

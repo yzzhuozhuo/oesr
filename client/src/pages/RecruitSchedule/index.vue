@@ -8,7 +8,7 @@
           v-if="account.accountType === 'company'"
           class="btn hover"
           @click.stop="publish"
-        >发布职位</div>
+        >发布日程</div>
         <div
           v-if="account.accountType === 'student'"
           class="btn"
@@ -62,6 +62,10 @@
                   placeholder="请选择职位类型"
                 >
                   <el-option
+                    label="全部"
+                    :value="0"
+                  ></el-option>
+                  <el-option
                     label="国企/研究所"
                     :value="1"
                   ></el-option>
@@ -74,8 +78,12 @@
                     :value="3"
                   ></el-option>
                   <el-option
-                    label="游戏"
+                    label="人工智能"
                     :value="4"
+                  ></el-option>
+                  <el-option
+                    label="游戏"
+                    :value="5"
                   ></el-option>
                 </el-select>
               </el-form-item>
@@ -152,6 +160,10 @@
             @followItem="followItem"
             @unfollowItem="unfollowItem"
           />
+          <div class="no-data" v-if="!campusDateList.length">
+            <img src="@/assets/no-data.png" class="no-data-img">
+            <div class="no-data-title">暂无数据哦~</div>
+          </div>
         </el-tab-pane>
         <el-tab-pane
           label="国企/研究所"
@@ -166,6 +178,10 @@
             @followItem="followItem"
             @unfollowItem="unfollowItem"
           />
+          <div class="no-data" v-if="!campusDateListFilter(1).length">
+            <img src="@/assets/no-data.png" class="no-data-img">
+            <div class="no-data-title">暂无数据哦~</div>
+          </div>
         </el-tab-pane>
         <el-tab-pane
           label="外企"
@@ -180,6 +196,10 @@
             @followItem="followItem"
             @unfollowItem="unfollowItem"
           />
+          <div class="no-data" v-if="!campusDateListFilter(2).length">
+            <img src="@/assets/no-data.png" class="no-data-img">
+            <div class="no-data-title">暂无数据哦~</div>
+          </div>
         </el-tab-pane>
         <el-tab-pane
           label="银行/证券"
@@ -194,10 +214,14 @@
             @followItem="followItem"
             @unfollowItem="unfollowItem"
           />
+          <div class="no-data" v-if="!campusDateListFilter(3).length">
+            <img src="@/assets/no-data.png" class="no-data-img">
+            <div class="no-data-title">暂无数据哦~</div>
+          </div>
         </el-tab-pane>
         <el-tab-pane
-          label="游戏"
-          name="fivth"
+          label="人工智能"
+          name="fifth"
           class="pane"
         >
           <schedule-card
@@ -208,6 +232,28 @@
             @followItem="followItem"
             @unfollowItem="unfollowItem"
           />
+          <div class="no-data" v-if="!campusDateListFilter(4).length">
+            <img src="@/assets/no-data.png" class="no-data-img">
+            <div class="no-data-title">暂无数据哦~</div>
+          </div>
+        </el-tab-pane>
+        <el-tab-pane
+          label="游戏"
+          name="sixth"
+          class="pane"
+        >
+          <schedule-card
+            v-for="(item, index) in campusDateListFilter(5)"
+            :key="index + Math.random()"
+            :campusDate="item"
+            :followCampus="followCampus"
+            @followItem="followItem"
+            @unfollowItem="unfollowItem"
+          />
+          <div class="no-data" v-if="!campusDateListFilter(5).length">
+            <img src="@/assets/no-data.png" class="no-data-img">
+            <div class="no-data-title">暂无数据哦~</div>
+          </div>
         </el-tab-pane>
       </el-tabs>
     </div>
@@ -251,7 +297,7 @@ export default {
         bishi: '',
         mianshi: '',
         offer: '',
-        type: 1
+        type: 0
       }
     }
   },
@@ -477,6 +523,22 @@ export default {
     box-sizing: border-box;
     width: 1165px;
     margin: 0 auto;
+  }
+}
+
+.no-data {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 130px 0;
+  .no-data-img {
+    width: 150px;
+    margin-bottom: 15px;
+  }
+  .no-data-title {
+    color: #999;
   }
 }
 </style>

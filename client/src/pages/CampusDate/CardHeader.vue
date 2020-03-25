@@ -15,6 +15,10 @@
       </div>
       <!-- <div class="follow">+ 关注</div> -->
     </div>
+    <div class="campus">
+      <span class="title">官网地址：</span>
+      <span class="url" @click="toCampus(campusUrl)">{{campusUrl}}</span>
+    </div>
   </div>
 </template>
 
@@ -22,7 +26,7 @@
 import home from '@/assets/home.png'
 
 export default {
-  props: ['companyName', 'companyImgUrl'],
+  props: ['companyName', 'companyImgUrl', 'campusUrl'],
   data () {
     return {
       home
@@ -33,6 +37,9 @@ export default {
       this.$router.push({
         path
       })
+    },
+    toCampus (url) {
+      window.open(url)
     }
   }
 }
@@ -92,6 +99,20 @@ export default {
     color: #25bb9b;
     font-size: 14px;
     cursor: pointer;
+  }
+}
+
+.campus {
+  position: absolute;
+  right: 200px;
+  cursor: pointer;
+  .title {
+    cursor: text;
+    user-select: text;
+  }
+  .url {
+    user-select: text;
+    color: #25bb9b;
   }
 }
 </style>
