@@ -205,13 +205,15 @@ export default {
       }
     },
     calculate (item) {
-      let result = 311 + this.$refs['card0'].$el.clientHeight
-      if (item === 0) return result
-      return Object.keys(this.$refs)
-        .slice(1, item + 1)
-        .reduce((pre, next) => {
-          return pre + this.$refs[next][0].$el.clientHeight
-        }, result)
+      if (this.$refs['card0'] && this.$refs['card0'].$el) {
+        let result = 311 + this.$refs['card0'].$el.clientHeight
+        if (item === 0) return result
+        return Object.keys(this.$refs)
+          .slice(1, item + 1)
+          .reduce((pre, next) => {
+            return pre + this.$refs[next][0].$el.clientHeight
+          }, result)
+      }
     },
     throttle (fn, time) {
       let pre = 0
