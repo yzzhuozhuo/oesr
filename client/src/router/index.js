@@ -30,13 +30,13 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: '首页',
-      component: HomePage
+      name: 'home',
+      component: HomePage // 首页
     },
     {
       path: '/questionPage',
-      name: '题库',
-      component: QuestionPage
+      name: 'questionPage',
+      component: QuestionPage // 题库
       // children: [
       //   {
       //     path: 'questionList',
@@ -47,108 +47,117 @@ export default new Router({
     },
     {
       path: '/learnPage',
-      name: '学习',
-      component: LearnPage
+      name: 'learnPage',
+      component: LearnPage // 学习
     },
     {
       path: '/jobPage',
-      name: '求职',
-      component: JobPage
+      name: 'jobPage',
+      component: JobPage // 求职
     },
     {
       path: '/discussPage',
-      name: '讨论区',
-      component: DiscussPage
+      name: 'discussPage',
+      component: DiscussPage // 讨论区
     },
     {
       path: '/questionList',
-      name: '问题详情页',
-      component: QuestionList
+      name: 'questionList',
+      component: QuestionList // 问题详情页
     },
     {
       path: '/answerList',
-      name: '答题页',
-      component: AnswerList
+      name: 'answerList',
+      component: AnswerList // 答题页
     },
     {
       path: '/userPage',
-      name: '用户主页',
-      component: UserPage
+      name: 'userPage',
+      component: UserPage // 用户主页
     },
     {
       path: '/practiceSquare',
-      name: '求职广场页',
-      component: PracticeSquare
+      name: 'practiceSquare',
+      component: PracticeSquare // 求职广场页
     },
     {
       path: '/recruitSchedule',
-      name: '校招日程',
-      component: RecruitSchedule
+      name: 'recruitSchedule',
+      component: RecruitSchedule // 校招日程
     },
     {
       path: '/writeCalendar',
-      name: '笔试日历',
-      component: WriteCalendar
+      name: 'writeCalendar',
+      component: WriteCalendar // 笔试日历
     },
     {
       path: '/preachList',
-      name: '宣讲会',
-      component: PreachList
+      name: 'preachList',
+      component: PreachList // 宣讲会
     },
     {
       path: '/positionDetail',
-      name: '职位详情',
-      component: PositionDetail
+      name: 'positionDetail',
+      component: PositionDetail // 职位详情
     },
     {
       path: '/publishComment',
-      name: '发表评论',
-      component: PublishComment
+      name: 'publishComment',
+      component: PublishComment // 发表评论
     },
     {
       path: '/campusDate',
+<<<<<<< HEAD
       name: '校招日程详情页',
       component: CampusDate
+=======
+      name: 'campusDate',
+      component: CampusDate // 公司校招日程
+>>>>>>> 0a610f81fae664340b09415be8651c7e29550a8d
     },
     {
       path: '/company',
-      name: '公司首页',
-      component: Company
+      name: 'company',
+      component: Company // 公司首页
     },
     {
       path: '/discussDetail',
       name: 'discussDetail',
-      component: DiscussDetail
+      component: DiscussDetail // 讨论区详情页
     },
     {
       path: '/login',
       name: 'login',
-      component: LoginPage
+      component: LoginPage // 登录页
     },
     {
       path: '/passwordBack',
-      name: '密码找回页',
-      component: PasswordBack
+      name: 'passwordBack',
+      component: PasswordBack // 密码找回页
     },
     {
       path: '/registerAccount',
-      name: '账号注册页',
-      component: RegisterAccount
+      name: 'registerAccount',
+      component: RegisterAccount // 账号注册页
     },
     {
       path: '/company/designTheme',
-      name: '在线出题页',
-      component: DesignTheme
+      name: 'designTheme',
+      component: DesignTheme // 在线出题页
     },
     {
       path: '/company/page',
-      name: '公司主页',
-      component: CompanyPage
+      name: 'page',
+      component: CompanyPage // 公司主页
     },
     {
       path: '/answerResult',
-      name: '答题结果页',
-      component: AnswerResult
+      name: 'answerResult',
+      component: AnswerResult // 答题结果页
+    },
+    {
+      path: '*',
+      redirect: 'login'
     }
   ]
 })

@@ -130,6 +130,17 @@ export default {
     }),
     ...mapGetters(['accountType'])
   },
+  mounted () {
+    if (this.accountType === 'student') {
+      this.$router.replace({
+        path: '/'
+      })
+    } else if (this.accountType === 'company') {
+      this.$router.replace({
+        path: '/company/page'
+      })
+    }
+  },
   methods: {
     ...mapActions([
       'findTel',

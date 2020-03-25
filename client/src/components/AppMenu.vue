@@ -117,7 +117,7 @@ export default {
     async handleLogout () {
       await this.logout()
       this.$router.replace({
-        path: '/'
+        path: '/logout'
       })
     }
   }
