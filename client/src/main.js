@@ -11,6 +11,25 @@ Vue.config.productionTip = false
 
 Vue.use(ElementUI)
 
+router.beforeEach((to, from, next) => {
+  if (store.state.account.accountType === 'company') {
+    console.info(11111)
+    if (/home|userPage|learnPage|jobPage/.test(to.name)) {
+      next('/company/page')
+    } else {
+      next()
+    }
+  } else if (store.state.account.accountType === 'student') {
+    if (/designTheme|page/.test(to.name)) {
+      next('/')
+    } else {
+      next()
+    }
+  } else {
+    next()
+  }
+})
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
