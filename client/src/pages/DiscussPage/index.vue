@@ -181,6 +181,7 @@ export default {
 .searchContent {
   width: 200px;
   margin-bottom: -10px;
+  cursor: pointer;
 }
 
 >>> .el-input__inner {

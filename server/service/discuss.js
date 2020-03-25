@@ -10,14 +10,10 @@ exports.getDiscussInfo = function (query) {
   let skipCounts = (currentPage - 1) * pageNum
   let labelItem = label ? { 'classify.label': label } : null
   let publishItem = publish === 1 ? { 'hot': -1 } : { 'createAt': -1 }
-  console.info(labelItem)
   if (title) {
     const reg = new RegExp(title, 'i')
     labelItem = { ...labelItem, $or: [{ title: reg }] }
   }
-
-  console.info(labelItem)
-
   return Promise.all([
     DiscussModel.find(labelItem).sort(publishItem).skip(skipCounts).limit(pageNum),
     DiscussModel.find(labelItem).sort(publishItem).count(true)

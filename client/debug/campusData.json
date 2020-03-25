@@ -10,6 +10,7 @@
       "mianshi" : "3月上旬起",
       "bishi" : "3月上旬-5月中旬",
       "wangshen" : "2月24日-4月30日",
+
       "neitui" : "2月24日-4月30日"
     }
   },
@@ -25,6 +26,230 @@
       "bishi" : "3月12日-4月23日",
       "wangshen" : "2月24日-4月20日",
       "neitui" : "2月24日-4月20日"
+    }
+  },
+  {
+    "companyType" : 0,
+    "coverImg" : "https://uploadfiles.nowcoder.com/files/20190403/4575098_1554274544708_宝洁2.png",
+    "companyName" : "宝洁",
+    "companyImgUrl" : "https://uploadfiles.nowcoder.com/files/20190403/4575098_1554274537221_宝洁2.png",
+    "campusUrl" : "https://www.nowcoder.com/discuss/376416",
+    "timeTable" : {
+      "offer" : "5月底",
+      "mianshi" : "4月中-5月中",
+      "bishi" : "",
+      "wangshen" : "4月9日截止",
+      "neitui" : "4月9日截止"
+    }
+  },
+  {
+    "companyType" : 0,
+    "coverImg" : "https://uploadfiles.nowcoder.com/files/20190819/999991354_1566195906668_跟谁学3.png",
+    "companyName" : "跟谁学",
+    "companyImgUrl" : "https://uploadfiles.nowcoder.com/files/20190819/999991354_1566195902795_跟谁学2.png",
+    "campusUrl" : "https://www.nowcoder.com/careers/gsx/13901",
+    "timeTable" : {
+      "offer" : "面试通过后直接发offer",
+      "mianshi" : "3月6日起",
+      "bishi" : "3月4日起",
+      "wangshen" : "即日起",
+      "neitui" : "即日起"
+    }
+  },
+  {
+    "companyType" : 0,
+    "coverImg" : "https://uploadfiles.nowcoder.com/files/20191011/999991354_1570771216913_七牛云1.png",
+    "companyName" : "七牛云",
+    "companyImgUrl" : "https://uploadfiles.nowcoder.com/files/20191011/999991354_1570771212132_七牛云4-120.png",
+    "campusUrl" : "https://campus.qiniu.com/",
+    "timeTable" : {
+      "offer" : "4月下旬",
+      "mianshi" : "4月-5月",
+      "bishi" : "4月中旬",
+      "wangshen" : "4月30日截止",
+      "neitui" : "4月30日截止"
+    }
+  },
+  {
+    "companyType" : 0,
+    "coverImg" : "https://uploadfiles.nowcoder.com/files/20191207/999991354_1575709494167_oppo3-2.png",
+    "companyName" : "OPPO",
+    "companyImgUrl" : "https://uploadfiles.nowcoder.com/files/20191205/4107856_1575513606131_60x60-2.png",
+    "campusUrl" : "http://oppo.zhaopin.com/",
+    "timeTable" : {
+      "offer" : "",
+      "mianshi" : "2月17日-3月17日",
+      "bishi" : "",
+      "wangshen" : "3月10日截止",
+      "neitui" : "3月10日截止"
+    }
+  },
+  {
+    "companyType" : 0,
+    "coverImg" : "https://uploadfiles.nowcoder.com/files/20190715/9398821_1563179707501_217-2.png",
+    "companyName" : "腾讯",
+    "companyImgUrl" : "https://uploadfiles.nowcoder.com/files/20190715/9398821_1563179692200_60-2.png",
+    "campusUrl" : "https://join.qq.com",
+    "timeTable" : {
+      "offer" : "",
+      "mianshi" : "",
+      "bishi" : "4月24日~4月26日",
+      "wangshen" : "3月5日-4月19日中午12:00",
+      "neitui" : "3月5日-4月19日中午12:00"
+    }
+  },
+  {
+    "companyType" : 0,
+    "coverImg" : "http://static.nowcoder.com/images/res/essenceTopic/wy.png",
+    "companyName" : "网易",
+    "companyImgUrl" : "https://uploadfiles.nowcoder.com/files/20160825/826546_1472120736090_网易4.png",
+    "campusUrl" : "https://campus.163.com/app/campus/recruitment4campus?projectId=24",
+    "timeTable" : {
+      "offer" : "",
+      "mianshi" : "",
+      "bishi" : "",
+      "wangshen" : "3月31日截止",
+      "neitui" : "3月31日截止"
+    }
+  },
+  {
+    "companyType" : 0,
+    "coverImg" : "https://uploadfiles.nowcoder.com/files/20180815/999991342_1534327628269_%E4%BD%9C%E4%B8%9A%E5%B8%AE.png",
+    "companyName" : "作业帮",
+    "companyImgUrl" : "https://uploadfiles.nowcoder.com/files/20180815/999991342_1534327628225_作业帮3.png",
+    "campusUrl" : "http://job.zuoyebang.com/xiaoyuan.html?mode=campus&pageNo=1&zhinengId=20244",
+    "timeTable" : {
+      "offer" : "3月中旬起",
+      "mianshi" : "3月中旬起",
+      "bishi" : "",
+      "wangshen" : "2月24日起",
+      "neitui" : "2月24日起"
+    }
+  },
+  {
+    "companyType" : 0,
+    "coverImg" : "https://uploadfiles.nowcoder.com/files/20190404/4107856_1554374463303_度小满金融.png",
+    "companyName" : "度小满金融",
+    "companyImgUrl" : "https://uploadfiles.nowcoder.com/files/20190404/4107856_1554374458101_度小满金融3.png",
+    "campusUrl" : "https://app.mokahr.com/su/14RMfA",
+    "timeTable" : {
+      "offer" : "4月下旬起",
+      "mianshi" : "4月下旬起",
+      "bishi" : "4月20日",
+      "wangshen" : "3月16日-4月16日",
+      "neitui" : "3月16日-4月16日"
+    }
+  },
+  {
+    "companyType" : 0,
+    "coverImg" : "https://uploadfiles.nowcoder.com/files/20190222/999991354_1550827083095_%E6%A0%BC%E5%8A%9B.png",
+    "companyName" : "格力",
+    "companyImgUrl" : "https://uploadfiles.nowcoder.com/files/20190222/999991354_1550827083066_60x602.png",
+    "campusUrl" : "https://bsurl.cn/83AOMheN",
+    "timeTable" : {
+      "offer" : "",
+      "mianshi" : "2月20日-3月14日",
+      "bishi" : "2月20日-3月14日",
+      "wangshen" : "即日起",
+      "neitui" : "即日起"
+    }
+  },
+  {
+    "companyType" : 0,
+    "coverImg" : "https://static.nowcoder.com/images/res/essenceTopic/xc.png",
+    "companyName" : "携程",
+    "companyImgUrl" : "https://uploadfiles.nowcoder.com/files/20160729/60_1469785401894_13.png",
+    "campusUrl" : "http://campus.ctrip.com",
+    "timeTable" : {
+      "offer" : "5月-7月",
+      "mianshi" : "4月-6月",
+      "bishi" : "4月1日/5月7日",
+      "wangshen" : "5月6日截止",
+      "neitui" : "3月16日截止"
+    }
+  },
+  {
+    "companyType" : 0,
+    "coverImg" : "https://uploadfiles.nowcoder.com/files/20170909/63_1504936739255_陌陌3.png",
+    "companyName" : "陌陌",
+    "companyImgUrl" : "https://uploadfiles.nowcoder.com/files/20200319/999991342_1584607187436_模板-陌陌灰.png",
+    "campusUrl" : "https://campus.immomo.com",
+    "timeTable" : {
+      "offer" : "",
+      "mianshi" : "3-5月",
+      "bishi" : "无统一笔试",
+      "wangshen" : "3月2日-4月30日",
+      "neitui" : "3月2日-4月30日"
+    }
+  },
+  {
+    "companyType" : 0,
+    "coverImg" : "https://uploadfiles.nowcoder.com/files/20160729/60_1469777209484_360.png",
+    "companyName" : "360",
+    "companyImgUrl" : "https://static.nowcoder.com/images/weblogo/gray_logo/3.png",
+    "campusUrl" : "http://chrcmp.chinahr.com/views/2020-qihu360spring/",
+    "timeTable" : {
+      "offer" : "5月下旬",
+      "mianshi" : "4月中下旬起",
+      "bishi" : "3月24日起",
+      "wangshen" : "3月9日-4月13日",
+      "neitui" : "3月9日-3月22日"
+    }
+  },
+  {
+    "companyType" : 0,
+    "coverImg" : "https://uploadfiles.nowcoder.com/files/20200312/999991354_1583986035924_斗鱼111.png",
+    "companyName" : "斗鱼",
+    "companyImgUrl" : "https://uploadfiles.nowcoder.com/files/20200312/999991354_1583986046960_斗鱼44.png",
+    "campusUrl" : "https://www.douyu.com/topic/zhaopin",
+    "timeTable" : {
+      "offer" : "",
+      "mianshi" : "",
+      "bishi" : "",
+      "wangshen" : "即日起",
+      "neitui" : "即日起"
+    }
+  },
+  {
+    "companyType" : 0,
+    "coverImg" : "https://uploadfiles.nowcoder.com/files/20160729/60_1469787222046_sougou.png",
+    "companyName" : "搜狗",
+    "companyImgUrl" : "https://uploadfiles.nowcoder.com/files/20160729/60_1469787221929_16.png",
+    "campusUrl" : "http://campus.sogou.com/campus_apply/sogou-inc01/104?sourceToken=3912719095e1c8cf09bca2d00e1736a8#/?_k=av4czl",
+    "timeTable" : {
+      "offer" : "3月-5月",
+      "mianshi" : "3月-4月",
+      "bishi" : "",
+      "wangshen" : "2月-3月",
+      "neitui" : "2月-3月"
+    }
+  },
+  {
+    "companyType" : 0,
+    "coverImg" : "https://static.nowcoder.com/images/active/campus2016/vip.png",
+    "companyName" : "唯品会",
+    "companyImgUrl" : "https://uploadfiles.nowcoder.com/files/20170801/63_1501583002662_vip_mini.png",
+    "campusUrl" : "https://campus.vip.com/",
+    "timeTable" : {
+      "offer" : "4月到5月",
+      "mianshi" : "3月下旬到4月",
+      "bishi" : "3月下旬到4月",
+      "wangshen" : "2月24日-3月27日",
+      "neitui" : "2月24日-3月27日"
+    }
+  },
+  {
+    "companyType" : 0,
+    "coverImg" : "https://uploadfiles.nowcoder.com/files/20180725/8386921_1532499093035_%E5%BF%AB%E6%89%8B2.png",
+    "companyName" : "快手",
+    "companyImgUrl" : "https://uploadfiles.nowcoder.com/files/20190403/4107856_1554269114114_60x60.png",
+    "campusUrl" : "https://campus.kuaishou.cn/#/campus/index/",
+    "timeTable" : {
+      "offer" : "",
+      "mianshi" : "",
+      "bishi" : "",
+      "wangshen" : "2月24日起",
+      "neitui" : "2月24日起"
     }
   },
   {
@@ -381,41 +606,41 @@
     "companyType" : 3,
     "coverImg" : "https://uploadfiles.nowcoder.com/files/20200312/999991354_1584009358471_广发银行研发中心1.png",
     "companyName" : "广发银行研发中心",
-    "companyImgUrl" : "",
-    "campusUrl" : "",
+    "companyImgUrl" : "https://uploadfiles.nowcoder.com/files/20200311/999991354_1583919496583_广发银行研发中心-4.png",
+    "campusUrl" : "http://gfyhyfzx2020.zhaopin.com/",
     "timeTable" : {
-      "offer" : "",
-      "mianshi" : "",
-      "bishi" : "",
-      "wangshen" : "",
-      "neitui" : ""
+      "offer" : "3月-6月",
+      "mianshi" : "3月-6月",
+      "bishi" : "3月-5月",
+      "wangshen" : "4月30日截止",
+      "neitui" : "4月30日截止"
     }
   },
   {
     "companyType" : 3,
     "coverImg" : "https://uploadfiles.nowcoder.com/files/20170817/63_1502951227371_%E6%8B%9B%E8%A1%8C2.png",
     "companyName" : "招银网络科技",
-    "companyImgUrl" : "",
+    "companyImgUrl" : "https://uploadfiles.nowcoder.com/images/20180918/4107856_1537254444704_B50040A947F9796F70E63BF731A4EA39",
     "campusUrl" : "",
     "timeTable" : {
       "offer" : "",
-      "mianshi" : "",
-      "bishi" : "",
-      "wangshen" : "",
-      "neitui" : ""
+      "mianshi" : "3月14日-3月22日",
+      "bishi" : "3月9日",
+      "wangshen" : "2月17日-3月8日",
+      "neitui" : "2月17日-3月8日"
     }
   },
   {
     "companyType" : 3,
     "coverImg" : "https://uploadfiles.nowcoder.com/files/20200307/999991354_1583571284582_中原银行1.png",
     "companyName" : "中原银行",
-    "companyImgUrl" : "",
-    "campusUrl" : "",
+    "companyImgUrl" : "https://uploadfiles.nowcoder.com/files/20200307/999991354_1583571279888_中原银行-4.png",
+    "campusUrl" : "http://www.zybank.com.cn/",
     "timeTable" : {
       "offer" : "",
-      "mianshi" : "",
-      "bishi" : "",
-      "wangshen" : "",
+      "mianshi" : "等候通知",
+      "bishi" : "等候通知",
+      "wangshen" : "3月31日截止",
       "neitui" : ""
     }
   },
@@ -423,27 +648,27 @@
     "companyType" : 3,
     "coverImg" : "https://uploadfiles.nowcoder.com/files/20170916/63_1505545405980_%E5%B9%BF%E5%8F%91%E9%93%B6%E8%A1%8C2.png",
     "companyName" : "广发银行",
-    "companyImgUrl" : "",
-    "campusUrl" : "",
+    "companyImgUrl" : "https://uploadfiles.nowcoder.com/files/20190717/999991354_1563357669516_广发银行4.png",
+    "campusUrl" : "https://xiaoyuan.zhaopin.com/company/CC000351878D90000000000",
     "timeTable" : {
       "offer" : "",
       "mianshi" : "",
       "bishi" : "",
-      "wangshen" : "",
-      "neitui" : ""
+      "wangshen" : "3月31日截止",
+      "neitui" : "3月31日截止"
     }
   },
   {
     "companyType" : 3,
     "coverImg" : "https://uploadfiles.nowcoder.com/files/20190612/999991354_1560329065115_02.png",
     "companyName" : "中国邮政",
-    "companyImgUrl" : "",
-    "campusUrl" : "",
+    "companyImgUrl" : "https://uploadfiles.nowcoder.com/files/20190612/999991354_1560329079663_03.png",
+    "campusUrl" : "http://companyads.51job.com/companyads/2019/wh/32841117/index.htm",
     "timeTable" : {
       "offer" : "",
       "mianshi" : "",
-      "bishi" : "",
-      "wangshen" : "",
+      "bishi" : "4月上旬",
+      "wangshen" : "3月31日18：00止",
       "neitui" : ""
     }
   },
@@ -451,560 +676,518 @@
     "companyType" : 3,
     "coverImg" : "https://uploadfiles.nowcoder.com/files/20190717/999991354_1563356941498_银联2.png",
     "companyName" : "中国银联",
-    "companyImgUrl" : "",
-    "campusUrl" : "",
+    "companyImgUrl" : "https://uploadfiles.nowcoder.com/files/20190717/999991354_1563356935354_银联4.png",
+    "campusUrl" : "https://join.unionpay.com/wt/unionpayhr/web/index/campus",
     "timeTable" : {
       "offer" : "",
       "mianshi" : "",
       "bishi" : "",
-      "wangshen" : "",
-      "neitui" : ""
+      "wangshen" : "2月24日-3月8日",
+      "neitui" : "2月24日-3月8日"
     }
   },
   {
     "companyType" : 3,
     "coverImg" : "https://uploadfiles.nowcoder.com/files/20191104/999991354_1572857838284_民生银行1.png",
     "companyName" : "民生银行",
-    "companyImgUrl" : "",
-    "campusUrl" : "",
+    "companyImgUrl" : "https://uploadfiles.nowcoder.com/files/20191104/999991354_1572857846004_民生银行4-120.png",
+    "campusUrl" : "http://career.cmbc.com.cn:8080/index.html#/app/home",
     "timeTable" : {
       "offer" : "",
       "mianshi" : "",
       "bishi" : "",
-      "wangshen" : "",
-      "neitui" : ""
+      "wangshen" : "3月22日截止",
+      "neitui" : "3月22日截止"
     }
   },
   {
     "companyType" : 3,
     "coverImg" : "https://uploadfiles.nowcoder.com/files/20170818/63_1503025197559_%E5%AE%81%E6%B3%A2%E9%93%B6%E8%A1%8C4.png",
     "companyName" : "宁波银行",
-    "companyImgUrl" : "",
-    "campusUrl" : "",
+    "companyImgUrl" : "https://uploadfiles.nowcoder.com/files/20170818/63_1503025197529_宁波银行.png",
+    "campusUrl" : "https://zhaopin.nbcb.com.cn",
     "timeTable" : {
-      "offer" : "",
-      "mianshi" : "",
-      "bishi" : "",
-      "wangshen" : "",
-      "neitui" : ""
+      "offer" : "5月上旬",
+      "mianshi" : "5月上旬",
+      "bishi" : "4月-5月",
+      "wangshen" : "4月30日截止",
+      "neitui" : "4月30日截止"
     }
   },
   {
-    "companyType" : 1,
-    "coverImg" : "",
-    "companyName" : "",
-    "companyImgUrl" : "",
-    "campusUrl" : "",
+    "companyType" : 3,
+    "coverImg" : "https://uploadfiles.nowcoder.com/files/20190730/999991354_1564470000856_中信证券3.png",
+    "companyName" : "中信证券",
+    "companyImgUrl" : "https://uploadfiles.nowcoder.com/files/20190730/999991354_1564469994494_中信2.png",
+    "campusUrl" : "http://customer.citics.com/",
     "timeTable" : {
-      "offer" : "",
-      "mianshi" : "",
-      "bishi" : "",
-      "wangshen" : "",
-      "neitui" : ""
+      "offer" : "4月-5月",
+      "mianshi" : "3月-4月",
+      "bishi" : "3月-4月",
+      "wangshen" : "3月29日截止",
+      "neitui" : "3月29日截止"
     }
   },
   {
-    "companyType" : 1,
-    "coverImg" : "",
-    "companyName" : "",
-    "companyImgUrl" : "",
-    "campusUrl" : "",
+    "companyType" : 3,
+    "coverImg" : "https://uploadfiles.nowcoder.com/files/20190221/999991354_1550741535890_%E4%B8%8A%E6%B5%B7%E9%93%B6%E8%A1%8C.png",
+    "companyName" : "上海银行",
+    "companyImgUrl" : "https://uploadfiles.nowcoder.com/files/20190221/999991354_1550748259745_%E4%B8%8A%E6%B5%B7.png",
+    "campusUrl" : "https://bosc.zhiye.com/campus",
     "timeTable" : {
-      "offer" : "",
-      "mianshi" : "",
-      "bishi" : "",
-      "wangshen" : "",
-      "neitui" : ""
+      "offer" : "4月",
+      "mianshi" : "3月下旬",
+      "bishi" : "3月中下旬",
+      "wangshen" : "2月24日-3月20日",
+      "neitui" : "2月24日-3月20日"
     }
   },
   {
-    "companyType" : 1,
-    "coverImg" : "",
-    "companyName" : "",
-    "companyImgUrl" : "",
-    "campusUrl" : "",
+    "companyType" : 3,
+    "coverImg" : "https://uploadfiles.nowcoder.com/files/20190924/999991354_1569306873694_兴业银行1.png",
+    "companyName" : "兴业银行",
+    "companyImgUrl" : "https://uploadfiles.nowcoder.com/files/20190924/999991354_1569306862533_兴业银行4-60.png",
+    "campusUrl" : "https://zhaopin.cib.com.cn/",
     "timeTable" : {
       "offer" : "",
       "mianshi" : "",
       "bishi" : "",
-      "wangshen" : "",
-      "neitui" : ""
+      "wangshen" : "2月17日起",
+      "neitui" : "2月17日起"
     }
   },
   {
-    "companyType" : 1,
-    "coverImg" : "",
-    "companyName" : "",
-    "companyImgUrl" : "",
-    "campusUrl" : "",
+    "companyType" : 3,
+    "coverImg" : "https://uploadfiles.nowcoder.com/files/20190921/999991354_1569033904558_中信银行1.png",
+    "companyName" : "中信银行",
+    "companyImgUrl" : "https://uploadfiles.nowcoder.com/files/20190921/999991354_1569033888944_中信银行4-60.png",
+    "campusUrl" : "https://job.citicbank.com",
     "timeTable" : {
       "offer" : "",
       "mianshi" : "",
       "bishi" : "",
-      "wangshen" : "",
-      "neitui" : ""
+      "wangshen" : "2月13日起",
+      "neitui" : "2月13日起"
     }
   },
   {
-    "companyType" : 1,
-    "coverImg" : "",
-    "companyName" : "",
-    "companyImgUrl" : "",
-    "campusUrl" : "",
+    "companyType" : 3,
+    "coverImg" : "https://uploadfiles.nowcoder.com/files/20200311/999991354_1583907988507_建信金融科技11.png",
+    "companyName" : "建信金融科技",
+    "companyImgUrl" : "https://uploadfiles.nowcoder.com/files/20190726/999991354_1564135428921_建行2.png",
+    "campusUrl" : "http://www.ccbft.com/",
     "timeTable" : {
-      "offer" : "",
-      "mianshi" : "",
-      "bishi" : "",
-      "wangshen" : "",
-      "neitui" : ""
+      "offer" : "4月10日-5月30日",
+      "mianshi" : "3月20日-5月10日",
+      "bishi" : "3月20日-4月20日",
+      "wangshen" : "3月10日-4月16日",
+      "neitui" : "3月10日-4月30日"
     }
   },
   {
-    "companyType" : 1,
-    "coverImg" : "",
-    "companyName" : "",
-    "companyImgUrl" : "",
-    "campusUrl" : "",
+    "companyType" : 3,
+    "coverImg" : "https://uploadfiles.nowcoder.com/files/20190713/999991354_1563008659949_浦发4.png",
+    "companyName" : "浦发银行",
+    "companyImgUrl" : "https://uploadfiles.nowcoder.com/files/20190713/999991354_1563008654617_浦发2.png",
+    "campusUrl" : "http://spdb.zhaopin.com/",
     "timeTable" : {
       "offer" : "",
       "mianshi" : "",
       "bishi" : "",
-      "wangshen" : "",
-      "neitui" : ""
+      "wangshen" : "3月17日18:00截止",
+      "neitui" : "3月17日18:00截止"
     }
   },
   {
-    "companyType" : 1,
-    "coverImg" : "",
-    "companyName" : "",
-    "companyImgUrl" : "",
-    "campusUrl" : "",
+    "companyType" : 3,
+    "coverImg" : "https://uploadfiles.nowcoder.com/files/20200317/999991354_1584459644330_杭州银行1.png",
+    "companyName" : "杭州银行",
+    "companyImgUrl" : "https://uploadfiles.nowcoder.com/files/20200317/999991354_1584459656036_杭州银行4.png",
+    "campusUrl" : "http://hzbank.zhaopin.com/",
     "timeTable" : {
       "offer" : "",
       "mianshi" : "",
       "bishi" : "",
-      "wangshen" : "",
-      "neitui" : ""
+      "wangshen" : "3月22日截止",
+      "neitui" : "3月22日截止"
     }
   },
   {
-    "companyType" : 1,
-    "coverImg" : "",
-    "companyName" : "",
-    "companyImgUrl" : "",
-    "campusUrl" : "",
+    "companyType" : 3,
+    "coverImg" : "https://uploadfiles.nowcoder.com/files/20200318/999991354_1584524090054_宁夏银行1.png",
+    "companyName" : "宁夏银行",
+    "companyImgUrl" : "https://uploadfiles.nowcoder.com/files/20200318/999991354_1584524099056_宁夏银行4.png",
+    "campusUrl" : "http://www.bankofnx.com.cn/bankofnx/gywm/zygg/415550/index.html",
     "timeTable" : {
       "offer" : "",
       "mianshi" : "",
       "bishi" : "",
-      "wangshen" : "",
-      "neitui" : ""
+      "wangshen" : "3月11日起",
+      "neitui" : "3月11日起"
     }
   },
   {
-    "companyType" : 1,
-    "coverImg" : "",
-    "companyName" : "",
-    "companyImgUrl" : "",
-    "campusUrl" : "",
+    "companyType" : 3,
+    "coverImg" : "https://uploadfiles.nowcoder.com/files/20190708/999991354_1562586408266_光大3.png",
+    "companyName" : "光大银行",
+    "companyImgUrl" : "https://uploadfiles.nowcoder.com/files/20190708/999991354_1562586403465_光大2.png",
+    "campusUrl" : "http://campus.51job.com/cebbank/jobs.htm",
     "timeTable" : {
-      "offer" : "",
-      "mianshi" : "",
-      "bishi" : "",
-      "wangshen" : "",
-      "neitui" : ""
+      "offer" : "4月下旬",
+      "mianshi" : "3月下旬-4月中旬",
+      "bishi" : "3月下旬-4月中旬",
+      "wangshen" : "即日起-3月15日",
+      "neitui" : "即日起-3月15日"
     }
   },
   {
-    "companyType" : 1,
-    "coverImg" : "",
-    "companyName" : "",
-    "companyImgUrl" : "",
-    "campusUrl" : "",
+    "companyType" : 3,
+    "coverImg" : "https://uploadfiles.nowcoder.com/files/20190308/999991354_1552030220194_%E6%8B%9B%E5%95%86.png",
+    "companyName" : "招商银行",
+    "companyImgUrl" : "https://uploadfiles.nowcoder.com/files/20190403/4107856_1554264855496_60x60-2.png",
+    "campusUrl" : "http://career.cmbchina.com/",
     "timeTable" : {
       "offer" : "",
       "mianshi" : "",
       "bishi" : "",
-      "wangshen" : "",
-      "neitui" : ""
+      "wangshen" : "3月下旬陆续截止",
+      "neitui" : "3月下旬陆续截止"
     }
   },
   {
-    "companyType" : 1,
-    "coverImg" : "",
-    "companyName" : "",
-    "companyImgUrl" : "",
-    "campusUrl" : "",
+    "companyType" : 3,
+    "coverImg" : "https://uploadfiles.nowcoder.com/files/20190308/999991354_1552038793408_%E5%B9%BF%E5%8F%91%E8%AF%81%E5%88%B8.png",
+    "companyName" : "广发证券",
+    "companyImgUrl" : "https://uploadfiles.nowcoder.com/files/20190308/999991354_1552038793374_%E5%B9%BF%E5%8F%91%E8%AF%81%E5%88%B82.png",
+    "campusUrl" : "http://job.gf.com.cn/recruitment/campus",
     "timeTable" : {
       "offer" : "",
       "mianshi" : "",
       "bishi" : "",
-      "wangshen" : "",
-      "neitui" : ""
+      "wangshen" : "3月20日截止",
+      "neitui" : "3月20日截止"
     }
   },
   {
-    "companyType" : 1,
-    "coverImg" : "",
-    "companyName" : "",
-    "companyImgUrl" : "",
-    "campusUrl" : "",
+    "companyType" : 3,
+    "coverImg" : "https://uploadfiles.nowcoder.com/files/20190308/999991354_1552037263615_%E6%B1%9F%E8%8B%8F%E9%93%B6%E8%A1%8C.png",
+    "companyName" : "江苏银行",
+    "companyImgUrl" : "https://uploadfiles.nowcoder.com/files/20190308/999991354_1552037263586_%E6%B1%9F%E8%8B%8F%E9%93%B6%E8%A1%8C2.png",
+    "campusUrl" : "http://www.jsbchina.cn/CN/gywh/grczp/rxyzp/index.html?flag=0",
     "timeTable" : {
       "offer" : "",
-      "mianshi" : "",
-      "bishi" : "",
-      "wangshen" : "",
-      "neitui" : ""
+      "mianshi" : "4月-5月",
+      "bishi" : "另行通知",
+      "wangshen" : "2月11日-3月22日",
+      "neitui" : "2月11日-3月22日"
     }
   },
   {
-    "companyType" : 1,
-    "coverImg" : "",
-    "companyName" : "",
-    "companyImgUrl" : "",
-    "campusUrl" : "",
+    "companyType" : 4,
+    "coverImg" : "https://uploadfiles.nowcoder.com/files/20190626/999991354_1561538225065_图森-3.png",
+    "companyName" : "图森未来",
+    "companyImgUrl" : "https://uploadfiles.nowcoder.com/images/20190305/9696957_1551781113554_FA8A17C1E224A892FC64CFF0BB61CF30",
+    "campusUrl" : "https://app.mokahr.com/campus_apply/tusenweilai/3232",
     "timeTable" : {
-      "offer" : "",
-      "mianshi" : "",
+      "offer" : "3月15日起",
+      "mianshi" : "3月10日起",
       "bishi" : "",
-      "wangshen" : "",
-      "neitui" : ""
+      "wangshen" : "3月2日-4月30日",
+      "neitui" : "3月2日-4月30日"
     }
   },
   {
-    "companyType" : 1,
-    "coverImg" : "",
-    "companyName" : "",
-    "companyImgUrl" : "",
-    "campusUrl" : "",
+    "companyType" : 4,
+    "coverImg" : "https://uploadfiles.nowcoder.com/files/20180810/999991342_1533906803422_%E8%BF%9C%E6%99%AF.png",
+    "companyName" : "远景",
+    "companyImgUrl" : "https://uploadfiles.nowcoder.com/files/20190506/63_1557149235465_远景-120x120.png",
+    "campusUrl" : "http://recruit.envisioncn.com/jobList.html?goType=EnvisioncnDigital",
     "timeTable" : {
       "offer" : "",
       "mianshi" : "",
       "bishi" : "",
-      "wangshen" : "",
-      "neitui" : ""
+      "wangshen" : "即日起",
+      "neitui" : "即日起"
     }
   },
   {
-    "companyType" : 1,
-    "coverImg" : "",
-    "companyName" : "",
-    "companyImgUrl" : "",
-    "campusUrl" : "",
+    "companyType" : 5,
+    "coverImg" : "https://uploadfiles.nowcoder.com/files/20200302/999991354_1583126027943_乐元素1.png",
+    "companyName" : "乐元素",
+    "companyImgUrl" : "https://uploadfiles.nowcoder.com/files/20200302/999991354_1583126038719_乐元素-4.png",
+    "campusUrl" : "https://app.mokahr.com/campus_apply/leyuansu/2357#/",
     "timeTable" : {
-      "offer" : "",
-      "mianshi" : "",
-      "bishi" : "",
-      "wangshen" : "",
-      "neitui" : ""
+      "offer" : "3月起",
+      "mianshi" : "灵活安排",
+      "bishi" : "灵活安排",
+      "wangshen" : "2月24日起",
+      "neitui" : "2月24日起"
     }
   },
   {
-    "companyType" : 1,
-    "coverImg" : "",
-    "companyName" : "",
-    "companyImgUrl" : "",
-    "campusUrl" : "",
+    "companyType" : 5,
+    "coverImg" : "https://uploadfiles.nowcoder.com/files/20200323/999991354_1584956569316_网龙1.png",
+    "companyName" : "网龙网络公司",
+    "companyImgUrl" : "https://uploadfiles.nowcoder.com/files/20200323/999991354_1584956674387_网龙-4.png",
+    "campusUrl" : "http://nd.zhaopin.com/",
     "timeTable" : {
-      "offer" : "",
-      "mianshi" : "",
-      "bishi" : "",
-      "wangshen" : "",
-      "neitui" : ""
+      "offer" : "4月起",
+      "mianshi" : "4月起（灵活分批安排）",
+      "bishi" : "4月起（4月1日部分岗位统一笔试）",
+      "wangshen" : "2月21日起",
+      "neitui" : "2月21日起"
     }
   },
   {
-    "companyType" : 1,
-    "coverImg" : "",
-    "companyName" : "",
-    "companyImgUrl" : "",
-    "campusUrl" : "",
+    "companyType" : 5,
+    "coverImg" : "https://uploadfiles.nowcoder.com/files/20190710/999991354_1562755151008_友塔游戏-3.png",
+    "companyName" : "友塔游戏",
+    "companyImgUrl" : "https://uploadfiles.nowcoder.com/files/20190710/999991354_1562755144473_友塔游戏-4.png",
+    "campusUrl" : "https://www.yottagames.com.cn/campus",
     "timeTable" : {
       "offer" : "",
       "mianshi" : "",
       "bishi" : "",
-      "wangshen" : "",
-      "neitui" : ""
+      "wangshen" : "即时起-6月30日",
+      "neitui" : "即时起-6月30日"
     }
   },
   {
-    "companyType" : 1,
-    "coverImg" : "",
-    "companyName" : "",
-    "companyImgUrl" : "",
-    "campusUrl" : "",
+    "companyType" : 5,
+    "coverImg" : "https://uploadfiles.nowcoder.com/files/20190819/999991354_1566201457508_竞技世界4.png",
+    "companyName" : "竞技世界",
+    "companyImgUrl" : "https://uploadfiles.nowcoder.com/files/20190819/999991354_1566201453130_竞技世界2.png",
+    "campusUrl" : "https://campus.jj.cn",
     "timeTable" : {
-      "offer" : "",
-      "mianshi" : "",
-      "bishi" : "",
-      "wangshen" : "",
-      "neitui" : ""
+      "offer" : "3月上旬起",
+      "mianshi" : "3月上旬-5月",
+      "bishi" : "3月上旬-5月",
+      "wangshen" : "2月14日-5月",
+      "neitui" : "2月14日-5月"
     }
   },
   {
-    "companyType" : 1,
-    "coverImg" : "",
-    "companyName" : "",
-    "companyImgUrl" : "",
-    "campusUrl" : "",
+    "companyType" : 5,
+    "coverImg" : "https://uploadfiles.nowcoder.com/files/20170818/63_1503050070470_%E5%A4%9A3.png",
+    "companyName" : "多益网络",
+    "companyImgUrl" : "https://uploadfiles.nowcoder.com/files/20170818/63_1503050070435_多5.png",
+    "campusUrl" : "https://xz.duoyi.com/TCa",
     "timeTable" : {
       "offer" : "",
       "mianshi" : "",
-      "bishi" : "",
-      "wangshen" : "",
-      "neitui" : ""
+      "bishi" : "3月5日或4月2日或5月8日",
+      "wangshen" : "5月8日截止",
+      "neitui" : "5月8日截止"
     }
   },
   {
-    "companyType" : 1,
-    "coverImg" : "",
-    "companyName" : "",
-    "companyImgUrl" : "",
-    "campusUrl" : "",
+    "companyType" : 5,
+    "coverImg" : "https://static.nowcoder.com/images/res/essenceTopic/wanmei.png",
+    "companyName" : "完美世界",
+    "companyImgUrl" : "https://uploadfiles.nowcoder.com/files/20190626/999991354_1561540590855_33.png",
+    "campusUrl" : "http://campus.wanmei.com/job.html",
     "timeTable" : {
-      "offer" : "",
-      "mianshi" : "",
-      "bishi" : "",
-      "wangshen" : "",
-      "neitui" : ""
+      "offer" : "3月中旬起",
+      "mianshi" : "3月中旬起",
+      "bishi" : "3月中旬-3月底",
+      "wangshen" : "3月9日起",
+      "neitui" : "3月9日起"
     }
   },
   {
-    "companyType" : 1,
-    "coverImg" : "",
-    "companyName" : "",
-    "companyImgUrl" : "",
-    "campusUrl" : "",
+    "companyType" : 5,
+    "coverImg" : "https://uploadfiles.nowcoder.com/files/20190712/999991354_1562913362803_雷火4.png",
+    "companyName" : "网易游戏雷火事业群",
+    "companyImgUrl" : "https://uploadfiles.nowcoder.com/files/20190712/999991354_1562913352408_雷火2.png",
+    "campusUrl" : "https://campus.163.com/app/hy/lh",
     "timeTable" : {
-      "offer" : "",
-      "mianshi" : "",
-      "bishi" : "",
-      "wangshen" : "",
-      "neitui" : ""
+      "offer" : "面试通过后尽快",
+      "mianshi" : "根据实际情况安排",
+      "bishi" : "3月下旬/4月中下旬",
+      "wangshen" : "4月19日截止",
+      "neitui" : "3月27日截止"
     }
   },
   {
-    "companyType" : 1,
-    "coverImg" : "",
-    "companyName" : "",
-    "companyImgUrl" : "",
-    "campusUrl" : "",
+    "companyType" : 5,
+    "coverImg" : "https://uploadfiles.nowcoder.com/files/20200317/999991354_1584440338997_金山西山居1.png",
+    "companyName" : "金山西山居",
+    "companyImgUrl" : "https://uploadfiles.nowcoder.com/files/20200317/999991354_1584440641429_金山西山居-4.png",
+    "campusUrl" : "https://app.mokahr.com/campus_apply/xishanju/5745#/?anchorName=default_joblist&sourceToken=&_k=gic0ic",
     "timeTable" : {
-      "offer" : "",
-      "mianshi" : "",
-      "bishi" : "",
-      "wangshen" : "",
-      "neitui" : ""
+      "offer" : "4月-5月",
+      "mianshi" : "4月-5月",
+      "bishi" : "3月中旬-４月下旬",
+      "wangshen" : "4月30日截止",
+      "neitui" : "4月30日截止"
     }
   },
   {
-    "companyType" : 1,
-    "coverImg" : "",
-    "companyName" : "",
-    "companyImgUrl" : "",
-    "campusUrl" : "",
+    "companyType" : 5,
+    "coverImg" : "https://uploadfiles.nowcoder.com/files/20190822/999991354_1566445387550_搜狐畅游4-修改.png",
+    "companyName" : "搜狐畅游",
+    "companyImgUrl" : "https://uploadfiles.nowcoder.com/files/20190404/4107856_1554375015275_搜狐畅游.png",
+    "campusUrl" : "http://zhaopin.changyou.com",
     "timeTable" : {
-      "offer" : "",
-      "mianshi" : "",
-      "bishi" : "",
-      "wangshen" : "",
-      "neitui" : ""
+      "offer" : "面试后一周左右",
+      "mianshi" : "2月-5月",
+      "bishi" : "邮件通知",
+      "wangshen" : "2月6日起",
+      "neitui" : "2月6日起"
     }
   },
   {
-    "companyType" : 1,
-    "coverImg" : "",
-    "companyName" : "",
-    "companyImgUrl" : "",
-    "campusUrl" : "",
+    "companyType" : 5,
+    "coverImg" : "https://uploadfiles.nowcoder.com/files/20180831/63_1535707175853_3.png",
+    "companyName" : "网易互娱",
+    "companyImgUrl" : "https://uploadfiles.nowcoder.com/files/20180831/63_1535707175805_1.png",
+    "campusUrl" : "http://url.163.com/newcode",
     "timeTable" : {
-      "offer" : "",
-      "mianshi" : "",
-      "bishi" : "",
-      "wangshen" : "",
-      "neitui" : ""
+      "offer" : "3月中及以后",
+      "mianshi" : "灵活分批安排",
+      "bishi" : "灵活分批安排",
+      "wangshen" : "2月25日-4月8日",
+      "neitui" : "2月25日-4月8日"
     }
   },
   {
-    "companyType" : 1,
-    "coverImg" : "",
-    "companyName" : "",
-    "companyImgUrl" : "",
-    "campusUrl" : "",
+    "companyType" : 5,
+    "coverImg" : "https://uploadfiles.nowcoder.com/files/20190821/999991354_1566375937381_博乐科技4.png",
+    "companyName" : "博乐科技",
+    "companyImgUrl" : "https://uploadfiles.nowcoder.com/files/20190821/999991354_1566375931573_博乐科技.png",
+    "campusUrl" : "http://bolegames.cn",
     "timeTable" : {
       "offer" : "",
       "mianshi" : "",
       "bishi" : "",
-      "wangshen" : "",
-      "neitui" : ""
+      "wangshen" : "即日起",
+      "neitui" : "即日起"
     }
   },
   {
-    "companyType" : 1,
-    "coverImg" : "",
-    "companyName" : "",
-    "companyImgUrl" : "",
-    "campusUrl" : "",
+    "companyType" : 5,
+    "coverImg" : "https://uploadfiles.nowcoder.com/files/20170805/63_1501917984593_%E4%B8%89%E4%B8%83%E4%BA%92%E5%A8%B13.png",
+    "companyName" : "三七互娱",
+    "companyImgUrl" : "https://uploadfiles.nowcoder.com/files/20170805/63_1501917984540_三七.png",
+    "campusUrl" : "https://zhaopin.37.com/index.php?m=Home&c=campus&a=index",
     "timeTable" : {
       "offer" : "",
       "mianshi" : "",
-      "bishi" : "",
-      "wangshen" : "",
-      "neitui" : ""
+      "bishi" : "3月3日/13日/25日",
+      "wangshen" : "即日起",
+      "neitui" : "即日起"
     }
   },
   {
-    "companyType" : 1,
-    "coverImg" : "",
-    "companyName" : "",
-    "companyImgUrl" : "",
-    "campusUrl" : "",
+    "companyType" : 5,
+    "coverImg" : "https://uploadfiles.nowcoder.com/files/20190403/4575098_1554274792495_米哈游.png",
+    "companyName" : "米哈游",
+    "companyImgUrl" : "https://uploadfiles.nowcoder.com/files/20190403/4575098_1554274783679_米哈游4.png",
+    "campusUrl" : "https://join.mihoyo.com/#/?_k=bu0m1e",
     "timeTable" : {
-      "offer" : "",
-      "mianshi" : "",
-      "bishi" : "",
-      "wangshen" : "",
-      "neitui" : ""
+      "offer" : "3月下旬开始",
+      "mianshi" : "3月-4月",
+      "bishi" : "3月中旬/4月上旬",
+      "wangshen" : "2月17日-3月29日",
+      "neitui" : "2月17日-3月29日"
     }
   },
   {
-    "companyType" : 1,
-    "coverImg" : "",
-    "companyName" : "",
-    "companyImgUrl" : "",
-    "campusUrl" : "",
+    "companyType" : 5,
+    "coverImg" : "https://uploadfiles.nowcoder.com/files/20160801/60_1470046024125_43994.png",
+    "companyName" : "4399",
+    "companyImgUrl" : "https://uploadfiles.nowcoder.com/files/20190529/999991354_1559113530714_31.png",
+    "campusUrl" : "http://web.4399.com/campus/",
     "timeTable" : {
-      "offer" : "",
-      "mianshi" : "",
-      "bishi" : "",
-      "wangshen" : "",
-      "neitui" : ""
+      "offer" : "3月-4月",
+      "mianshi" : "3月-4月",
+      "bishi" : "3月-4月",
+      "wangshen" : "2月-3月",
+      "neitui" : "2月-3月"
     }
   },
   {
-    "companyType" : 1,
-    "coverImg" : "",
-    "companyName" : "",
-    "companyImgUrl" : "",
-    "campusUrl" : "",
+    "companyType" : 5,
+    "coverImg" : "https://uploadfiles.nowcoder.com/files/20190917/999991354_1568716050466_疯狂游戏4.png",
+    "companyName" : "疯狂游戏",
+    "companyImgUrl" : "https://uploadfiles.nowcoder.com/files/20190917/999991354_1568716044558_疯狂游戏2.png",
+    "campusUrl" : "http://official-website.hortorgames.com/#/web/list",
     "timeTable" : {
-      "offer" : "",
-      "mianshi" : "",
-      "bishi" : "",
-      "wangshen" : "",
-      "neitui" : ""
+      "offer" : "3月1日-4月30日",
+      "mianshi" : "2月25日-3月25日",
+      "bishi" : "2月20日-3月20日",
+      "wangshen" : "2月15日-3月10日",
+      "neitui" : "2月15日-3月10日"
     }
   },
   {
-    "companyType" : 1,
-    "coverImg" : "",
-    "companyName" : "",
-    "companyImgUrl" : "",
-    "campusUrl" : "",
+    "companyType" : 5,
+    "coverImg" : "https://uploadfiles.nowcoder.com/files/20190906/999991354_1567738629781_途游217-144.png",
+    "companyName" : "途游游戏",
+    "companyImgUrl" : "https://uploadfiles.nowcoder.com/files/20190222/999991354_1550827162252_60x603.png",
+    "campusUrl" : "http://www.hotjob.cn/wt/Tuyoo/web/index?brandCode=1",
     "timeTable" : {
       "offer" : "",
-      "mianshi" : "",
-      "bishi" : "",
-      "wangshen" : "",
-      "neitui" : ""
+      "mianshi" : "2月17日-6月17日",
+      "bishi" : "每周四",
+      "wangshen" : "2月17日-6月17日",
+      "neitui" : "2月17日-6月17日"
     }
   },
   {
-    "companyType" : 1,
-    "coverImg" : "",
-    "companyName" : "",
-    "companyImgUrl" : "",
-    "campusUrl" : "",
+    "companyType" : 5,
+    "coverImg" : "https://uploadfiles.nowcoder.com/files/20190712/999991354_1562913623219_尚游游戏3.png",
+    "companyName" : "尚游游戏",
+    "companyImgUrl" : "https://uploadfiles.nowcoder.com/files/20190712/999991354_1562913616097_尚游游戏2.png",
+    "campusUrl" : "http://campus.syyx.com/",
     "timeTable" : {
-      "offer" : "",
-      "mianshi" : "",
-      "bishi" : "",
-      "wangshen" : "",
-      "neitui" : ""
+      "offer" : "3月中旬起",
+      "mianshi" : "灵活分批安排",
+      "bishi" : "灵活分批安排",
+      "wangshen" : "2月27日-3月31日",
+      "neitui" : "2月27日-3月31日"
     }
   },
   {
-    "companyType" : 1,
-    "coverImg" : "",
-    "companyName" : "",
-    "companyImgUrl" : "",
-    "campusUrl" : "",
+    "companyType" : 5,
+    "coverImg" : "https://uploadfiles.nowcoder.com/files/20170803/63_1501727078099_4.png",
+    "companyName" : "吉比特",
+    "companyImgUrl" : "https://uploadfiles.nowcoder.com/files/20190813/999991354_1565668933625_3.png",
+    "campusUrl" : "https://campus.g-bits.com/",
     "timeTable" : {
       "offer" : "",
-      "mianshi" : "",
-      "bishi" : "",
-      "wangshen" : "",
-      "neitui" : ""
+      "mianshi" : "4月起",
+      "bishi" : "3月中旬起",
+      "wangshen" : "3月11日截止",
+      "neitui" : "3月11日截止"
     }
   },
   {
-    "companyType" : 1,
-    "coverImg" : "",
-    "companyName" : "",
-    "companyImgUrl" : "",
-    "campusUrl" : "",
+    "companyType" : 5,
+    "coverImg" : "https://uploadfiles.nowcoder.com/images/20190305/9696957_1551758649944_D5E3DD9015346EE1906EACAD91B4B27F",
+    "companyName" : "巨人网络",
+    "companyImgUrl" : "https://uploadfiles.nowcoder.com/files/20190403/4107856_1554259428675_60x60-2.png",
+    "campusUrl" : "http://hr.ztgame.com/campus/",
     "timeTable" : {
       "offer" : "",
       "mianshi" : "",
       "bishi" : "",
-      "wangshen" : "",
-      "neitui" : ""
+      "wangshen" : "4月底截止",
+      "neitui" : "4月底截止"
     }
   },
   {
-    "companyType" : 1,
-    "coverImg" : "",
-    "companyName" : "",
-    "companyImgUrl" : "",
-    "campusUrl" : "",
+    "companyType" : 5,
+    "coverImg" : "https://uploadfiles.nowcoder.com/files/20190710/4107856_1562752992112_盛趣游戏.png",
+    "companyName" : "盛趣游戏",
+    "companyImgUrl" : "https://uploadfiles.nowcoder.com/files/20190710/4107856_1562752981122_盛趣游戏60-2.png",
+    "campusUrl" : "https://app.mokahr.com/campus_apply/shengqu/4078",
     "timeTable" : {
       "offer" : "",
       "mianshi" : "",
       "bishi" : "",
-      "wangshen" : "",
-      "neitui" : ""
-    }
-  },
-  {
-    "companyType" : 1,
-    "coverImg" : "",
-    "companyName" : "",
-    "companyImgUrl" : "",
-    "campusUrl" : "",
-    "timeTable" : {
-      "offer" : "",
-      "mianshi" : "",
-      "bishi" : "",
-      "wangshen" : "",
-      "neitui" : ""
-    }
-  },
-  {
-    "companyType" : 1,
-    "coverImg" : "",
-    "companyName" : "",
-    "companyImgUrl" : "",
-    "campusUrl" : "",
-    "timeTable" : {
-      "offer" : "",
-      "mianshi" : "",
-      "bishi" : "",
-      "wangshen" : "",
-      "neitui" : ""
-    }
-  },
-  {
-    "companyType" : 1,
-    "coverImg" : "",
-    "companyName" : "",
-    "companyImgUrl" : "",
-    "campusUrl" : "",
-    "timeTable" : {
-      "offer" : "",
-      "mianshi" : "",
-      "bishi" : "",
-      "wangshen" : "",
-      "neitui" : ""
+      "wangshen" : "3月9日起",
+      "neitui" : "3月9日起"
     }
   }
 ]
