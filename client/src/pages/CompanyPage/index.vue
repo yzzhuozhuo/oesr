@@ -8,16 +8,22 @@
               <img :src="companyInfo.companyImgUrl">
             </div>
             <div class="info">
-              <div class="info-top">
-                <div class="company-name">{{companyInfo.companyName}}</div>
-              </div>
-              <div class="info-bottom">
-                <div class="info-location">
-                  <i class="el-icon-location"></i>
-                  <div>
-                    <span>{{companyInfo.companyAddress}}</span>
+              <div class="info-left">
+                <div class="info-top">
+                  <div class="company-name">{{companyInfo.companyName}}</div>
+                </div>
+                <div class="info-bottom">
+                  <div class="info-location">
+                    <i class="el-icon-location"></i>
+                    <div>
+                      <span>{{companyInfo.companyAddress}}</span>
+                    </div>
                   </div>
                 </div>
+              </div>
+              <div class="campus">
+                <span class="one">校招官网：</span>
+                <span class="two" @click="toCampus">{{companyInfo.companyCampusUrl}}</span>
               </div>
             </div>
           </div>
@@ -111,6 +117,13 @@
                       <el-input
                         v-else
                         v-model="newCompanyInfo.companyAddress"
+                      ></el-input>
+                    </el-form-item>
+                    <el-form-item label="校招官网">
+                      <div v-if="!isEdit">{{companyInfo.companyCampusUrl}}</div>
+                      <el-input
+                        v-else
+                        v-model="newCompanyInfo.companyCampusUrl"
                       ></el-input>
                     </el-form-item>
                     <el-form-item label="公司简介">
@@ -860,6 +873,9 @@ export default {
     },
     viewPreach (id) {
       console.log('查看宣讲会')
+    },
+    toCampus () {
+      window.open(this.companyInfo.companyCampusUrl)
     }
   }
 }
@@ -923,11 +939,17 @@ export default {
         border-radius: 50%;
       }
       .info {
-        .info-top,
-        .info-bottom {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .info-left {
           display: flex;
-          align-content: center;
-          align-items: center;
+          flex-direction: column;
+          // align-items: center;
+        }
+        .info-top{
+          text-align: left;
         }
         .info-top {
           margin-bottom: 10px;
@@ -958,6 +980,12 @@ export default {
         }
         .info-bottom .center-item {
           margin: 0 10px;
+        }
+        .campus {
+          cursor: pointer;
+          .two {
+            color: #42c1a2;
+          }
         }
       }
     }

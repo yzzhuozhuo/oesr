@@ -2,7 +2,7 @@ import * as types from '../mutation-types'
 
 const state = {
   tel: '',
-  accountType: 'student',
+  accountType: '',
   userId: '',
   token: ''
 }

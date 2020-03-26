@@ -110,6 +110,7 @@ export const findAccount = function ({ commit }, data) {
 }
 export const fetchCompanyList = function ({ commit }, data) {
   return api.fetchCompanyList(data).then(data => {
+    console.log(989898, data)
     commit(types.FETCH_COMPANY_LIST, data)
     return data
   }).catch(generateErrorHandler(commit))
@@ -236,8 +237,15 @@ export const findDiscussById = function ({ commit }, data) {
 
 export const addCampusDate = function ({ commit }, data) {
   return api.addCampusDate(data).then(data => {
-    commit(types.ADD_CAMPUS_DATE_LIST, data)
-    return data
+    console.log(55555, data)
+    // commit(types.ADD_CAMPUS_DATE_LIST, data)
+    if (Array.isArray(data)) {
+      commit(types.FETCH_CAMPUS_DATE_LIST, data)
+      return data
+    } else {
+      commit(types.FETCH_CAMPUS_DATE_LIST, [data])
+      return { update: true }
+    }
   }).catch(generateErrorHandler(commit))
 }
 

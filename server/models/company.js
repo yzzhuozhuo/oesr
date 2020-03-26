@@ -46,6 +46,9 @@ const companySchema = mongoose.Schema({
   recuritPosts: {
     type: String,
     required: true
+  },
+  companyCampusUrl: {
+    type: String
   }
 }, { collection: 'company' })
 

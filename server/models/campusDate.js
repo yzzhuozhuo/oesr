@@ -11,7 +11,12 @@ const campusDateSchema = mongoose.Schema({
   companyImgUrl: String,
   campusUrl: String,
   coverImg: String,
-  timeTable: Object
+  timeTable: Object,
+  createdAt: {
+    type: Number,
+    required: true,
+    default: Date.now()
+  }
 }, { collection: 'campusDate' })
 
 module.exports = mongoose.model('campusDate', campusDateSchema)

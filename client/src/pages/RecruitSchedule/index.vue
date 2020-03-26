@@ -1,14 +1,19 @@
 <template>
   <div class="schedule">
-    <top-banner />
-    <middle-banner :bannerImg="bannerImg" />
+    <top-banner :isCompany="accountType === 'company' ? true : false" @getInputVal="getInputVal"/>
+    <!-- <middle-banner :bannerImg="bannerImg" /> -->
     <div class="content">
       <div class="content-btn">
         <div
-          v-if="account.accountType === 'company'"
+          v-if="account.accountType === 'company' && !campusDateList.length"
           class="btn hover"
           @click.stop="publish"
         >发布日程</div>
+        <div
+          v-if="account.accountType === 'company' && campusDateList.length"
+          class="btn hover"
+          @click.stop="rePublish"
+        >修改日程</div>
         <div
           v-if="account.accountType === 'student'"
           class="btn"
@@ -40,8 +45,8 @@
                   :before-upload="beforeAvatarUpload"
                 >
                   <img
-                    v-if="schemaForm.coverUrl"
-                    :src="schemaForm.coverUrl"
+                    v-if="schemaForm.coverImg"
+                    :src="schemaForm.coverImg"
                     class="avatar"
                   >
                   <i
@@ -52,13 +57,13 @@
               </el-form-item>
               <el-form-item
                 label="职位类型"
-                prop="type"
+                prop="companyType"
                 :rules="[
                   { required: true, message: '请选择职位类型'},
                 ]"
               >
                 <el-select
-                  v-model="schemaForm.type"
+                  v-model="schemaForm.companyType"
                   placeholder="请选择职位类型"
                 >
                   <el-option
@@ -89,46 +94,46 @@
               </el-form-item>
               <el-form-item
                 label="内推时间"
-                prop="neitui"
+                prop="timeTable.neitui"
               >
                 <el-input
-                  v-model="schemaForm.neitui"
+                  v-model="schemaForm.timeTable.neitui"
                   placeholder="请输入内推时间"
                 ></el-input>
               </el-form-item>
               <el-form-item
                 label="网申时间"
-                prop="wangshen"
+                prop="timeTable.wangshen"
               >
                 <el-input
-                  v-model="schemaForm.wangshen"
+                  v-model="schemaForm.timeTable.wangshen"
                   placeholder="请输入网申时间"
                 ></el-input>
               </el-form-item>
               <el-form-item
                 label="笔试时间"
-                prop="bishi"
+                prop="timeTable.bishi"
               >
                 <el-input
-                  v-model="schemaForm.bishi"
+                  v-model="schemaForm.timeTable.bishi"
                   placeholder="请输入笔试时间"
                 ></el-input>
               </el-form-item>
               <el-form-item
                 label="面试时间"
-                prop="mianshi"
+                prop="timeTable.mianshi"
               >
                 <el-input
-                  v-model="schemaForm.mianshi"
+                  v-model="schemaForm.timeTable.mianshi"
                   placeholder="请输入面试时间"
                 ></el-input>
               </el-form-item>
               <el-form-item
                 label="offer时间"
-                prop="offer"
+                prop="timeTable.offer"
               >
                 <el-input
-                  v-model="schemaForm.offer"
+                  v-model="schemaForm.timeTable.offer"
                   placeholder="请输入offer发放时间"
                 ></el-input>
               </el-form-item>
@@ -146,6 +151,7 @@
       <el-tabs
         v-model="activeName"
         @tab-click="handleClick"
+        v-if="accountType === 'student'"
       >
         <el-tab-pane
           label="全部"
@@ -256,25 +262,51 @@
           </div>
         </el-tab-pane>
       </el-tabs>
+      <el-tabs
+        v-model="activeName"
+        @tab-click="handleClick"
+        v-if="accountType === 'company'"
+      >
+        <el-tab-pane
+          label="我的发布"
+          name="first"
+          class="pane"
+        >
+          <schedule-card
+            v-for="(item, index) in campusDateList"
+            :key="index + Math.random()"
+            :campusDate="item"
+            :followCampus="followCampus"
+            @followItem="followItem"
+            @unfollowItem="unfollowItem"
+          />
+          <div class="no-data" v-if="!campusDateList.length">
+            <img src="@/assets/no-data.png" class="no-data-img">
+            <div class="no-data-title">暂无数据哦~</div>
+          </div>
+        </el-tab-pane>
+      </el-tabs>
     </div>
   </div>
 </template>
 
 <script>
 import TopBanner from './TopBanner'
-import MiddleBanner from './MiddleBanner'
+// import MiddleBanner from './MiddleBanner'
 import ScheduleCard from './ScheduleCard'
 import { mapState, mapActions, mapGetters } from 'vuex'
+import _ from 'lodash'
 
 export default {
   name: 'RecruitSchedule',
   components: {
     TopBanner,
-    MiddleBanner,
+    // MiddleBanner,
     ScheduleCard
   },
   data () {
     return {
+      searchVal: '',
       domain: 'https://upload.qiniup.com',
       qiniuaddr: 'q7heq11s7.bkt.clouddn.com',
       activeName: 'first',
@@ -291,13 +323,15 @@ export default {
       ],
       cacheUrl: '',
       schemaForm: {
-        coverUrl: '',
-        neitui: '',
-        wangshen: '',
-        bishi: '',
-        mianshi: '',
-        offer: '',
-        type: 0
+        coverImg: '',
+        companyType: 0,
+        timeTable: {
+          neitui: '',
+          wangshen: '',
+          bishi: '',
+          mianshi: '',
+          offer: ''
+        }
       }
     }
   },
@@ -308,10 +342,17 @@ export default {
       account: state => state.account,
       campusDateList: state => state.campusDate.campusDateList
     }),
-    ...mapGetters(['followCampus'])
+    ...mapGetters(['followCampus', 'accountType'])
+  },
+  watch: {
+    searchVal () {
+      this.fetchCampusLastData()
+    }
   },
   mounted () {
-    this.getCampusDate()
+    setTimeout(() => {
+      this.fetchCampusLastData()
+    }, 1000)
   },
   methods: {
     ...mapActions([
@@ -322,6 +363,14 @@ export default {
       'unFollowCampusItem',
       'filterCampusList'
     ]),
+    fetchCampusLastData () {
+      let params = {
+        companyId: this.company.companyId,
+        // companyId: this.accountType === 'company' ? this.company.companyId : '',
+        searchVal: this.searchVal
+      }
+      this.getCampusDate(params)
+    },
     campusDateListFilter (index) {
       return this.campusDateList.filter(item => item.companyType === index)
     },
@@ -337,6 +386,19 @@ export default {
       }
       this.dialogPublish = true
     },
+    rePublish () {
+      console.log(9999, this.company)
+      console.log(33, this.campusDateList[0])
+      this.schemaForm = _.cloneDeep(this.campusDateList[0])
+      console.log(44, this.schemaForm)
+      if (!this.account.token) {
+        this.$message.error('请先登录！')
+        return this.$router.replace({
+          path: '/login'
+        })
+      }
+      this.dialogPublish = true
+    },
     resetForm () {
       this.$refs['schemaForm'].resetFields()
     },
@@ -344,25 +406,34 @@ export default {
       const data = {
         companyId: this.company.companyId,
         companyName: this.company.companyName,
+        campusUrl: this.company.companyCampusUrl,
         companyImgUrl: this.company.companyImgUrl,
-        companyType: this.schemaForm.type,
-        coverImg: this.schemaForm.coverUrl,
+        companyType: this.schemaForm.companyType,
+        coverImg: this.schemaForm.coverImg,
         timeTable: {
-          neitui: this.schemaForm.neitui,
-          wangshen: this.schemaForm.wangshen,
-          bishi: this.schemaForm.bishi,
-          mianshi: this.schemaForm.mianshi,
-          offer: this.schemaForm.offer
+          neitui: this.schemaForm.timeTable.neitui,
+          wangshen: this.schemaForm.timeTable.wangshen,
+          bishi: this.schemaForm.timeTable.bishi,
+          mianshi: this.schemaForm.timeTable.mianshi,
+          offer: this.schemaForm.timeTable.offer
         }
       }
-      console.info(data)
+      console.info(323232, data)
       this.$refs['schemaForm'].validate(async valid => {
         if (valid) {
-          if (!this.cacheUrl) return this.$message.error('请上传图片')
-          await this.addCampusDate(data)
-          await this.$message({
-            message: '发布成功',
-            type: 'success'
+          if (!this.schemaForm.coverImg) return this.$message.error('请上传图片')
+          await this.addCampusDate(data).then(data => {
+            if (data.update) {
+              this.$message({
+                message: '更新成功',
+                type: 'success'
+              })
+            } else {
+              this.$message({
+                message: '发布成功',
+                type: 'success'
+              })
+            }
           })
           await this.resetForm()
           this.dialogPublish = false
@@ -372,7 +443,7 @@ export default {
       })
     },
     handleAvatarSuccess (res, file) {
-      this.schemaForm.coverUrl = this.cacheUrl
+      this.schemaForm.coverImg = this.cacheUrl
     },
     beforeAvatarUpload (file) {
       const isPNG = file.type === 'image/png'
@@ -416,6 +487,9 @@ export default {
         campusDateId: id,
         userInfo: this.userInfo
       })
+    },
+    getInputVal (searchVal) {
+      this.searchVal = searchVal
     }
   }
 }
@@ -429,7 +503,7 @@ export default {
   .content {
     width: 1170px;
     padding: 25px 20px;
-    margin: 0px auto;
+    margin: 20px auto;
     border: 1px solid #d6d6d6;
     border-radius: 4px;
     background: #fff;
@@ -491,7 +565,7 @@ export default {
       width: 300px;
     }
     .avatar-uploader {
-      width: 100px;
+      width: 200px;
       height: 100px;
       border: 1px solid #d9d9d9;
     }
@@ -505,14 +579,14 @@ export default {
     .avatar-uploader-icon {
       font-size: 28px;
       color: #8c939d;
-      width: 100px;
+      width: 200px;
       height: 100px;
       line-height: 100px;
       text-align: center;
     }
     .avatar {
-      width: 100px;
-      height: 100px;
+      width: 100%;
+      height: 110px;
       display: block;
     }
   }

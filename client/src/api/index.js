@@ -200,8 +200,8 @@ export function addCampusDate (body) {
   return axios.post(url, body).then(utils.checkHttpStatus).then(utils.checkResponse).catch({})
 }
 
-export function getCampusDate () {
-  let url = '/oesr/getCampusDate'
+export function getCampusDate (data) {
+  let url = `/oesr/getCampusDate?${params(data)}`
   return axios.get(url, {
     method: 'GET',
     credentials: 'same-origin',
