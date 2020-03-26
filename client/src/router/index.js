@@ -106,11 +106,6 @@ export default new Router({
       component: PublishComment // 发表评论
     },
     {
-      path: '/campusDate',
-      name: 'campusDate',
-      component: CampusDate // 公司校招日程
-    },
-    {
       path: '/company',
       name: 'company',
       component: Company // 公司首页
@@ -149,6 +144,11 @@ export default new Router({
       path: '/answerResult',
       name: 'answerResult',
       component: AnswerResult // 答题结果页
+    },
+    {
+      path: '/campusDate',
+      name: 'campusDate',
+      component: CampusDate
     },
     {
       path: '*',

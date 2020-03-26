@@ -7,8 +7,11 @@
       <el-breadcrumb-item :to="{ path: '/recruitSchedule' }">校招日程</el-breadcrumb-item>
       <el-breadcrumb-item>{{campusDate.companyName}}</el-breadcrumb-item>
     </el-breadcrumb>
-    <card-header :companyName="campusDate.companyName" :companyImgUrl="campusDate.companyImgUrl" />
-    <time-table :plans="plans" />
+    <card-header
+      :companyName="campusDate.companyName"
+      :companyImgUrl="campusDate.companyImgUrl"
+      :campusUrl="campusDate.campusUrl"/>
+    <time-table :plans="plans" :campusUrl="campusDate.campusUrl"/>
     <!-- <find-post /> -->
   </div>
 </template>
