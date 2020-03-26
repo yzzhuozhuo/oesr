@@ -156,7 +156,7 @@ export default {
     console.log(1111, this.studentList)
     // 根据学生感兴趣的公司进行推荐，即要拿到学生的信息
     let params = {
-      interestedCompany: this.studentList.interestedCompany
+      interestedCompany: this.studentList && this.studentList.interestedCompany
       // interestedCompany: ['网易', '携程旅行', '字节跳动', '度小满', '完美世界', '作业帮', '网易互娱', '蘑菇街']
     }
     this.fetchCampusList(params)

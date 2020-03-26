@@ -10,7 +10,8 @@ const mutations = {
   },
   [types.ADD_CAMPUS_DATE_LIST] (state, data) {
     console.info(data)
-    state.campusDateList.push(data)
+    // state.campusDateList.push(data)
+    state.campusDateList = data
   },
   [types.FILTER_FOLLOW_CAMPUS_ITEM] (state, data) {
     console.info(data)

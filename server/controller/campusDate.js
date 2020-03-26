@@ -12,8 +12,9 @@ exports.addCampusDate = async function (req, res) {
 }
 
 exports.getCampusDate = async function (req, res) {
+  let { companyId = '', searchVal = '' } = req.query
   try {
-    const data = await campusDateService.getCampusDate()
+    const data = await campusDateService.getCampusDate(companyId, searchVal)
     res.send({
       code: '200', data
     })
