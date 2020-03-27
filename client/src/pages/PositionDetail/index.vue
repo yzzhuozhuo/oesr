@@ -1,8 +1,9 @@
 <template>
   <div class="main">
     <div class="title">
+      <i class="el-icon-arrow-left"></i>
       <!-- <span>职位首页 > {{positionDetailData.companyName}}</span> -->
-      <span>职位首页 > 蚂蚁金服</span>
+      <span @click="goBack">返回职位列表</span>
     </div>
     <div class="card-content">
       <div class="card-left">
@@ -23,7 +24,7 @@
                 </div>
                 <div class="location">
                   <i class="el-icon-map-location"></i>
-                  <span>{{positionDetailData.PositionCity}}</span>
+                  <span>{{positionDetailData.positionCity}}</span>
                 </div>
               </div>
               <div class="info">薪酬：{{positionDetailData.compensation}}  |  实习要求：{{positionDetailData.practiceRequire}}  |  转正机会：{{positionDetailData.becomeOfficial === '1' ? '有' : '无'}}</div>
@@ -35,7 +36,7 @@
                   <span>岗位职责</span>
                 </div>
                 <div class="item" v-for="(item, index) in positionDetailData.jobResponsibilities" :key="index">
-                  <div>- {{item}}</div>
+                  <div>{{item}}</div>
                 </div>
               </div>
               <div class="duty">
@@ -44,11 +45,20 @@
                   <span>岗位要求</span>
                 </div>
                 <div class="item" v-for="(item, index) in positionDetailData.jobRequirements" :key="index">
-                  <div>{{index + 1}}、{{item}}</div>
+                  <div>{{item}}</div>
                 </div>
               </div>
               <div class="apply">
-                <el-button type="success" @click="applyPositon" :disabled="isDisabled" :loading="isLoading">申请</el-button>
+                <el-button
+                  v-if="accountType === 'student'"
+                  type="success"
+                  @click="applyPositon"
+                  :disabled="isDisabled"
+                  :loading="isLoading">申请</el-button>
+                <el-button
+                  v-if="accountType === 'company'"
+                  type="success"
+                  @click="viewApplyPositon">查看申请</el-button>
               </div>
             </div>
           </div>
@@ -57,11 +67,9 @@
       <div class="card-right">
         <div class="card-header">
           <div class="card-img">
-            <!-- <img :src="positionDetailData.companyImgUrl"> -->
-            <img src="https://uploadfiles.nowcoder.com/files/20170318/1697873_1489806769570_2.jpg">
+            <img :src="positionDetailData.companyImgUrl">
           </div>
-          <!-- <div class="card-company-name">{{positionDetailData.companyName}}</div> -->
-          <div class="card-company-name">蚂蚁金服</div>
+          <div class="card-company-name">{{positionDetailData.companyName}}</div>
         </div>
         <div class="info">
           <div class="info-content">
@@ -75,7 +83,7 @@
             </div>
             <div class="item">
               <i class="el-icon-location"></i>
-              <span>浙江</span>
+              <span>{{positionDetailData.positionCity}}</span>
             </div>
           </div>
         </div>
@@ -87,9 +95,7 @@
             </div>
             <div class="content">
               <span>
-                <!-- {{positionDetailData.companyProfile}} -->
-                浙江蚂蚁小微金融服务集团股份有限公司，简称蚂蚁金服，正式成立于2014年，是专注于服务小微企业与普通消费者的互联网金融服务公司。
-                其前身是成立于2000年10月，独立于阿里巴巴集团之外的中国内资公司——浙江阿里巴巴电子商务有限公司。 截至2018年，蚂蚁金服的估值达到1600亿美元，是全球最大的独角兽公司。
+                {{positionDetailData.companyProfile}}
               </span>
             </div>
           </div>
@@ -108,38 +114,14 @@ export default {
     return {
       positionDetailData: {},
       isDisabled: false,
-      isLoading: false,
-      positionDetailDataOld: {
-        companyName: '蚂蚁金服',
-        companyImgUrl: 'https://uploadfiles.nowcoder.com/files/20170318/1697873_1489806769570_2.jpg',
-        companyProfile: '浙江蚂蚁小微金融服务集团股份有限公司，简称蚂蚁金服，正式成立于2014年，是专注于服务小微企业与普通消费者的互联网金融服务公司。 其前身是成立于2000年10月，独立于阿里巴巴集团之外的中国内资公司——浙江阿里巴巴电子商务有限公司。 截至2018年，蚂蚁金服的估值达到1600亿美元，是全球最大的独角兽公司。',
-        positionTitle: '蚂蚁金服-2020-研发岗', // 职位标题
-        positionType: '研发', // 职位类型 研发/测试/前端...
-        PositionCity: '杭州', // 职位位置
-        practiceRequire: '5天/周，3个月以上',
-        compensation: '面议',
-        becomeOfficial: '是',
-        jobResponsibilities: [
-          '负责国际事业群业务线开发，包括全球各地钱包',
-          '业务实体包括：Alipay HK、Paytm、TNG、MYNT等',
-          '将我们的技术输出到全球，创造无限的可能',
-          '专注国际业务，致力于通过世界一流的全球化技术惠普全球消费者'
-        ],
-        jobRequirements: [
-          '本科及以上学历，优秀的代码能力。',
-          '热爱计算机科学和互联网技术，精通至少一门编程语言，包括但不仅限于：Java、C、C++、PHP、 Python、Go。',
-          '掌握扎实的计算机基础知识，深入理解数据结构、算法和操作系统知识。',
-          '有优秀的逻辑分析能力，能够对业务逻辑进行合理的抽象和拆分。',
-          '有强烈的求知欲，优秀的学习和沟通能力。'
-        ]
-      }
+      isLoading: false
     }
   },
   created () {
     let positionDetailId = this.$route.query.positionDetailId
     this.fetchPositionDetailList({ positionDetailId: positionDetailId })
     if (this.hasLogin) {
-      this.fetchResumeList({ positionId: positionDetailId, studentId: '123' })
+      this.fetchResumeList({ positionId: positionDetailId, studentId: this.studentInfo.studentId })
     }
   },
   mounted () {
@@ -147,11 +129,13 @@ export default {
   computed: {
     ...mapState({
       account: state => state.account,
+      companyInfo: state => state.company.companyList,
+      studentInfo: state => state.student.studentList,
       positionDetailList: state => state.position.positionDetailList || {},
       resumeList: state => state.resumeList.resumeList || [],
       studentList: state => state.student.studentList
     }),
-    ...mapGetters(['hasLogin'])
+    ...mapGetters(['hasLogin', 'accountType'])
   },
   watch: {
     positionDetailList () {
@@ -174,6 +158,10 @@ export default {
           path: '/login'
         })
       }
+      if (!this.studentList.resume.url) {
+        this.$message.error('请先在个人主页上传简历，才能申请职位哦~')
+        return
+      }
       console.log(555, this.positionDetailData)
       let data = {
         studentId: this.studentList.studentId,
@@ -194,6 +182,20 @@ export default {
           message: '申请成功~'
         })
       })
+    },
+    goBack () {
+      this.$router.push({
+        path: '/practiceSquare'
+      })
+    },
+    viewApplyPositon () {
+      console.log(111111, this.positionDetailData._id)
+      this.$router.push({
+        path: '/company/page',
+        query: {
+          positionId: this.positionDetailData._id
+        }
+      })
     }
   }
 }
@@ -210,6 +212,7 @@ export default {
     margin: 0 170px 10px;
     font-size: 15px;
     color: #999;
+    cursor: pointer;
   }
 
   .card-content {

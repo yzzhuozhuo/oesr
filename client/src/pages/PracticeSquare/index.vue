@@ -1,13 +1,29 @@
 <template>
   <div class="practice">
-    <banner
-      :bannerImg="bannerImg"
-      :height="80"
-    />
+    <div @click="toCampus">
+      <banner
+        :bannerImg="bannerImg"
+        :height="80"
+      />
+    </div>
     <div class="content">
       <div class="left">
-        <card-title titleName="职位广场" />
-        <logo-list />
+        <div class="left-header">
+          <card-title titleName="职位广场" />
+          <el-input
+            size="small"
+            style="width: 200px"
+            clearable
+            class="input-p"
+            placeholder="请输入公司进行查询"
+            v-model="searchVal">
+            <i slot="prefix" class="el-input__icon el-icon-search"></i>
+          </el-input>
+        </div>
+        <logo-list
+          v-if="accountType === 'student'"
+          :path="path"
+          @getCompanyName="getCompanyName"/>
         <div class="post-selector">
           <div class="city">
             <span class="location">地点</span>
@@ -29,12 +45,10 @@
           :key="index"
         >
           <div class="company" @click="toPositionDetail(item._id)">
-            <!-- <img :src="item.companyImgUrl"> -->
-            <img src="https://uploadfiles.nowcoder.com/files/20170318/1697873_1489806769570_2.jpg" alt="">
+            <img :src="item.companyImgUrl">
             <div class="intr">
               <div class="intr-name">{{item.positionTitle}}</div>
-              <!-- <div class="intr-com">{{item.companyName}}</div> -->
-              <div class="intr-com">蚂蚁金服</div>
+              <div class="intr-com">{{item.companyName}}</div>
             </div>
           </div>
           <div class="treat">
@@ -172,6 +186,8 @@ export default {
   },
   data () {
     return {
+      searchVal: '',
+      path: 'positionSquare',
       location,
       salary,
       activeIndex: 0,
@@ -200,7 +216,7 @@ export default {
       addMesDialogVisible: false,
       textareaSize: { minRows: 2, maxRows: 8 },
       bannerImg:
-        'https://uploadfiles.nowcoder.com/images/20200227/999991356_1582788882962_3D701BDF90492AB964C923896E32F192',
+        'https://uploadfiles.nowcoder.com/images/20200207/33317073_1581044632109_870880B6B4BBEBE903A9F026B639A40B',
       disscussList: [
         '全部',
         '站内公告',
@@ -354,17 +370,14 @@ export default {
         }
       ],
       addPositionForm: {
-        companyName: '', // 公司名称
-        companyImgUrl: '', // 公司图标
-        companyProfile: '', // 公司简介
         positionTitle: '', // 职位标题
         positionType: '', // 职位类型 研发/测试/前端...
-        PositionCity: '', // 职位城市
+        positionCity: '', // 职位城市
         processingRatio: '', // 简历处理率
         processingTime: '', // 简历处理时间
         processingSpeed: '', // 处理速度 ['fast', 'medium ', 'slow']
         compensation: '', // 薪酬 面议/200-300元/天
-        practiceRequire: '',
+        practiceRequired: '',
         becomeOfficial: '', // 是否可以转正 是/否 1/0
         jobResponsibilities: '', // 岗位职责
         jobRequirements: '' // 岗位要求
@@ -374,6 +387,7 @@ export default {
   computed: {
     ...mapState({
       account: state => state.account,
+      companyInfo: state => state.company.companyList,
       positionList: state => state.position.positionList || [],
       totalPage: state => state.position.totalPage || 0,
       pageNumber: state => state.position.pageNumber || 10,
@@ -381,7 +395,7 @@ export default {
     }),
     ...mapGetters(['accountType']),
     fetchList () {
-      return `${this.selectCity}_${this.selectType}_${this.selectTab}`
+      return `${this.selectCity}_${this.selectType}_${this.selectTab}_${this.searchVal}`
     }
   },
   watch: {
@@ -402,13 +416,19 @@ export default {
     }
   },
   mounted () {
-    this.fetchPositionList()
+    // this.fetchPositionDataList()
+    setTimeout(() => {
+      this.fetchPositionDataList()
+    }, 1000)
   },
   methods: {
     ...mapActions([
       'fetchPositionList',
       'updatePositionList'
     ]),
+    getCompanyName (companyName) {
+      this.searchVal = companyName
+    },
     formatPositionData (positionList) {
       const TIME_FORMAT = 'YYYY-MM-DD HH:mm:ss'
       const data = _.cloneDeep(positionList)
@@ -451,16 +471,19 @@ export default {
       let data = _.cloneDeep(this.addPositionForm)
       data.jobResponsibilities = data.jobResponsibilities.split(/[\s\n]/)
       data.jobRequirements = data.jobRequirements.split(/[\s\n]/)
-      data.companyId = '123'
+      data.companyId = this.companyInfo.companyId
+      data.companyName = this.companyInfo.companyName
+      data.companyImgUrl = this.companyInfo.companyImgUrl
+      data.companyProfile = this.companyInfo.companyProfile
       console.log(666, data)
-      // this.updatePositionList(data).then(() => {
-      //   this.addMesDialogVisible = false
-      //   this.fetchPositionDataList()
-      //   this.$message({
-      //     type: 'success',
-      //     message: '发表职位成功~'
-      //   })
-      // })
+      this.updatePositionList(data).then(() => {
+        this.addMesDialogVisible = false
+        this.fetchPositionDataList()
+        this.$message({
+          type: 'success',
+          message: '发表职位成功~'
+        })
+      })
     },
     publishPost () {
       // TODO发布职位
@@ -474,6 +497,9 @@ export default {
     },
     fetchPositionDataList () {
       let params = {
+        searchVal: this.searchVal,
+        accountType: this.accountType,
+        companyId: this.accountType === 'company' ? this.companyInfo.companyId : '',
         selectCity: this.selectCity,
         selectType: this.selectType,
         selectTab: this.selectTab,
@@ -481,6 +507,9 @@ export default {
         pageNum: this.pageNum
       }
       this.fetchPositionList(params)
+    },
+    toCampus () {
+      window.open('https://job.bytedance.com/campus/position?_tracking=214035798')
     }
   }
 }
@@ -489,7 +518,7 @@ export default {
 <style lang="scss" scoped>
 .practice {
   width: 1200px;
-  margin: 80px auto 30px;
+  margin: 75px auto 30px;
 }
 
 .content {
@@ -505,6 +534,16 @@ export default {
     border: 1px solid #d6d6d6;
     padding: 15px 0;
     background-color: #fff;
+
+    .left-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0px 15px 2px 0;
+      .input-p {
+        margin-bottom: 15px;
+      }
+    }
 
     .no-data {
       text-align: center;

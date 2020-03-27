@@ -6,6 +6,12 @@
 const mongoose = require('mongoose')
 
 const calendarSchema = mongoose.Schema({
+  studentId: {
+    type: String
+  },
+  companyId: {
+    type: String
+  },
   months: {
     type: Array,
     required: true

@@ -141,6 +141,10 @@ export default {
     }
   },
   mounted () {
+    let companyName = this.$route.query.companyName
+    if (companyName) {
+      this.searchSelectedVal.companyName = companyName === '99+' ? '' : companyName
+    }
     this.fetchThemeList()
   },
   methods: {

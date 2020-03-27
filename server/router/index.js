@@ -20,9 +20,10 @@ router
   .get('/oesr/user', userController.user)
   .get('/oesr/home', homeController.getHome)
   .get('/oesr/calendarList', calendarController.getCalendar)
-  .put('/oesr/addCalendarList', calendarController.addCalendar)
+  .post('/oesr/addCalendarList', calendarController.addCalendar)
   .get('/oesr/preachList', preachController.getPreach)
   .post('/oesr/addPreachList', preachController.addPreach)
+  .delete('/oesr/removeCalendarList', preachController.removePreach)
 
   .get('/oesr/discuss', discussController.getDiscuss)
   .post('/oesr/addDiscuss', discussController.addDiscuss)

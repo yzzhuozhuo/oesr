@@ -1,11 +1,14 @@
 <template>
   <div class="main">
     <div class="header">
-      <div class="menu-title">求职首页 / 宣讲会</div>
-      <div class="search-title-top">宣讲会查询系统</div>
-      <div class="search-title-bottom">第一时间获得宣讲信息</div>
+      <div class="menu-title" v-if="accountType === 'student'">求职首页 / 宣讲会</div>
+      <div class="search-title-top" v-if="accountType === 'student'">宣讲会查询系统</div>
+      <div class="search-title-top" v-if="accountType === 'company'">宣讲会发布系统</div>
+      <div class="search-title-bottom" v-if="accountType === 'student'">第一时间获得宣讲信息</div>
+      <div class="search-title-bottom" v-if="accountType === 'company'">第一时间发布宣讲信息</div>
       <div class="input-content">
         <el-input
+          clearable
           class="input-p"
           placeholder="请输入宣讲学校/宣讲城市/宣讲公司查询"
           v-model="searchVal">
@@ -62,9 +65,15 @@
         <div class="preach-flex">
           <div class="preach-content" v-for="(item, index) in preachData" :key="index">
             <div class="title">
-              <span class="preach-company">{{item.preachCompany}}</span>
-              <el-tag effect="dark" size="small" v-if="new Date(item.preachTime).getDate() === new Date().getDate()" type="success">今日</el-tag>
-              <el-tag effect="dark" size="small" v-if="tomorrowStart <= new Date(item.preachTime) && new Date(item.preachTime) <= tomorrowEnd">明日</el-tag>
+              <div class="left">
+                <span class="preach-company">{{item.preachCompany}}</span>
+                <el-tag effect="dark" size="mini" v-if="new Date(item.preachTime).getDate() < new Date().getDate()" type="info">已结束</el-tag>
+                <el-tag effect="dark" size="small" v-if="new Date(item.preachTime).getDate() === new Date().getDate()" type="success">今日</el-tag>
+                <el-tag effect="dark" size="small" v-if="tomorrowStart <= new Date(item.preachTime) && new Date(item.preachTime) <= tomorrowEnd">明日</el-tag>
+              </div>
+              <div class="right" v-if="accountType === 'company'">
+                <el-button type="primary" size="mini" @click="removePreach(item._id)">删除</el-button>
+              </div>
             </div>
             <div class="preach-info">
               <div class="city">
@@ -267,12 +276,15 @@ export default {
     }
   },
   mounted () {
-    this.fetchPreachList()
+    setTimeout(() => {
+      this.fetchPreachDataList()
+    }, 1000)
   },
   methods: {
     ...mapActions([
       'fetchPreachList',
-      'updatePreachList'
+      'updatePreachList',
+      'removeCalendarList'
     ]),
     formatPreachTime (preachList) {
       const TIME_FORMAT = 'YYYY-MM-DD HH:mm:ss'
@@ -284,6 +296,8 @@ export default {
     },
     fetchPreachDataList () {
       let params = {
+        accountType: this.accountType,
+        companyId: this.companyInfo.companyId,
         preachStartTime: this.pickDateVal ? this.pickDateVal[0] : [],
         preachEndTime: this.pickDateVal ? this.pickDateVal[1] : [],
         searchValue: this.searchVal,
@@ -347,6 +361,16 @@ export default {
             message: '发布宣讲信息成功~'
           })
         }
+      })
+    },
+    removePreach (id) {
+      console.log(888889, id)
+      this.removeCalendarList({ preachId: id }).then(() => {
+        this.fetchPreachDataList()
+        this.$message({
+          type: 'success',
+          message: '删除宣讲信息成功~'
+        })
       })
     }
   }
@@ -469,6 +493,7 @@ export default {
             font-size: 17px;
             display: flex;
             align-items: center;
+            justify-content: space-between;
             .preach-company {
               padding-right: 10px;
             }

@@ -664,6 +664,11 @@ export default {
     }
   },
   created () {
+    let positionId = this.$route.query.positionId
+    console.log(6666, positionId)
+    if (positionId) {
+      this.viewPositonResume(positionId)
+    }
   },
   mounted () {},
   methods: {
@@ -693,8 +698,7 @@ export default {
     },
     fetchResumeDataList () {
       let params = {
-        // companyId: this.companyInfo.companyId,
-        companyId: '123',
+        companyId: this.companyInfo.companyId,
         searchValue: this.searchResumeValue,
         currentPage: this.currentResumePage,
         pageNum: this.pageResumeNum,
@@ -706,6 +710,7 @@ export default {
     fetchThemeDataList () {
       let params = {
         companyId: '123',
+        // companyId: this.companyInfo.companyId,
         searchValue: this.searchThemeValue,
         currentPage: this.currentThemePage,
         pageNum: this.pageThemeNum,
@@ -715,7 +720,7 @@ export default {
     },
     fetchPositionDataList () {
       let params = {
-        companyId: '123',
+        companyId: this.companyInfo.companyId,
         searchPosition: this.searchPositionValue,
         currentPage: this.currentPositionPage,
         pageNum: this.pagePositionNum,
@@ -725,7 +730,7 @@ export default {
     },
     fetchPreachDataList () {
       let params = {
-        companyId: '123',
+        companyId: this.companyInfo.companyId,
         searchValue: this.searchPreachValue,
         currentPage: this.currentPreachPage,
         pageNum: this.pagePreachNum,
@@ -866,6 +871,7 @@ export default {
       })
     },
     viewPositonResume (id) {
+      this.isCompanyInfo = false
       this.isPosition = false
       this.isResume = true
       this.positionId = id

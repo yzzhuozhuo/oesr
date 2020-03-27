@@ -21,8 +21,8 @@ export const fetchHomeInfo = function ({ state, commit, rootState }) {
   })
 }
 
-export const fetchCalendarList = function ({ commit }) {
-  return api.fetchCalendarList().then(data => {
+export const fetchCalendarList = function ({ commit }, data) {
+  return api.fetchCalendarList(data).then(data => {
     // console.log(123321, data)
     commit(types.FETCH_CALENDAR_LIST, data)
   }).catch(generateErrorHandler(commit))
@@ -30,6 +30,12 @@ export const fetchCalendarList = function ({ commit }) {
 
 export const updateCalendarList = function ({ commit }, data) {
   return api.updateCalendarList(data).then(data => {
+    return data
+  }).catch(generateErrorHandler(commit))
+}
+
+export const removeCalendarList = function ({ commit }, data) {
+  return api.removeCalendarList(data).then(data => {
     return data
   }).catch(generateErrorHandler(commit))
 }

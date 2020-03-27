@@ -2,9 +2,13 @@
   <div class="main">
     <div class="header-title">
       <span>求职 > 校招日历</span>
-      <el-button type="primary" size="small" @click="addCalendarData" v-if="!hasLogin">添加日历</el-button>
-      <el-button type="primary" size="small" @click="addCalendarData" v-if="accountType === 'student'">添加日历</el-button>
-      <el-button type="primary" size="small" @click="addCalendarData" v-if="accountType === 'company'">发布日历</el-button>
+      <div>
+        <el-button type="primary" size="small" @click="addCalendarData" v-if="!hasLogin">添加日历</el-button>
+        <el-button type="" size="small" @click="myCalendarData" v-if="hasLogin && !isViewAll">我添加的日历</el-button>
+        <el-button type="" size="small" @click="myCalendarData" v-if="hasLogin && isViewAll">查看全部日历</el-button>
+        <el-button type="primary" size="small" @click="addCalendarData" v-if="accountType === 'student'">添加日历</el-button>
+        <el-button type="primary" size="small" @click="addCalendarData" v-if="accountType === 'company'">发布日历</el-button>
+      </div>
     </div>
     <div class="calendar">
       <el-calendar v-model="value" class="calendar-content">
@@ -75,11 +79,14 @@ export default {
         calendarDate: '',
         calendarTime: ''
       },
-      addDialogVisible: false
+      addDialogVisible: false,
+      isViewAll: false
     }
   },
   computed: {
     ...mapState({
+      companyInfo: state => state.company.companyList,
+      studentInfo: state => state.student.studentList,
       calendarList: state => state.calendar.calendarList || [],
       account: state => state.account
     }),
@@ -104,6 +111,8 @@ export default {
       let formatMonths = moment(this.addCalendarForm.calendarDate).format(TIME_FORMAT)
       let formatHour = moment(this.addCalendarForm.calendarTime).format(HOUR_FORMAT)
       let data = {
+        companyId: this.companyInfo ? this.companyInfo.companyId : '',
+        studentId: this.studentInfo ? this.studentInfo.studentId : '',
         months: formatMonths.split('-')[0],
         days: formatMonths.split('-')[1],
         things: `${formatHour} ${this.addCalendarForm.title}`
@@ -125,6 +134,20 @@ export default {
         })
       }
       this.addDialogVisible = true
+    },
+    myCalendarData () {
+      // 只查看自己发布的日历
+      if (!this.isViewAll) {
+        let params = {
+          companyId: this.companyInfo ? this.companyInfo.companyId : '',
+          studentId: this.studentInfo ? this.studentInfo.studentId : ''
+        }
+        this.fetchCalendarList(params)
+        this.isViewAll = true
+      } else {
+        this.fetchCalendarList()
+        this.isViewAll = false
+      }
     }
   }
 }

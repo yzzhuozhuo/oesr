@@ -1,7 +1,9 @@
 const calendarService = require('../service/calendar')
 
 exports.getCalendar = function (req, res) {
-  calendarService.getCalendarList().then(data => {
+  let { studentId = '', companyId = ''} = req.query
+  console.log(11, req.query)
+  calendarService.getCalendarList(studentId, companyId).then(data => {
     res.send({
       code: '200',
       data: data
@@ -15,6 +17,7 @@ exports.getCalendar = function (req, res) {
 }
 
 exports.addCalendar = function (req, res) {
+  console.log('dddddd')
   let data = req.body
   calendarService.addCalendarList(data).then(data => {
     res.send({

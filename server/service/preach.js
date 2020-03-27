@@ -1,9 +1,10 @@
 const PreachModel = require('../models/preach')
 
-exports.getPreachList = function (accountType, searchValue, selectCity, selectSchool, currentPage, pageNum, preachStartTime, preachEndTime) {
+exports.getPreachList = function (companyId, accountType, searchValue, selectCity, selectSchool, currentPage, pageNum, preachStartTime, preachEndTime) {
   let skipCounts = (currentPage - 1) * pageNum
   let findConditions = {}
   let sortCondition = {}
+  if (companyId) findConditions.companyId = companyId
   if (searchValue) findConditions['$or'] = [ { preachCompany: searchValue }, { preachCity: searchValue }, { preachSchool: searchValue } ]
   if (selectCity) findConditions.preachCity = selectCity
   if (selectSchool) findConditions.preachSchool = selectSchool
@@ -28,4 +29,8 @@ exports.getPreachList = function (accountType, searchValue, selectCity, selectSc
 
 exports.addPreachList = function (data) {
   return PreachModel.insertMany(data)
+}
+
+exports.removePreachList = function (preachId) {
+  return PreachModel.remove({ _id: preachId })
 }
