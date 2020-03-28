@@ -77,8 +77,14 @@ export default {
   data () {
     return {
       swiperImgs: [
-        'https://uploadfiles.nowcoder.com/images/20200227/339694163_1582804471958_AD8B368EA1D50F999423FF2A5F2DC6C2',
-        'https://uploadfiles.nowcoder.com/images/20200217/3985294_1581947783711_181D2EA526633BFB154F4A4C9A5F5FE2'
+        {
+          img: 'https://uploadfiles.nowcoder.com/images/20200227/339694163_1582804471958_AD8B368EA1D50F999423FF2A5F2DC6C2',
+          url: 'https://www.baidu.com'
+        },
+        {
+          img: 'https://uploadfiles.nowcoder.com/images/20200217/3985294_1581947783711_181D2EA526633BFB154F4A4C9A5F5FE2',
+          url: 'https://www.baidu.com'
+        }
       ],
       cityList: [
         '全国',
