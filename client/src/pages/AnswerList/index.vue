@@ -31,7 +31,7 @@
               </li>
             </ul>
             <div class="l-bottom">
-              <div class="item">
+              <div class="item" v-if="topicCount[0]">
                 <p>一、选择题部分 (共{{topicCount[0]}}题)</p>
                 <ul>
                   <li v-for="(list, index1) in topic['chooseLists']" :key="index1">
@@ -44,7 +44,7 @@
                   </li>
                 </ul>
               </div>
-              <div class="item">
+              <div class="item" v-if="topicCount[1]">
                 <p>二、填空题部分 (共{{topicCount[1]}}题)</p>
                 <ul>
                   <li v-for="(list, index2) in topic['fillLists']" :key="index2">
@@ -52,7 +52,7 @@
                   </li>
                 </ul>
               </div>
-              <div class="item">
+              <div class="item" v-if="topicCount[2]">
                 <p>三、判断题部分 (共{{topicCount[2]}}题)</p>
                 <ul>
                   <li v-for="(list, index3) in topic['judgeLists']" :key="index3">
@@ -73,7 +73,7 @@
             <div v-else>请查看正确答案和解析</div>
             <div v-if="!isCheck">
               <i class="el-icon-document"></i>
-              <span>全卷共 {{topicCount[0] + topicCount[1] + topicCount[2]}} 题</span>
+              <span>全卷共 {{topicCount[0] ? topicCount[0] : 0 + topicCount[1] ? topicCount[1] : 0  + topicCount[2] ? topicCount[2] : 0 }} 题</span>
               <i class="el-icon-time"></i>
               <span>倒计时：<b>{{time}}</b>分钟</span>
             </div>
@@ -214,13 +214,14 @@ export default {
       this.isCompanyType = true
     }
     if (!this.isCheck) {
-      this.time = 11 // 设置倒计时分钟数
+      this.time = 90 // 设置倒计时分钟数
       this.showTime()
       console.log('倒计时开始啦')
     }
     this.getExamData()
   },
   mounted () {
+    console.log(555, this.$route.query.themeDetailId)
   },
   methods: {
     ...mapActions([

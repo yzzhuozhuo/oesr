@@ -2,7 +2,7 @@
   {
     "companyId": "noId",
     "companyName": "noName",
-    "companyImageUrl": "https://uploadfiles.nowcoder.com/images/20191109/59_1573270956405_8A9C8878206EDC89EA273AF6F4418EA6",
+    "themeImageUrl": "https://uploadfiles.nowcoder.com/images/20191109/59_1573270956405_8A9C8878206EDC89EA273AF6F4418EA6",
     "themeTitle": "Java工程师能力评估",
     "tagType": "software",
     "years": "2020",
@@ -217,7 +217,7 @@
   {
     "companyId": "noId",
     "companyName": "noName",
-    "companyImageUrl": "https://uploadfiles.nowcoder.com/images/20191109/59_1573270962275_C9C7E65E981906B5E63EAEBF16B1D934",
+    "themeImageUrl": "https://uploadfiles.nowcoder.com/images/20191109/59_1573270962275_C9C7E65E981906B5E63EAEBF16B1D934",
     "themeTitle": "C/C++工程师能力评估",
     "tagType": "software",
     "years": "2020",
@@ -432,7 +432,7 @@
   {
     "companyId": "noId",
     "companyName": "noName",
-    "companyImageUrl": "https://uploadfiles.nowcoder.com/images/20191109/59_1573270970017_1675FC0467AA1E05F959D7EA84D5CD04",
+    "themeImageUrl": "https://uploadfiles.nowcoder.com/images/20191109/59_1573270970017_1675FC0467AA1E05F959D7EA84D5CD04",
     "themeTitle": "前端工程师能力评估",
     "tagType": "software",
     "years": "2020",
@@ -647,7 +647,7 @@
   {
     "companyId": "noId",
     "companyName": "noName",
-    "companyImageUrl": "https://uploadfiles.nowcoder.com/images/20191109/59_1573270982162_AB01B3F9FAB7041C502A7024BD12462D",
+    "themeImageUrl": "https://uploadfiles.nowcoder.com/images/20191109/59_1573270982162_AB01B3F9FAB7041C502A7024BD12462D",
     "themeTitle": "算法工程师能力评估",
     "tagType": "software",
     "years": "2020",
@@ -862,7 +862,7 @@
   {
     "companyId": "noId",
     "companyName": "noName",
-    "companyImageUrl": "https://uploadfiles.nowcoder.com/images/20191109/59_1573270991126_23230194E64FD17881C425D8A8B2282E",
+    "themeImageUrl": "https://uploadfiles.nowcoder.com/images/20191109/59_1573270991126_23230194E64FD17881C425D8A8B2282E",
     "themeTitle": "运维工程师能力评估",
     "tagType": "software",
     "years": "2020",
@@ -1077,7 +1077,7 @@
   {
     "companyId": "noId",
     "companyName": "noName",
-    "companyImageUrl": "https://uploadfiles.nowcoder.com/images/20191109/59_1573270996663_11FF950FE370A5351306402006DF24FE",
+    "themeImageUrl": "https://uploadfiles.nowcoder.com/images/20191109/59_1573270996663_11FF950FE370A5351306402006DF24FE",
     "themeTitle": "测试工程师能力评估",
     "tagType": "software",
     "years": "2020",
@@ -1292,7 +1292,7 @@
   {
     "companyId": "noId",
     "companyName": "noName",
-    "companyImageUrl": "https://uploadfiles.nowcoder.com/images/20191109/59_1573271001211_28AD21DEB4E7FBD7B88929B1D630DCC7",
+    "themeImageUrl": "https://uploadfiles.nowcoder.com/images/20191109/59_1573271001211_28AD21DEB4E7FBD7B88929B1D630DCC7",
     "themeTitle": "产品经理能力评估",
     "tagType": "software",
     "years": "2020",
@@ -1507,7 +1507,7 @@
   {
     "companyId": "noId",
     "companyName": "noName",
-    "companyImageUrl": "https://uploadfiles.nowcoder.com/images/20191109/59_1573271006463_C436A093EFFBCEECD0B94F6558875999",
+    "themeImageUrl": "https://uploadfiles.nowcoder.com/images/20191109/59_1573271006463_C436A093EFFBCEECD0B94F6558875999",
     "themeTitle": "运营岗位能力评估",
     "tagType": "software",
     "years": "2020",

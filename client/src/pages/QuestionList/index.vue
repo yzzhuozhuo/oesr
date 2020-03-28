@@ -104,10 +104,13 @@ export default {
   watch: {
     themeDetailList () {
       this.themeDetailData = this.themeDetailList
+      let chooseLength = this.themeDetailList.questionLists.chooseLists
+      let fillLength = this.themeDetailList.questionLists.fillLists
+      let judgeLength = this.themeDetailList.questionLists.judgeLists
       this.tableData.map(item => {
-        item.chooseNum = this.themeDetailList.questionLists.chooseLists.length
-        item.fillNum = this.themeDetailList.questionLists.fillLists.length
-        item.judgeNum = this.themeDetailList.questionLists.judgeLists.length
+        item.chooseNum = chooseLength ? chooseLength.length : '0'
+        item.fillNum = fillLength ? fillLength.length : '0'
+        item.judgeNum = judgeLength ? judgeLength.length : '0'
         return item
       })
       this.themeDetailId = this.themeDetailList._id
@@ -139,7 +142,7 @@ export default {
       this.$router.push({
         path: 'answerList',
         query: {
-          themeDetailId: this.themeDetailId
+          themeDetailId: this.themeDetailList._id
         }
       })
     },
@@ -147,7 +150,7 @@ export default {
       this.$router.push({
         path: 'answerList',
         query: {
-          themeDetailId: this.themeDetailId,
+          themeDetailId: this.themeDetailList._id,
           isCheck: true,
           accountType: 'company'
         }
