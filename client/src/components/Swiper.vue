@@ -13,8 +13,9 @@
           :key="index"
           class="swiper-slide"
           :style="{
-            backgroundImage: `url(${item})`
+            backgroundImage: `url(${item.img})`
           }"
+          @click.stop="jump(item.url)"
         />
       </div>
       <div
@@ -54,6 +55,11 @@ export default {
         prevEl: '.swiper-button-prev'
       }
     })
+  },
+  methods: {
+    jump (url) {
+      window.open(url)
+    }
   }
 }
 </script>

@@ -16,8 +16,14 @@
         </el-timeline-item>
       </el-timeline>
     </div>
-    <div class="neitui">寻找内部员工内推</div>
-    <div class="neitui toudi" @click="toCampus">官网投递</div>
+    <div
+      class="neitui"
+      @click="toDiscuss"
+    >寻找内部员工内推</div>
+    <div
+      class="neitui toudi"
+      @click="toCampus"
+    >官网投递</div>
   </div>
 </template>
 
@@ -36,6 +42,14 @@ export default {
   methods: {
     toCampus () {
       window.open(this.campusUrl)
+    },
+    toDiscuss () {
+      this.$router.push({
+        name: 'discussPage',
+        params: {
+          label: 6
+        }
+      })
     }
   }
 }

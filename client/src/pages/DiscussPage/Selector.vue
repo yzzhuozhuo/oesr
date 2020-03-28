@@ -4,7 +4,7 @@
       class="item"
       v-for="(item, index) in selectList"
       :key="index"
-      :class="activeIndex === index ? 'active' : 'nomal'"
+      :class="label === index ? 'active' : 'nomal'"
       @click.stop="checkout(index, item.label)"
     >{{item.name}}</span>
   </div>
@@ -12,17 +12,15 @@
 
 <script>
 export default {
-  props: ['selectList'],
+  props: ['selectList', 'label'],
   data () {
     return {
-      activeIndex: 0,
       selectedCity: '',
       selectedPost: ''
     }
   },
   methods: {
     checkout (index, label) {
-      this.activeIndex = index
       this.$emit('selectedLabel', label)
     }
   }

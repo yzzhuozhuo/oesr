@@ -6,18 +6,21 @@
     >
     <div class="company">
       <div class="name">{{companyName}} 2020校招</div>
-      <div
+      <!-- <div
         class="home"
         @click.stop="jumpToCompany('company')"
-      >
+      > -->
         <!-- <img :src="home">
         <span>公司主页</span> -->
-      </div>
+      <!-- </div> -->
       <!-- <div class="follow">+ 关注</div> -->
-    </div>
-    <div class="campus">
-      <span class="title">官网地址：</span>
-      <span class="url" @click="toCampus(campusUrl)">{{campusUrl}}</span>
+      <div class="campus">
+        <span class="title">官网地址：</span>
+        <span
+          class="url"
+          @click="toCampus(campusUrl)"
+        >{{campusUrl}}</span>
+      </div>
     </div>
   </div>
 </template>
@@ -65,11 +68,13 @@ export default {
   .company {
     display: flex;
     align-items: center;
+    width: 850px;
 
     .name {
       font-weight: 700;
       font-size: 22px;
       margin-right: 20px;
+      flex: 1;
     }
 
     .home {
@@ -103,8 +108,6 @@ export default {
 }
 
 .campus {
-  position: absolute;
-  right: 200px;
   cursor: pointer;
   .title {
     cursor: text;

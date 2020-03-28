@@ -197,7 +197,8 @@ export default {
   },
   computed: {
     ...mapState({
-      themeDetailList: state => state.theme.themeDetailList
+      themeDetailList: state => state.theme.themeDetailList,
+      userInfo: state => state.student.studentList
     })
   },
   watch: {
@@ -468,9 +469,9 @@ export default {
     saveExamInfo () {
       let data = {
         themeId: this.themeDetailData._id,
-        studentId: '123',
-        studentName: '小卓子嘻嘻~',
-        studentImageUrl: 'https://images.nowcoder.com/images/20190928/638373518_1569674550437_27E42C56E73D70CBE3050C38883E4E56?x-oss-process=image/resize,m_mfit,h_100,w_100',
+        studentId: this.userInfo.studentId,
+        studentName: this.userInfo.studentName,
+        studentImageUrl: this.userInfo.studentImgUrl,
         themeTitle: this.themeDetailData.themeTitle,
         totalScore: this.totalScore,
         startTime: this.startTime,

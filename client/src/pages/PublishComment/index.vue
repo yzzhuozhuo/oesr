@@ -159,7 +159,7 @@ export default {
         { value: 3, label: '我要提问' },
         { value: 4, label: '技术交流' },
         { value: 5, label: '产品运营' },
-        { value: 6, label: '留学生' },
+        { value: 6, label: '内推消息' },
         { value: 7, label: '职业发展' },
         { value: 8, label: '招聘信息' },
         { value: 9, label: '资源分享' },
