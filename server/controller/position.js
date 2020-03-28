@@ -2,6 +2,8 @@ const positionService = require('../service/position')
 
 exports.getPosition = function (req, res) {
   let {
+    searchVal = '',
+    companyId = '',
     accountType = '',
     selectType = '',
     selectCity = '',
@@ -12,7 +14,7 @@ exports.getPosition = function (req, res) {
   } = req.query
   pageNum = +pageNum
   currentPage = +currentPage
-  positionService.getPositionList(accountType, selectType, selectCity, selectTab, searchPosition, currentPage, pageNum).then(data => {
+  positionService.getPositionList(searchVal, companyId, accountType, selectType, selectCity, selectTab, searchPosition, currentPage, pageNum).then(data => {
     res.send({
       code: '200',
       data: {

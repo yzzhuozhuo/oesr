@@ -6,20 +6,24 @@ export function fetchUserInfo () {
   return axios.get(url).then(utils.checkHttpStatus).then(utils.checkResponse).catch({})
 }
 
-export function fetchCalendarList () {
-  let url = '/oesr/calendarList'
-  return axios.get(url).then(utils.checkHttpStatus).then(utils.checkResponse).catch({})
-}
-
-export function updateCalendarList (body) {
-  return fetch('/oesr/addCalendarList', {
-    method: 'POST',
+export function fetchCalendarList (data) {
+  return axios.get(`/oesr/calendarList?${params(data)}`, {
+    method: 'GET',
     credentials: 'same-origin',
-    body: JSON.stringify(body),
     headers: {
       'Content-Type': 'application/json'
     }
   }).then(utils.checkHttpStatus).then(utils.checkResponse).catch({})
+}
+
+export function updateCalendarList (body) {
+  let url = '/oesr/addCalendarList'
+  return axios.post(url, body).then(utils.checkHttpStatus).then(utils.checkResponse).catch({})
+}
+
+export function removeCalendarList (data) {
+  let url = `/oesr/removeCalendarList?${params(data)}`
+  return axios.delete(url).then(utils.checkHttpStatus).then(utils.checkResponse).catch({})
 }
 
 export function fetchPreachList (data) {

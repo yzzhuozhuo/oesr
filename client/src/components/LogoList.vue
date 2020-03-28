@@ -1,29 +1,42 @@
 <template>
-  <div
-    class="logo"
-    @click.capture="jump"
-  >
-    <div class="logo1 logo0">腾讯</div>
-    <div class="logo2 logo0">字节跳动</div>
-    <div class="logo3 logo0">百度</div>
-    <div class="logo4 logo0">京东</div>
-    <div class="logo5 logo0">网易</div>
-    <div class="logo6 logo0">美团</div>
-    <div class="logo7 logo0">99+</div>
+  <div class="logo">
+    <div class="logo-content" v-for="(item, index) in companyList" :key="index">
+      <div class="logo0" :class="ownClass(index)" @click="getCompanyName(item)">{{item}}</div>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  props: ['logoData'],
+  props: ['logoData', 'path'],
   data () {
-    return {}
+    return {
+      companyList: [
+        '腾讯',
+        '字节跳动',
+        '百度',
+        '京东',
+        '网易',
+        '美团',
+        '99+'
+      ]
+    }
   },
   methods: {
-    jump (e) {
-      this.$router.push({
-        path: 'questionPage'
-      })
+    ownClass (index) {
+      return `logo${index + 1}`
+    },
+    getCompanyName (companyName) {
+      if (this.path === 'positionSquare') {
+        this.$emit('getCompanyName', companyName)
+      } else {
+        this.$router.push({
+          path: 'questionPage',
+          query: {
+            companyName
+          }
+        })
+      }
     }
   }
 }
@@ -68,9 +81,9 @@ export default {
   background-position: -1690px -650px;
 }
 
-.logo3 {
-  /* background-position: 0 0; */
-}
+// .logo3 {
+//   /* background-position: 0 0; */
+// }
 
 .logo3:hover {
   background-position: 0 -130px;

@@ -2,6 +2,7 @@ const preachService = require('../service/preach')
 
 exports.getPreach = function (req, res) {
   let {
+    companyId = '',
     accountType = '',
     searchValue = '',
     selectCity = '',
@@ -15,7 +16,7 @@ exports.getPreach = function (req, res) {
   currentPage = +currentPage
   preachStartTime = +preachStartTime
   preachEndTime = +preachEndTime
-  preachService.getPreachList(accountType, searchValue, selectCity, selectSchool, currentPage, pageNum, preachStartTime, preachEndTime).then(data => {
+  preachService.getPreachList(companyId, accountType, searchValue, selectCity, selectSchool, currentPage, pageNum, preachStartTime, preachEndTime).then(data => {
     res.send({
       code: '200',
       data: {
@@ -36,6 +37,21 @@ exports.getPreach = function (req, res) {
 exports.addPreach = function (req, res) {
   let data = req.body
   preachService.addPreachList(data).then(data => {
+    res.send({
+      code: '200',
+      data: data
+    })
+  }).catch(err => {
+    res.send({
+      code: '500',
+      data: err.msg
+    })
+  })
+}
+
+exports.removePreach = function (req, res) {
+  let { preachId = '' } = req.query
+  preachService.removePreachList(preachId).then(data => {
     res.send({
       code: '200',
       data: data

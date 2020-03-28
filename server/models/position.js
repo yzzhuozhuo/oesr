@@ -54,7 +54,7 @@ const positionSchema = mongoose.Schema({
     type: String,
     required: true
   },
-  practicerequired: {
+  practiceRequired: {
     type: String
   },
   becomeOfficial: {
@@ -64,7 +64,7 @@ const positionSchema = mongoose.Schema({
     type: Array,
     requiredd: true
   },
-  jobrequiredments: {
+  jobRequirements: {
     type: Array,
     requiredd: true
   }

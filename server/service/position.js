@@ -1,8 +1,10 @@
 const PositionModel = require('../models/position')
 
-exports.getPositionList = function (accountType, selectType, selectCity, selectTab, searchPosition, currentPage, pageNum) {
+exports.getPositionList = function (searchVal, companyId, accountType, selectType, selectCity, selectTab, searchPosition, currentPage, pageNum) {
   let skipCounts = (currentPage - 1) * pageNum
   let findConditions = {}
+  if (companyId) findConditions.companyId = companyId
+  if (searchVal) findConditions.companyName = searchVal
   if (searchPosition) findConditions.positionTitle = searchPosition
   if (selectType) findConditions.positionType = selectType
   if (selectCity) findConditions.positionCity = selectCity

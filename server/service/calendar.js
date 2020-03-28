@@ -1,7 +1,11 @@
 const CalendarModel = require('../models/calendar')
 
-exports.getCalendarList = function () {
-  return CalendarModel.find()
+exports.getCalendarList = function (studentId, companyId) {
+  let findConditions = {}
+  if (studentId) findConditions.studentId = studentId
+  if (companyId) findConditions.companyId = companyId
+  console.log(33, findConditions)
+  return CalendarModel.find(findConditions)
 }
 
 exports.addCalendarList = function (data) {

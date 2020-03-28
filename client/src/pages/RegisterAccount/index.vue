@@ -830,9 +830,6 @@ export default {
       .sex {
         margin-top: -10px;
       }
-      .intro {
-        // margin-top: -10px;
-      }
       .el-input {
         width: 100%;
       }
