@@ -25,6 +25,7 @@
         <div class="selector">
           <selector
             :selectList="selectList"
+            :label="label"
             @selectedLabel="selectedLabel"
           />
         </div>
@@ -84,7 +85,7 @@ export default {
         { label: 3, name: '我要提问' },
         { label: 4, name: '技术交流' },
         { label: 5, name: '产品运营' },
-        { label: 6, name: '留学生' },
+        { label: 6, name: '内推消息' },
         { label: 7, name: '职业发展' },
         { label: 8, name: '招聘信息' },
         { label: 9, name: '资源分享' },
@@ -92,7 +93,7 @@ export default {
         { label: 11, name: '工作以后' }
       ],
       publish: 0,
-      label: 0
+      label: this.$route.params.label * 1 || 0
     }
   },
   computed: {
