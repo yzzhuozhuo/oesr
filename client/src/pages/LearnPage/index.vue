@@ -92,8 +92,14 @@ export default {
   data () {
     return {
       swiperImgs: [
-        'https://uploadfiles.nowcoder.com/images/20191231/4107856_1577773849648_EBDA8C006A521B8F4B64E3C834ED1118',
-        'https://uploadfiles.nowcoder.com/images/20190708/4107856_1562577889040_895F882A6AADA8C739DA78B2AB48B6B1'
+        {
+          img: 'https://uploadfiles.nowcoder.com/images/20191231/4107856_1577773849648_EBDA8C006A521B8F4B64E3C834ED1118',
+          url: 'https://www.baidu.com'
+        },
+        {
+          img: 'https://uploadfiles.nowcoder.com/images/20190708/4107856_1562577889040_895F882A6AADA8C739DA78B2AB48B6B1',
+          url: 'https://www.baidu.com'
+        }
       ],
       hotImgs: [
         'https://uploadfiles.nowcoder.com/files/20191212/59_1576134154605_3.png',
