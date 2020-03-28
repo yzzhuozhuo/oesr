@@ -1,0 +1,1722 @@
+[
+  {
+    "companyId": "noId",
+    "companyName": "noName",
+    "themeImageUrl": "https://uploadfiles.nowcoder.com/images/20191109/59_1573270956405_8A9C8878206EDC89EA273AF6F4418EA6",
+    "themeTitle": "Java工程师能力评估",
+    "tagType": "software",
+    "years": "2020",
+    "hot": 100,
+    "rate": 5,
+    "post": "Java工程师",
+    "questionLists": {
+      "chooseLists": [
+        {
+          "question": "下面有关JVM内存，说法错误的是?",
+          "answerA": " 程序计数器是一个比较小的内存区域，用于指示当前线程所执行的字节码执行到了第几行，是线程隔离的",
+          "answerB": " 虚拟机栈描述的是Java方法执行的内存模型，用于存储局部变量，操作数栈，动态链接，方法出口等信息，是线程隔离的",
+          "answerC": " 方法区用于存储JVM加载的类信息、常量、静态变量、以及编译器编译后的代码等数据，是线程隔离的",
+          "answerD": " 原则上讲，所有的对象都在堆区上分配内存，是线程之间共享的",
+          "rightAnswer": "C",
+          "analysis": "方法区在JVM中也是一个非常重要的区域，它与堆一样，是被 线程共享 的区域。 在方法区中，存储了每个类的信息（包括类的名称、方法信息、字段信息）、静态变量、常量以及编译器编译后的代码等。",
+          "score": 5
+        },
+        {
+          "question": "下面有关jdbc statement的说法错误的是？",
+          "answerA": "JDBC提供了Statement、PreparedStatement 和 CallableStatement三种方式来执行查询语句，其中 Statement 用于通用查询， PreparedStatement 用于执行参数化查询，而 CallableStatement则是用于存储过程",
+          "answerB": "对于PreparedStatement来说，数据库可以使用已经编译过及定义好的执行计划，由于 PreparedStatement 对象已预编译过，所以其执行速度要快于 Statement 对象”",
+          "answerC": "PreparedStatement中，“?” 叫做占位符，一个占位符可以有一个或者多个值",
+          "answerD": "PreparedStatement可以阻止常见的SQL注入式攻击",
+          "rightAnswer": "C",
+          "analysis": "JDBC statement中的PReparedStatement的占位符对应着即将与之对应当值，并且一个占位符只能对应一个值，如果能对应多个就会引起混淆。sql语句是确定的，那么一个占位符必定只能对应一个值",
+          "score": 5
+        },
+        {
+          "question": "下面有关SPRING的事务传播特性，说法错误的是？",
+          "answerA": "PROPAGATION_SUPPORTS：支持当前事务，如果当前没有事务，就以非事务方式执行",
+          "answerB": "PROPAGATION_REQUIRED：支持当前事务，如果当前没有事务，就抛出异常",
+          "answerC": "PROPAGATION_REQUIRES_NEW：新建事务，如果当前存在事务，把当前事务挂起",
+          "answerD": "PROPAGATION_NESTED：支持当前事务，新增Savepoint点，与当前事务同步提交或回滚",
+          "rightAnswer": "B",
+          "analysis": "Spring的API设计很不错，基本上根据英文翻译就能知道作用:Required:必须的。说明必须要有事物，没有就新建事物。supports:支持。说明仅仅是支持事务，没有事务就非事务方式执行。mandatory:强制的。说明一定要有事务，没有事务就抛出异常。required_new:必须新建事物。如果当前存在事物就挂起。not_supported:不支持事物，如果存在事物就挂起。never:绝不有事务。如果存在事物就抛出异常",
+          "score": 5
+        },
+        {
+          "question": "下面有关servlet和cgi的描述，说法错误的是？",
+          "answerA": "servlet处于服务器进程中，它通过多线程方式运行其service方法",
+          "answerB": "CGI对每个请求都产生新的进程，服务完成后就销毁",
+          "answerC": "servlet在易用性上强于cgi，它提供了大量的实用工具例程，例如自动地解析和解码HTML表单数据、读取和设置HTTP头、处理Cookie、跟踪会话状态等",
+          "answerD": "cgi在移植性上高于servlet，几乎所有的主流服务器都直接或通过插件支持cgi",
+          "rightAnswer": "D",
+          "analysis": "和CGI程序一样，Servlet可以响应用户的指令(提交一个FORM等等)，也可以象CGI程序一样，收集用户表单的信息并给予动态反馈(简单的注册信息录入和检查错误)。",
+          "score": 5
+        },
+        {
+          "question": "下面有关servlet service描述错误的是？",
+          "answerA": "不管是post还是get方法提交过来的连接，都会在service中处理",
+          "answerB": "doGet/doPost 则是在 javax.servlet.GenericServlet 中实现的",
+          "answerC": "service()是在javax.servlet.Servlet接口中定义的",
+          "answerD": "service判断请求类型，决定是调用doGet还是doPost方法",
+          "rightAnswer": "B",
+          "analysis": "GenericServlet 抽象类 给出了设计 servlet 的一些骨架，定义了 servlet 生命周期，还有一些得到名字、配置、初始化参数的方法，其设计的是和应用层协议无关的",
+          "score": 5
+        },
+        {
+          "question": "下列有关Servlet的生命周期，说法不正确的是？",
+          "answerA": "在创建自己的Servlet时候，应该在初始化方法init()方法中创建Servlet实例",
+          "answerB": "在Servlet生命周期的服务阶段，执行service()方法，根据用户请求的方法，执行相应的doGet()或是doPost()方法",
+          "answerC": "在销毁阶段，执行destroy()方法后会释放Servlet 占用的资源",
+          "answerD": "destroy()方法仅执行一次，即在服务器停止且卸载Servlet时执行该方法",
+          "rightAnswer": "A",
+          "analysis": "Servlet的生命周期分为5个阶段：加载、创建、初始化、处理客户请求、卸载。",
+          "score": 5
+        },
+        {
+          "question": "下面有关servlet中init,service,destroy方法描述错误的是？",
+          "answerA": "init()方法是servlet生命的起点。一旦加载了某个servlet，服务器将立即调用它的init()方法",
+          "answerB": "service()方法处理客户机发出的所有请求",
+          "answerC": "destroy()方法标志servlet生命周期的结束",
+          "answerD": "servlet在多线程下使用了同步机制，因此，在并发编程下servlet是线程安全的",
+          "rightAnswer": "D",
+          "analysis": "servlet在多线程下其本身并不是线程安全的。",
+          "score": 5
+        },
+        {
+          "question": "下面有关struts1和struts2的区别，描述错误的是？",
+          "answerA": "Struts1要求Action类继承一个抽象基类。Struts 2 Action类可以实现一个Action接口",
+          "answerB": "Struts1 Action对象为每一个请求产生一个实例。Struts2 Action是单例模式并且必须是线程安全的",
+          "answerC": "Struts1 Action 依赖于Servlet API，Struts 2 Action不依赖于容器，允许Action脱离容器单独被测试",
+          "answerD": "Struts1 整合了JSTL，Struts2可以使用JSTL，但是也支持OGNL",
+          "rightAnswer": "B",
+          "analysis": "servle是单例的   Struts2是多例的   记住这个就OK了",
+          "score": 5
+        },
+        {
+          "question": "关于AWT和Swing说法正确的是？",
+          "answerA": "Swing是AWT的子类",
+          "answerB": "AWT在不同操作系统中显示相同的风格",
+          "answerC": "AWT不支持事件类型，Swing支持事件模型",
+          "answerD": "Swing在不同的操作系统中显示相同的风格",
+          "rightAnswer": "D",
+          "analysis": "AWT，抽象窗口工具包，是Java提供的建立图形用户界面的工具集，可用于生成现代的、鼠标控制的图形应用接口，且无需修改，就可以在各种软硬件平台上运行。",
+          "score": 5
+        },
+        {
+          "question": "从数据库中删除表的命令是()",
+          "answerA": "DROP TABLE",
+          "answerB": "TRUNCATE TABLE",
+          "answerC": "DELETE TABLE",
+          "answerD": "DELETE FROM TABLE",
+          "rightAnswer": "A",
+          "analysis": "DROP TABLE 指令。整个表格消失，无法再被用了。",
+          "score": 5
+        },
+        {
+          "question": "下面哪一项不是加载驱动程序的方法？",
+          "answerA": "通过DriverManager.getConnection方法加载",
+          "answerB": "调用方法 Class.forName",
+          "answerC": "通过添加系统的jdbc.drivers属性",
+          "answerD": "通过registerDriver方法注册",
+          "rightAnswer": "A",
+          "analysis": "DriverManager.getConnection方法返回一个Connection对象，这是加载驱动之后才能进行的",
+          "score": 5
+        },
+        {
+          "question": "关于sleep()和wait()，以下描述错误的一项是（ ）",
+          "answerA": "sleep是线程类（Thread）的方法，wait是Object类的方法；",
+          "answerB": "sleep不释放对象锁，wait放弃对象锁",
+          "answerC": "sleep暂停线程、但监控状态仍然保持，结束后会自动恢复",
+          "answerD": "wait后进入等待锁定池，只有针对此对象发出notify方法后获得对象锁进入运行状态",
+          "rightAnswer": "D",
+          "analysis": "Java中的多线程是一种抢占式的机制，而不是分时机制。抢占式的机制是有多个线程处于可运行状态，但是只有一个线程在运行。",
+          "score": 5
+        },
+        {
+          "question": "[0-9a-fA-F]{2}(-[0-9a-fA-F]{2}){5} 该正则表达式可以匹配()",
+          "answerA": "域名",
+          "answerB": "ip地址",
+          "answerC": "mac地址",
+          "answerD": "主机名+端口号",
+          "rightAnswer": "C",
+          "analysis": "表示 mac 地址",
+          "score": 5
+        },
+        {
+          "question": "sed命令哪个参数可以删除指定行()",
+          "answerA": "-n",
+          "answerB": "-s",
+          "answerC": "-i",
+          "answerD": "-r",
+          "rightAnswer": "A",
+          "analysis": "sed命令哪个参数可以删除指定行为 -n",
+          "score": 5
+        },
+        {
+          "question": "下列情况中，不会使线程返回所持有的对象锁是哪个？()",
+          "answerA": "当 synchronized() 语句块执行完毕",
+          "answerB": "当调用了线程的 suspend() 方法",
+          "answerC": "当在 synchronized() 语句块中出现异常",
+          "answerD": "当持有锁的线程调用改对象的 wait() 方法",
+          "rightAnswer": "B",
+          "analysis": "本题考查Java线程中对象的加锁及其操作。对象加锁的使用非常灵活，定要注意。对象的锁在如下几种情况下由持有线程返还：当synchronized()语句块执行完后，所以选项A错误；当在synchronized()语句块中出现异常(exception)，所以选项B错误：当持有锁的线程调用该对象的wait()方法，此时该线程将释放对象的锁，所以选项D错误。而当调用了线程的suspend()方法只是使线程暂时停止执行，可以使用其他线程调用resume()方法恢复执行，所以选项B正确。",
+          "score": 5
+        },
+        {
+          "question": "下面哪个不对？",
+          "answerA": "RuntimeException is the superclass of those exceptions that can be thrown during the normal operation of the Java Virtual Machine.",
+          "answerB": "A method is not required to declare in its throws clause any subclasses of RuntimeExeption that might be thrown during the execution of the method but not caught",
+          "answerC": "An RuntimeException is a subclass of Throwable that indicates serious problems that a reasonable application should not try to catch.",
+          "answerD": "NullPointerException is one kind of RuntimeException",
+          "rightAnswer": "C",
+          "analysis": "运行时异常： 都是RuntimeException类及其子类异常，如NullPointerException(空指针异常)、IndexOutOfBoundsException(下标越界异常)等，这些异常是不检查异常，程序中可以选择捕获处理，也可以不处理。这些异常一般是由程序逻辑错误引起的，程序应该从逻辑角度尽可能避免这类异常的发生。",
+          "score": 5
+        },
+        {
+          "question": "char变量的默认值是什么？()",
+          "answerA": "\u0000",
+          "answerB": "0",
+          "answerC": "null",
+          "answerD": "not defined",
+          "rightAnswer": "A",
+          "analysis": "整数类型（byte、short、int、long）的基本类型变量的默认值为0。",
+          "score": 5
+        },
+        {
+          "question": "关于struts项目中的类与MVC模式的对应关系，说法错误的是",
+          "answerA": "Jsp文件实现视图View的功能",
+          "answerB": "ActionServlet这一个类是整个struts项目的控制器",
+          "answerC": "V 为视图层",
+          "answerD": "一个struts项目只能有一个Servlet",
+          "rightAnswer": "D",
+          "analysis": "MVC即Model-View-Controller的缩写，是一种常用的设计模式。MVC   减弱了业务逻辑接口和数据接口之间的耦合，以及让视图层更富于变化。",
+          "score": 5
+        },
+        {
+          "question": "下面有关jsp中静态include和动态include的区别，说法错误的是？  ",
+          "answerA": "动态INCLUDE:用jsp:include动作实现 ",
+          "answerB": "静态INCLUDE:用include伪码实现，定不会检查所含文件的变化，适用于包含静态页面",
+          "answerC": "静态include的结果是把其他jsp引入当前jsp，两者合为一体;动态include的结构是两者独立，直到输出时才合并",
+          "answerD": "静态include和动态include都可以允许变量同名的冲突.页面设置也可以借用主文件的",
+          "rightAnswer": "D",
+          "analysis": "静态的include：是jsp的指令来实现的，特点是 共享request请求域，先包含再编译，不检查包含页面的变化。动态的include：是jsp动作来实现的，这个是不共享request请求域，先编译在包含，是要检查包含页面的变化的。",
+          "score": 5
+        },
+        {
+          "question": "对于JVM内存配置参数：-Xmx10240m -Xms10240m -Xmn5120m -XXSurvivorRatio=3，其最小内存值和Survivor区总大小分别是()",
+          "answerA": "5120m，1024m",
+          "answerB": "5120m，2048m",
+          "answerC": "10240m，1024m",
+          "answerD": "10240m，2048m",
+          "rightAnswer": "D",
+          "analysis": "-Xmx：最大堆大小、-Xms：初始堆大小、-Xmn:年轻代大小、-XXSurvivorRatio：年轻代中Eden区与Survivor区的大小比值",
+          "score": 5
+        }
+      ]
+    }
+  },
+  {
+    "companyId": "noId",
+    "companyName": "noName",
+    "themeImageUrl": "https://uploadfiles.nowcoder.com/images/20191109/59_1573270962275_C9C7E65E981906B5E63EAEBF16B1D934",
+    "themeTitle": "C/C++工程师能力评估",
+    "tagType": "software",
+    "years": "2020",
+    "hot": 100,
+    "rate": 5,
+    "post": "C/C++工程师",
+    "questionLists": {
+      "chooseLists": [
+        {
+          "question": "下面关于虚函数和函数重载的叙述不正确的是",
+          "answerA": "虚函数不是类的成员函数",
+          "answerB": "虚函数实现了C++的多态性",
+          "answerC": "函数重载允许非成员函数，而虚函数则不行",
+          "answerD": "函数重载的调用根据参数的个数、序列来确定，而虚函数依据对象确定",
+          "rightAnswer": "A",
+          "analysis": "虚函数和函数重载都实现了C+=的多态性，但表现形式不一样，函数重载调用根据参数个数、参数类型等进行区分，而虚函数则是根据动态联编来确定调用什么，故BD说法正确",
+          "score": 5
+        },
+        {
+          "question": "下面描述正确的是：int *p1 = new int[10]; int *p2 = new int[10]();",
+          "answerA": "p1和p2申请的空间里面的值都是随机值",
+          "answerB": "p1和p2申请的空间里的值都已经初始化",
+          "answerC": "p1申请的空间里的值是随机值，p2申请的空间里的值已经初始化",
+          "answerD": "p1申请的空间里的值已经初始化，p2申请的空间里的值是随机值",
+          "rightAnswer": "C",
+          "analysis": "对于内置类型而言，new仅仅是分配内存，除非后面显示加(),相当于调用它的构造函数，对于自定义类型而言，只要一调用new，那么编译器不仅仅给它分配内存，还调用它的默认构造函数初始化，即使后面没有加()",
+          "score": 5
+        },
+        {
+          "question": "关于重载函数，哪个说明是正确的？",
+          "answerA": "函数名相同，参数类型或个数不同",
+          "answerB": "函数名相同，返回值类型不同",
+          "answerC": "函数名相同，函数内部实现不同",
+          "answerD": "函数名称不同",
+          "rightAnswer": "A",
+          "analysis": "函数重载的条件是：函数名相同，参数类型或者个数不同，返回类型不能视为重载",
+          "score": 5
+        },
+        {
+          "question": "下面有关c++静态数据成员，说法正确的是？",
+          "answerA": "不能在类内初始化",
+          "answerB": "不能被类的对象调用",
+          "answerC": "不能受private修饰符的作用",
+          "answerD": "可以直接用类名调用",
+          "rightAnswer": "D",
+          "analysis": "类体中的数据成员的声明前加上static关键字，该数据成员就成为了该类的静态数据成员。和其他数据成员一样，静态数据成员也遵守public/protected/private访问规则。",
+          "score": 5
+        },
+        {
+          "question": "当一个类对象的生命周期结束后，关于调用析构函数的描述正确的是:()",
+          "answerA": "如果派生类没有定义析构函数，则只调用基类的析构函数",
+          "answerB": "如果基类没有定义析构函数，则只调用派生类的析构函数",
+          "answerC": "先调用派生类的析构函数，后调用基类的析构函数",
+          "answerD": "先调用基类的析构函数，后调用派生类的析构函数",
+          "rightAnswer": "C",
+          "analysis": "当用父类指针调用子类创建对象时 ，释放放若父类的析构函数不是虚函数，则只调用父类的析构函数，若析构函数是虚函数，则先调用子类析构函数，再调用父类的析构函数。",
+          "score": 5
+        },
+        {
+          "question": "有以下函数定义：void fun( int n,double x) {…}，若以下选项中的变量都已正确定义并赋值，则对函数fun的正确调用语句是哪个？",
+          "answerA": "fun(int y,double m);",
+          "answerB": "k=fun(10,12.5);",
+          "answerC": "fun(x,n);",
+          "answerD": "void fun(n,x);",
+          "rightAnswer": "C",
+          "analysis": "对于一个已经定义好了的函数，A这样调用是不对的；函数没有返回值B也是错误的，D更加不对了。至于c我个人觉得不管x和n是什么类型，是可以做类型转换的（也仅限于基本类型之间）！！",
+          "score": 5
+        },
+        {
+          "question": "变量void (*s[5])(int)表示意思为()",
+          "answerA": "函数指针",
+          "answerB": "函数指针数组",
+          "answerC": "数组指针函数",
+          "answerD": "语法错误",
+          "rightAnswer": "B",
+          "analysis": "这是一个标准的函数指针数组，s先与[5]结合，说明s是一个数组，数组的内容是void (*)(int)类型的函数指针，该指针指向的函数参数为int，返回值为void。",
+          "score": 5
+        },
+        {
+          "question": "若有 int *p=(int *)malloc(sizeof(int));则向内存申请到内存空间存入整数123的语句为()。",
+          "answerA": "scanf('%d',p);",
+          "answerB": "scanf('%d',&p);",
+          "answerC": "scanf('%d',*p);",
+          "answerD": "scanf('%d',**p);",
+          "rightAnswer": "A",
+          "analysis": "p 是 int 的指针类型，scanf 要求 %d 相应参数也是 int 的指针类型，所以直接 A",
+          "score": 5
+        },
+        {
+          "question": "malloc函数进行内存分配是在什么阶段?",
+          "answerA": "编译阶段",
+          "answerB": "链接阶段",
+          "answerC": "装载阶段",
+          "answerD": "执行阶段",
+          "rightAnswer": "D",
+          "analysis": "程序占用三种类型的内存：静态内存、栈内存、堆内存； ",
+          "score": 5
+        },
+        {
+          "question": "以下字符串定义与赋值中，正确的是()",
+          "answerA": "char s[80] = {'A', 'B' ,'C'}",
+          "answerB": "char s[80]; s = {'A', 'B','C'}",
+          "answerC": "char s[80]; s = 'ABC';",
+          "answerD": "char s[80] ='ABC';",
+          "rightAnswer": "D",
+          "analysis": "A的意思是用了三个字符数组初始化显然不对。B与C我认为此时的s就是指针了，声明时初始化可以，但是单独再赋值就不对了，让指针的值等于别的值也就出错了，D正确，字符串本身就是字符数组，赋值没问题",
+          "score": 5
+        },
+        {
+          "question": "要打开A盘上user子目录下名为abc.txt的文本文件进行读、写操作，下面符合此要求的函数调用是()",
+          "answerA": "fopen('A:\\user\\abc.txt','r')",
+          "answerB": "fopen ('A:\\user\\abc.txt','r+')",
+          "answerC": "fopen('A:\\user\\abc.txt','rb')",
+          "answerD": "fopen(‘A:\\user\\abc.txt','rb')",
+          "rightAnswer": "B",
+          "analysis": "如果要对文件进行读、写操作，则文件打开方式字符串中必须有+。答案A和C都只能对文件进行读操作，答案D则只能对文件进行写操作。故选择答案是B。",
+          "score": 5
+        },
+        {
+          "question": "是已知变量p、q是两个同类型的指针变量，下列表达式有语法错误的是()",
+          "answerA": "p+1",
+          "answerB": "q++",
+          "answerC": "（*p-q）/2",
+          "answerD": "*p（*q）",
+          "rightAnswer": "C",
+          "analysis": "A,B明显是对的，D答案中*p可能为一个函数指针",
+          "score": 5
+        },
+        {
+          "question": "若有以下定义和语句，则对s数组元素的正确引用形式是()。int s[4][5],(*ps)[5]；",
+          "answerA": "ps+1",
+          "answerB": "*(ps+3)",
+          "answerC": "ps[0][2]",
+          "answerD": "*(ps+1)+3",
+          "rightAnswer": "C",
+          "analysis": "ps是一指向二维数组s的指针，ps+1表示指向数组s第2行首地址的指针；*(ps+3)表示数组s第4行的首地址；*(ps+1)+3表示数组s第2行第4列元素的地址，答案A、B、D都不是对数组元素的正确引用。所以正确答案是C。",
+          "score": 5
+        },
+        {
+          "question": "若 k 为 int 型变量，则以下程序段的执行结果是()。k=-8567; printf('|%06d|\n',k);",
+          "answerA": "格式描述符不合法,输出无定值",
+          "answerB": "输出为|%06D|",
+          "answerC": "输出为|-08567|",
+          "answerD": "输出为|-8567|",
+          "rightAnswer": "C",
+          "analysis": "%06d意思是将要输出的整数按六位输出，不足六位的用零补齐。但是此题的d大写成D，因此不选C",
+          "score": 5
+        },
+        {
+          "question": "以下叙述中不正确的是()。",
+          "answerA": "一个好的程序应该有详尽的注释",
+          "answerB": "在 C 程序中，赋值运算符的优先级最低",
+          "answerC": "在 C 程序中，j++;是一条赋值语句",
+          "answerD": "C程序中的#include和#define均不是C语句",
+          "rightAnswer": "B",
+          "analysis": "c语言中，逗号优先级最低。",
+          "score": 5
+        },
+        {
+          "question": "定义带参数的宏“#define JH(a,b,t)t=a; a=b; b=t”，对两个参数a、b的值进行交换，下列表述中正确的是（ ）。",
+          "answerA": "不定义参数a和b将导致编译错误",
+          "answerB": "不定义参数a、b、t将导致编译错误",
+          "answerC": "不定义参数t将导致运行错误",
+          "answerD": "不需要定义参数a、b、t类型",
+          "rightAnswer": "C",
+          "analysis": "先说A,B：不会检查宏参有没有定义，所以它们是错的~定于不定都不导致错误。A,B错误,再说D：宏参只是达到替换的作用。不能定义它的类型。D错误,最后是C：跟A,B一样，C是错的。",
+          "score": 5
+        },
+        {
+          "question": "下列的模板说明中，正确的有（ ）",
+          "answerA": "下列的模板说明中，正确的有（ ）",
+          "answerB": "template <class T1, T2>",
+          "answerC": "template <class T1, class T2>",
+          "answerD": "template <typename T1; typename T2>",
+          "rightAnswer": "A",
+          "analysis": "B中有一个没有类型说明，D中出现分号。",
+          "score": 5
+        },
+        {
+          "question": "若有定义语句： int a=10 ; double b=3.14 ; 则表达式 'A'+a+b 值的类型是()",
+          "answerA": "char",
+          "answerB": "int",
+          "answerC": "double",
+          "answerD": "float",
+          "rightAnswer": "C",
+          "analysis": "char < short < int < float < double  不同类型运算结果类型向右边靠齐",
+          "score": 5
+        },
+        {
+          "question": "已有定义int x；float y；且执行scanf(“%3d%f”,&x,&y)；语句时，假设输入数据为12345□678↙，则x、y的值分别为()。",
+          "answerA": "12345  678.000000",
+          "answerB": "123  678.000000",
+          "answerC": "123  45.678000",
+          "answerD": "123   45.000000",
+          "rightAnswer": "D",
+          "analysis": "在scanf 接受数值数据的时候，从非空格符开始接收，遇到空格符即停止这个数据项的接收",
+          "score": 5
+        },
+        {
+          "question": "C++中32位单精度浮点数能表示的十进制有效数字是多少位？()",
+          "answerA": "9",
+          "answerB": "6",
+          "answerC": "7",
+          "answerD": "8",
+          "rightAnswer": "C",
+          "analysis": "一个浮点数由三部分组成：符号位S、指数部分E（阶码）以及尾数部分M。",
+          "score": 5
+        }
+      ]
+    }
+  },
+  {
+    "companyId": "noId",
+    "companyName": "noName",
+    "themeImageUrl": "https://uploadfiles.nowcoder.com/images/20191109/59_1573270970017_1675FC0467AA1E05F959D7EA84D5CD04",
+    "themeTitle": "前端工程师能力评估",
+    "tagType": "software",
+    "years": "2020",
+    "hot": 100,
+    "rate": 5,
+    "post": "前端工程师",
+    "questionLists": {
+      "chooseLists": [
+        {
+          "question": "下列哪个样式定义后,内联(非块状)元素可以定义宽度和高度",
+          "answerA": "display:inline",
+          "answerB": "display:none",
+          "answerC": "display:block",
+          "answerD": "display:inherit",
+          "rightAnswer": "C",
+          "analysis": "内联元素加上display：block;后被块级化。块级元素一般是其他元素的容器，可容纳内联元素和其他块状元素，块状元素排斥其他元素与其位于同一行，宽度(width)高度(height)起作用。因此，可以定义其宽度和高度。",
+          "score": 5
+        },
+        {
+          "question": "新窗口打开网页，用到以下哪个值()。",
+          "answerA": "_self",
+          "answerB": "_blank",
+          "answerC": "_top",
+          "answerD": "_parent",
+          "rightAnswer": "B",
+          "analysis": "在html中通过<a>标签打开一个链接，通过 <a> 标签的 target 属性规定在何处打开链接文档。如果在标签<a>中写入target属性，则浏览器会根据target的属性值去打开与其命名或名称相符的 框架<frame>或者窗口.在target中还存在四个保留的属性值如下，",
+          "score": 5
+        },
+        {
+          "question": "下面有关jquery事件的响应，描述错误的是？",
+          "answerA": "onclick 鼠标点击某个对象",
+          "answerB": "onfocus 元素失去焦点",
+          "answerC": "onload 是某个页面的css js html 文档结构和图像被完全加载",
+          "answerD": "onmousedown 某个鼠标按键被按下",
+          "rightAnswer": "B",
+          "analysis": "onfocus 获得焦点 onblur 失去焦点",
+          "score": 5
+        },
+        {
+          "question": "flash和js通过什么类如何交互?",
+          "answerA": "ExtensionContex",
+          "answerB": "ExternalInterface",
+          "answerC": "IInterpolator",
+          "answerD": "FlexContentHolder",
+          "rightAnswer": "B",
+          "analysis": "Flash提供了ExternalInterface接口与JavaScript通信，ExternalInterface有两个方法，call和addCallback，call的作用是让Flash调用js里的方法，addCallback是用来注册flash函数让js调用。",
+          "score": 5
+        },
+        {
+          "question": "元素的alt和title有什么异同，选出正确的说法？",
+          "answerA": "不同的浏览器，表现一样",
+          "answerB": "alt和title同时设置的时候，alt作为图片的替代文字出现，title是图片的解释文字",
+          "answerC": "alt和title同时设置的时候，title作为图片的替代文字出现，alt是图片的解释文字",
+          "answerD": "以上说法都不正确",
+          "rightAnswer": "B",
+          "analysis": "alt是html标签的属性，而title既是html标签，又是html属性。 ",
+          "score": 5
+        },
+        {
+          "question": "下列js可以让一个input的背景颜色变成红色的是？",
+          "answerA": "inputElement.style.backgroundColor = 'red';",
+          "answerB": "inputElement.backgroundColor = 'red';",
+          "answerC": "inputElement.style.backgroundColor = '#0000';",
+          "answerD": "inputElement.backgroundColor = '#0000';",
+          "rightAnswer": "A",
+          "analysis": "用js让一个input的背景颜色变成红色。",
+          "score": 5
+        },
+        {
+          "question": "下面有关html5标签说法错误的有？",
+          "answerA": "<audio> 标签定义声音，比如音乐或其他音频流",
+          "answerB": "<canvas> 比如来自一个外部的新闻提供者的一篇新的文章，或者来自 blog 的文本，或者是来自论坛的文本。亦或是来自其他外部源内容",
+          "answerC": "<menu> 标签定义菜单列表。当希望列出表单控件时使用该标签",
+          "answerD": "<command> 标签定义命令按钮，比如单选按钮、复选框或按钮",
+          "rightAnswer": "B",
+          "analysis": "这里考察HTML标签的使用",
+          "score": 5
+        },
+        {
+          "question": "下述有关css属性position的属性值的描述，说法错误的是？",
+          "answerA": "static：没有定位，元素出现在正常的流中",
+          "answerB": "fixed：生成绝对定位的元素，相对于父元素进行定位",
+          "answerC": "relative：生成相对定位的元素，相对于元素本身正常位置进行定位。",
+          "answerD": "absolute：生成绝对定位的元素，相对于 static 定位以外的第一个祖先元素进行定位。",
+          "rightAnswer": "B",
+          "analysis": "在html中网页可以看成一个立体的空间，一个完整的页面是由很多个页面堆积形成的",
+          "score": 5
+        },
+        {
+          "question": "下面有关浏览器中使用js跨域获取数据的描述，说法错误的是？",
+          "answerA": "域名、端口相同，协议不同，属于相同的域",
+          "answerB": "js可以使用jsonp进行跨域",
+          "answerC": "通过修改document.domain来跨子域",
+          "answerD": "使用window.name来进行跨域",
+          "rightAnswer": "A",
+          "analysis": "只要 协议 、 域名 、 端口 有任何一个 不同, 都被当作是 不同 的域。",
+          "score": 5
+        },
+        {
+          "question": "下面符合一个有效的javascript变量定义规则的是？",
+          "answerA": "_$te$t2",
+          "answerB": "with",
+          "answerC": "a bc",
+          "answerD": "2a",
+          "rightAnswer": "A",
+          "analysis": "变量名称一定不能是 保留字。 ",
+          "score": 5
+        },
+        {
+          "question": "下面有关javascript系统方法的描述，错误的是？",
+          "answerA": "parseFloat方法：该方法将一个字符串转换成对应的小数",
+          "answerB": "isNaN方法：该方法用于检测参数是否为数值型，如果是，返回true，否则，返回false。",
+          "answerC": "escape方法： 该方法返回对一个字符串编码后的结果字符串",
+          "answerD": "eval方法：该方法将某个参数字符串作为一个JavaScript执行",
+          "rightAnswer": "B",
+          "analysis": "NaN,即非数值（Not a Number）是一个特殊的数值，这个数值用来表示一个本来要返回数值的操作数未返回数值的情况（这样就不会抛出错误了）。",
+          "score": 5
+        },
+        {
+          "question": "下面有关javascript常见事件的触发情况，描述错误的是？",
+          "answerA": "onmousedown：某个鼠标按键被按下",
+          "answerB": "onkeypress：某个键盘的键被按下或按住",
+          "answerC": "onblur：元素获得焦点",
+          "answerD": "onchange：用户改变域的内容",
+          "rightAnswer": "C",
+          "analysis": "onBlur:当失去输入焦点后产生该事件，onFocus:当输入获得焦点后，产生该文件，onchange:当文字值改变时，产生该事件，onselect:当文字加亮后，产生该事件",
+          "score": 5
+        },
+        {
+          "question": "下面有关HTML的Doctype和严格模式与混杂模式的描述，错误的是？",
+          "answerA": "<!DOCTYPE> 声明位于文档中的最前面，处于<html>标签之前。告知浏览器的解析器，用什么文档类型 规范来解析这个文档",
+          "answerB": "在标准模式中，浏览器根据规范呈现页面；在混杂模式中，页面以一种比较宽松的向后兼容的方式显示",
+          "answerC": "DOCTYPE不存在或格式不正确会导致文档以标准模式呈现",
+          "answerD": "浏览器根据DOCTYPE是否存在以及使用的哪种DTD来选择要使用的呈现方法",
+          "rightAnswer": "C",
+          "analysis": "1.<!DOCTYPE> 声明位于文档中的最前面，处于 <html> 标签之前。告知浏览器的解析器，用什么文档类型 规范来解析这个文档。2.严格模式的排版和 JS 运作模式是 以该浏览器支持的最高标准运行。在混杂模式中，页面以宽松的向后兼容的方式显示。模拟老式浏览器的行为以防止站点无法工作。",
+          "score": 5
+        },
+        {
+          "question": "下面有关JavaScript中 call和apply的描述，错误的是？",
+          "answerA": "call与apply都属于Function.prototype的一个方法，所以每个function实例都有call、apply属性",
+          "answerB": "两者传递的参数不同，call函数第一个参数都是要传入给当前对象的对象，apply不是",
+          "answerC": "apply传入的是一个参数数组，也就是将多个参数组合成为一个数组传入",
+          "answerD": "call传入的则是直接的参数列表。call 方法可将一个函数的对象上下文从初始的上下文改变为由 thisObj 指定的新对象。",
+          "rightAnswer": "B",
+          "analysis": "相同点:两个方法产生的 作用是完全一样的，不同点:方法传递的参数不同",
+          "score": 5
+        },
+        {
+          "question": "下述有关border:none以及border:0的区别，描述错误的是？ ",
+          "answerA": "border:none表示边框样式无",
+          "answerB": "border:0表示边框宽度为0",
+          "answerC": "当定义了border:none，即隐藏了边框的显示，实际就是边框宽度为0",
+          "answerD": "当定义边框时，仅设置边框宽度也可以达到显示的效果",
+          "rightAnswer": "C",
+          "analysis": "定义边框时，除了设置宽度外，还必须设置边框的样式才能显示出来。",
+          "score": 5
+        },
+        {
+          "question": "下面有关CSS sprites说法错误的是？",
+          "answerA": "允许你将一个页面涉及到的所有零星图片都包含到一张大图中去",
+          "answerB": "利用CSS的“background-image”，“background-repeat”，“background-position”的组合进行背景定位",
+          "answerC": "CSS Sprites虽然增加了总的图片的字节，但是很好地减少网页的http请求，从而大大的提高页面的性能",
+          "answerD": "CSS Sprites整理起来更为方便，同一个按钮不同状态的图片也不需要一个个切割出来并个别命名",
+          "rightAnswer": "C",
+          "analysis": "CSS Sprites在国内很多人叫css精灵，是一种网页图片应用处理方式。它允许你将一个页面涉及到的所有零星图片都包含到一张大图中去，这样一来，当访问该页面时，载入的图片就不会像以前那样一幅一幅地慢慢显示出来了。",
+          "score": 5
+        },
+        {
+          "question": "下面列出的浏览器，无webkit内核的是()",
+          "answerA": "chrome",
+          "answerB": "Safari",
+          "answerC": "搜狗浏览器",
+          "answerD": "firefox",
+          "rightAnswer": "D",
+          "analysis": "Wekbit是一个开源的Web浏览器引擎，也就是浏览器的内核。Apple的Safari, Google的Chrome, Nokia S60平台的默认浏览器，Apple手机的默认浏览器，Android手机的默认浏览器均采用的Webkit作为器浏览器内核。Webkit的采用程度由 此可见一斑，理所当然的成为了当今主流的三大浏览器内核之一。另外两个分别是Gecko和Trident，大名鼎鼎的Firefox便是使用的Gecko 内核，而微软的IE系列则使用的是Trident内核。另外，搜狗浏览器是双核的，双核并不是指一个页面由2个内核同时处理,而是所有网页（通常是标准通用标记语言的应用超文本标记语言）由webkit内核处理,只有银行网站用IE内核",
+          "score": 5
+        },
+        {
+          "question": "嵌入在HTML文档中的图像格式错误的是？",
+          "answerA": "*.gif",
+          "answerB": "*.tif",
+          "answerC": "*.bmp",
+          "answerD": "*.jpg",
+          "rightAnswer": "B",
+          "analysis": "网页html文档支持的图片格式有jpg, gif, png 和 bmp 这四种，jpg gif 和 png 格式的图片特点是体积很小，因为在网上很常见，然而 bmp就不常见了，因为这种格式虽然很清晰色彩丰富，但是所占内存很大，所以很少见，但是也是支持的。一共这4种。",
+          "score": 5
+        },
+        {
+          "question": "以下属于行内标签的是()",
+          "answerA": "p",
+          "answerB": "img",
+          "answerC": "ul",
+          "answerD": "form",
+          "rightAnswer": "B",
+          "analysis": "img是行内块元素，此题有问题",
+          "score": 5
+        },
+        {
+          "question": "请选择产生粗体字的 HTML 标签：",
+          "answerA": "<bold>",
+          "answerB": "<bb>",
+          "answerC": "<b>",
+          "answerD": "<bld>",
+          "rightAnswer": "C",
+          "analysis": "html语言中加粗的标签有<b>和<strong>,或者使用css设置｛font-weight:bold｝",
+          "score": 5
+        }
+      ]
+    }
+  },
+  {
+    "companyId": "noId",
+    "companyName": "noName",
+    "themeImageUrl": "https://uploadfiles.nowcoder.com/images/20191109/59_1573270982162_AB01B3F9FAB7041C502A7024BD12462D",
+    "themeTitle": "算法工程师能力评估",
+    "tagType": "software",
+    "years": "2020",
+    "hot": 100,
+    "rate": 5,
+    "post": "算法工程师",
+    "questionLists": {
+      "chooseLists": [
+        {
+          "question": "下列关于树的宽度优先搜索算法描述错误的是?",
+          "answerA": "从根节点开始，沿着树的宽度遍历树的节点。如果所有节点均被访问，则算法中止",
+          "answerB": "常采用先进后出的栈来实现算法",
+          "answerC": "空间的复杂度为O(V+E)，因为所有节点都必须被储存，其中V是节点的数量，E是边的数量",
+          "answerD": "时间复杂度为O(V+E)，因为必须寻找所有到可能节点的所有路径，其中V是节点的数量，E是边的数量",
+          "rightAnswer": "B",
+          "analysis": "宽度优先遍历用队列，深度优先遍历用栈",
+          "score": 5
+        },
+        {
+          "question": "在有序表(12,24,36,48,60,72,84)中二分查找关键字72时所需进行的关键字比较次数是多少？",
+          "answerA": "1",
+          "answerB": "2",
+          "answerC": "3",
+          "answerD": "4",
+          "rightAnswer": "B",
+          "analysis": "采用二分搜索时取中间值即48进行比较，显然48小于72。所以搜索范围变为48的右侧。然后同理取中间值72进行比较，得到结果程序结束。所以比较了两次",
+          "score": 5
+        },
+        {
+          "question": "下面关于B-和B+树的叙述中，不正确的是",
+          "answerA": "B-树和B+树都是平衡的多叉树",
+          "answerB": "B-树和B+树都可用于文件的索引结构",
+          "answerC": "B-树和B+树都能有效地支持顺序检索",
+          "answerD": "B-树和B+树都能有效地支持随机检索",
+          "rightAnswer": "C",
+          "analysis": "B树的定义是这样的，一棵m阶的B树满足下列条件：(1)每个结点至多有m棵子树；(2)除根结点外，其他每个非叶子结点至少有m/2棵子树；(3)若根结点不是叶子结点，则至少有两棵子树；(4)所有叶结点在同一层上。",
+          "score": 5
+        },
+        {
+          "question": "具有3个结点的二叉树有几种形态？",
+          "answerA": "4",
+          "answerB": "5",
+          "answerC": "6",
+          "answerD": "7",
+          "rightAnswer": "B",
+          "analysis": "这是个卡塔兰数应用，把没使用节点看做0  使用了节点看做1  最后看出现的形状",
+          "score": 5
+        },
+        {
+          "question": "已知一棵二叉树前序遍历和中序遍历分别为ABDEGCFH和DBGEACHF，则该二叉树的后序遍历为多少？",
+          "answerA": "DGEBFHAC",
+          "answerB": "DGEBHFCA",
+          "answerC": "DEGHBFCA",
+          "answerD": "DEGBHACF",
+          "rightAnswer": "B",
+          "analysis": "前序遍历确定",
+          "score": 5
+        },
+        {
+          "question": "已知数据表A中每个元素距其最终位置不远，为节省时间排序，应采用什么方法排序？",
+          "answerA": "堆排序",
+          "answerB": "插入排序",
+          "answerC": "快速排序",
+          "answerD": "直接选择排序",
+          "rightAnswer": "B",
+          "analysis": "插入排序：如果平均每个元素离最终位置相距c个元素，则其复杂度为O(cn)，一共n趟，每次比较c次；",
+          "score": 5
+        },
+        {
+          "question": "将N条长度均为M的有序链表进行合并，合并以后的链表也保持有序，时间复杂度为()?",
+          "answerA": "O(N * M * logN)",
+          "answerB": "O(N*M)",
+          "answerC": "O(N)",
+          "answerD": "O(M)",
+          "rightAnswer": "A",
+          "analysis": "建堆只建一次，复杂度为O(N)；调整堆MN-1次，复杂度为(MN-1)*O(lg N)。所以为O(MN*lg N)",
+          "score": 5
+        },
+        {
+          "question": "T(n) = 25T(n/5)+n^2的时间复杂度？",
+          "answerA": "O(n^2*(lgn))",
+          "answerB": "O(n^2)",
+          "answerC": "O(lgn)",
+          "answerD": "O(n*n*n)",
+          "rightAnswer": "A",
+          "analysis": "根据主方法，有T(n) = aT(n/b)+O(n^d), 则a=5^(2k), b=5k, d=2, a=b^d。所以T(n)=O(n^d*(lgn))=O(n^2(lgn)).",
+          "score": 5
+        },
+        {
+          "question": "连续自然数之和为1000的共有几组？（m，n都为自然数，单独1个数也算作“连续自然数”）",
+          "answerA": "3",
+          "answerB": "4",
+          "answerC": "5",
+          "answerD": "8",
+          "rightAnswer": "B",
+          "analysis": "设从n加到m和为1000,则(n+m)(m-n+1)/2=1000,即(n+m)(m-n+1）=2000，即把2000分解成两个数的乘积，且这两个数为一奇一偶。2000=（2^4）*（5^3）,于是奇数可能为5^0,5^1,5^2,5^3,即有四组解",
+          "score": 5
+        },
+        {
+          "question": "一个有序数列，序列中的每一个值都能够被2或者3或者5所整除，这个序列的初始值从1开始，但是1并不在这个数列中。求第1500个值是多少？",
+          "answerA": "2040",
+          "answerB": "2042",
+          "answerC": "2045",
+          "answerD": "2050",
+          "rightAnswer": "C",
+          "analysis": "设x个数，x/2+x/3+x/5-x/6-x/10-x/15+x/30=1500解出来就行",
+          "score": 5
+        },
+        {
+          "question": "写出a*(b-c*d)+e-f/g*(h+i*j-k)的逆波兰表达式。",
+          "answerA": "a(b-c*d)*+e-(f/g(h+i*j-k)*)",
+          "answerB": "a(b-(cd*))*+e-(fg/(h+ij*-k)*)",
+          "answerC": "a(bcd*-)*+e-(fg/hij*+k-*)",
+          "answerD": "abcd*-*e+fg/hij*+k-*-",
+          "rightAnswer": "D",
+          "analysis": "本题可以快速求解，显然逆波兰式中不存在括号，所以必然为D",
+          "score": 5
+        },
+        {
+          "question": "下列关于线性表，二叉平衡树，哈希表存储数据的优劣描述错误的是？",
+          "answerA": "哈希表是一个在时间和空间上做出权衡的经典例子。",
+          "answerB": "线性表实现相对比较简单",
+          "answerC": "平衡二叉树的各项操作的时间复杂度为O（logn）",
+          "answerD": "平衡二叉树的插入节点比较快",
+          "rightAnswer": "D",
+          "analysis": "在平衡二叉树中插入结点要随时保证插入后整棵二叉树是平衡的，所以可能需要通过一次或多次树旋转来重新平衡这个树",
+          "score": 5
+        },
+        {
+          "question": "如果一个堆栈的入栈序列是A,B,C,D,E,则堆栈的不可能输出顺序是()",
+          "answerA": "EDCBA",
+          "answerB": "DECBA",
+          "answerC": "DCEAB",
+          "answerD": "ABCDE",
+          "rightAnswer": "C",
+          "analysis": "规律：某数a右侧比a小的数构成的子列必须严格降序",
+          "score": 5
+        },
+        {
+          "question": "若以{4,5,6,7,8}作为叶子结点的权值构造哈夫曼树，则其带权路径长度是()",
+          "answerA": "24",
+          "answerB": "30",
+          "answerC": "53",
+          "answerD": "69",
+          "rightAnswer": "D",
+          "analysis": "（4+5）*3+（6+7+8）*2=27+42=69",
+          "score": 5
+        },
+        {
+          "question": "设某颗二叉树中有360个结点，则该二叉树的最小高度是？(包括根节点)",
+          "answerA": "10",
+          "answerB": "9",
+          "answerC": "8",
+          "answerD": "7",
+          "rightAnswer": "B",
+          "analysis": "深度为h的二叉树最多有2^h-1个节点，因此h最小取9",
+          "score": 5
+        },
+        {
+          "question": "从网络纵深防护的角度看，下面哪一项起到第一道网络安全防线的作用()",
+          "answerA": "Web应用防火墙",
+          "answerB": "杀毒软件",
+          "answerC": "网络ACL策略",
+          "answerD": "IDS/IPS",
+          "rightAnswer": "C",
+          "analysis": "网络ACL策略起到第一道网络安全防线的作用",
+          "score": 5
+        },
+        {
+          "question": "下列算法中哪一种采用了非对称加密技术()",
+          "answerA": "BASE64",
+          "answerB": "RSA",
+          "answerC": "rot13",
+          "answerD": "3DES",
+          "rightAnswer": "B",
+          "analysis": "RSA采用了非对称加密技术",
+          "score": 5
+        },
+        {
+          "question": "下列关于线性回归分析中的残差（Residuals）说法正确的是？",
+          "answerA": "残差均值总是为零",
+          "answerB": "残差均值总是小于零",
+          "answerC": "残差均值总是大于零",
+          "answerD": "其他说法都不对",
+          "rightAnswer": "A",
+          "analysis": "线性回归中的残差服从均值为0的正态分布",
+          "score": 5
+        },
+        {
+          "question": "四个二维平面最多可以把一个三维空间分割成多少份？",
+          "answerA": "12",
+          "answerB": "14",
+          "answerC": "15",
+          "answerD": "16",
+          "rightAnswer": "C",
+          "analysis": "线分平面：[n(n+1)]/2+1，平面分空间：(n^3+5n+6)/6",
+          "score": 5
+        },
+        {
+          "question": "关于如何防止模型过拟合，错误的是？",
+          "answerA": "增加训练集的数据量",
+          "answerB": "使用droupout",
+          "answerC": "使用BatchNorm",
+          "answerD": "增加训练迭代的次数",
+          "rightAnswer": "D",
+          "analysis": "增加训练次数有可能导致过拟合",
+          "score": 5
+        }
+      ]
+    }
+  },
+  {
+    "companyId": "noId",
+    "companyName": "noName",
+    "themeImageUrl": "https://uploadfiles.nowcoder.com/images/20191109/59_1573270991126_23230194E64FD17881C425D8A8B2282E",
+    "themeTitle": "运维工程师能力评估",
+    "tagType": "software",
+    "years": "2020",
+    "hot": 100,
+    "rate": 5,
+    "post": "运维工程师",
+    "questionLists": {
+      "chooseLists": [
+        {
+          "question": "下列不是Linux系统进程类型的是。",
+          "answerA": "交互进程",
+          "answerB": "批处理进程",
+          "answerC": "守护进程",
+          "answerD": "就绪进程",
+          "rightAnswer": "D",
+          "analysis": "Linux操作系统包括三种不同类型的进程，每种进程都有自己的特点和属性。1.交互进程——由一个shell启动的进程。交互进程既可以在前台运行，也可以在后台运行。 2.批处理进程——这种进程和终端没有联系，是一个进程序列。 3.监控进程（也称守护进程）——Linux系统启动时启动的进程，并在后台运行。",
+          "score": 5
+        },
+        {
+          "question": "Linux文件权限一共10 位长度，分成四段，第三段表示的内容是。",
+          "answerA": "文件类型",
+          "answerB": "文件所有者的权限",
+          "answerC": "文件所有者所在组的权限",
+          "answerD": "其他用户的权限",
+          "rightAnswer": "C",
+          "analysis": "文件类型/文件所有者权限/文件所有者所在组的权限/ 其他用户的权限",
+          "score": 5
+        },
+        {
+          "question": "终止一个前台进程可能用到的命令和操作",
+          "answerA": "kill",
+          "answerB": "ctrl+c",
+          "answerC": "shut down",
+          "answerD": "halt",
+          "rightAnswer": "B",
+          "analysis": "kill是杀死进程，Ctrl+c是终止进程",
+          "score": 5
+        },
+        {
+          "question": "在使用mkdir命令创建新的目录时，在其父目录不存在时先创建父目录的选项是",
+          "answerA": "-m",
+          "answerB": "-d",
+          "answerC": "-f",
+          "answerD": "-p",
+          "rightAnswer": "D",
+          "analysis": "p --parent 可以一次建立多个目录，并且如果所指定的路径中有些父目录不存在，自动新建它们",
+          "score": 5
+        },
+        {
+          "question": "一个文件名字为rr.Z，可以用来解压缩的命令是：",
+          "answerA": "tar",
+          "answerB": "gzip",
+          "answerC": "compress",
+          "answerD": "uncompress",
+          "rightAnswer": "D",
+          "analysis": "uncompress：解压缩.Z文件",
+          "score": 5
+        },
+        {
+          "question": "文件exer1 的访问权限为rw-r--r-- ，现要增加所有用户的执行权限和同组用户的写权限，下列命令正确的是",
+          "answerA": "chmod a+x,g+w exer1",
+          "answerB": "chmod 775 exer1",
+          "answerC": "chmodo+x exer1",
+          "answerD": "chmodg+w exer1",
+          "rightAnswer": "A",
+          "analysis": "chmod a+x g+w exer1",
+          "score": 5
+        },
+        {
+          "question": "关闭linux系统（不重新启动）可使用命令。",
+          "answerA": "Ctrl+Alt+Del",
+          "answerB": "halt",
+          "answerC": "shutdown -r now",
+          "answerD": "reboot",
+          "rightAnswer": "B",
+          "analysis": "halt就是调用shutdown -h。halt执行时﹐杀死应用进程﹐执行sync系统调用﹐文件系统写操作完成后就会停止内核。",
+          "score": 5
+        },
+        {
+          "question": "在日常管理中，通常CPU 会影响系统性能的情况是：",
+          "answerA": "CPU已满负荷地运转",
+          "answerB": "CPU 的运行效率为30%",
+          "answerC": "CPU的运行效率为50%",
+          "answerD": "CPU 的运行效率为80%",
+          "rightAnswer": "A",
+          "analysis": "只要cpu没满，性能瓶颈就不在cpu这里",
+          "score": 5
+        },
+        {
+          "question": "若一台计算机的内存为128MB ，则交换分区的大小通常是",
+          "answerA": "64MB",
+          "answerB": "128MB",
+          "answerC": "256MB",
+          "answerD": "512MB",
+          "rightAnswer": "C",
+          "analysis": "交换分区一般物理内存的2倍",
+          "score": 5
+        },
+        {
+          "question": "Samba 服务器的配置文件是",
+          "answerA": "httpd.conf",
+          "answerB": "inetd.conf",
+          "answerC": "rc.samba",
+          "answerD": "smb.conf",
+          "rightAnswer": "D",
+          "analysis": "Samba是在Linux和UNIX系统上实现SMB协议的一个免费软件，由服务器及客户端程序构成。SMB（Server Messages Block，信息服务块）是一种在局域网上共享文件和打印机的一种通信协议。",
+          "score": 5
+        },
+        {
+          "question": "Linux 有三个查看文件的命令，若希望在查看文件内容过程中可以用光标上下移动来查看文件内容，应使用命令。",
+          "answerA": "cat",
+          "answerB": "more",
+          "answerC": "less",
+          "answerD": "menu",
+          "rightAnswer": "C",
+          "analysis": "cat,less,more都可以查看，只是查看的方式不一样，less可以让光标上下移动，more只能用enter键往下翻，cat的话直接跳到最后一页了",
+          "score": 5
+        },
+        {
+          "question": "建立动态路由需要用到的文件有",
+          "answerA": "/etc/hosts",
+          "answerB": "/etc/HOSTNAME",
+          "answerC": "/etc/resolv.conf",
+          "answerD": "/etc/gateways",
+          "rightAnswer": "D",
+          "analysis": "动态路由器上的路由表项是通过相互连接的路由器之间交换彼此信息，然后按照一定的算法优化出来的。",
+          "score": 5
+        },
+        {
+          "question": "下面对www 和ftp的端口描述正确的是",
+          "answerA": "20 21",
+          "answerB": "80 20",
+          "answerC": "80 21",
+          "answerD": "80,20 21",
+          "rightAnswer": "D",
+          "analysis": "HTTP有3个端口即：80端口(默认访问端口)  8080端口 443端口(ssl加密) 主动连接是20 被动连接是21",
+          "score": 5
+        },
+        {
+          "question": "下面对linux下mysqldump备份命令及参数描述正确的是",
+          "answerA": "mysqldump -h ip -uroot -p DBNAME >bck.sql",
+          "answerB": "mysqldump -Pip -hDBNAME>bck.sql",
+          "answerC": "mysqldump -uip -P DBNAME>bck.sql",
+          "answerD": "mysqldump -h ip -uDBNAME>bck.sql",
+          "rightAnswer": "A",
+          "analysis": "-h表示主机名或I",
+          "score": 5
+        },
+        {
+          "question": "将/home/stud1/wang目录做归档压缩，压缩后生成wang.tar.gz 文件，并将此文件保存到/home 目录下，实现此任务的tar 格式为",
+          "answerA": "tar zcvf /home/wang.tar.gz /home/stud1/wang",
+          "answerB": "tar xcvf /home/stud1/wang /home/wang",
+          "answerC": "tar zcv /home/stud1/wang /home/wang",
+          "answerD": "tar zcvf /home/stud1/wang /home/wang.tar.gz",
+          "rightAnswer": "A",
+          "analysis": "option z表示压缩，所以才有后面的.gz， c表示创建这个压缩包，v是可视，能看到其打包和压缩的过程，f表示文件",
+          "score": 5
+        },
+        {
+          "question": "shell不仅仅是用户命令解释器，同时一种强大的编程语言，linux缺省的shell是什么",
+          "answerA": "bash",
+          "answerB": "ruby",
+          "answerC": "PHP",
+          "answerD": "perl",
+          "rightAnswer": "A",
+          "analysis": "linux中，shell缺省的是bash",
+          "score": 5
+        },
+        {
+          "question": "增加一个用户的命令是什么",
+          "answerA": "useradd",
+          "answerB": "usermod",
+          "answerC": "groupadd",
+          "answerD": "userdel",
+          "rightAnswer": "A",
+          "analysis": "useradd 增加用户,usermod 修改用户账号信息,groupadd 添加组账号userdel 删除用户",
+          "score": 5
+        },
+        {
+          "question": "为脚本程序指定执行权限命令的参数为",
+          "answerA": "chmod +x filename.sh",
+          "answerB": "chown +x filename.sh",
+          "answerC": "chmod +w filename.sh",
+          "answerD": "chown +r filename.sh",
+          "rightAnswer": "A",
+          "analysis": "可以这么看chmod,拆开是ch modify是修改之意，chown拆开是ch own是修改拥有者之意。r读w写x执行，另外还有一些特殊权限suid，sgid,sbit,用s,s,t表示的哦",
+          "score": 5
+        },
+        {
+          "question": "当内网内没有条件建立dns服务器，又不想用IP访问网站，应配置什么文件",
+          "answerA": "hosts",
+          "answerB": "sysconfig",
+          "answerC": "network",
+          "answerD": "hostname",
+          "rightAnswer": "A",
+          "analysis": "hosts文件是Li",
+          "score": 5
+        },
+        {
+          "question": "在linux系统中，用来存放系统所需要的配置文件和子目录是",
+          "answerA": "/etc",
+          "answerB": "/var",
+          "answerC": "/root",
+          "answerD": "/home",
+          "rightAnswer": "A",
+          "analysis": "/etc目录用来存放配置信息",
+          "score": 5
+        }
+      ]
+    }
+  },
+  {
+    "companyId": "noId",
+    "companyName": "noName",
+    "themeImageUrl": "https://uploadfiles.nowcoder.com/images/20191109/59_1573270996663_11FF950FE370A5351306402006DF24FE",
+    "themeTitle": "测试工程师能力评估",
+    "tagType": "software",
+    "years": "2020",
+    "hot": 100,
+    "rate": 5,
+    "post": "测试工程师",
+    "questionLists": {
+      "chooseLists": [
+        {
+          "question": "下列哪项是判定/条件覆盖的特点()",
+          "answerA": "判定中每个条件的所有可能结果至少出现一次，每个判定本身所有可能结果也至少出现一次",
+          "answerB": "判定中每个条件获得所有可能的结果",
+          "answerC": "每个判定所有可能结果至少出现一次",
+          "answerD": "覆盖程序中所有可能的路径",
+          "rightAnswer": "A",
+          "analysis": "题目是条件和判定，条件是必须要出现一次的，所以出现了条件所以判定也会实现一次",
+          "score": 5
+        },
+        {
+          "question": "使用语句覆盖对下列代码(public  static void Test(int a, int b, int c) {if ((a > 1) && (c == 0)) b = b / a; if ((a == 1) && (b > 1)) b = b + 1;})进行测试用例设计时，需要设计()个测试用例",
+          "answerA": "1",
+          "answerB": "2",
+          "answerC": "3",
+          "answerD": "4",
+          "rightAnswer": "B",
+          "analysis": "由于a>1和a==1不可能同时成立，因此两个执行语句无法通过一组取值而同时执行，因此，需要两次。",
+          "score": 5
+        },
+        {
+          "question": "测试用例设计的方法有()",
+          "answerA": "等价类、边界值",
+          "answerB": "预置条件",
+          "answerC": "业务流程图",
+          "answerD": "依照测试点，写预期结果",
+          "rightAnswer": "A",
+          "analysis": "测试用例常见的设计方法有：等价类划分法、边界值分析法、错误推测法、判定表法、正交实验法。",
+          "score": 5
+        },
+        {
+          "question": "下述()不属于单元测试",
+          "answerA": "全局数据结构是否有问题",
+          "answerB": "逻辑覆盖、循环覆盖",
+          "answerC": "代码评审、代码走查",
+          "answerD": "景泰数据流分析",
+          "rightAnswer": "A",
+          "analysis": "单元测试的策略：逻辑覆盖、循环覆盖、同行评审、桌前检查、代码走查、代码评审、景泰数据流分析",
+          "score": 5
+        },
+        {
+          "question": "2元地铁票售票软件：投币2元时，按下“2元”按钮，弹出相应地铁票；投币5元，则弹出地铁票同时退还3元，若对该功能进行测试用例设计最宜选择哪种方法()",
+          "answerA": "等价类划分法",
+          "answerB": "边界值分析",
+          "answerC": "错误推测法",
+          "answerD": "因果图",
+          "rightAnswer": "D",
+          "analysis": "因果图是从需求中找出因（输入条件）和果（输出或程序改变的状态），通过因果图转化为判定表。 1.输入条件之间的关系（组合、约束） 2.输入与输出的关系 3.输出条件的关系",
+          "score": 5
+        },
+        {
+          "question": "在执行集成测试阶段，产生输出的是()",
+          "answerA": "集成测试用例",
+          "answerB": "集成测试代码",
+          "answerC": "集成测试脚本",
+          "answerD": "集成测试报告",
+          "rightAnswer": "D",
+          "analysis": "测试报告中要记录实际的测试结果、在测试中发现的问题、解决这些问题的方法以及解决之后再次测试的结果。此外还应提出不能解决、还需要管理人员和开发人员注意的一些问题，提供测试评审和最终决策，以提出处理意见。",
+          "score": 5
+        },
+        {
+          "question": "白盒测试方法不包括()",
+          "answerA": "语句覆盖",
+          "answerB": "条件覆盖、判定/条件覆盖、条件组合覆盖",
+          "answerC": "路径覆盖",
+          "answerD": "边界值测试",
+          "rightAnswer": "D",
+          "analysis": "边界值是属于黑盒测试方法",
+          "score": 5
+        },
+        {
+          "question": "下面哪些属于动态分析()",
+          "answerA": "代码覆盖率",
+          "answerB": "模块功能检查",
+          "answerC": "系统功能测试",
+          "answerD": "程序数据流分析",
+          "rightAnswer": "B",
+          "analysis": "动态测试方法是指通过运行被测程序，检查运行结果与预期结果的差异，并分析运行效率、正确性和健壮性等性能。这种方法由三部分组成：构造测试用例、执行程序、分析程序的输出结果。",
+          "score": 5
+        },
+        {
+          "question": "一下不是单元测试主要技术手段的是()",
+          "answerA": "驱动代码",
+          "answerB": "Stub代码",
+          "answerC": "Mock代码",
+          "answerD": "GUI测试手段",
+          "rightAnswer": "D",
+          "analysis": "GUI测试手段是系统测试手段",
+          "score": 5
+        },
+        {
+          "question": "下面几种白盒测试技术，哪种是最强的覆盖准则()",
+          "answerA": "语句覆盖",
+          "answerB": "条件覆盖",
+          "answerC": "判定覆盖",
+          "answerD": "条件组合覆盖",
+          "rightAnswer": "D",
+          "analysis": "只针对程序逻辑中显式存在的语句。如果if结构中没有给出else后的执行分支，语句覆盖就不会考虑这种情况。语句覆盖对多分支的逻辑运算是无法全面反映的，只在乎运行一次，不考虑其他情况。",
+          "score": 5
+        },
+        {
+          "question": "以下程序至少需要（ ）个测试用例，才可以满足判断覆盖 if（x && y）{....} else{....}",
+          "answerA": "1",
+          "answerB": "2",
+          "answerC": "3",
+          "answerD": "4",
+          "rightAnswer": "B",
+          "analysis": "条件语句+1即获得测试用例数量",
+          "score": 5
+        },
+        {
+          "question": "在以下测试阶段中，()主要依据是系统设计文档",
+          "answerA": "单元测试",
+          "answerB": "集成测试",
+          "answerC": "系统测试",
+          "answerD": "验收测试",
+          "rightAnswer": "C",
+          "analysis": "单元测试是针对软件的详细设计做的测试，测试用例的主要 依据 也是详细设计。而集成测试是针对软件的概括设计做的测试，测试用例的主要 依据 则是概括设计。",
+          "score": 5
+        },
+        {
+          "question": "下面叙述中错误的是()",
+          "answerA": "软件测试的目的是发现错误并改正错误",
+          "answerB": "对被调试的程序进行“错误定位”是程序调试的必要步骤",
+          "answerC": "程序调试通常也称为Debug",
+          "answerD": "软件测试应严格执行测试计划，排除测试的随意性",
+          "rightAnswer": "A",
+          "analysis": "软件测试的目的是发现缺陷和预防缺陷",
+          "score": 5
+        },
+        {
+          "question": "下面有关白盒测试和黑盒测试说法错误的有？",
+          "answerA": "白盒测试也称结构测试或逻辑驱动测试，是指基于一个应用代码的内部逻辑知识，即基于覆盖全部代码、分支、路径、条件的测试。",
+          "answerB": "黑盒测试也称功能测试或数据驱动测试，它是在已知产品所应具有的功能，通过测试来检测每个功能是否都能正常使用",
+          "answerC": "黑盒测试，也称作黑盒分析，是基于对程序内部细节有限认知上的软件调试方法",
+          "answerD": "黑盒测试与白盒测试相比，更需要关心模块与模块之间的交互",
+          "rightAnswer": "C",
+          "analysis": "灰盒测试， 也称作灰盒分析，是基于对程序内部细节有限认知上的软件调试方法",
+          "score": 5
+        },
+        {
+          "question": "集成测试分为渐增组装测试和()",
+          "answerA": "非渐增组装测试",
+          "answerB": "确认测试",
+          "answerC": "单元测试",
+          "answerD": "测试计划",
+          "rightAnswer": "A",
+          "analysis": "渐增组装测试，是测完一个再加上一个一起测试。 非渐增组装测试，是一个一个的测试。",
+          "score": 5
+        },
+        {
+          "question": "既可以用于黑盒测试，也可以用于白盒测试的方法的是()",
+          "answerA": "逻辑覆盖法",
+          "answerB": "边界值法",
+          "answerC": "基本路径法",
+          "answerD": "正交试验设计法",
+          "rightAnswer": "B",
+          "analysis": "白盒测试是根据内部逻辑进行测试，所以在我们知道了内部具体代码实现后，可以根据代码的边界值判断处理来进行测试。黑盒测试不用说，边界值测试本就是测试的一种方法。",
+          "score": 5
+        },
+        {
+          "question": "对于软件的β测试，下列描述正确的是()",
+          "answerA": "β测试就是在软件公司内部展开的测试，由公司专业的测试人员执行的测试",
+          "answerB": "β测试就是在软件公司内部展开的测试，由公司的非专业测试人员执行的测试",
+          "answerC": "β测试就是在软件公司外部展开的测试，由专业的测试人员执行的测试",
+          "answerD": "β测试就是在软件公司外部展开的测试，可以由非专业的测试人员执行的测试",
+          "rightAnswer": "D",
+          "analysis": "β是第二个阶段，已经消除了软件中大部分的不完善之处，但仍有可能还存在缺陷和漏洞，一般只提供给特定的用户群来测试使用",
+          "score": 5
+        },
+        {
+          "question": "下面个不属于静态分析()",
+          "answerA": "编码规则检查",
+          "answerB": "程序结构分析",
+          "answerC": "程序复杂度分析",
+          "answerD": "内存泄漏",
+          "rightAnswer": "D",
+          "analysis": "动态分析：运行软件代码之后;静态分析：运行软件代码之前",
+          "score": 5
+        },
+        {
+          "question": "下列哪个测试粒度最大()",
+          "answerA": "单元测试",
+          "answerB": "集成测试",
+          "answerC": "系统测试",
+          "answerD": "验收测试",
+          "rightAnswer": "D",
+          "analysis": "验收测试是软件交付前最后一个测试操作，让系统用户决定是否接收系统，考察软件的功能和性能是否如同用户期待的那样。所以是粒度最大。",
+          "score": 5
+        },
+        {
+          "question": "假定一个系统包括6个模块（ABCDEF），其中B、C、D是A的子模块，E是B的子模块、F是D的子模块,采用先深度后广度的增量测试方法，测试顺序为()",
+          "answerA": "ABCDEF",
+          "answerB": "ABCEDF",
+          "answerC": "ABECDF",
+          "answerD": "EFBCDA",
+          "rightAnswer": "C",
+          "analysis": "根据先深度后广度的测试方法应该是：A,B,E,C,D,F",
+          "score": 5
+        }
+      ]
+    }
+  },
+  {
+    "companyId": "noId",
+    "companyName": "noName",
+    "themeImageUrl": "https://uploadfiles.nowcoder.com/images/20191109/59_1573271001211_28AD21DEB4E7FBD7B88929B1D630DCC7",
+    "themeTitle": "产品经理能力评估",
+    "tagType": "software",
+    "years": "2020",
+    "hot": 100,
+    "rate": 5,
+    "post": "产品经理",
+    "questionLists": {
+      "chooseLists": [
+        {
+          "question": "产品经理的职责是：",
+          "answerA": "提出需求，并跟进开发、测试、上线整个过程",
+          "answerB": "提出需求即可",
+          "answerC": "提出需求，只跟进开发",
+          "answerD": "提出需求，只跟进测试",
+          "rightAnswer": "A",
+          "analysis": "产品经理是一个全程的角色，从前期一直到产品交付给客户。",
+          "score": 5
+        },
+        {
+          "question": "以下哪个产品的商业模式与其它选项差别最大：",
+          "answerA": "Airbnb",
+          "answerB": "Uber",
+          "answerC": "ofo",
+          "answerD": "yelp",
+          "rightAnswer": "D",
+          "analysis": "airbnb uber ofo 是共享经济模式",
+          "score": 5
+        },
+        {
+          "question": "制片方在网络大电影上的主要受益来自于：",
+          "answerA": "广告植入",
+          "answerB": "有效播放",
+          "answerC": "正片VV",
+          "answerD": "页面访问量",
+          "rightAnswer": "B",
+          "analysis": "如同院线电影，观众的有效观看数量直接决定了网络大电影合作方的收益。视频网站根据影片的有效付费点播量给合作方结算分成收益。",
+          "score": 5
+        },
+        {
+          "question": "C语言是由什么基本单位组成的：",
+          "answerA": "过程",
+          "answerB": "语句",
+          "answerC": "函数",
+          "answerD": "程序",
+          "rightAnswer": "C",
+          "analysis": "一个过程内也要有函数，所以最小是函数",
+          "score": 5
+        },
+        {
+          "question": "在SQL语言的SELECT语句中，能实现选择操作的是：",
+          "answerA": "SELECT",
+          "answerB": "FROM",
+          "answerC": "WHERE",
+          "answerD": "GROUP  BY",
+          "rightAnswer": "C",
+          "analysis": "SELECT：投影操作 WHERE：选择操作",
+          "score": 5
+        },
+        {
+          "question": "一般互联网产品都会推出积分系统，如滴滴积分，支付宝积分等等，对此类产品来讲积分的最大价值是什么？",
+          "answerA": "提升用户活跃度",
+          "answerB": "提高用户的参与度",
+          "answerC": "提升用户留存及流失成本",
+          "answerD": "提升产品的口碑",
+          "rightAnswer": "C",
+          "analysis": "用户在产品中产生积分，会有一种获得感，如果此后卸载，就会若有所失",
+          "score": 5
+        },
+        {
+          "question": "以下属于微信与微博的区别的是：",
+          "answerA": "微信是浅社交，微博是深社交。",
+          "answerB": "微信是窄传播，微博是广传播。",
+          "answerC": "微信信息呈发散性流动，微博信息点对点流动。",
+          "answerD": "微信具有开放性，微博具有封闭性。",
+          "rightAnswer": "B",
+          "analysis": "微博是广传播、浅社交、松关系。微信是窄传播、深社交、紧关系。",
+          "score": 5
+        },
+        {
+          "question": "彼之蜜糖，吾之砒霜，从需求到结论并不是一个容易的过程。以下对需求漏斗模型顺序描述正确的是：",
+          "answerA": "用户认为的需求、用户原始需求、产品经理理解的需求、用户表述的需求、需求分析结果。",
+          "answerB": "用户原始需求、用户认为的需求、用户表述的需求、产品经理理解的需求、需求分析结果。",
+          "answerC": "用户认为的需求、产品经理理解的需求、用户表述的需求、用户原始需求、需求分析结果。",
+          "answerD": "用户原始需求、产品经理理解的需求、用户认为的需求、用户表述的需求、需求分析结果。",
+          "rightAnswer": "B",
+          "analysis": "需求漏斗模型：用户原始，用户认为，用户表述，产品理解，需求分析",
+          "score": 5
+        },
+        {
+          "question": "需求金字塔不包括哪个：",
+          "answerA": "基础型需求",
+          "answerB": "期望型需求",
+          "answerC": "兴奋型需求",
+          "answerD": "功能型需求",
+          "rightAnswer": "D",
+          "analysis": "基础需求，期望需求，兴奋需求，无差异需求，反向需求",
+          "score": 5
+        },
+        {
+          "question": "以下关于竞品分析描述不恰当的是：",
+          "answerA": "维度很多，要根据具体职责和目的选择侧重点",
+          "answerB": "一定要对分析结论进行总结产出",
+          "answerC": "选择尽可能多的竞品进行分析",
+          "answerD": "尽量保持客观，避免过多主观评价",
+          "rightAnswer": "C",
+          "analysis": "竞品应当选择有代表性，与佼佼者做比较",
+          "score": 5
+        },
+        {
+          "question": "下面哪一项不属于做竞品分析的方法：",
+          "answerA": "体验法",
+          "answerB": "FAB法",
+          "answerC": "回溯法",
+          "answerD": "空雨伞",
+          "rightAnswer": "B",
+          "analysis": "FAB法是在销售中用于说服客户的一种法则。Feature、Advantage和Benefit",
+          "score": 5
+        },
+        {
+          "question": "什么是ROI()",
+          "answerA": "投资回报率",
+          "answerB": "跳失率",
+          "answerC": "跳出率",
+          "answerD": "页面浏览量",
+          "rightAnswer": "A",
+          "analysis": "投资回报率（Return On Investment，ROI）是指通过投资而应返回的价值",
+          "score": 5
+        },
+        {
+          "question": "产品数据中常说的ARPU、ARPPU指的是什么()",
+          "answerA": "ARPU指付费转化率、ARPPU指平均每用户收入",
+          "answerB": "ARPU指日新增用户数、ARPPU指日新增付费用户数",
+          "answerC": "ARPU日活跃用户数、ARPPU指日活跃付费用户数",
+          "answerD": "ARPU指平均用户收入、ARPPU平均每付费用户收入",
+          "rightAnswer": "D",
+          "analysis": "ARPU的全称是Average Revenue Per User，也就是每用户平均收入。",
+          "score": 5
+        },
+        {
+          "question": "Axure文件的后缀名是：",
+          "answerA": "html",
+          "answerB": "Rp",
+          "answerC": "rar",
+          "answerD": "docx",
+          "rightAnswer": "B",
+          "analysis": "Axure RP是一款专业的快速原型设计工具。",
+          "score": 5
+        },
+        {
+          "question": "AXURE原型设计工具中通常菱形在流程图设计中表示什么意思：",
+          "answerA": "执行",
+          "answerB": "判断",
+          "answerC": "程序的开始或结束",
+          "answerD": "数据的传递",
+          "rightAnswer": "B",
+          "analysis": "矩形：一般用作要执行的处理（process），在程序流程图中做执行框。",
+          "score": 5
+        },
+        {
+          "question": "产品需求文档的组成模块不包括哪个：",
+          "answerA": "版本信息",
+          "answerB": "产品概述",
+          "answerC": "非产品描述",
+          "answerD": "非功能性需求",
+          "rightAnswer": "C",
+          "analysis": "非功能需求指安全、性能、体验等需求",
+          "score": 5
+        },
+        {
+          "question": "以下哪个内容是在不需求文档中要体现的：",
+          "answerA": "版本号",
+          "answerB": "需求描述分析",
+          "answerC": "测试案例",
+          "answerD": "流程图",
+          "rightAnswer": "C",
+          "analysis": "需求文档是产品前期的任务，测试属于开发后期",
+          "score": 5
+        },
+        {
+          "question": "以下那列不是数据分析的主要作用：",
+          "answerA": "发现问题",
+          "answerB": "回应质疑",
+          "answerC": "指导决策",
+          "answerD": "管理项目",
+          "rightAnswer": "D",
+          "analysis": "管理不是主要作用 毕竟项目管理是一个笼统综合的动作",
+          "score": 5
+        },
+        {
+          "question": "UV和PV的数据关系通常是以下哪种：",
+          "answerA": "UV<PV",
+          "answerB": "UV>PV",
+          "answerC": "UV=PV",
+          "answerD": "大小关系不一定",
+          "rightAnswer": "A",
+          "analysis": "uv: unique visitor pv: page view 从英文角度理解~",
+          "score": 5
+        },
+        {
+          "question": "项目管理的哪个过程组花费最多的时间和资源：",
+          "answerA": "规划",
+          "answerB": "设计",
+          "answerC": "整合",
+          "answerD": "执行",
+          "rightAnswer": "D",
+          "analysis": "执行过程组：完成项目管理计划中确定的工作以实现项目目标的一组过程。",
+          "score": 5
+        }
+      ]
+    }
+  },
+  {
+    "companyId": "noId",
+    "companyName": "noName",
+    "themeImageUrl": "https://uploadfiles.nowcoder.com/images/20191109/59_1573271006463_C436A093EFFBCEECD0B94F6558875999",
+    "themeTitle": "运营岗位能力评估",
+    "tagType": "software",
+    "years": "2020",
+    "hot": 100,
+    "rate": 5,
+    "post": "运营",
+    "questionLists": {
+      "chooseLists": [
+        {
+          "question": "请选出互联网蓝海的定义：",
+          "answerA": "未知的市场空间",
+          "answerB": "已知的市场空间",
+          "answerC": "云计算的应用",
+          "answerD": "互联网用户生态",
+          "rightAnswer": "A",
+          "analysis": "蓝海是指未知的市场空间，红海则是指已知的市场空间。一般进入市场面临的选择是在蓝海中开辟新的道路或在红海中杀出一条血路，来比喻在市场空间中生存的选择。",
+          "score": 5
+        },
+        {
+          "question": "内容输出是指将站内优质内容输出至站外，促进内容传播，提升产品品牌。下列产品中符合上述定义的有：",
+          "answerA": "微头条",
+          "answerB": "微信息",
+          "answerC": "微博热榜",
+          "answerD": "简书出版",
+          "rightAnswer": "D",
+          "analysis": "热榜仅属于站内的统计，不分享到站外，也就不是内容输出了",
+          "score": 5
+        },
+        {
+          "question": "MGC（Machine-generatedContent 机器生产内容）跟以下哪种技术关联最密切：",
+          "answerA": "区块链",
+          "answerB": "量子计算",
+          "answerC": "虚拟现实",
+          "answerD": "人工智能",
+          "rightAnswer": "D",
+          "analysis": "机器。技术。ai",
+          "score": 5
+        },
+        {
+          "question": "活动运营的目标不包括：",
+          "answerA": "改善运营格局",
+          "answerB": "提升品牌",
+          "answerC": "网站推广",
+          "answerD": "促进盈利",
+          "rightAnswer": "A",
+          "analysis": "改善运营格局不是最终运营目标，问的是最后的目的",
+          "score": 5
+        },
+        {
+          "question": "一下哪个不是活动运营的分类",
+          "answerA": "营销主导型",
+          "answerB": "传播主导型",
+          "answerC": "混合型",
+          "answerD": "宣传盈利性",
+          "rightAnswer": "D",
+          "analysis": "公司的所有活动的目的就是追逐利润，所以盈利不是手段，而是目的。",
+          "score": 5
+        },
+        {
+          "question": "以下产品中，目前没有做用户成长体系的是：",
+          "answerA": "支付宝",
+          "answerB": "闲鱼",
+          "answerC": "搜狗输入法",
+          "answerD": "京东",
+          "rightAnswer": "B",
+          "analysis": "我觉得用户成长体系是指推动新用户向老用户转变的过程。",
+          "score": 5
+        },
+        {
+          "question": "对处于稳定期的产品，哪一生命周期的运营相对而言最为重要？",
+          "answerA": "拉动新增用户",
+          "answerB": "促进新用户转化",
+          "answerC": "促进老用户活跃",
+          "answerD": "流失用户召回",
+          "rightAnswer": "C",
+          "analysis": "产品稳定期，促进老用户活跃，对用户进行细分，精细化运营，最终更好地变现。",
+          "score": 5
+        },
+        {
+          "question": "MAU是指：",
+          "answerA": "日活跃用户数",
+          "answerB": "日新增用户数",
+          "answerC": "月活跃用户数",
+          "answerD": "月新增用户数",
+          "rightAnswer": "C",
+          "analysis": "month active users",
+          "score": 5
+        },
+        {
+          "question": "在SQL中哪个词不是高级查询运算词：",
+          "answerA": "UNION",
+          "answerB": "EXCEPT",
+          "answerC": "INTERSECT",
+          "answerD": "OUTPUT",
+          "rightAnswer": "D",
+          "analysis": "结构化查询语言(Structured Query Language)简称SQL。",
+          "score": 5
+        },
+        {
+          "question": "付费合作推广中，按天收费是哪个：",
+          "answerA": "CPT",
+          "answerB": "CPS",
+          "answerC": "CPC",
+          "answerD": "CPD",
+          "rightAnswer": "D",
+          "analysis": "CPD（Cost Per Day，每天成本）按天计费",
+          "score": 5
+        },
+        {
+          "question": "以下哪个不是APP推广常用的手段：",
+          "answerA": "ASO",
+          "answerB": "SEM",
+          "answerC": "积分墙",
+          "answerD": "应用市场",
+          "rightAnswer": "B",
+          "analysis": "SEM 搜索引擎营销:英文Search Engine Marketing ",
+          "score": 5
+        },
+        {
+          "question": "CRM是什么意思：",
+          "answerA": "客户关系管理",
+          "answerB": "供应商关系",
+          "answerC": "管理消费者关系",
+          "answerD": "管理前后台关系管理",
+          "rightAnswer": "A",
+          "analysis": "Customer Relationship Management 客户关系管理",
+          "score": 5
+        },
+        {
+          "question": "以下电商网站中，属于内容电商的是：",
+          "answerA": "淘宝",
+          "answerB": "京东",
+          "answerC": "小红书",
+          "answerD": "酒买网",
+          "rightAnswer": "C",
+          "analysis": "用户通过一个内容（图文、短视频、直播），发现了一个电商产品，就算内容电商。",
+          "score": 5
+        },
+        {
+          "question": "以下哪个不是公众号涨粉策略：",
+          "answerA": "增加公众号推广入口",
+          "answerB": "增加营销内容推送频率",
+          "answerC": "提升内容质量",
+          "answerD": "上线分享得优惠活动",
+          "rightAnswer": "B",
+          "analysis": "涨粉应该是说增量用户增加，而增加营销内容推送频率是提高存量客户粘度。",
+          "score": 5
+        },
+        {
+          "question": "最常用的微信公众号第三方内容编辑排版工具有哪些：",
+          "answerA": "秀米",
+          "answerB": "堆糖",
+          "answerC": "创客贴",
+          "answerD": "编辑器",
+          "rightAnswer": "A",
+          "analysis": "I排版、新榜编辑器、秀米、366编辑器、135编辑器、微信编辑器",
+          "score": 5
+        },
+        {
+          "question": "以下新媒体平台中，内容以音频为主的是：",
+          "answerA": "小程序",
+          "answerB": "企鹅号",
+          "answerC": "荔枝",
+          "answerD": "喜马拉雅FM",
+          "rightAnswer": "D",
+          "analysis": "企鹅号是腾讯旗下的一站式内容创作运营平台，也是腾讯“大内容”生态的重要入口。",
+          "score": 5
+        },
+        {
+          "question": "会员营收和哪个变量无直接关联：",
+          "answerA": "会员数",
+          "answerB": "会员单价",
+          "answerC": "会员活跃",
+          "answerD": "会员开通时长",
+          "rightAnswer": "C",
+          "analysis": "活不活跃不重要，重要的是已经是会员了",
+          "score": 5
+        },
+        {
+          "question": "一下哪个不是影响互联网广告效果的直接因素：",
+          "answerA": "广告创意",
+          "answerB": "广告代理",
+          "answerC": "广告定向人群",
+          "answerD": "广告形式",
+          "rightAnswer": "B",
+          "analysis": "因为***并不会直接和消费者接触，他是负责投放广告或者作出广告，让广告去和消费者接触。属于间接",
+          "score": 5
+        },
+        {
+          "question": "百晓生兵器榜上，“小李飞刀”位列第三，请问排名第四的是：",
+          "answerA": "嵩阳铁剑",
+          "answerB": "子母龙凤环",
+          "answerC": "天机棒",
+          "answerD": "温侯银戟",
+          "rightAnswer": "A",
+          "analysis": "4、嵩阳铁剑——郭嵩阳",
+          "score": 5
+        },
+        {
+          "question": "假设你需要对一款游戏进行内容运营，并形成一条完整的社区生态链，对于以下几点阶段目标，你认为正确的执行顺序为：1-通过高品质的宣传，博取核心用户的关注度 2-高质量大范围地覆盖各类宣传渠道 3-用户生态链的完整搭建，以UGC为主导进行稳定的发展 4-公布游戏内容，并初步进行内容社区的搭建",
+          "answerA": "1423",
+          "answerB": "4123",
+          "answerC": "4213",
+          "answerD": "1243",
+          "rightAnswer": "A",
+          "analysis": "直接记下重点：重点宣传->公布内容->大面积推广->搭建生态链",
+          "score": 5
+        }
+      ]
+    }
+  }
+]

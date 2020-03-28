@@ -1,9 +1,12 @@
 const ThemeModel = require('../models/theme')
+const theme = require('../../client/debug/theme.json')
 
 exports.getThemeList = function (accountType, companyId, searchValue, companyName, post, years, currentPage, pageNum, tagType, sortType) {
   let skipCounts = (currentPage - 1) * pageNum
   let findConditions = {}
   let sortCondition = {}
+  // 查询时候过滤掉首页的八套题
+  // findConditions.companyId = { $ne: 'noId' }
   if (accountType !== 'company' && searchValue) findConditions.themeTitle = searchValue
   if (companyId) findConditions.companyId = companyId
   if (companyName) findConditions.companyName = companyName
@@ -21,6 +24,11 @@ exports.getThemeList = function (accountType, companyId, searchValue, companyNam
     ThemeModel.find(findConditions).sort(sortCondition).skip(skipCounts).limit(pageNum),
     ThemeModel.find(findConditions).sort(sortCondition).count(true)
   ]).then(([data, total]) => {
+    // if (!data.length) {
+    //   console.log('11111')
+    //   ThemeModel.insertMany(theme)
+    //   return theme
+    // }
     return {
       data: data,
       currentPage: +currentPage,
