@@ -215,8 +215,10 @@ export default {
       ],
       addMesDialogVisible: false,
       textareaSize: { minRows: 2, maxRows: 8 },
-      bannerImg:
-        'https://uploadfiles.nowcoder.com/images/20200207/33317073_1581044632109_870880B6B4BBEBE903A9F026B639A40B',
+      bannerImg: {
+        img: 'https://uploadfiles.nowcoder.com/images/20200207/33317073_1581044632109_870880B6B4BBEBE903A9F026B639A40B',
+        url: 'https://www.baidu.com'
+      },
       disscussList: [
         '全部',
         '站内公告',

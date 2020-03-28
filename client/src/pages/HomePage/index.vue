@@ -80,11 +80,26 @@ export default {
   data () {
     return {
       swiperImgs: [
-        'https://uploadfiles.nowcoder.com/images/20191115/999991356_1573804506330_D82683B3C229BEDC46B1799DE6AD7969',
-        'https://uploadfiles.nowcoder.com/images/20191217/4107856_1576563101119_5B4556E89C61A892801B88376C6D7D72',
-        'https://uploadfiles.nowcoder.com/images/20200215/999991342_1581772325727_E3CB95122AE9DC62348FC2AF4779F8F6',
-        'https://uploadfiles.nowcoder.com/images/20191030/8030387_1572425880113_685F76A8B66169663137EEB61BFB05E8',
-        'https://uploadfiles.nowcoder.com/images/20200227/999991356_1582784877799_412F57578E7D9C9A7D523D8022845B1A'
+        {
+          img: 'https://uploadfiles.nowcoder.com/images/20191115/999991356_1573804506330_D82683B3C229BEDC46B1799DE6AD7969',
+          url: 'https://www.baidu.com'
+        },
+        {
+          img: 'https://uploadfiles.nowcoder.com/images/20191217/4107856_1576563101119_5B4556E89C61A892801B88376C6D7D72',
+          url: 'https://www.baidu.com'
+        },
+        {
+          img: 'https://uploadfiles.nowcoder.com/images/20200215/999991342_1581772325727_E3CB95122AE9DC62348FC2AF4779F8F6',
+          url: 'https://www.baidu.com'
+        },
+        {
+          img: 'https://uploadfiles.nowcoder.com/images/20191030/8030387_1572425880113_685F76A8B66169663137EEB61BFB05E8',
+          url: 'https://www.baidu.com'
+        },
+        {
+          img: 'https://uploadfiles.nowcoder.com/images/20200227/999991356_1582784877799_412F57578E7D9C9A7D523D8022845B1A',
+          url: 'https://www.baidu.com'
+        }
       ],
       fixed: false, // 左侧导航固定定位
       active: '1-1' // 轮播图默认展示页

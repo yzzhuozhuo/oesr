@@ -76,8 +76,10 @@ export default {
   data () {
     return {
       searchContent: '',
-      bannerImg:
-        'https://uploadfiles.nowcoder.com/images/20200227/339694163_1582802393641_2EA1149C6B414F2169207C5987D77BCB',
+      bannerImg: {
+        img: 'https://uploadfiles.nowcoder.com/images/20200207/33317073_1581044632109_870880B6B4BBEBE903A9F026B639A40B',
+        url: 'https://www.baidu.com'
+      },
       selectList: [
         { label: 0, name: '全部' },
         { label: 1, name: '站内公告' },
