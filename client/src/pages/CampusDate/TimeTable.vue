@@ -34,7 +34,7 @@ export default {
   components: {
     CardTitle
   },
-  props: ['plans', 'campusUrl'],
+  props: ['plans', 'campusUrl', 'companyName'],
   data () {
     return {}
   },
@@ -45,9 +45,10 @@ export default {
     },
     toDiscuss () {
       this.$router.push({
-        name: 'discussPage',
-        params: {
-          label: 6
+        path: '/discussPage',
+        query: {
+          label: 6,
+          company: this.companyName
         }
       })
     }

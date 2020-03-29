@@ -75,7 +75,6 @@ export default {
   },
   data () {
     return {
-      searchContent: '',
       bannerImg: {
         img: 'https://uploadfiles.nowcoder.com/images/20200207/33317073_1581044632109_870880B6B4BBEBE903A9F026B639A40B',
         url: 'https://www.baidu.com'
@@ -95,7 +94,8 @@ export default {
         { label: 11, name: '工作以后' }
       ],
       publish: 0,
-      label: this.$route.params.label * 1 || 0
+      label: this.$route.query.label * 1 || 0,
+      searchContent: this.$route.query.company || ''
     }
   },
   computed: {

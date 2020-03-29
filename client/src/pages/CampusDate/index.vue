@@ -10,8 +10,13 @@
     <card-header
       :companyName="campusDate.companyName"
       :companyImgUrl="campusDate.companyImgUrl"
-      :campusUrl="campusDate.campusUrl"/>
-    <time-table :plans="plans" :campusUrl="campusDate.campusUrl"/>
+      :campusUrl="campusDate.campusUrl"
+    />
+    <time-table
+      :plans="plans"
+      :campusUrl="campusDate.campusUrl"
+      :companyName="campusDate.companyName"
+    />
     <!-- <find-post /> -->
   </div>
 </template>
@@ -39,32 +44,38 @@ export default {
       return [
         {
           content: '内推',
-          timestamp: this.campusDate.timeTable && this.campusDate.timeTable.neitui,
+          timestamp:
+            this.campusDate.timeTable && this.campusDate.timeTable.neitui,
           color: '#0bbd87'
         },
         {
           content: '网申',
-          timestamp: this.campusDate.timeTable && this.campusDate.timeTable.wangshen,
+          timestamp:
+            this.campusDate.timeTable && this.campusDate.timeTable.wangshen,
           color: '#0bbd87'
         },
         {
           content: '线上宣讲',
-          timestamp: this.campusDate.timeTable && this.campusDate.timeTable.neitui,
+          timestamp:
+            this.campusDate.timeTable && this.campusDate.timeTable.neitui,
           color: '#0bbd87'
         },
         {
           content: '笔试',
-          timestamp: this.campusDate.timeTable && this.campusDate.timeTable.bishi,
+          timestamp:
+            this.campusDate.timeTable && this.campusDate.timeTable.bishi,
           color: '#0bbd87'
         },
         {
           content: '面试',
-          timestamp: this.campusDate.timeTable && this.campusDate.timeTable.mianshi,
+          timestamp:
+            this.campusDate.timeTable && this.campusDate.timeTable.mianshi,
           color: '#0bbd87'
         },
         {
           content: 'offer',
-          timestamp: this.campusDate.timeTable && this.campusDate.timeTable.offer,
+          timestamp:
+            this.campusDate.timeTable && this.campusDate.timeTable.offer,
           color: '#0bbd87'
         }
       ]
