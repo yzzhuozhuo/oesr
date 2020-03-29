@@ -124,7 +124,7 @@ export default {
     ...mapActions(['fetchHomeInfo']),
     handleScroll () {
       let scrollY = document.documentElement.scrollTop
-      if (scrollY > 285) {
+      if (scrollY > 295) {
         if (!this.fixed) this.fixed = true
       } else {
         if (this.fixed) this.fixed = false

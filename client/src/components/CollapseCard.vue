@@ -8,7 +8,10 @@
         </template>
         <div class="company">
           <div v-for="(item, index) in collapseCardData" :key="index">
-            <img :src="item.companyImageUrl" class="companyImage" @click="selectedVal(item.companyName, key='companyName')">
+            <img v-if="item.companyImageUrl" :src="item.companyImageUrl" class="companyImage" @click="selectedCompanyVal(item.companyName)">
+            <div v-else class="no-img" @click="selectedCompanyVal(item.companyName)">
+              <span>{{item.companyName}}</span>
+            </div>
           </div>
         </div>
       </el-collapse-item>
@@ -17,26 +20,44 @@
           <span class="collapse-title">职位</span>
           <i class="header-icon el-icon-s-custom"></i>
         </template>
-        <el-tag
-          v-for="(item, index) in collapseCardData"
+        <!-- <el-tag
+          class="post-tag"
+          style="font-size: 12px"
+          v-for="(item, index) in tagPostVal"
           :key="index"
-          :type="item.tagType"
-          @click="selectedVal(item.post, key='post')">
-          {{item.post}}
-        </el-tag>
+          type="info"
+          @click="selectedVal(item, key='post')">
+          {{item}}
+        </el-tag> -->
+        <div class="flex-content">
+          <div
+            v-for="(item, postIndex) in tagPostVal"
+            :key="postIndex"
+            class="post-flex"
+            @click="selectedPostVal(item, postIndex)">
+            <span class="post-title" :class="activePostIndex === postIndex ? 'active' : 'nomal'">{{item}}</span>
+          </div>
+        </div>
       </el-collapse-item>
       <el-collapse-item name="3">
         <template slot="title">
           <span class="collapse-title">年份</span>
           <i class="header-icon el-icon-time"></i>
         </template>
-        <el-tag
-          v-for="(item, index) in tagVal"
+        <!-- <el-tag
+          class="time-tag"
+          style="font-size: 14px"
+          v-for="(item, index) in tagTimeVal"
           :key="index"
-          type="danger"
+          type="info"
           @click="selectedVal(item, key='years')">
           {{item}}
-        </el-tag>
+        </el-tag> -->
+        <div class="flex-content">
+          <div v-for="(item, yearIndex) in tagTimeVal" :key="yearIndex" class="post-flex" @click="selectedYearVal(item, yearIndex)">
+            <span class="post-title" :class="activeYearIndex === yearIndex ? 'active' : 'nomal'">{{item}}</span>
+          </div>
+        </div>
       </el-collapse-item>
     </el-collapse>
   </div>
@@ -47,6 +68,10 @@ export default {
   props: ['collapseCardData'],
   data () {
     return {
+      activePostIndex: '',
+      activeYearIndex: '',
+      hasSelectedPost: false,
+      hasSelectedYear: false,
       activeNames: ['1'],
       selectedCompany: '',
       selectedJob: '',
@@ -60,8 +85,11 @@ export default {
     }
   },
   computed: {
-    tagVal () {
-      return this.handleTagVal(this.collapseCardData)
+    tagTimeVal () {
+      return this.handleTimeTagVal(this.collapseCardData)
+    },
+    tagPostVal () {
+      return this.handlePostTagVal(this.collapseCardData)
     }
   },
   watch: {},
@@ -70,15 +98,47 @@ export default {
     handleChange (val) {
       console.log(1, val)
     },
-    selectedVal (val, key) {
-      this.selectedValList[key] = val
+    selectedCompanyVal (val) {
+      this.selectedValList.companyName = val
       this.$emit('selectedValList', this.selectedValList)
     },
-    handleTagVal (data) {
+    selectedPostVal (val, postIndex) {
+      if (!this.hasSelectedPost) {
+        this.activePostIndex = postIndex
+        this.selectedValList.post = val
+        this.$emit('selectedValList', this.selectedValList)
+        this.hasSelectedPost = true
+      } else {
+        this.activePostIndex = ''
+        this.selectedValList.post = ''
+        this.$emit('selectedValList', this.selectedValList)
+        this.hasSelectedPost = false
+      }
+    },
+    selectedYearVal (val, yearIndex) {
+      if (!this.hasSelectedYear) {
+        this.activeYearIndex = yearIndex
+        this.selectedValList.years = val
+        this.$emit('selectedValList', this.selectedValList)
+        this.hasSelectedYear = true
+      } else {
+        this.activeYearIndex = ''
+        this.selectedValList.years = ''
+        this.$emit('selectedValList', this.selectedValList)
+        this.hasSelectedYear = false
+      }
+    },
+    handleTimeTagVal (data) {
       let repeatTime = data.map(item => {
         return item.years
       })
       return [...new Set(repeatTime)]
+    },
+    handlePostTagVal (data) {
+      let repeatPost = data.map(item => {
+        return item.post
+      })
+      return [...new Set(repeatPost)]
     }
   }
 }
@@ -96,15 +156,10 @@ export default {
 .collapse-title {
   font-size: 18px;
   padding-right: 5px;
-  /* color: #003ecc; */
   font-weight: bold;
-  /* font-size: 17px; */
-  /* padding-right: 5px; */
   color: cornflowerblue;
 }
 .header-icon {
-  /* font-size: 17px; */
-  /* color: cornflowerblue; */
   font-size: 18px;
   color: #003ecc;
   font-weight: bold;
@@ -127,8 +182,58 @@ export default {
   color: #909090;
 }
 
-/* .selected-val {
-  color: #f56c6c;
-} */
+.post-tag:hover {
+  /* transform: scale(1.1); */
+  background: #eee;
+}
+
+.time-tag:hover {
+  transform: scale(1.1);
+  color: #F56C6A;
+  /* background: #eee; */
+}
+
+.no-img {
+  width: 60px;
+  height: 30px;
+  margin-bottom: 14px;
+  text-align: center;
+  padding-top: 5px;
+}
+
+.no-img:hover {
+  background: #eee;
+}
+
+.flex-content {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.post-flex {
+  font-size: 15px;
+  margin: 10px 5px;
+}
+
+.post-title {
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.active {
+  /* border-radius: 5px; */
+  color: #25bb9b;
+  background: #eee;
+}
+
+.nomal {
+  color: #000;
+}
+
+.post-title:hover {
+  background: #eee;
+  color: #25bb9b;
+}
 
 </style>

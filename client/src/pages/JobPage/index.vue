@@ -78,12 +78,16 @@ export default {
     return {
       swiperImgs: [
         {
-          img: 'https://uploadfiles.nowcoder.com/images/20200227/339694163_1582804471958_AD8B368EA1D50F999423FF2A5F2DC6C2',
-          url: 'https://www.baidu.com'
+          img: 'http://uploadfiles.nowcoder.com/images/20200314/33317073_1584156674985_CE64A6BFE3EED9F3201EF1390D4ED623',
+          url: 'https://www.nowcoder.com/activity/2020hongshan/index'
         },
         {
           img: 'https://uploadfiles.nowcoder.com/images/20200217/3985294_1581947783711_181D2EA526633BFB154F4A4C9A5F5FE2',
-          url: 'https://www.baidu.com'
+          url: 'https://campus.meituan.com/'
+        },
+        {
+          img: 'http://uploadfiles.nowcoder.com/images/20200313/90999146_1584103353322_54CE75E1DB7496268EE0E7C5046362B6',
+          url: 'https://webank.cheng95.com/positions/intern?channel=2&project_id=5'
         }
       ],
       cityList: [

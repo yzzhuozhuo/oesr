@@ -1,7 +1,7 @@
 <template>
   <div class="main">
     <router-view></router-view>
-    <img src="https://uploadfiles.nowcoder.com/images/20200227/339694163_1582803781536_E8CABFD4B8C6F9129BA59A7DDB02371B">
+    <!-- <img class="campusImg" src="https://uploadfiles.nowcoder.com/images/20200227/339694163_1582803781536_E8CABFD4B8C6F9129BA59A7DDB02371B" @click="toCampus"> -->
     <div class="content">
       <div class="company-choose">
         <el-input
@@ -43,7 +43,7 @@
           <collapse-card :collapseCardData="softwareCollapseData" @selectedValList="selectedValList"> </collapse-card>
         </el-tab-pane>
         <el-tab-pane label="技术（硬件）/电子信息类" name="hardware">
-          <collapse-card :collapseCardData="softwareCollapseData" @selectedValList="selectedValList"> </collapse-card>
+          <collapse-card :collapseCardData="hardwareCollapseData" @selectedValList="selectedValList"> </collapse-card>
         </el-tab-pane>
       </el-tabs>
     </div>
@@ -83,7 +83,7 @@ import moment from 'moment'
 import _ from 'lodash'
 import CollapseCard from '@/components/CollapseCard'
 import QuestionCard from '@/components/QuestionCard'
-import { softwareCollapseData } from './config'
+import { softwareCollapseData, hardwareCollapseData } from './config'
 
 export default {
   name: 'QuestionPage',
@@ -94,6 +94,7 @@ export default {
   data () {
     return {
       softwareCollapseData: softwareCollapseData,
+      hardwareCollapseData: hardwareCollapseData,
       activeName: 'software',
       activeCardName: '',
       currentPage: 1, // 分页
@@ -185,6 +186,9 @@ export default {
     selectedValList (selectedValList) {
       // 子组件传来选择的值 公司 职位 年份 {}
       this.searchSelectedVal = _.cloneDeep(selectedValList)
+    },
+    toCampus () {
+      window.open('https://zhaopin.kuaishou.cn/recruit/e/#/official/index/')
     }
   }
 }
@@ -197,6 +201,9 @@ export default {
   width: 1200px;
   box-sizing: border-box;
   position: relative;
+}
+.campusImg {
+  cursor: pointer;
 }
 .content {
   background: #fff;
@@ -217,7 +224,8 @@ export default {
 .company-choose {
   display: flex;
   position: absolute;
-  top: 105px;
+  /* top: 105px; */
+  top: 12px;
   right: 26px;
   z-index: 1000;
 }

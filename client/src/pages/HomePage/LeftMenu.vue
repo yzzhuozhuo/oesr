@@ -43,7 +43,7 @@ export default {
   },
   computed: {
     left () {
-      let left = (this.width - 1216) / 2
+      let left = (this.width - 1200) / 2
       if (left <= 0) left = 0
       return left
     }
@@ -57,11 +57,12 @@ export default {
   left: 0;
   top: 0;
 }
+
 .fixed {
   width: 200px;
   position: fixed;
   // left: 75px;
-  top: 61px;
+  top: 76px;
 }
 
 .el-submenu .el-menu-item {

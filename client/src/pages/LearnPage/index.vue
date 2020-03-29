@@ -5,11 +5,11 @@
       <div class="host-content">
         <div class="host-content-title">
           <img src="http://static.nowcoder.com/images-nk/img/icons/ico-fire.png">
-          <div>火热报名中</div>
+          <div>火热学习课程</div>
         </div>
         <div class="img-content hot">
-          <div v-for="(item, index) in hotImgs" :key="index">
-            <img :src="item" class="img-container">
+          <div v-for="(item, index) in hotImgs" :key="index" class="hot-content">
+            <img :src="item.img" class="img-container" @click="toLearnHot(item.url)">
           </div>
         </div>
       </div>
@@ -22,8 +22,8 @@
           <el-divider content-position="center" class="explain">校 招 经 验 分 享</el-divider>
         </div>
         <div class="share-content">
-          <div v-for="(item, index) in shareImgs" :key="index" class="img-share-box">
-            <img :src="item" class="img-share">
+          <div v-for="(item, index) in shareImgs" :key="index" class="img-share-box" @click="toNewPage(item.url)">
+            <img :src="item.img" class="img-share">
           </div>
         </div>
         <div class="explain-content">
@@ -94,33 +94,84 @@ export default {
       swiperImgs: [
         {
           img: 'https://uploadfiles.nowcoder.com/images/20191231/4107856_1577773849648_EBDA8C006A521B8F4B64E3C834ED1118',
-          url: 'https://www.baidu.com'
+          url: 'https://www.imooc.com/learn/1029'
         },
         {
           img: 'https://uploadfiles.nowcoder.com/images/20190708/4107856_1562577889040_895F882A6AADA8C739DA78B2AB48B6B1',
-          url: 'https://www.baidu.com'
+          url: 'https://www.imooc.com/learn/1096'
         }
       ],
       hotImgs: [
-        'https://uploadfiles.nowcoder.com/files/20191212/59_1576134154605_3.png',
-        'https://uploadfiles.nowcoder.com/files/20191212/59_1576134194565_2.png',
-        'https://uploadfiles.nowcoder.com/files/20191212/59_1576134223891_1.png',
-        'https://uploadfiles.nowcoder.com/files/20190515/59_1557901417732_机器.jpg',
-        'https://uploadfiles.nowcoder.com/files/20190704/59_1562206905797_高级项目课.png',
-        'https://uploadfiles.nowcoder.com/files/20200305/59_1583403105947_59_1576134097656_4.png'
+        {
+          img: 'http://img3.mukewang.com/570b064a00015a0c06000338-240-135.jpg',
+          url: 'https://www.imooc.com/learn/172'
+        },
+        {
+          img: 'http://img.mukewang.com/572bff580001c7a006000338-240-135.jpg',
+          url: 'https://www.imooc.com/learn/587'
+        },
+        {
+          img: 'http://img2.mukewang.com/5733e336000141f806000338-240-135.jpg',
+          url: 'https://www.imooc.com/learn/632'
+        },
+        {
+          img: 'http://img1.mukewang.com/5a56fdb400017d0306000338-240-135.jpg',
+          url: 'https://www.imooc.com/learn/935'
+        },
+        {
+          img: 'http://img2.mukewang.com/570b05f4000194e506000338-240-135.jpg',
+          url: 'https://www.imooc.com/learn/222'
+        },
+        {
+          img: 'http://img3.mukewang.com/5c760767084b92ce06000338-240-135.jpg',
+          url: 'https://www.imooc.com/learn/1102'
+        }
       ],
       shareImgs: [
-        'https://uploadfiles.nowcoder.com/images/20190802/59_1564751822240_A3E11644B0F36A72563D1971588638CA',
-        'https://uploadfiles.nowcoder.com/images/20190802/59_1564751859605_842E238B1E65FCDB7DEBEC618981D188',
-        'https://uploadfiles.nowcoder.com/images/20190802/59_1564751881039_8F344281B28AFA1A9C114350D6061063',
-        'https://uploadfiles.nowcoder.com/images/20190802/59_1564751897163_2DCC6450D5B221A6031596FC2B3BB9C8',
-        'https://uploadfiles.nowcoder.com/images/20190802/59_1564751917881_767EF39C8917BA287CC609B24341ADB8',
-        'https://uploadfiles.nowcoder.com/images/20190802/59_1564751933287_A741812942864A153F5C82232F24E8F5',
-        'https://uploadfiles.nowcoder.com/images/20190802/59_1564751952849_55C7FBFF49F35899192DA86DD4F7AE57',
-        'https://uploadfiles.nowcoder.com/images/20190802/59_1564751965614_3F87637210B58521E91D6EE27F3986E9',
-        'https://uploadfiles.nowcoder.com/images/20190802/59_1564751982835_2869449F66866826D4D9FD3D24427C9F',
-        'https://uploadfiles.nowcoder.com/images/20190802/59_1564752001930_C3A1840F5D5715471D514B373440CFD1',
-        'https://uploadfiles.nowcoder.com/images/20190802/59_1564752020829_532270391A0C6F8673FE58307D1EA829'
+        {
+          img: 'https://uploadfiles.nowcoder.com/images/20190802/59_1564751822240_A3E11644B0F36A72563D1971588638CA',
+          url: 'https://zhuanlan.zhihu.com/p/51724231'
+        },
+        {
+          img: 'https://uploadfiles.nowcoder.com/images/20190802/59_1564751859605_842E238B1E65FCDB7DEBEC618981D188',
+          url: 'https://zhuanlan.zhihu.com/p/95593247'
+        },
+        {
+          img: 'https://uploadfiles.nowcoder.com/images/20190802/59_1564751881039_8F344281B28AFA1A9C114350D6061063',
+          url: 'https://ridiqulous.com/2019-recruitment/'
+        },
+        {
+          img: 'https://uploadfiles.nowcoder.com/images/20190802/59_1564751897163_2DCC6450D5B221A6031596FC2B3BB9C8',
+          url: 'https://zhuanlan.zhihu.com/p/60657612'
+        },
+        {
+          img: 'https://uploadfiles.nowcoder.com/images/20190802/59_1564751917881_767EF39C8917BA287CC609B24341ADB8',
+          url: 'http://www.woshipm.com/pmd/1453984.html'
+        },
+        {
+          img: 'https://uploadfiles.nowcoder.com/images/20190802/59_1564751933287_A741812942864A153F5C82232F24E8F5',
+          url: 'https://zhuanlan.zhihu.com/p/31306205'
+        },
+        {
+          img: 'https://uploadfiles.nowcoder.com/images/20190802/59_1564751952849_55C7FBFF49F35899192DA86DD4F7AE57',
+          url: 'https://zhuanlan.zhihu.com/p/31302161'
+        },
+        {
+          img: 'https://uploadfiles.nowcoder.com/images/20190802/59_1564751965614_3F87637210B58521E91D6EE27F3986E9',
+          url: 'https://www.zhihu.com/question/29884937'
+        },
+        {
+          img: 'https://uploadfiles.nowcoder.com/images/20190802/59_1564751982835_2869449F66866826D4D9FD3D24427C9F',
+          url: 'https://blog.csdn.net/qq_41811931/article/details/88037374'
+        },
+        {
+          img: 'https://uploadfiles.nowcoder.com/images/20190802/59_1564752001930_C3A1840F5D5715471D514B373440CFD1',
+          url: 'https://blog.csdn.net/xwd18280820053/article/details/77529906'
+        },
+        {
+          img: 'https://uploadfiles.nowcoder.com/images/20190802/59_1564752020829_532270391A0C6F8673FE58307D1EA829',
+          url: 'https://zhuanlan.zhihu.com/p/80225410'
+        }
       ],
       strategyData: [
         {
@@ -457,8 +508,10 @@ export default {
   mounted () {},
   methods: {
     toNewPage (url) {
-      console.log(url)
-      window.location.href = url
+      window.open(url)
+    },
+    toLearnHot (url) {
+      window.open(url)
     }
   }
 }
@@ -495,6 +548,9 @@ export default {
   display: flex;
   margin: 15px 0 20px;
   padding: 0 10px;
+  .hot-content img{
+    border-radius: 10px;
+  }
 }
 .hot {
   justify-content: space-around;
@@ -691,6 +747,7 @@ export default {
           img {
             width: 100%;
             height: 119px;
+            border-radius: 10px;
           }
           .classify {
             display: inline-block;
@@ -708,7 +765,7 @@ export default {
           }
           .title {
             text-align: center;
-            font-size: 16px;
+            font-size: 15px;
             font-weight: bold;
             margin-top: -14px;
           }
