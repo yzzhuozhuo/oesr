@@ -19,7 +19,10 @@
           ref="card0"
           :title="menus[0].subMenu[0].subName"
         >
-          <frist-card :firstCardData="firstCardData" />
+          <frist-card
+            :firstCardData="firstCardData"
+            :themeList="themeList.slice(0, 8)"
+          />
         </right-card>
         <right-card
           v-for="(item, index) in menus[0].subMenu.slice(1)"
@@ -81,23 +84,28 @@ export default {
     return {
       swiperImgs: [
         {
-          img: 'https://uploadfiles.nowcoder.com/images/20191115/999991356_1573804506330_D82683B3C229BEDC46B1799DE6AD7969',
+          img:
+            'https://uploadfiles.nowcoder.com/images/20191115/999991356_1573804506330_D82683B3C229BEDC46B1799DE6AD7969',
           url: 'https://www.baidu.com'
         },
         {
-          img: 'https://uploadfiles.nowcoder.com/images/20191217/4107856_1576563101119_5B4556E89C61A892801B88376C6D7D72',
+          img:
+            'https://uploadfiles.nowcoder.com/images/20191217/4107856_1576563101119_5B4556E89C61A892801B88376C6D7D72',
           url: 'https://www.baidu.com'
         },
         {
-          img: 'https://uploadfiles.nowcoder.com/images/20200215/999991342_1581772325727_E3CB95122AE9DC62348FC2AF4779F8F6',
+          img:
+            'https://uploadfiles.nowcoder.com/images/20200215/999991342_1581772325727_E3CB95122AE9DC62348FC2AF4779F8F6',
           url: 'https://www.baidu.com'
         },
         {
-          img: 'https://uploadfiles.nowcoder.com/images/20191030/8030387_1572425880113_685F76A8B66169663137EEB61BFB05E8',
+          img:
+            'https://uploadfiles.nowcoder.com/images/20191030/8030387_1572425880113_685F76A8B66169663137EEB61BFB05E8',
           url: 'https://www.baidu.com'
         },
         {
-          img: 'https://uploadfiles.nowcoder.com/images/20200227/999991356_1582784877799_412F57578E7D9C9A7D523D8022845B1A',
+          img:
+            'https://uploadfiles.nowcoder.com/images/20200227/999991356_1582784877799_412F57578E7D9C9A7D523D8022845B1A',
           url: 'https://www.baidu.com'
         }
       ],
@@ -106,7 +114,10 @@ export default {
     }
   },
   computed: {
-    ...mapState({ menus: state => state.home.menus }),
+    ...mapState({
+      menus: state => state.home.menus,
+      themeList: state => state.theme.themeList || []
+    }),
     firstCardData () {
       return this.menus.length ? this.menus[0].subMenu[0].subList : []
     }
@@ -114,6 +125,7 @@ export default {
   created () {
     // 取首页数据
     this.fetchHomeInfo()
+    this.fetchThemeList()
   },
   mounted () {
     this.$nextTick(() => {
@@ -121,7 +133,7 @@ export default {
     })
   },
   methods: {
-    ...mapActions(['fetchHomeInfo']),
+    ...mapActions(['fetchHomeInfo', 'fetchThemeList']),
     handleScroll () {
       let scrollY = document.documentElement.scrollTop
       if (scrollY > 295) {

@@ -146,7 +146,7 @@ export default {
     if (companyName) {
       this.searchSelectedVal.companyName = companyName === '99+' ? '' : companyName
     }
-    this.fetchThemeList()
+    // this.fetchThemeList()
   },
   methods: {
     ...mapActions([

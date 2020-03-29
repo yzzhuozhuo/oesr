@@ -1,7 +1,7 @@
 <template>
   <div
     class="profession"
-    @click.stop="jump(professionCardData.url)"
+    @click.stop="jump(theme._id)"
   >
     <div class="profession-name">{{professionCardData.name}}</div>
     <img
@@ -13,11 +13,14 @@
 
 <script>
 export default {
-  props: ['professionCardData'],
+  props: ['professionCardData', 'theme'],
   methods: {
-    jump (path) {
+    jump (themeDetailId) {
       this.$router.push({
-        path
+        path: '/questionList',
+        query: {
+          themeDetailId
+        }
       })
     }
   }

@@ -12,7 +12,7 @@ exports.getDiscussInfo = function (query) {
   let publishItem = publish === 1 ? { 'hot': -1 } : { 'createAt': -1 }
   if (title) {
     const reg = new RegExp(title, 'i')
-    labelItem = { ...labelItem, $or: [{ title: reg }] }
+    labelItem = { ...labelItem, $or: [{ title: reg }, { content: reg }] }
   }
   return Promise.all([
     DiscussModel.find(labelItem).sort(publishItem).skip(skipCounts).limit(pageNum),
