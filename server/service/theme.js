@@ -1,5 +1,5 @@
 const ThemeModel = require('../models/theme')
-// const theme = require('../../client/debug/theme.json')
+const theme = require('../../client/debugJson/theme.json')
 
 exports.getThemeList = function (accountType, companyId, searchValue, companyName, post, years, currentPage, pageNum, tagType, sortType) {
   let skipCounts = (currentPage - 1) * pageNum

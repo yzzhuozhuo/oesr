@@ -1,5 +1,5 @@
 const DiscussModel = require('../models/discuss')
-// const discuss = require('../../client/debug/discuss.json')
+const discuss = require('../../client/debugJson/discuss.json')
 
 exports.getDiscussInfo = function (query) {
   let { label, publish, currentPage = 1, pageNum = 10, title = '' } = query

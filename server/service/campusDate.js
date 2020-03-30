@@ -1,5 +1,5 @@
 const CampusDateModel = require('../models/campusDate')
-// const campusData = require('../../client/debug/campusData.json')
+const campusData = require('../../client/debugJson/campusData.json')
 
 exports.addCampusDate = function (campusDate) {
   let newDate = campusDate

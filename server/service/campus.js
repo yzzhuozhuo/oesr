@@ -1,5 +1,5 @@
 const CampusModel = require('../models/campus')
-// const campus = require('../../client/debug/campus.json')
+const campus = require('../../client/debugJson/campus.json')
 
 exports.getCampusList = function (interestedCompany) {
   let findConditions = {}
