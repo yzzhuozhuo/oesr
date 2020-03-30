@@ -7,6 +7,12 @@
     >
       <img :src="discuss.user.avatar">
       <div class="main">
+        <el-button
+          v-if="studentId === discuss.user.id || companyId === discuss.user.id"
+          type="text"
+          size="mini"
+          style="float: right"
+          @click="remove(discuss)">删除</el-button>
         <div
           class="comment-word"
           @click="jump(discuss)"
@@ -20,7 +26,7 @@
         />
         <div class="info">
           <div class="info-left">{{discuss.user.name}}</div>
-          <div class="info-mid">{{formatTime(discuss.createAt)}}</div>
+          <div class="info-mid">{{formatTime(discuss.createdAt)}}</div>
           <div class="info-right">发表在 【{{discuss.classify.name}}】</div>
         </div>
       </div>
@@ -36,13 +42,13 @@ export default {
   components: {
     MarkType
   },
-  props: ['discussList'],
+  props: ['discussList', 'studentId', 'companyId'],
   data () {
     return {}
   },
   methods: {
     formatTime (time) {
-      return moment(time).format('YYYY-MM-DD')
+      return moment(time).format('YYYY-MM-DD HH:mm:ss')
     },
     jump (discuss) {
       this.$router.push({
@@ -50,6 +56,20 @@ export default {
         query: {
           id: discuss._id
         }
+      })
+    },
+    remove (discuss) {
+      this.$confirm(`确定要删除标题为 【${discuss.title}】的帖子?`, '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        this.$emit('removeDiscuss', discuss)
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消删除'
+        })
       })
     }
   }

@@ -32,8 +32,9 @@ const discussSchema = mongooes.Schema({
     name: String,
     avatar: String
   },
-  createAt: {
-    type: Date,
+  createdAt: {
+    type: Number,
+    required: true,
     default: Date.now()
   }
 }, { collection: 'discuss' })

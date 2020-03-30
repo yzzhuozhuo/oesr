@@ -59,10 +59,10 @@ import Selector from '@/components/Selector'
 import PostCard from '@/components/PostCard'
 import CardTitle from '@/components/CardTitle'
 import CompanyCard from '@/components/CompanyCard'
-import practice from '@/assets/practice.png'
-import schedule from '@/assets/schedule.png'
-import calendar from '@/assets/calendar.png'
-import preach from '@/assets/preach.png'
+import practice from '@/assets/qz.png'
+import schedule from '@/assets/rc.png'
+import calendar from '@/assets/bs.png'
+import preach from '@/assets/xj1.png'
 
 export default {
   name: 'JobPage',
@@ -82,8 +82,8 @@ export default {
           url: 'https://www.nowcoder.com/activity/2020hongshan/index'
         },
         {
-          img: 'https://uploadfiles.nowcoder.com/images/20200217/3985294_1581947783711_181D2EA526633BFB154F4A4C9A5F5FE2',
-          url: 'https://campus.meituan.com/'
+          img: 'http://uploadfiles.nowcoder.com/images/20200306/339694163_1583500819306_0A14088F8158DFE8F8AD684894FB33B5',
+          url: 'https://campus.kuaishou.cn/#/campus/index/'
         },
         {
           img: 'http://uploadfiles.nowcoder.com/images/20200313/90999146_1584103353322_54CE75E1DB7496268EE0E7C5046362B6',
@@ -240,15 +240,19 @@ export default {
     cursor: pointer;
     display: flex;
     align-items: center;
-    margin-right: 50px;
+    margin-right: 60px;
     .img {
       width: 40px;
       height: 40px;
-      padding-right: 10px;
+      padding-right: 15px;
     }
   }
   .menu-card:hover {
     transform: scale(1.1);
   }
+}
+
+.menu-card:last-child {
+  margin-right: 0;
 }
 </style>

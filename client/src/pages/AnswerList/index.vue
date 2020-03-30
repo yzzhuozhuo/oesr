@@ -157,7 +157,7 @@
 </template>
 
 <script>
-// import topicData from '../../../debug/topic.json'
+// import topicData from '../../../debugJson/topic.json'
 import { mapState, mapActions } from 'vuex'
 import moment from 'moment'
 

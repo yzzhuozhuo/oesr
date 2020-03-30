@@ -50,6 +50,12 @@
               </div>
               <div class="apply">
                 <el-button
+                  v-if="!hasLogin"
+                  type="success"
+                  @click="applyPositon"
+                  :disabled="isDisabled"
+                  :loading="isLoading">申请</el-button>
+                <el-button
                   v-if="accountType === 'student'"
                   type="success"
                   @click="applyPositon"

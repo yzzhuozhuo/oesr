@@ -176,7 +176,7 @@ export default {
     })
   },
   methods: {
-    ...mapActions(['uploadImg', 'addDiscuss']),
+    ...mapActions(['uploadImg', 'addDiscuss', 'fetchDiscussInfo']),
     async handleImageAdded (file, Editor, cursorLocation, resetUploader) {
       const result = await this.uploadImg({
         file: file,
@@ -227,6 +227,7 @@ export default {
           }
           const res = await this.addDiscuss(data)
           if (res) {
+            await this.fetchDiscussInfo(this.$route.query)
             await this.$message({ message: '发表成功', type: 'success' })
             await this.$router.replace({ path: 'discussPage' })
           }

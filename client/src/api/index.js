@@ -109,6 +109,11 @@ export function addDiscuss (body) {
   return axios.post(url, body).then(utils.checkHttpStatus).then(utils.checkResponse).catch()
 }
 
+export function removeDiscussInfo (data) {
+  let url = `/oesr/removeDiscussInfo?${params(data)}`
+  return axios.delete(url).then(utils.checkHttpStatus).then(utils.checkResponse).catch({})
+}
+
 export function findDiscussById (data) {
   let url = '/oesr/findDiscussById'
   return axios.get(`${url}?id=${data}`, {

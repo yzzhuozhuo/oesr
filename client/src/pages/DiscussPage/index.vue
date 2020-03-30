@@ -30,7 +30,7 @@
           />
         </div>
         <publish @selectPublish="selectPublish" />
-        <discuss :discussList="discussList" />
+        <discuss :discussList="discussList" :studentId="studentList.studentId" :companyId="companyList.companyId" @removeDiscuss="removeDiscuss"/>
         <pagination
           :currentPage="currentPage"
           :pageNum="pageNum"
@@ -53,7 +53,7 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
+import { mapActions, mapState, mapGetters } from 'vuex'
 import Banner from '@/components/Banner'
 import CardTitle from '@/components/CardTitle'
 import HotDiscuss from '@/components/HotDiscuss'
@@ -100,12 +100,15 @@ export default {
   },
   computed: {
     ...mapState({
+      studentList: state => state.student.studentList || [],
+      companyList: state => state.company.companyList || [],
       discussList: state => state.discuss.discussList,
       currentPage: state => state.discuss.currentPage,
       pageNum: state => state.discuss.pageNum,
       total: state => state.discuss.total,
       account: state => state.account
-    })
+    }),
+    ...mapGetters(['accountType', 'hasLogin'])
   },
   created () {
     this.fetchDiscussInfo({
@@ -118,7 +121,7 @@ export default {
   },
   mounted () {},
   methods: {
-    ...mapActions(['fetchDiscussInfo']),
+    ...mapActions(['fetchDiscussInfo', 'removeDiscussInfo']),
     jump (path) {
       if (!this.account.token) {
         this.$message.error('请先登录！')
@@ -127,7 +130,15 @@ export default {
         })
       }
       this.$router.push({
-        path
+        path,
+        query: {
+          label: this.label,
+          publish: this.publish,
+          userId: this.publish === 2 && this.accountType === 'student' ? this.studentList.studentId : this.companyList.companyId,
+          currentPage: this.currentPage,
+          pageNum: this.pageNum,
+          title: this.searchContent
+        }
       })
     },
     selectedLabel (label) {
@@ -135,6 +146,7 @@ export default {
       this.fetchDiscussInfo({
         label,
         publish: this.publish,
+        userId: this.publish === 2 && this.accountType === 'student' ? this.studentList.studentId : this.companyList.companyId,
         currentPage: this.currentPage,
         pageNum: this.pageNum,
         title: this.searchContent
@@ -142,10 +154,18 @@ export default {
       this.label = label
     },
     selectPublish (publish) {
+      console.log(666, publish)
+      if (!this.account.token && publish === 2) {
+        this.$message.error('请先登录，才能查看我的发布哦~')
+        return this.$router.replace({
+          path: '/login'
+        })
+      }
       if (this.publish === publish) return
       this.fetchDiscussInfo({
         label: this.label,
         publish,
+        userId: publish === 2 && this.accountType === 'student' ? this.studentList.studentId : this.companyList.companyId,
         currentPage: this.currentPage,
         pageNum: this.pageNum,
         title: this.searchContent
@@ -155,6 +175,7 @@ export default {
     changePagination (currentPage) {
       this.fetchDiscussInfo({
         publish: this.publish,
+        userId: this.publish === 2 && this.accountType === 'student' ? this.studentList.studentId : this.companyList.companyId,
         label: this.label,
         currentPage,
         pageNum: this.pageNum,
@@ -164,10 +185,27 @@ export default {
     handleChange (title) {
       this.fetchDiscussInfo({
         publish: this.publish,
+        userId: this.publish === 2 && this.accountType === 'student' ? this.studentList.studentId : this.companyList.companyId,
         label: this.label,
         currentPage: this.currentPage,
         pageNum: this.pageNum,
         title
+      })
+    },
+    removeDiscuss (discuss) {
+      this.removeDiscussInfo({ discussId: discuss._id }).then(() => {
+        this.fetchDiscussInfo({
+          publish: this.publish,
+          userId: this.publish === 2 && this.accountType === 'student' ? this.studentList.studentId : this.companyList.companyId,
+          label: this.label,
+          currentPage: this.currentPage,
+          pageNum: this.pageNum,
+          title: this.title
+        })
+        this.$message({
+          type: 'success',
+          message: '删除讨论帖成功~'
+        })
       })
     }
   }

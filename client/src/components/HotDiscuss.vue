@@ -5,13 +5,15 @@
   >
     <div class="top">{{hotCommentData.title}}</div>
     <div class="bottom">
-      <div class="time">发表于 {{hotCommentData.createAt}}</div>
+      <div class="time">发表于 {{formatTime(hotCommentData.createdAt)}}</div>
       <div class="reword">精</div>
     </div>
   </div>
 </template>
 
 <script>
+import moment from 'moment'
+
 export default {
   props: ['hotCommentData'],
   data () {
@@ -19,6 +21,9 @@ export default {
   },
   mounted () {},
   methods: {
+    formatTime (time) {
+      return moment(time).format('YYYY-MM-DD HH:mm:ss')
+    },
     jump (hotCommentData) {
       this.$router.push({
         path: 'discussDetail',

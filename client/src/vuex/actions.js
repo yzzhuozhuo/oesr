@@ -235,6 +235,12 @@ export const addDiscuss = function ({ commit }, data) {
   }).catch(generateErrorHandler(commit))
 }
 
+export const removeDiscussInfo = function ({ commit }, data) {
+  return api.removeDiscussInfo(data).then(data => {
+    return data
+  }).catch(generateErrorHandler(commit))
+}
+
 export const findDiscussById = function ({ commit }, data) {
   return api.findDiscussById(data).then(data => {
     return data

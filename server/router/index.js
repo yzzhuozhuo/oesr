@@ -28,6 +28,7 @@ router
   .get('/oesr/discuss', discussController.getDiscuss)
   .post('/oesr/addDiscuss', discussController.addDiscuss)
   .get('/oesr/findDiscussById', discussController.findDiscussById)
+  .delete('/oesr/removeDiscussInfo', discussController.removeDiscuss)
 
   .get('/oesr/positionList', positionController.getPosition)
   .post('/oesr/addPositionList', positionController.addPosition)

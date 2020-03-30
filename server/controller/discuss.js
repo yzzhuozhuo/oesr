@@ -29,3 +29,18 @@ exports.findDiscussById = async function (req, res) {
     data
   })
 }
+
+exports.removeDiscuss = function (req, res) {
+  let { discussId = '' } = req.query
+  discussService.removeDiscussList(discussId).then(data => {
+    res.send({
+      code: '200',
+      data: data
+    })
+  }).catch(err => {
+    res.send({
+      code: '500',
+      data: err
+    })
+  })
+}

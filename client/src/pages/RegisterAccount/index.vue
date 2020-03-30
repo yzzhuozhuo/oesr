@@ -245,8 +245,11 @@
               <el-form-item label="感兴趣的公司">
                 <el-select
                   v-model="newUserInfo.interestedCompany"
+                  filterable
+                  allow-create
+                  default-first-option
                   multiple
-                  placeholder="请选择感兴趣的公司"
+                  placeholder="请选择公司，或自己输入按回车添加"
                   style="width: 436px"
                 >
                   <el-option

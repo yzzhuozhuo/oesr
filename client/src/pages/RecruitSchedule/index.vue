@@ -151,7 +151,7 @@
       <el-tabs
         v-model="activeName"
         @tab-click="handleClick"
-        v-if="accountType === 'student'"
+        v-if="accountType === 'student' || !hasLogin"
       >
         <el-tab-pane
           label="全部"
@@ -342,7 +342,7 @@ export default {
       account: state => state.account,
       campusDateList: state => state.campusDate.campusDateList
     }),
-    ...mapGetters(['followCampus', 'accountType'])
+    ...mapGetters(['followCampus', 'accountType', 'hasLogin'])
   },
   watch: {
     searchVal () {

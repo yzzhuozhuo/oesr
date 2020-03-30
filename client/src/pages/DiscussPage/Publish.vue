@@ -10,6 +10,11 @@
       :class="active === 1 ? 'active' : 'nomal'"
       @click.stop="checkout(1)"
     >最热发表</div>
+    <div
+      class="publish-hot common"
+      :class="active === 2 ? 'active' : 'nomal'"
+      @click.stop="checkout(2)"
+    >我的发表</div>
   </div>
 </template>
 

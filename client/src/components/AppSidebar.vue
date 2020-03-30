@@ -2,7 +2,15 @@
   <div class="main">
     <div class="contant">
       <div class="contant-img" @click="backTop">
-        <img src="../assets/top.png">
+        <el-popover
+          placement="left"
+          width="100"
+          trigger="hover">
+          <div class="popover-qq">
+            <span>点击返回顶部哦~</span>
+          </div>
+          <img src="../assets/top.png" slot="reference">
+        </el-popover>
       </div>
       <div class="contant-img qq">
         <el-popover
@@ -80,7 +88,7 @@ export default {
   position: fixed;
   z-index: 999;
   right: 10px;
-  bottom: 220px;
+  bottom: 180px;
   zoom: 1;
 }
 .contant-img {
