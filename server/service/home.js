@@ -1,5 +1,5 @@
 const HomeModel = require('../models/home')
-const home = require('../../client/debug/home.json')
+// const home = require('../../client/debug/home.json')
 
 exports.getHomeInfo = function () {
   return HomeModel.find().then(data => {
