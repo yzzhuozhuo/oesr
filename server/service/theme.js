@@ -24,11 +24,11 @@ exports.getThemeList = function (accountType, companyId, searchValue, companyNam
     ThemeModel.find(findConditions).sort(sortCondition).skip(skipCounts).limit(pageNum),
     ThemeModel.find(findConditions).sort(sortCondition).count(true)
   ]).then(([data, total]) => {
-    // if (!data.length) {
-    //   console.log('11111')
-    //   ThemeModel.insertMany(theme)
-    //   return theme
-    // }
+    if (!data.length) {
+      console.log('11111')
+      ThemeModel.insertMany(theme)
+      return theme
+    }
     return {
       data: data,
       currentPage: +currentPage,

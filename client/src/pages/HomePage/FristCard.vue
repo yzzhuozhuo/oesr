@@ -6,6 +6,7 @@
         v-for="(item, index) in professionData.listCard"
         :key="index"
         :professionCardData="item"
+        :theme="themeList[index]"
       />
     </div>
     <div class="title-name">{{famousQuestion.listName}}</div>
@@ -25,7 +26,7 @@ export default {
     LogoList,
     AroundCard
   },
-  props: ['firstCardData'],
+  props: ['firstCardData', 'themeList'],
   data () {
     return {}
   },
