@@ -6,7 +6,7 @@
         <el-form
           ref="loginForm"
           :model="loginForm"
-          label-width="60px"
+          label-width="70px"
           class="form-box"
         >
           <el-form-item
@@ -29,10 +29,12 @@
             <el-input
               v-model="loginForm.tel"
               placeholder="请输入手机号码"
+              clearable
             ></el-input>
           </el-form-item>
           <el-form-item
             v-if="isAccountLogin"
+            clearable
             label="密码"
             prop="password"
             :rules="[
@@ -45,6 +47,7 @@
           >
             <el-input
               v-model="loginForm.password"
+              clearable
               placeholder="请输入密码"
               type="password"
             ></el-input>
@@ -52,10 +55,19 @@
           <el-form-item
             label="验证码"
             class="code"
+            prop="code"
+            :rules="[
+              { required: true, message: '请输入验证码'},
+              {
+                validator: validateCode,
+                trigger: ['blur']
+              }
+            ]"
             v-if="isMSMLogin"
           >
             <el-input
-              v-model="loginForm.password"
+              v-model="loginForm.code"
+              clearable
               class="get-code-inp"
               placeholder="请输入验证码"
             ></el-input>
@@ -64,7 +76,9 @@
               plain
               class="get-code-btn"
               size="small"
-            >获取验证码</el-button>
+              :disabled="codeDisabled"
+              @click.stop="getCode"
+            >{{codeWord}}{{typeof codeWord === 'number' ? 's' : ''}}</el-button>
           </el-form-item>
           <el-form-item label="">
             <el-checkbox v-model="loginForm.automaticLogin">下次自动登录</el-checkbox>
@@ -117,10 +131,13 @@ export default {
       loginForm: {
         tel: this.$route.params.tel || '',
         password: '',
-        automaticLogin: true
+        automaticLogin: true,
+        code: ''
       },
       isMSMLogin: false,
-      isAccountLogin: true
+      isAccountLogin: true,
+      codeDisabled: true,
+      codeWord: '获取验证码'
     }
   },
   computed: {
@@ -130,7 +147,26 @@ export default {
     }),
     ...mapGetters(['accountType'])
   },
+  watch: {
+    'loginForm.tel' (tel) {
+      if (tel.length === 11 && typeof this.codeWord === 'string') {
+        this.findTel({ tel }).then(result => {
+          if (result.message) this.codeDisabled = false
+        })
+      } else {
+        this.codeDisabled = true
+      }
+    }
+  },
   mounted () {
+    const { tel } = this.loginForm
+    if (tel.length === 11 && typeof this.codeWord === 'string') {
+      this.findTel({ tel }).then(result => {
+        if (result.message) this.codeDisabled = false
+      })
+    } else {
+      this.codeDisabled = true
+    }
     if (this.accountType === 'student') {
       this.$router.replace({
         path: '/'
@@ -146,7 +182,9 @@ export default {
       'findTel',
       'findAccount',
       'fetchStudentList',
-      'fetchCompanyList'
+      'fetchCompanyList',
+      'sendCode',
+      'verifyCode'
     ]),
     toMSMLogin () {
       this.isAccountLogin = false
@@ -201,9 +239,27 @@ export default {
         tel: this.loginForm.tel,
         password: this.loginForm.password
       })
-      if (!result.token) return callback(new Error(result.message))
+      if (!result.token) return callback(new Error('密码错误'))
       console.info('登录信息')
       console.info(result)
+      this.fetchList(result)
+      return callback()
+    },
+    async validateCode (rule, value, callback) {
+      if (!/^\d{6}$/.test(value)) {
+        return callback(new Error('请输入六位数字'))
+      }
+      const result = await this.verifyCode({
+        inputCode: value,
+        tel: this.loginForm.tel
+      })
+      if (result.code) {
+        return callback(new Error('验证码错误'))
+      }
+      this.fetchList(result)
+      return callback()
+    },
+    async fetchList (result) {
       if (result.accountType === 'student') {
         await this.fetchStudentList({
           studentId: result.userId
@@ -218,7 +274,22 @@ export default {
       if (this.loginForm.automaticLogin) {
         localStorage.setItem('account', JSON.stringify(result))
       }
-      return callback()
+    },
+    getCode () {
+      this.codeDisabled = true
+      this.setCodeTime()
+      this.sendCode({ tel: this.loginForm.tel })
+    },
+    setCodeTime () {
+      this.codeWord = 60
+      const timer = setInterval(() => {
+        this.codeWord -= 1
+        if (this.codeWord < 1) {
+          this.codeDisabled = false
+          this.codeWord = '获取验证码'
+          clearInterval(timer)
+        }
+      }, 1000)
     }
   }
 }
@@ -236,8 +307,8 @@ export default {
       no-repeat;
     background-size: 100% 100%;
     .form-content {
-      padding: 40px 70px 50px;
-      width: 400px;
+      padding: 40px 65px 50px 55px;
+      width: 420px;
       // height: 300px;
       border-radius: 4px;
       background: rgba(255, 255, 255, 0.8);
@@ -261,7 +332,7 @@ export default {
         }
         .code {
           .get-code-inp {
-            width: 54%;
+            width: 55%;
           }
           .get-code-btn {
             width: 40%;

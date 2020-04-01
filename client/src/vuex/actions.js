@@ -149,6 +149,22 @@ export const logout = function ({ commit }) {
   }).catch(generateErrorHandler(commit))
 }
 
+export const sendCode = function ({ commit }, data) {
+  return api.sendCode(data).then(data => {
+    console.info('---发送验证码---')
+    console.info(data)
+  }).catch(generateErrorHandler(commit))
+}
+
+export const verifyCode = function ({ commit }, data) {
+  console.info('---输入验证码---')
+  console.info(data)
+  return api.verifyCode(data).then(data => {
+    commit(types.FIND_ACCOUNT, data)
+    return data
+  }).catch(generateErrorHandler(commit))
+}
+
 export const updatePsd = function ({ commit }, data) {
   return api.updatePsd(data).then(data => {
     return data
