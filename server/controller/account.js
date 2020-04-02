@@ -9,7 +9,8 @@ exports.addAccount = async function (req, res) {
   try {
     const data = await accountService.addAccount({ tel, password, accountType })
     res.send({
-      code: '200', data: {
+      code: '200', 
+      data: {
         accountType,
         tel,
         _id: data._doc._id
