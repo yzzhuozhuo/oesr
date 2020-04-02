@@ -6,7 +6,7 @@ exports.getThemeList = function (accountType, companyId, searchValue, companyNam
   let findConditions = {}
   let sortCondition = {}
   // 查询时候过滤掉首页的八套题
-  // findConditions.companyId = { $ne: 'noId' }
+  findConditions.companyId = { $ne: 'noId' }
   if (accountType !== 'company' && searchValue) findConditions.themeTitle = searchValue
   if (companyId) findConditions.companyId = companyId
   if (companyName) findConditions.companyName = companyName
