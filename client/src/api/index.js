@@ -263,6 +263,11 @@ export function verifyCode (body) {
   return axios.post(url, body).then(utils.checkHttpStatus).then(utils.checkResponse).catch({})
 }
 
+export function verifyCodeToNomal (body) {
+  let url = '/oesr/verifyCodeToNomal'
+  return axios.post(url, body).then(utils.checkHttpStatus).then(utils.checkResponse).catch({})
+}
+
 export function addCompanyList (body) {
   const url = '/oesr/addCompanyList'
   return axios.post(url, body).then(utils.checkHttpStatus).then(utils.checkResponse).catch({})

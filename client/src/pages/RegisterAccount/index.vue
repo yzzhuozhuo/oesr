@@ -40,7 +40,11 @@
             class="code"
             prop="verCode"
             :rules="[
-              { required: true, message: '请输入验证码'}
+              { required: true, message: '请输入验证码' },
+              {
+                validator: this.validateCode,
+                trigger: ['blur']
+              }
             ]"
           >
             <el-input
@@ -53,7 +57,9 @@
               plain
               class="get-code-btn"
               size="small"
-            >获取验证码</el-button>
+              :disabled="codeDisabled"
+              @click.stop="getCode"
+            >{{codeWord}}{{typeof codeWord === 'number' ? 's' : ''}}</el-button>
           </el-form-item>
           <el-form-item
             label="密码"
@@ -430,6 +436,8 @@ export default {
         accountType: '',
         automaticLogin: true
       },
+      codeDisabled: true,
+      codeWord: '获取验证码',
       hasRegister: false,
       cacheUrl: '',
       newUserInfo: {
@@ -567,6 +575,17 @@ export default {
       ]
     }
   },
+  watch: {
+    'loginForm.tel' (tel) {
+      if (tel.length === 11 && typeof this.codeWord === 'string') {
+        this.findTel({ tel }).then(result => {
+          if (!result.message) this.codeDisabled = false
+        })
+      } else {
+        this.codeDisabled = true
+      }
+    }
+  },
   computed: {},
   mounted () {},
   methods: {
@@ -576,7 +595,9 @@ export default {
       'fetchCompanyList',
       'addAccount',
       'findTel',
-      'uploadImg'
+      'uploadImg',
+      'verifyCodeToNomal',
+      'sendCode'
     ]),
     register () {
       this.$refs['loginForm'].validate(async valid => {
@@ -626,7 +647,7 @@ export default {
         if (!valid) {
           return false
         } else {
-          if (!this.cacheUrl) return this.$message.error('请上传图片')
+          if (!this.cacheUrl) return this.$message.error('请上传头像')
           await this.addStudentList(this.newUserInfo)
           this.$router.replace({
             name: 'login',
@@ -643,7 +664,7 @@ export default {
         if (!valid) {
           return false
         } else {
-          if (!this.cacheUrl) return this.$message.error('请上传图片')
+          if (!this.cacheUrl) return this.$message.error('请上传头像')
           await this.addCompanyList(this.newCompanyInfo)
           this.$router.replace({
             name: 'login',
@@ -679,6 +700,34 @@ export default {
         qiniuaddr: this.qiniuaddr
       })
       this.cacheUrl = result
+    },
+    async validateCode (rule, value, callback) {
+      if (!/^\d{6}$/.test(value)) {
+        return callback(new Error('请输入六位数字'))
+      }
+      const result = await this.verifyCodeToNomal({
+        inputCode: value
+      })
+      if (result.code) {
+        return callback(new Error('验证码错误'))
+      }
+      return callback()
+    },
+    getCode () {
+      this.codeDisabled = true
+      this.setCodeTime()
+      this.sendCode({ tel: this.loginForm.tel })
+    },
+    setCodeTime () {
+      this.codeWord = 60
+      const timer = setInterval(() => {
+        this.codeWord -= 1
+        if (this.codeWord < 1) {
+          this.codeDisabled = false
+          this.codeWord = '获取验证码'
+          clearInterval(timer)
+        }
+      }, 1000)
     }
   }
 }

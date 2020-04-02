@@ -43,7 +43,9 @@
               plain
               class="get-code-btn"
               size="small"
-            >获取验证码</el-button>
+              :disabled="codeDisabled"
+              @click.stop="getCode"
+            >{{codeWord}}{{typeof codeWord === 'number' ? 's' : ''}}</el-button>
           </el-form-item>
           <el-form-item
             label=""
@@ -102,6 +104,8 @@ export default {
         newPassword: '',
         automaticLogin: true
       },
+      codeDisabled: true,
+      codeWord: '获取验证码',
       isVerificationPass: false,
       rules: {
         tel: [
@@ -111,7 +115,13 @@ export default {
             trigger: ['blur']
           }
         ],
-        code: [{ required: true, message: '请输入验证码', trigger: 'blur' }],
+        code: [
+          { required: true, message: '请输入验证码' },
+          {
+            validator: this.validateCode,
+            trigger: ['blur']
+          }
+        ],
         password: [
           { required: true, message: '请输入新密码', trigger: 'blur' }
         ],
@@ -129,8 +139,19 @@ export default {
       }
     }
   },
+  watch: {
+    'loginForm.tel' (tel) {
+      if (tel.length === 11 && typeof this.codeWord === 'string') {
+        this.findTel({ tel }).then(result => {
+          if (result.message) this.codeDisabled = false
+        })
+      } else {
+        this.codeDisabled = true
+      }
+    }
+  },
   methods: {
-    ...mapActions(['findTel', 'updatePsd']),
+    ...mapActions(['findTel', 'updatePsd', 'verifyCodeToNomal', 'sendCode']),
     toMSMLogin () {
       this.isAccountLogin = false
       this.isMSMLogin = true
@@ -188,6 +209,34 @@ export default {
         return callback(new Error('两次密码不一致'))
       }
       return callback()
+    },
+    async validateCode (rule, value, callback) {
+      if (!/^\d{6}$/.test(value)) {
+        return callback(new Error('请输入六位数字'))
+      }
+      const result = await this.verifyCodeToNomal({
+        inputCode: value
+      })
+      if (result.code) {
+        return callback(new Error('验证码错误'))
+      }
+      return callback()
+    },
+    getCode () {
+      this.codeDisabled = true
+      this.setCodeTime()
+      this.sendCode({ tel: this.loginForm.tel })
+    },
+    setCodeTime () {
+      this.codeWord = 60
+      const timer = setInterval(() => {
+        this.codeWord -= 1
+        if (this.codeWord < 1) {
+          this.codeDisabled = false
+          this.codeWord = '获取验证码'
+          clearInterval(timer)
+        }
+      }, 1000)
     }
   }
 }

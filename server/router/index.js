@@ -42,6 +42,7 @@ router
   .post('/oesr/updatePsd', accountController.updatePsd)
   .get('/oesr/sendCode', accountController.sendCode)
   .post('/oesr/verifyCode', accountController.verifyCode)
+  .post('/oesr/verifyCodeToNomal', accountController.verifyCodeToNomal)
 
   .post('/oesr/addCampusDate', campusDateController.addCampusDate)
   .get('/oesr/getCampusDate', campusDateController.getCampusDate)
