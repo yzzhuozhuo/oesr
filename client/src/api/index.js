@@ -247,6 +247,22 @@ export function logout () {
   return axios.get(url).then(utils.checkHttpStatus).then(utils.checkResponse).catch({})
 }
 
+export function sendCode (data) {
+  let url = `/oesr/sendCode?${params(data)}`
+  return axios.get(url, {
+    method: 'GET',
+    credentials: 'same-origin',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }).then(utils.checkHttpStatus).then(utils.checkResponse).catch({})
+}
+
+export function verifyCode (body) {
+  let url = '/oesr/verifyCode'
+  return axios.post(url, body).then(utils.checkHttpStatus).then(utils.checkResponse).catch({})
+}
+
 export function addCompanyList (body) {
   const url = '/oesr/addCompanyList'
   return axios.post(url, body).then(utils.checkHttpStatus).then(utils.checkResponse).catch({})

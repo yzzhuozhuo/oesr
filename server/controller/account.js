@@ -1,7 +1,9 @@
 const accountService = require('../service/account')
 const jwt = require('jsonwebtoken')
 const bcryptjs = require('bcryptjs')
+const qiniu = require('qiniu')
 const SECRET = 'asdafadfadgaag' // token 秘钥
+let code = ('000000' + Math.floor(Math.random() * 999999)).slice(-6) // 随机验证码
 
 // 注册接口，添加用户
 exports.addAccount = async function (req, res) {
@@ -92,6 +94,52 @@ exports.updatePsd = async function (req, res) {
     if (result) res.send({ code: '200', data: { message: '修改成功', code: 0 } })
   } catch (error) {
     res.send({ code: '200', data: { code: -1 } })
+  }
+}
+
+exports.sendCode = async function (req, res) {
+  const { tel } = req.query
+  console.info(tel)
+  const accessKey = '1BAxkaDEdVBt0aMcBfixthRQ2jEp3x2fPavoEJB8'
+  const secretKey = 'q05nnsqqhWcTdMMPQRCVbFvqwcnIOflBS1bPl_Ze'
+  const template_id = '1245260156606881792'
+  code = ('000000' + Math.floor(Math.random() * 999999)).slice(-6) // 更新随机验证码
+  const mac = new qiniu.auth.digest.Mac(accessKey, secretKey)
+  console.info(code)
+  const reqBody = {
+    template_id,
+    mobile: tel,
+    parameters: {
+      code
+    }
+  }
+  // return res.send({ code: '200', data: { code: 0 } })
+  qiniu.sms.message.sendSingleMessage(reqBody, mac, (error, { message_id }, data) => {
+    console.info(message_id)
+    if (message_id) return res.send({ code: '200', data: { code: 0, message_id } })
+    return res.send({ code: '200', data: { code: -1 } })
+  })
+}
+
+exports.verifyCode = async function (req, res) {
+  const { inputCode, tel } = req.body
+  if (inputCode !== code) return res.send({ code: '200', data: { code: -1 } })
+  try {
+    const account = await accountService.findAccount(tel)
+    const token = jwt.sign({
+      id: String(account._id)
+    }, SECRET, {
+      expiresIn: 60 * 60 * 24 * 7 // 过期时间为 7 天
+    })
+    req.session.userInfo = {
+      tel: account.tel,
+      accountType: account.accountType,
+      userId: account._id,
+      token
+    }
+    res.send({ code: '200', data: { ...req.session.userInfo, code: 0 } })
+  } catch (error) {
+    console.error(error)
   }
 }
 
