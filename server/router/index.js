@@ -40,6 +40,8 @@ router
   .get('/oesr/getUserInfo', accountController.getUserInfo)
   .get('/oesr/logout', accountController.logout)
   .post('/oesr/updatePsd', accountController.updatePsd)
+  .get('/oesr/sendCode', accountController.sendCode)
+  .post('/oesr/verifyCode', accountController.verifyCode)
 
   .post('/oesr/addCampusDate', campusDateController.addCampusDate)
   .get('/oesr/getCampusDate', campusDateController.getCampusDate)
