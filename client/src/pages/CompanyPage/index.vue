@@ -3,23 +3,28 @@
     <div class="main-content">
       <el-container>
         <el-header height="100%">
-          <div class="header-content" @mouseenter="enter" @mouseleave="leave">
-            <el-upload
-              class="avatar"
-              :action="domain"
-              :http-request="handleUpload"
-              :show-file-list="false"
-              :on-success="handleAvatarSuccess"
-              :before-upload="beforeAvatarUpload"
+          <div class="header-content">
+            <div
+              @mouseenter="enter"
+              @mouseleave="leave"
             >
-              <img
-                :src="companyInfo.companyImgUrl"
+              <el-upload
                 class="avatar"
+                :action="domain"
+                :http-request="handleUpload"
+                :show-file-list="false"
+                :on-success="handleAvatarSuccess"
+                :before-upload="beforeAvatarUpload"
               >
-              <div class="cover" v-if="coverAvatar">
-                <img :src="camera">
-              </div>
-            </el-upload>
+                <img
+                  :src="companyInfo.companyImgUrl"
+                  class="avatar"
+                >
+                <div class="cover" v-if="coverAvatar">
+                  <img :src="camera">
+                </div>
+              </el-upload>
+            </div>
             <div class="info">
               <div class="info-left">
                 <div class="info-top">

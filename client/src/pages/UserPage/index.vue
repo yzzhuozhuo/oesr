@@ -3,23 +3,31 @@
     <div class="main-content">
       <el-container>
         <el-header height="100%">
-          <div class="header-content" @mouseenter="enter" @mouseleave="leave">
-            <el-upload
-              class="avatar"
-              :action="domain"
-              :http-request="handleUpload"
-              :show-file-list="false"
-              :on-success="handleAvatarSuccess"
-              :before-upload="beforeAvatarUpload"
+          <div class="header-content">
+            <div
+              @mouseenter="enter"
+              @mouseleave="leave"
             >
-              <img
-                :src="userInfo.studentImgUrl"
+              <el-upload
                 class="avatar"
+                :action="domain"
+                :http-request="handleUpload"
+                :show-file-list="false"
+                :on-success="handleAvatarSuccess"
+                :before-upload="beforeAvatarUpload"
               >
-              <div class="cover" v-if="coverAvatar">
-                <img :src="camera">
-              </div>
-            </el-upload>
+                <img
+                  :src="userInfo.studentImgUrl"
+                  class="avatar"
+                >
+                <div
+                  class="cover"
+                  v-if="coverAvatar"
+                >
+                  <img :src="camera">
+                </div>
+              </el-upload>
+            </div>
             <div class="info">
               <div class="info-top">
                 <div class="username">{{userInfo.studentName}}</div>
@@ -685,7 +693,7 @@ export default {
         width: 60px;
         height: 60px;
         border-radius: 50%;
-        background-color: rgba($color: #000000, $alpha: .2);
+        background-color: rgba($color: #000000, $alpha: 0.2);
 
         img {
           width: 20px;
