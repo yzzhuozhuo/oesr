@@ -3,10 +3,23 @@
     <div class="main-content">
       <el-container>
         <el-header height="100%">
-          <div class="header-content">
-            <div class="avatar">
-              <img :src="companyInfo.companyImgUrl">
-            </div>
+          <div class="header-content" @mouseenter="enter" @mouseleave="leave">
+            <el-upload
+              class="avatar"
+              :action="domain"
+              :http-request="handleUpload"
+              :show-file-list="false"
+              :on-success="handleAvatarSuccess"
+              :before-upload="beforeAvatarUpload"
+            >
+              <img
+                :src="companyInfo.companyImgUrl"
+                class="avatar"
+              >
+              <div class="cover" v-if="coverAvatar">
+                <img :src="camera">
+              </div>
+            </el-upload>
             <div class="info">
               <div class="info-left">
                 <div class="info-top">
@@ -493,6 +506,8 @@
 import { mapState, mapActions } from 'vuex'
 import _ from 'lodash'
 import moment from 'moment'
+import camera from '@/assets/camera.png'
+
 const tomorrowStart = new Date(new Date(new Date().toLocaleDateString()).getTime() + 3600 * 1000 * 24 * 1)
 const tomorrowEnd = new Date(new Date(new Date().toLocaleDateString()).getTime() + 3600 * 1000 * 24 * 1 + 24 * 60 * 60 * 1000 - 1)
 
@@ -519,6 +534,9 @@ export default {
       }
     }
     return {
+      domain: 'https://upload.qiniup.com',
+      qiniuaddr: 'q7heq11s7.bkt.clouddn.com',
+      camera,
       tomorrowStart: tomorrowStart,
       tomorrowEnd: tomorrowEnd,
       newCompanyInfo: {},
@@ -551,6 +569,8 @@ export default {
       isPosition: false,
       isPreach: false,
       dialogSettingVisible: false,
+      coverAvatar: false,
+      cacheUrl: '',
       classifyOptions: [
         {
           label: '技术（软件）/信息技术类',
@@ -678,7 +698,8 @@ export default {
       'logout',
       'fetchThemeList',
       'fetchPositionList',
-      'fetchPreachList'
+      'fetchPreachList',
+      'uploadImg'
     ]),
     formatTime (dataList) {
       const TIME_FORMAT = 'YYYY-MM-DD HH:mm'
@@ -882,6 +903,36 @@ export default {
     },
     toCampus () {
       window.open(this.companyInfo.companyCampusUrl)
+    },
+    enter () {
+      this.coverAvatar = true
+    },
+    leave () {
+      this.coverAvatar = false
+    },
+    async handleUpload (req) {
+      const result = await this.uploadImg({
+        file: req.file,
+        domain: this.domain,
+        qiniuaddr: this.qiniuaddr
+      })
+      this.cacheUrl = result
+    },
+    async handleAvatarSuccess (res, file) {
+      this.newCompanyInfo.companyImgUrl = this.cacheUrl
+      await this.updatecompanyInfo(this.newCompanyInfo)
+    },
+    beforeAvatarUpload (file) {
+      this.newCompanyInfo = _.cloneDeep(this.companyInfo)
+      const isPNG = file.type === 'image/png'
+      const isLt2M = file.size / 1024 / 1024 < 2
+      if (!isPNG) {
+        this.$message.error('上传头像图片只能是 PNG 格式!')
+      }
+      if (!isLt2M) {
+        this.$message.error('上传头像图片大小不能超过 2MB!')
+      }
+      return isPNG && isLt2M
     }
   }
 }
@@ -935,14 +986,30 @@ export default {
     .header-content {
       display: flex;
       align-items: center;
+      position: relative;
       .avatar {
         width: 60px;
         height: 60px;
         margin-right: 20px;
+        cursor: pointer;
       }
       .avatar img {
-        width: 100%;
+        width: 60px;
         border-radius: 50%;
+      }
+      .cover {
+        position: absolute;
+        top: 0;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background-color: rgba($color: #000000, $alpha: .2);
+
+        img {
+          width: 20px;
+          height: 20px;
+          margin-top: 20px;
+        }
       }
       .info {
         width: 100%;

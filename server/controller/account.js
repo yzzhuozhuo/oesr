@@ -11,7 +11,7 @@ exports.addAccount = async function (req, res) {
   try {
     const data = await accountService.addAccount({ tel, password, accountType })
     res.send({
-      code: '200', 
+      code: '200',
       data: {
         accountType,
         tel,
@@ -113,12 +113,12 @@ exports.sendCode = async function (req, res) {
       code
     }
   }
-  return res.send({ code: '200', data: { code: 0 } })
-  // qiniu.sms.message.sendSingleMessage(reqBody, mac, (error, { message_id }, data) => {
-  //   console.info(message_id)
-  //   if (message_id) return res.send({ code: '200', data: { code: 0, message_id } })
-  //   return res.send({ code: '200', data: { code: -1 } })
-  // })
+  // return res.send({ code: '200', data: { code: 0 } })
+  qiniu.sms.message.sendSingleMessage(reqBody, mac, (error, { message_id }, data) => {
+    console.info(message_id)
+    if (message_id) return res.send({ code: '200', data: { code: 0, message_id } })
+    return res.send({ code: '200', data: { code: -1 } })
+  })
 }
 
 exports.verifyCode = async function (req, res) {

@@ -3,10 +3,23 @@
     <div class="main-content">
       <el-container>
         <el-header height="100%">
-          <div class="header-content">
-            <div class="avatar">
-              <img :src="userInfo.studentImgUrl">
-            </div>
+          <div class="header-content" @mouseenter="enter" @mouseleave="leave">
+            <el-upload
+              class="avatar"
+              :action="domain"
+              :http-request="handleUpload"
+              :show-file-list="false"
+              :on-success="handleAvatarSuccess"
+              :before-upload="beforeAvatarUpload"
+            >
+              <img
+                :src="userInfo.studentImgUrl"
+                class="avatar"
+              >
+              <div class="cover" v-if="coverAvatar">
+                <img :src="camera">
+              </div>
+            </el-upload>
             <div class="info">
               <div class="info-top">
                 <div class="username">{{userInfo.studentName}}</div>
@@ -326,7 +339,7 @@
                   :action="domain"
                   :http-request="handleUpload"
                   :limit="1"
-                  :on-success="handleAvatarSuccess"
+                  :on-success="handleResumeSuccess"
                   :on-preview="handleClick"
                   :file-list="fileList"
                   :on-remove="handleRemove"
@@ -346,6 +359,7 @@
 <script>
 import _ from 'lodash'
 import { mapState, mapActions } from 'vuex'
+import camera from '@/assets/camera.png'
 
 export default {
   name: 'UserPage',
@@ -359,6 +373,8 @@ export default {
       dialogSettingVisible: false,
       dialogMyResume: false,
       cacheUrl: '',
+      coverAvatar: false,
+      camera,
       companyOptions: [
         {
           label: '字节跳动',
@@ -533,6 +549,19 @@ export default {
       return callback()
     },
     async handleAvatarSuccess (res, file) {
+      this.newUserInfo.studentImgUrl = this.cacheUrl
+      const result = await this.updateStudentList(this.newUserInfo)
+      console.info(result)
+      if (result) {
+        this.$message({
+          message: '上传成功',
+          type: 'success'
+        })
+      } else {
+        this.$message.error('上传失败，请重试')
+      }
+    },
+    async handleResumeSuccess (res, file) {
       const url = this.cacheUrl
       const name = file.name
       this.newUserInfo.resume = { name, url }
@@ -547,7 +576,7 @@ export default {
       }
     },
     async handleRemove () {
-      delete this.newUserInfo.resume
+      this.newUserInfo.resume = null
       const result = await this.updateStudentList(this.newUserInfo)
       if (result) {
         this.$message({
@@ -568,6 +597,24 @@ export default {
     },
     async handleClick (file) {
       window.open(this.newUserInfo.resume.url)
+    },
+    enter () {
+      this.coverAvatar = true
+    },
+    leave () {
+      this.coverAvatar = false
+    },
+    beforeAvatarUpload (file) {
+      this.newUserInfo = _.cloneDeep(this.userInfo)
+      const isPNG = file.type === 'image/png'
+      const isLt2M = file.size / 1024 / 1024 < 2
+      if (!isPNG) {
+        this.$message.error('上传头像图片只能是 PNG 格式!')
+      }
+      if (!isLt2M) {
+        this.$message.error('上传头像图片大小不能超过 2MB!')
+      }
+      return isPNG && isLt2M
     }
   }
 }
@@ -621,14 +668,30 @@ export default {
     .header-content {
       display: flex;
       align-items: center;
+      position: relative;
       .avatar {
         width: 60px;
         height: 60px;
         margin-right: 20px;
+        cursor: pointer;
       }
       .avatar img {
         width: 100%;
         border-radius: 50%;
+      }
+      .cover {
+        position: absolute;
+        top: 0;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background-color: rgba($color: #000000, $alpha: .2);
+
+        img {
+          width: 20px;
+          height: 20px;
+          margin-top: 20px;
+        }
       }
       .info {
         .info-top,
