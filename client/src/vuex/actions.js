@@ -165,6 +165,14 @@ export const verifyCode = function ({ commit }, data) {
   }).catch(generateErrorHandler(commit))
 }
 
+export const verifyCodeToNomal = function ({ commit }, data) {
+  console.info('---输入验证码---')
+  console.info(data)
+  return api.verifyCodeToNomal(data).then(data => {
+    return data
+  }).catch(generateErrorHandler(commit))
+}
+
 export const updatePsd = function ({ commit }, data) {
   return api.updatePsd(data).then(data => {
     return data

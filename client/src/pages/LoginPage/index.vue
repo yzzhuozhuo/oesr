@@ -167,6 +167,8 @@ export default {
     } else {
       this.codeDisabled = true
     }
+    console.info('-----')
+    console.info(this.accountType)
     if (this.accountType === 'student') {
       this.$router.replace({
         path: '/'

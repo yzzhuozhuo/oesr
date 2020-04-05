@@ -11,7 +11,7 @@ exports.addAccount = async function (req, res) {
   try {
     const data = await accountService.addAccount({ tel, password, accountType })
     res.send({
-      code: '200', 
+      code: '200',
       data: {
         accountType,
         tel,
@@ -102,7 +102,7 @@ exports.sendCode = async function (req, res) {
   console.info(tel)
   const accessKey = '1BAxkaDEdVBt0aMcBfixthRQ2jEp3x2fPavoEJB8'
   const secretKey = 'q05nnsqqhWcTdMMPQRCVbFvqwcnIOflBS1bPl_Ze'
-  const template_id = '1245260156606881792'
+  const template_id = '1245544677579427840'
   code = ('000000' + Math.floor(Math.random() * 999999)).slice(-6) // 更新随机验证码
   const mac = new qiniu.auth.digest.Mac(accessKey, secretKey)
   console.info(code)
@@ -141,6 +141,12 @@ exports.verifyCode = async function (req, res) {
   } catch (error) {
     console.error(error)
   }
+}
+
+exports.verifyCodeToNomal = async function (req, res) {
+  const { inputCode } = req.body
+  if (inputCode !== code) return res.send({ code: '200', data: { code: -1 } })
+  return res.send({ code: '200', data: { code: 0 } })
 }
 
 // exports.getAccountInfo = async function (req, res, next) {
