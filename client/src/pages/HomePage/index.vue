@@ -62,7 +62,7 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
+import { mapActions, mapState, mapGetters } from 'vuex'
 import Swiper from '@/components/Swiper'
 import LeftMenu from './LeftMenu'
 import RightCard from './RightCard'
@@ -113,6 +113,7 @@ export default {
       menus: state => state.home.menus,
       themeList: state => state.theme.themeList || []
     }),
+    ...mapGetters(['accountType']),
     firstCardData () {
       return this.menus.length ? this.menus[0].subMenu[0].subList : []
     }
@@ -125,6 +126,13 @@ export default {
   mounted () {
     this.$nextTick(() => {
       window.addEventListener('scroll', this.throttle(this.handleScroll, 15))
+    })
+    this.$nextTick(() => {
+      if (this.accountType === 'company') {
+        this.$router.replace({
+          path: '/company/page'
+        })
+      }
     })
   },
   methods: {
