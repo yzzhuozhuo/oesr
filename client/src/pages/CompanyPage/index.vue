@@ -75,6 +75,10 @@
                       <i class="el-icon-document-checked"></i>
                       <span slot="title">简历列表</span>
                     </el-menu-item>
+                    <el-menu-item index="setting">
+                      <i class="el-icon-setting"></i>
+                      <span slot="title">账号设置</span>
+                    </el-menu-item>
                     <el-menu-item index="logout">
                       <i class="el-icon-switch-button"></i>
                       <span slot="title">退出登录</span>
@@ -350,8 +354,8 @@
                     >
                       <div class="top" style="margin: 10px 0">
                         <span>宣讲会名称：{{item.preachCompany}}</span>
-                        <el-tag effect="dark" size="mini" v-if="new Date(item.preachTime).getDate() < new Date().getDate()" type="info">已结束</el-tag>
-                        <el-tag effect="dark" size="mini" v-if="new Date(item.preachTime).getDate() === new Date().getDate()" type="success">今日</el-tag>
+                        <el-tag effect="dark" size="mini" v-if="new Date(item.preachTime).getMonth() < new Date().getMonth() || (new Date(item.preachTime).getMonth() < new Date().getMonth() && new Date(item.preachTime).getDate() < new Date().getDate())" type="info">已结束</el-tag>
+                        <el-tag effect="dark" size="mini" v-if="new Date(item.preachTime).getMonth() === new Date().getMonth() && new Date(item.preachTime).getDate() === new Date().getDate()" type="success">今日</el-tag>
                         <el-tag effect="dark" size="mini" v-if="tomorrowStart <= new Date(item.preachTime) && new Date(item.preachTime) <= tomorrowEnd">明日</el-tag>
                       </div>
                       <div class="bottom">
@@ -466,11 +470,11 @@
                     >
                       <el-input
                         type="password"
-                        v-model.number="ruleForm.prePass"
+                        v-model="ruleForm.prePass"
                       ></el-input>
                     </el-form-item>
                     <el-form-item
-                      label="密码"
+                      label="新密码"
                       prop="pass"
                     >
                       <el-input
@@ -493,9 +497,9 @@
                   <div class="form-btn">
                     <el-button
                       type="primary"
-                      @click="submitForm('ruleForm')"
+                      @click="submitForm"
                     >提交</el-button>
-                    <el-button @click="resetForm('ruleForm')">重置</el-button>
+                    <el-button @click="resetForm">重置</el-button>
                   </div>
                 </div>
               </el-dialog>
@@ -519,25 +523,6 @@ const tomorrowEnd = new Date(new Date(new Date().toLocaleDateString()).getTime()
 export default {
   name: 'UserPage',
   data () {
-    let validatePass = (rule, value, callback) => {
-      if (value === '') {
-        callback(new Error('请输入密码'))
-      } else {
-        if (this.ruleForm.checkPass !== '') {
-          this.$refs.ruleForm.validateField('checkPass')
-        }
-        callback()
-      }
-    }
-    let validatePass2 = (rule, value, callback) => {
-      if (value === '') {
-        callback(new Error('请再次输入密码'))
-      } else if (value !== this.ruleForm.pass) {
-        callback(new Error('两次输入密码不一致!'))
-      } else {
-        callback()
-      }
-    }
     return {
       domain: 'https://upload.qiniup.com',
       qiniuaddr: 'cdn.zouhaohao.xyz',
@@ -606,12 +591,23 @@ export default {
         checkPass: ''
       },
       rules: {
-        pass: [{ required: true, validator: validatePass, trigger: 'blur' }],
+        pass: [{ required: true, message: '请输入新密码', trigger: 'blur' }],
         checkPass: [
-          { required: true, validator: validatePass2, trigger: 'blur' }
+          {
+            required: true,
+            message: '请再次输入新密码'
+          },
+          {
+            validator: this.validatePsd,
+            trigger: 'blur'
+          }
         ],
         prePass: [
-          { required: true, message: '请输入正确的原密码', trigger: 'blur' }
+          { required: true, message: '请输入原密码' },
+          {
+            validator: this.validatePrePas,
+            trigger: ['']
+          }
         ]
       }
     }
@@ -704,7 +700,8 @@ export default {
       'fetchThemeList',
       'fetchPositionList',
       'fetchPreachList',
-      'uploadImg'
+      'uploadImg',
+      'updatePsd'
     ]),
     formatTime (dataList) {
       const TIME_FORMAT = 'YYYY-MM-DD HH:mm'
@@ -735,8 +732,8 @@ export default {
     },
     fetchThemeDataList () {
       let params = {
-        companyId: '123',
-        // companyId: this.companyInfo.companyId,
+        // companyId: '123',
+        companyId: this.companyInfo.companyId,
         searchValue: this.searchThemeValue,
         currentPage: this.currentThemePage,
         pageNum: this.pageThemeNum,
@@ -800,6 +797,8 @@ export default {
         this.$router.replace({
           path: '/'
         })
+      } else if (keyPath === 'setting') {
+        this.dialogSettingVisible = true
       }
     },
     async updatecompanyInfo () {
@@ -819,18 +818,37 @@ export default {
     cancelUpdatecompanyInfo () {
       this.isEdit = false
     },
-    submitForm (formName) {
-      this.$refs[formName].validate(valid => {
+    submitForm () {
+      this.$refs['ruleForm'].validate(async valid => {
         if (valid) {
-          console.log(666, this.ruleForm)
+          await this.$message({
+            message: '密码修改成功',
+            type: 'success'
+          })
+          await this.resetForm()
+          this.dialogSettingVisible = false
         } else {
-          console.log('error submit!!')
           return false
         }
       })
     },
-    resetForm (formName) {
-      this.$refs[formName].resetFields()
+    async validatePrePas (rule, value, callback) {
+      const result = await this.updatePsd({
+        tel: this.account.tel,
+        password: this.ruleForm.prePass,
+        newPassword: this.ruleForm.checkPass
+      })
+      if (result.code) return callback(new Error('密码错误'))
+      return callback()
+    },
+    resetForm () {
+      this.$refs['ruleForm'].resetFields()
+    },
+    validatePsd (rule, value, callback) {
+      if (this.ruleForm.pass !== value) {
+        return callback(new Error('两次密码不一致'))
+      }
+      return callback()
     },
     handleResumeSizeChange (val) {
       console.log(`每页 ${val} 条`)
@@ -888,6 +906,7 @@ export default {
       window.open(resumeUrl)
     },
     viewTheme (id) {
+      console.log(99999, id)
       this.$router.push({
         path: '/questionList',
         query: {

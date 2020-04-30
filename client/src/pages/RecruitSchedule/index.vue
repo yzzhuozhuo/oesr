@@ -365,8 +365,8 @@ export default {
     ]),
     fetchCampusLastData () {
       let params = {
-        companyId: this.company.companyId,
-        // companyId: this.accountType === 'company' ? this.company.companyId : '',
+        // companyId: '123',
+        companyId: this.accountType === 'company' ? this.company.companyId : '',
         searchVal: this.searchVal
       }
       this.getCampusDate(params)

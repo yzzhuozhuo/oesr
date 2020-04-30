@@ -101,11 +101,11 @@
       v-if="accountType === 'company'"
       index="/preachList"
     >宣讲会发布</el-menu-item>
-    <el-menu-item
+    <!-- <el-menu-item
       key="17"
       index="/discussPage"
       v-if="accountType === 'company'"
-    >讨论区</el-menu-item>
+    >讨论区</el-menu-item> -->
     <el-menu-item
       key="18"
       v-if="hasLogin"

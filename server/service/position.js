@@ -10,7 +10,7 @@ exports.getPositionList = function (searchVal, companyId, accountType, selectTyp
   if (selectCity) findConditions.positionCity = selectCity
   // 根据 最新发布 最快处理 处理率最高 进行排序 默认不排序
   let sortCondition = {}
-  if (accountType === 'company') sortCondition.createdAt = -1 
+  if (accountType === 'company') sortCondition.createdAt = -1
   if (selectTab === 'new') sortCondition.createdAt = -1
   if (selectTab === 'fast') sortCondition.processingTime = 1
   if (selectTab === 'ratio') sortCondition.processingRatio = -1
