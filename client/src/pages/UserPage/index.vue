@@ -375,7 +375,7 @@ export default {
     return {
       newUserInfo: {},
       domain: 'https://upload.qiniup.com',
-      qiniuaddr: 'q7heq11s7.bkt.clouddn.com',
+      qiniuaddr: 'cdn.zouhaohao.xyz',
       isEdit: false,
       isSetting: false,
       dialogSettingVisible: false,
