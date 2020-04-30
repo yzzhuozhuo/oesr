@@ -112,7 +112,7 @@ export default {
       comment: {},
       inputVal: '',
       domain: 'https://upload.qiniup.com',
-      qiniuaddr: 'q7heq11s7.bkt.clouddn.com',
+      qiniuaddr: 'cdn.zouhaohao.xyz',
       cacheUrl: '',
       dialogCommentMark: false,
       publishForm: {

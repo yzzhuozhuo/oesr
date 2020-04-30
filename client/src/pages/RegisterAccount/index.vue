@@ -427,7 +427,7 @@ export default {
   data () {
     return {
       domain: 'https://upload.qiniup.com',
-      qiniuaddr: 'q7heq11s7.bkt.clouddn.com',
+      qiniuaddr: 'cdn.zouhaohao.xyz',
       loginForm: {
         verCode: '', // 验证码
         tel: '',
