@@ -1,7 +1,7 @@
 <template>
   <div class="main">
     <router-view></router-view>
-    <img class="campusImg" src="https://uploadfiles.nowcoder.com/images/20200227/339694163_1582803781536_E8CABFD4B8C6F9129BA59A7DDB02371B" @click="toCampus">
+    <!-- <img class="campusImg" src="https://uploadfiles.nowcoder.com/images/20200227/339694163_1582803781536_E8CABFD4B8C6F9129BA59A7DDB02371B" @click="toCampus"> -->
     <div class="content">
       <div class="company-choose">
         <el-input
@@ -224,8 +224,8 @@ export default {
 .company-choose {
   display: flex;
   position: absolute;
-  top: 105px;
-  /* top: 12px; */
+  /* top: 105px; */
+  top: 12px;
   right: 26px;
   z-index: 1000;
 }

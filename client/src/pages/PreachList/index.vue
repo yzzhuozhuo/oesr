@@ -67,8 +67,8 @@
             <div class="title">
               <div class="left">
                 <span class="preach-company">{{item.preachCompany}}</span>
-                <el-tag effect="dark" size="mini" v-if="new Date(item.preachTime).getDate() < new Date().getDate()" type="info">已结束</el-tag>
-                <el-tag effect="dark" size="small" v-if="new Date(item.preachTime).getDate() === new Date().getDate()" type="success">今日</el-tag>
+                <el-tag effect="dark" size="small" v-if="new Date(item.preachTime).getMonth() < new Date().getMonth() || (new Date(item.preachTime).getMonth() < new Date().getMonth() && new Date(item.preachTime).getDate() < new Date().getDate())" type="info">已结束</el-tag>
+                <el-tag effect="dark" size="small" v-if="new Date(item.preachTime).getMonth() === new Date().getMonth() && new Date(item.preachTime).getDate() === new Date().getDate()" type="success">今日</el-tag>
                 <el-tag effect="dark" size="small" v-if="tomorrowStart <= new Date(item.preachTime) && new Date(item.preachTime) <= tomorrowEnd">明日</el-tag>
               </div>
               <div class="right" v-if="accountType === 'company'">
@@ -110,7 +110,7 @@
     </div>
     <div class="dialog-content">
       <el-dialog
-        title="添加宣讲会"
+        :title="accountType === 'student' ? '添加宣讲会' : '发布宣讲会'"
         :visible.sync="addMesDialogVisible"
         width="40%">
         <div class="form-content">

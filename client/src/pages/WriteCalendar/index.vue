@@ -4,8 +4,8 @@
       <span>求职 > 校招日历</span>
       <div>
         <el-button type="primary" size="small" @click="addCalendarData" v-if="!hasLogin">添加日历</el-button>
-        <el-button type="" size="small" @click="myCalendarData" v-if="hasLogin && !isViewAll">我添加的日历</el-button>
-        <el-button type="" size="small" @click="myCalendarData" v-if="hasLogin && isViewAll">查看全部日历</el-button>
+        <el-button type="" size="small" @click="myCalendarData" v-if="hasLogin && !isViewAll && accountType === 'student'">我添加的日历</el-button>
+        <el-button type="" size="small" @click="myCalendarData" v-if="hasLogin && isViewAll && accountType === 'student'">查看全部日历</el-button>
         <el-button type="primary" size="small" @click="addCalendarData" v-if="accountType === 'student'">添加日历</el-button>
         <el-button type="primary" size="small" @click="addCalendarData" v-if="accountType === 'company'">发布日历</el-button>
       </div>
@@ -34,9 +34,9 @@
         </template>
       </el-calendar>
     </div>
-    <div class="dialog-content">
+    <div class="dialog-content" v-if="accountType === 'student'">
       <el-dialog
-        title="添加笔试日历"
+        :title="accountType === 'student' ? '添加笔试日历': '发布笔试日历'"
         :visible.sync="addDialogVisible"
         width="40%">
         <div class="form-content">
@@ -98,7 +98,14 @@ export default {
     }
   },
   mounted () {
-    this.fetchCalendarList()
+    let params = {
+      companyId: this.companyInfo ? this.companyInfo.companyId : '',
+      studentId: this.studentInfo ? this.studentInfo.studentId : ''
+    }
+    setTimeout(() => {
+      console.log(8888, params)
+      this.fetchCalendarList(params)
+    }, 1000)
   },
   methods: {
     ...mapActions([
@@ -118,11 +125,18 @@ export default {
         things: `${formatHour} ${this.addCalendarForm.title}`
       }
       this.updateCalendarList(data).then(() => {
-        this.fetchCalendarList()
-        this.$message({
-          message: '添加笔试日历成功~',
-          type: 'success'
-        })
+        this.fetchLastCalendarList()
+        if (this.accountType === 'student') {
+          this.$message({
+            message: '添加笔试日历成功~',
+            type: 'success'
+          })
+        } else {
+          this.$message({
+            message: '发布笔试日历成功~',
+            type: 'success'
+          })
+        }
       })
       this.addDialogVisible = false
     },
@@ -135,17 +149,20 @@ export default {
       }
       this.addDialogVisible = true
     },
+    fetchLastCalendarList () {
+      let params = {
+        companyId: this.companyInfo ? this.companyInfo.companyId : '',
+        studentId: this.studentInfo ? this.studentInfo.studentId : ''
+      }
+      this.fetchCalendarList(params)
+    },
     myCalendarData () {
       // 只查看自己发布的日历
       if (!this.isViewAll) {
-        let params = {
-          companyId: this.companyInfo ? this.companyInfo.companyId : '',
-          studentId: this.studentInfo ? this.studentInfo.studentId : ''
-        }
-        this.fetchCalendarList(params)
+        this.fetchLastCalendarList()
         this.isViewAll = true
       } else {
-        this.fetchCalendarList()
+        this.fetchLastCalendarList()
         this.isViewAll = false
       }
     }

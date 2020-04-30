@@ -106,7 +106,7 @@
             <el-radio
               v-model="loginForm.accountType"
               label="company"
-            >企业</el-radio>
+            >公司</el-radio>
           </el-form-item>
           <el-form-item
             label=""

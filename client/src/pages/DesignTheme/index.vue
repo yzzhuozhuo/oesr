@@ -17,7 +17,7 @@
               style="width: 370px">
             </el-input>
           </div>
-          <div class="total" v-if="chooseNum && fillNum && judgeNum">总分：{{3 * chooseNum + 2 * fillNum + 2 * judgeNum}}</div>
+          <!-- <div class="total" v-if="chooseNum && fillNum && judgeNum">总分：{{3 * chooseNum + 2 * fillNum + 2 * judgeNum}}</div> -->
         </div>
         <div class="choose-num">
           <div class="classify">
