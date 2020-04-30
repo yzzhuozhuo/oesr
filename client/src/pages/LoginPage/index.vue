@@ -169,15 +169,17 @@ export default {
     }
     console.info('-----')
     console.info(this.accountType)
-    if (this.accountType === 'student') {
-      this.$router.replace({
-        path: '/'
-      })
-    } else if (this.accountType === 'company') {
-      this.$router.replace({
-        path: '/company/page'
-      })
-    }
+    this.$nextTick(() => {
+      if (this.accountType === 'student') {
+        this.$router.replace({
+          path: '/'
+        })
+      } else if (this.accountType === 'company') {
+        this.$router.replace({
+          path: '/company/page'
+        })
+      }
+    })
   },
   methods: {
     ...mapActions([
